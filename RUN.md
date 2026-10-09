@@ -63,3 +63,15 @@
 - 产物在 `eval_mafa/out/`(`medhypertrace_pred.jsonl`、`medhypertrace_report.json`、`error_analysis_notes.md`);评估代码提交 `9ad8ca0`;复现 `bash eval_mafa/run_eval.sh`。
 
 **未决:** 回传 MAFA 由用户转交(MAFA 仓库在本会话只读);是否把「猜第一步」对照补进主表。
+
+## 第 6 轮 · 2026-10-09 05:21 · 回应 MAFA 的「缺陷层/责任层」提案
+
+**MAFA 提案:** 人类版标签分两层——缺陷层(哪些智能体输出有缺陷)+ 责任层(只在答错轨迹上标:哪些缺陷沿传播链进入了最终答案);最早故障步改由码推出,另给最早责任步。问我们三件事:(a) 步骤标签怎么来的;(b) 合成集里「被注入但没传到最终答案」的比例;(c) 主目标用哪一层。
+**做了(`analysis/injection_propagation.py`,结果 `analysis/injection_propagation.json`):**
+- (a) 步骤标签 = conversation_history 中 `injection_applied=True` 的最小 `step`;智能体标签 = `multi_injection_info` ∪ 已应用步骤。计划注入却从未应用:llm_debate 294/1712(17%)、dylan 20/1062,其余 0。不核对传播。
+- (b) 答案级代理(被注入智能体最后表态 vs 最终错误答案),排除最终答案产出者(mdagents/llm_debate 的 Aggregator、clinical_agent 的 Reasoner),只保留最终答案与 `regex_extracted` 一致且≠金标准的轨迹。有作答的被注入智能体中,最后表态 ≠ 最终错误答案:mdagents 59%(其中仍答对 19%)、dylan 34%(23%)、llm_debate 70%(33%)、clinical_agent 37%(37%,但只有 166/571 个被注入智能体给出概率)。对照(未注入)与最终答案一致率:46%/17%/16%/40%。mdagents 被注入者一致率(41%)甚至低于未注入者(46%)。clinical_agent5 智能体基本不出概率,代理量无信息。mdagents 抽取器与 regex_extracted 945/950 一致、抽查正确;dylan/llm_debate 抽取较粗(一致率 77%/88%,覆盖低),只作粗估。
+- **新发现(影响本方法):** 注入伪迹——被注入步骤答案为 A 的比例 51%/55%/30%(mdagents/dylan/llm_debate),未注入步骤 18%/11%/12%;响应篡改常追加模板句「Therefore the final answer is A.」。这是表层捷径,可能是向真实故障迁移失败的原因之一。
+- 核对 MAFA 第 3 点:合成 mdagents 中**未被注入**的招募者 66% 也给出答案(越权),其中 51% 是正确答案——即「有缺陷、无责任」在合成标签里被标为无故障。
+- (c) 建议:智能体层主指标用责任层 agent_auroc,缺陷层辅助;步骤层主报最早责任步(对应 Who&When 的 decisive error),最早缺陷步辅助。另提出责任层的操作细则建议(见给 MAFA 的回复)。
+
+**含义:** 合成训练标签在语义上是「被注入集合」,既不是缺陷层也不是责任层;责任层监督只能来自真实标注(与交接文档 §5.3 一致)。

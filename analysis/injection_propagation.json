@@ -1,0 +1,268 @@
+{
+ "propagation": {
+  "mdagents": {
+   "agents": {
+    "inj": {
+     "none": 605,
+     "Recruiter:none": 315,
+     "aligned": 1218,
+     "Expert:aligned": 1126,
+     "Recruiter:aligned": 92,
+     "gold": 557,
+     "Expert:gold": 506,
+     "Expert:none": 290,
+     "other": 1185,
+     "Expert:other": 1041,
+     "Recruiter:gold": 51,
+     "Recruiter:other": 144
+    },
+    "non": {
+     "gold": 697,
+     "Expert:gold": 601,
+     "aligned": 746,
+     "Expert:aligned": 694,
+     "Recruiter:gold": 96,
+     "none": 114,
+     "Expert:none": 19,
+     "Recruiter:none": 95,
+     "other": 188,
+     "Expert:other": 148,
+     "Recruiter:aligned": 52,
+     "Recruiter:other": 40
+    },
+    "producer": {
+     "aligned": 885,
+     "Aggregator:aligned": 885
+    }
+   },
+   "trajectories": {
+    "inj_answering": 2960,
+    "n": 885,
+    "some_injected_aligned": 607,
+    "no_final": 53,
+    "all_answering_injected_say_gold": 42,
+    "dropped_invalid_final": 65
+   }
+  },
+  "dylan": {
+   "agents": {
+    "inj": {
+     "aligned": 805,
+     "Pathologist:aligned": 156,
+     "gold": 276,
+     "Medical_Researcher:gold": 85,
+     "Physician:aligned": 213,
+     "Physician:gold": 52,
+     "Pharmacologist:aligned": 195,
+     "other": 138,
+     "Medical_Researcher:other": 42,
+     "none": 68,
+     "Physician:none": 5,
+     "Pharmacologist:gold": 107,
+     "Medical_Researcher:aligned": 241,
+     "Physician:other": 40,
+     "Pathologist:gold": 32,
+     "Pathologist:none": 19,
+     "Medical_Researcher:none": 12,
+     "Pathologist:other": 27,
+     "Pharmacologist:other": 29,
+     "Pharmacologist:none": 32
+    },
+    "non": {
+     "gold": 823,
+     "Physician:gold": 231,
+     "other": 96,
+     "Pharmacologist:other": 24,
+     "Pharmacologist:gold": 170,
+     "Pathologist:gold": 288,
+     "Medical_Researcher:other": 16,
+     "Medical_Researcher:gold": 134,
+     "aligned": 185,
+     "Physician:aligned": 45,
+     "Pathologist:aligned": 60,
+     "none": 174,
+     "Physician:none": 45,
+     "Medical_Researcher:none": 42,
+     "Physician:other": 21,
+     "Pathologist:other": 35,
+     "Pharmacologist:none": 52,
+     "Pathologist:none": 35,
+     "Medical_Researcher:aligned": 37,
+     "Pharmacologist:aligned": 43
+    },
+    "producer": {}
+   },
+   "trajectories": {
+    "inj_answering": 1219,
+    "n": 652,
+    "some_injected_aligned": 619,
+    "dropped_invalid_final": 324,
+    "no_final": 86,
+    "all_answering_injected_say_gold": 12
+   }
+  },
+  "llm_debate": {
+   "agents": {
+    "inj": {
+     "other": 192,
+     "Agent 1:other": 17,
+     "gold": 177,
+     "Agent 2:gold": 54,
+     "Agent 3:other": 119,
+     "aligned": 161,
+     "Agent 1:aligned": 28,
+     "Agent 1:gold": 51,
+     "none": 93,
+     "Agent 2:none": 28,
+     "Agent 3:aligned": 91,
+     "Agent 2:other": 56,
+     "Agent 3:none": 44,
+     "Agent 1:none": 21,
+     "Agent 2:aligned": 42,
+     "Agent 3:gold": 72
+    },
+    "non": {
+     "other": 45,
+     "Agent 2:other": 16,
+     "gold": 574,
+     "Agent 3:gold": 126,
+     "none": 149,
+     "Agent 1:none": 63,
+     "Agent 2:gold": 198,
+     "aligned": 115,
+     "Agent 2:aligned": 54,
+     "Agent 1:aligned": 49,
+     "Agent 1:other": 23,
+     "Agent 1:gold": 250,
+     "Agent 3:aligned": 12,
+     "Agent 3:none": 32,
+     "Agent 3:other": 6,
+     "Agent 2:none": 54
+    },
+    "producer": {
+     "aligned": 502,
+     "Aggregator:aligned": 502
+    }
+   },
+   "trajectories": {
+    "inj_answering": 530,
+    "n": 502,
+    "some_injected_aligned": 137,
+    "no_final": 1051,
+    "all_answering_injected_say_gold": 136,
+    "dropped_invalid_final": 159
+   }
+  },
+  "clinical_agent": {
+   "agents": {
+    "inj": {
+     "aligned": 105,
+     "Planner:aligned": 2,
+     "none": 405,
+     "Planner:none": 228,
+     "EfficacyAgent:aligned": 52,
+     "SafetyAgent:none": 47,
+     "EfficacyAgent:none": 26,
+     "gold": 61,
+     "EfficacyAgent:gold": 7,
+     "SafetyAgent:aligned": 49,
+     "EnrollmentAgent:none": 79,
+     "SafetyAgent:gold": 43,
+     "ClinicalAgent:none": 25,
+     "Planner:gold": 8,
+     "ClinicalAgent:gold": 3,
+     "ClinicalAgent:aligned": 2
+    },
+    "non": {
+     "gold": 354,
+     "ClinicalAgent:gold": 15,
+     "SafetyAgent:gold": 146,
+     "aligned": 239,
+     "EfficacyAgent:aligned": 116,
+     "none": 816,
+     "EnrollmentAgent:none": 317,
+     "ClinicalAgent:none": 337,
+     "EfficacyAgent:gold": 192,
+     "Planner:none": 157,
+     "SafetyAgent:aligned": 109,
+     "EfficacyAgent:none": 3,
+     "ClinicalAgent:aligned": 14,
+     "SafetyAgent:none": 2,
+     "Planner:gold": 1
+    },
+    "producer": {
+     "aligned": 396,
+     "Reasoner:aligned": 396
+    }
+   },
+   "trajectories": {
+    "inj_answering": 166,
+    "n": 396,
+    "some_injected_aligned": 105,
+    "all_answering_injected_say_gold": 61,
+    "no_final": 6
+   }
+  },
+  "clinical_agent5": {
+   "agents": {
+    "inj": {
+     "none": 2319,
+     "EfficacyAgent:none": 629,
+     "Reasoner:none": 616,
+     "EnrollmentAgent:none": 482,
+     "Planner:none": 265,
+     "SafetyAgent:none": 327,
+     "aligned": 156,
+     "Reasoner:aligned": 156
+    },
+    "non": {
+     "none": 2604,
+     "Planner:none": 787,
+     "SafetyAgent:none": 725,
+     "EnrollmentAgent:none": 570,
+     "EfficacyAgent:none": 423,
+     "aligned": 181,
+     "Reasoner:aligned": 181,
+     "Reasoner:none": 99
+    },
+    "producer": {}
+   },
+   "trajectories": {
+    "inj_answering": 156,
+    "n": 1052,
+    "some_injected_aligned": 156
+   }
+  }
+ },
+ "extractor_validation": {
+  "mdagents": {
+   "n": 1003,
+   "final_extracted": 950,
+   "final_eq_gold": 60,
+   "both": 950,
+   "agree_regex_extracted": 945
+  },
+  "dylan": {
+   "n": 1062,
+   "final_extracted": 976,
+   "final_eq_gold": 141,
+   "both": 896,
+   "agree_regex_extracted": 686
+  },
+  "llm_debate": {
+   "n": 1712,
+   "final_extracted": 661,
+   "final_eq_gold": 99,
+   "both": 543,
+   "agree_regex_extracted": 476
+  },
+  "clinical_agent": {
+   "n": 402,
+   "final_extracted": 396
+  },
+  "clinical_agent5": {
+   "n": 1052,
+   "final_extracted": 1052
+  }
+ }
+}
