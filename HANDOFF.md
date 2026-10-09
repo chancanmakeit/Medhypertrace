@@ -26,6 +26,12 @@
 - 接口文档 §6.1 的 `answer==ground_truth` 问题:在本项目的 5 个 AEGIS 合成文件上同样成立(5231/5231 条 `answer == ground_truth.correct_answer`,全部 `is_correct=False`)。**本项目代码不受影响**:`common/data.py` 把它当正确答案(`correct_answer`)用,没有任何地方把它当系统答案;NLI 的 `--factuality_ref gold-answer` 用的也是正确答案,语义正确。
 - 接入人类标注时:只能用 `anchors.jsonl`(`status=done`、present/absent);`reviewer.kind=llm` 的 human-like 标签**绝不能**当真值;MAST 包的框架固有码(MDAgents 的 FM-1.1/1.2、ClinicalAgent 的 FM-1.2)不能当「故障→答错」监督信号。轨迹 ID 必须用整串做键。
 
+### 0.25 MAFA 联合评估(2026-10-09 第 5 轮)
+- MAFA 仓库 `chancanmakeit/MAFA-human-ai-annotation` 在本会话**只读**,克隆在 `/home/claude/mafa-human-ai-annotation`,锁定 `908bc74`;AEGIS 原始记录需在其根目录跑 `bash scripts/fetch_data.sh`(约 1.9G,很快)。新会话需重新 add_repo(只读)+ 克隆 + checkout。
+- 评估代码在 `eval_mafa/`,产物在 `eval_mafa/out/`,详见 `eval_mafa/out/error_analysis_notes.md`。结论:可行性成立,**方法在 human-like-v1 上四项指标都没超过「猜第一步」基线**,智能体排序 AUROC 0.41。
+- MedHyperTrace 没有保存权重;评估时按默认超参在合成训练集上现训(每框架 ~1–2 分钟 CPU)。
+- **发现:** 合成测试集上 step head 对「猜第一步」在 mdagents 只高 1 个点(0.693 对 0.680),主表 Step-Acc 需加此对照。
+
 ### 0.3 下一步
 见 §七;另加:接入标注数据(接口 v1)时先写一个 loader,把 `anchors.jsonl` 对齐到本项目的轨迹对象,并在失效边界上实测(ID 重复、框架固有码)。
 

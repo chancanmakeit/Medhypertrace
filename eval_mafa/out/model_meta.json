@@ -1,0 +1,84 @@
+{
+ "seed": 0,
+ "config": {
+  "features": "tfidf",
+  "emb_model": "mxbai",
+  "device": "auto",
+  "struct": 1,
+  "factuality": "null",
+  "factuality_model": "cross-encoder/nli-deberta-v3-small",
+  "factuality_ref": "prior-steps",
+  "backbone": "relation",
+  "prop": 0.1,
+  "margin": 0.5,
+  "holdout": null,
+  "frameworks": null,
+  "no_hyperedges": false,
+  "epochs": 20,
+  "bs": 16,
+  "hidden": 128,
+  "lr": 0.002
+ },
+ "frameworks": {
+  "clinical_agent": {
+   "synthetic_test_step_top1": 0.686,
+   "synthetic_test_n": 105,
+   "fm_thresholds": {
+    "FM-1.1": 0.5,
+    "FM-1.2": 0.8,
+    "FM-1.3": 0.6,
+    "FM-1.4": 0.7,
+    "FM-1.5": 0.85,
+    "FM-2.1": 0.9,
+    "FM-2.2": 0.9,
+    "FM-2.3": 0.9,
+    "FM-2.4": 0.9,
+    "FM-2.5": 0.9,
+    "FM-2.6": 0.65,
+    "FM-3.1": 0.3,
+    "FM-3.2": 0.9,
+    "FM-3.3": 0.85
+   }
+  },
+  "dylan": {
+   "synthetic_test_step_top1": 0.694,
+   "synthetic_test_n": 337,
+   "fm_thresholds": {
+    "FM-1.1": 0.8,
+    "FM-1.2": 0.75,
+    "FM-1.3": 0.6,
+    "FM-1.4": 0.55,
+    "FM-1.5": 0.85,
+    "FM-2.1": 0.1,
+    "FM-2.2": 0.8,
+    "FM-2.3": 0.85,
+    "FM-2.4": 0.75,
+    "FM-2.5": 0.8,
+    "FM-2.6": 0.85,
+    "FM-3.1": 0.6,
+    "FM-3.2": 0.2,
+    "FM-3.3": 0.6
+   }
+  },
+  "mdagents": {
+   "synthetic_test_step_top1": 0.693,
+   "synthetic_test_n": 300,
+   "fm_thresholds": {
+    "FM-1.1": 0.5,
+    "FM-1.2": 0.9,
+    "FM-1.3": 0.65,
+    "FM-1.4": 0.9,
+    "FM-1.5": 0.75,
+    "FM-2.1": 0.2,
+    "FM-2.2": 0.6,
+    "FM-2.3": 0.75,
+    "FM-2.4": 0.9,
+    "FM-2.5": 0.65,
+    "FM-2.6": 0.3,
+    "FM-3.1": 0.9,
+    "FM-3.2": 0.65,
+    "FM-3.3": 0.85
+   }
+  }
+ }
+}

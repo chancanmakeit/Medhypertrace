@@ -1,0 +1,218 @@
+{
+ "training_files": {
+  "mdagents": "/home/claude/aegis_813/AEGIS-custom-dataset/medxpertqa-mm-100-mdagents_error.jsonl",
+  "dylan": "/home/claude/aegis_813/AEGIS-custom-dataset/mmlu_pro_health-100-dylan_error.jsonl",
+  "llm_debate": "/home/claude/aegis_813/AEGIS-custom-dataset/mmlu_pro_health-100-llm_debate_error.jsonl",
+  "clinical_agent": "/home/claude/aegis_813/AEGIS-custom-dataset/trial_success-200-clinical_agent_error.jsonl",
+  "clinical_agent5": "/home/claude/aegis_813/AEGIS-custom-dataset/trial_success-200-500-clinical_agent5_error.jsonl"
+ },
+ "eval_frameworks": [
+  "clinical_agent",
+  "dylan",
+  "mdagents"
+ ],
+ "traces": [
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00005#NCT00001830",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00010#NCT00002623",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00016#NCT00002967",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00026#NCT00003251",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00034#NCT00003640",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00003#mmlu_pro_health_b342a27b",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [
+    "llm_debate/test"
+   ],
+   "query_match": [
+    "llm_debate/test"
+   ],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00010#mmlu_pro_health_eda2b16b",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00015#mmlu_pro_health_5badfa1f",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [
+    {
+     "step": "s01",
+     "chars": 699,
+     "in": [
+      "dylan/test"
+     ]
+    },
+    {
+     "step": "s04",
+     "chars": 549,
+     "in": [
+      "dylan/test"
+     ]
+    }
+   ],
+   "trivial_step_matches": [],
+   "task_id_match": [
+    "dylan/test",
+    "llm_debate/test"
+   ],
+   "query_match": [
+    "dylan/test",
+    "llm_debate/test"
+   ],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00032#mmlu_pro_health_7a49adc4",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00037#mmlu_pro_health_e09cdd6d",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00002#MM-7",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00009#MM-21",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00017#MM-47",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00018#MM-51",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00023#MM-61",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00028#MM-72",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00040#MM-99",
+   "file_line_match": false,
+   "trace_sha1_match": [],
+   "nontrivial_step_matches": [],
+   "trivial_step_matches": [],
+   "task_id_match": [],
+   "query_match": [],
+   "same_task_in_same_framework_train": false
+  }
+ ],
+ "summary": {
+  "file_line": "0/17",
+  "trace_sha1": "0/17",
+  "any_nontrivial_step": "1/17",
+  "task_or_query_any": "2/17",
+  "task_same_fw_train": "0/17"
+ }
+}

@@ -49,3 +49,17 @@
 - `HANDOFF.md §0.1` 同步更新(私有、数据在库、端点在 Project doc)。
 
 **结论:** 新会话续接只需 clone 仓库 + `bash scripts/restore_env.sh` + 读 Project doc `api端点`,不需要用户再上传任何文件。
+
+## 第 5 轮 · 2026-10-09 03:21 · MedHyperTrace 在 MAFA human-like-v1 上的可行性验证
+
+**要求:** 把私有仓库 `chancanmakeit/MAFA-human-ai-annotation` 只读加入会话,锁定 `908bc74`,按其 `docs/MedHyperTrace评估执行文档.md` 评估;只推理不训练不调参;先做 §2 sha1 自检和 §3 泄漏检查。
+**做了:**
+- 仓库只读加入,克隆并 `checkout --detach 908bc74`。跑 `scripts/fetch_data.sh` 取 AEGIS 原始记录(需要原始格式建图)。
+- **偏离说明:** MedHyperTrace 没有保存的权重,无法纯推理。改为每个框架用 `train_hgnn.py` **默认超参**在合成注入训练集上训一个模型,MAFA 标签不参与训练/选择/阈值。决策规则跑分前写死(主口径 step-owner,副口径 agent-head)。
+- §2 对齐 **17/17**;§3 泄漏 文件+行号 0/17、整轨迹 0/17,1 条与 dylan/llm_debate **测试集**共享 2 步文本和题目;同框架训练集同题 0/17。
+- 结果(种子 0,主口径):who_earliest **9/20** [0.26,0.66]、who_any 12/20、when_exact **8/20** [0.22,0.61]、when_pm1 14/20、agent AUROC **0.414**、MAST code F1 0.349(全判存在 0.478)。**四项都没超过「永远猜第一步」(14/14/11/15)**。种子 1、2 结论相同。
+- 错误分析:不偏后而偏早;智能体头反向(AUROC<0.5);dylan 合成注入 100% 在 s01–s03 而真实故障在 s05/s06/s09;clinical_agent 真实主导故障 ClinicalAgent@s02 在合成集只占 9%;mdagents 被拉向专家步骤;步骤分数极度过度自信。
+- **超出本轮的发现:** 合成测试集上 step head top-1 对「猜第一步」:mdagents 0.693 对 0.680(几乎无增益)、clinical_agent 0.686 对 0.600、dylan 0.694 对 0.513。主表 Step-Acc 需要加这个对照。
+- 产物在 `eval_mafa/out/`(`medhypertrace_pred.jsonl`、`medhypertrace_report.json`、`error_analysis_notes.md`);评估代码提交 `9ad8ca0`;复现 `bash eval_mafa/run_eval.sh`。
+
+**未决:** 回传 MAFA 由用户转交(MAFA 仓库在本会话只读);是否把「猜第一步」对照补进主表。

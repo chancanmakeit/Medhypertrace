@@ -1,0 +1,22 @@
+== training clinical_agent (defaults, seed 1)
+  ep01 loss=4.318 val stepTop1=0.688 Top3=1.000
+  ep04 loss=2.315 val stepTop1=0.812 Top3=1.000
+  ep08 loss=1.463 val stepTop1=0.750 Top3=1.000
+  ep12 loss=1.162 val stepTop1=0.719 Top3=1.000
+  ep16 loss=0.864 val stepTop1=0.750 Top3=1.000
+  ep20 loss=0.707 val stepTop1=0.750 Top3=1.000
+== training dylan (defaults, seed 1)
+  ep01 loss=3.908 val stepTop1=0.646 Top3=0.875
+  ep04 loss=2.008 val stepTop1=0.604 Top3=0.938
+  ep08 loss=1.582 val stepTop1=0.667 Top3=0.938
+  ep12 loss=1.324 val stepTop1=0.708 Top3=0.938
+  ep16 loss=1.235 val stepTop1=0.646 Top3=0.938
+  ep20 loss=1.047 val stepTop1=0.646 Top3=0.917
+== training mdagents (defaults, seed 1)
+  ep01 loss=3.672 val stepTop1=0.725 Top3=0.925
+  ep04 loss=2.167 val stepTop1=0.700 Top3=0.950
+  ep08 loss=1.742 val stepTop1=0.700 Top3=0.925
+  ep12 loss=1.462 val stepTop1=0.675 Top3=0.900
+  ep16 loss=1.303 val stepTop1=0.725 Top3=0.850
+  ep20 loss=1.236 val stepTop1=0.725 Top3=0.900
+wrote 20 prediction rows for 17 traces to eval_mafa/out

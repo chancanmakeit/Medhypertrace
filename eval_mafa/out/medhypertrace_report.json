@@ -1,0 +1,183 @@
+{
+ "method": "MedHyperTrace",
+ "version": {
+  "medhypertrace_commit": "9ad8ca0",
+  "method_code_note": "common/ and ours/ unchanged since the 2026-10-08 handoff package",
+  "mafa_commit": "908bc74"
+ },
+ "eval_set": "human-like-v1 (n=20 rows / 17 traces, faulty only, LLM labels)",
+ "setting": "no checkpoint existed: one model per framework (mdagents, dylan, clinical_agent) trained with train_hgnn.py DEFAULT hyperparameters on the fixed AEGIS synthetic-injection train split; MAFA labels never used for training, selection or thresholds. Primary seed 0; seeds 1-2 reported for robustness only.",
+ "alignment": "17/17 traces sha1-aligned (every step, raw order and parser order)",
+ "leakage": {
+  "summary": {
+   "file_line": "0/17",
+   "trace_sha1": "0/17",
+   "any_nontrivial_step": "1/17",
+   "task_or_query_any": "2/17",
+   "task_same_fw_train": "0/17"
+  },
+  "note": "0/17 by file+line and 0/17 by whole-trace sha1. 1/17 (dylan mmlu_pro_health_5badfa1f) shares 2 step contents and its task with the dylan/llm_debate TEST splits only (not used in training). 0/17 tasks appear in the same framework's train split."
+ },
+ "decision_rules": {
+  "pred_step": "argmax step head",
+  "pred_agent_primary": "agent executing pred_step (step-owner)",
+  "pred_agent_secondary": "argmax agent head (agent-head)",
+  "pred_codes": "MAST rows only; max over agents of pair head, rescaled so the val-calibrated threshold maps to 0.5"
+ },
+ "results_primary_seed0": {
+  "ALL": {
+   "who_earliest": "9/20 [0.26, 0.66]",
+   "who_any": "12/20 [0.39, 0.78]",
+   "when_exact": "8/20 [0.22, 0.61]",
+   "when_pm1": "14/20 [0.48, 0.85]",
+   "agent_auroc": "0.414 (n=15 traces)",
+   "code_micro_f1": 0.349
+  },
+  "MAST": {
+   "who_earliest": "6/13 [0.23, 0.71]",
+   "who_any": "7/13 [0.29, 0.77]",
+   "when_exact": "5/13 [0.18, 0.65]",
+   "when_pm1": "9/13 [0.42, 0.87]",
+   "agent_auroc": "0.371 (n=10 traces)",
+   "code_micro_f1": 0.349
+  },
+  "MedAgentAudit": {
+   "who_earliest": "3/7 [0.16, 0.75]",
+   "who_any": "5/7 [0.36, 0.92]",
+   "when_exact": "3/7 [0.16, 0.75]",
+   "when_pm1": "5/7 [0.36, 0.92]",
+   "agent_auroc": "0.5 (n=5 traces)"
+  }
+ },
+ "results_secondary_agent_head_seed0": {
+  "ALL": {
+   "who_earliest": "4/20 [0.08, 0.42]",
+   "who_any": "16/20 [0.58, 0.92]",
+   "when_exact": "8/20 [0.22, 0.61]",
+   "when_pm1": "14/20 [0.48, 0.85]",
+   "agent_auroc": "0.414 (n=15 traces)",
+   "code_micro_f1": 0.349
+  },
+  "MAST": {
+   "who_earliest": "3/13 [0.08, 0.50]",
+   "who_any": "10/13 [0.50, 0.92]",
+   "when_exact": "5/13 [0.18, 0.65]",
+   "when_pm1": "9/13 [0.42, 0.87]",
+   "agent_auroc": "0.371 (n=10 traces)",
+   "code_micro_f1": 0.349
+  },
+  "MedAgentAudit": {
+   "who_earliest": "1/7 [0.03, 0.51]",
+   "who_any": "6/7 [0.49, 0.97]",
+   "when_exact": "3/7 [0.16, 0.75]",
+   "when_pm1": "5/7 [0.36, 0.92]",
+   "agent_auroc": "0.5 (n=5 traces)"
+  }
+ },
+ "seeds_ALL": {
+  "seed0": {
+   "step-owner": {
+    "who_earliest": "9/20 [0.26, 0.66]",
+    "who_any": "12/20 [0.39, 0.78]",
+    "when_exact": "8/20 [0.22, 0.61]",
+    "when_pm1": "14/20 [0.48, 0.85]",
+    "agent_auroc": "0.414 (n=15 traces)",
+    "code_micro_f1": 0.349
+   },
+   "agent-head": {
+    "who_earliest": "4/20 [0.08, 0.42]",
+    "who_any": "16/20 [0.58, 0.92]",
+    "when_exact": "8/20 [0.22, 0.61]",
+    "when_pm1": "14/20 [0.48, 0.85]",
+    "agent_auroc": "0.414 (n=15 traces)",
+    "code_micro_f1": 0.349
+   }
+  },
+  "seed1": {
+   "step-owner": {
+    "who_earliest": "10/20 [0.30, 0.70]",
+    "who_any": "12/20 [0.39, 0.78]",
+    "when_exact": "8/20 [0.22, 0.61]",
+    "when_pm1": "15/20 [0.53, 0.89]",
+    "agent_auroc": "0.382 (n=15 traces)",
+    "code_micro_f1": 0.336
+   },
+   "agent-head": {
+    "who_earliest": "5/20 [0.11, 0.47]",
+    "who_any": "12/20 [0.39, 0.78]",
+    "when_exact": "8/20 [0.22, 0.61]",
+    "when_pm1": "15/20 [0.53, 0.89]",
+    "agent_auroc": "0.382 (n=15 traces)",
+    "code_micro_f1": 0.336
+   }
+  },
+  "seed2": {
+   "step-owner": {
+    "who_earliest": "11/20 [0.34, 0.74]",
+    "who_any": "12/20 [0.39, 0.78]",
+    "when_exact": "9/20 [0.26, 0.66]",
+    "when_pm1": "15/20 [0.53, 0.89]",
+    "agent_auroc": "0.398 (n=15 traces)",
+    "code_micro_f1": 0.417
+   },
+   "agent-head": {
+    "who_earliest": "6/20 [0.14, 0.52]",
+    "who_any": "15/20 [0.53, 0.89]",
+    "when_exact": "9/20 [0.26, 0.66]",
+    "when_pm1": "15/20 [0.53, 0.89]",
+    "agent_auroc": "0.398 (n=15 traces)",
+    "code_micro_f1": 0.417
+   }
+  }
+ },
+ "reference_baselines_ALL": {
+  "first_step": {
+   "who_earliest": "14/20",
+   "who_any": "14/20",
+   "when_exact": "11/20",
+   "when_pm1": "15/20"
+  },
+  "last_step": {
+   "who_earliest": "0/20",
+   "who_any": "18/20",
+   "when_exact": "0/20",
+   "when_pm1": "1/20"
+  },
+  "mafa_primary": {
+   "who_earliest": "18/20 [0.70, 0.97]",
+   "who_any": "20/20 [0.84, 1.00]",
+   "when_exact": "17/20 [0.64, 0.95]",
+   "when_pm1": "17/20 [0.64, 0.95]",
+   "agent_auroc": "0.845 (n=15 traces)",
+   "code_micro_f1": 0.759
+  },
+  "mafa_secondary": {
+   "who_earliest": "15/20 [0.53, 0.89]",
+   "who_any": "19/20 [0.76, 0.99]",
+   "when_exact": "12/20 [0.39, 0.78]",
+   "when_pm1": "13/16 [0.57, 0.93]",
+   "agent_auroc": "0.727 (n=15 traces)",
+   "code_micro_f1": 0.319
+  }
+ },
+ "context": {
+  "trivial_code_baseline": "all MAST codes present: code_micro_f1 0.478 (13 MAST rows)",
+  "in_distribution_step_top1_seed0_vs_first_step": {
+   "clinical_agent": {
+    "model_step_top1": 0.686,
+    "first_step_baseline": 0.6,
+    "n": 105
+   },
+   "dylan": {
+    "model_step_top1": 0.694,
+    "first_step_baseline": 0.513,
+    "n": 337
+   },
+   "mdagents": {
+    "model_step_top1": 0.693,
+    "first_step_baseline": 0.68,
+    "n": 300
+   }
+  }
+ }
+}

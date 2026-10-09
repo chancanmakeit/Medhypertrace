@@ -1,0 +1,864 @@
+{
+ "rows": [
+  {
+   "row": "MAST|clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00005#NCT00001830",
+   "framework": "clinical_agent",
+   "taxonomy": "MAST",
+   "n_steps": 6,
+   "gold_step": "s02",
+   "gold_agent": "ClinicalAgent-0",
+   "pred_step": "s01",
+   "pred_agent": "Planner-0",
+   "pred_role": "Planner",
+   "offset": -1,
+   "gold_rank_in_model": 3,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": false,
+   "present_code_steps": [
+    "s02",
+    "s04",
+    "s05",
+    "s06"
+   ],
+   "first_step_baseline_hit": false,
+   "faulty_agents": [
+    "ClinicalAgent-0",
+    "EfficacyAgent-0",
+    "EnrollmentAgent-0",
+    "Reasoner-0"
+   ],
+   "agent_head_top": "Reasoner-0",
+   "agent_head_top_role": "Reasoner",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 1.0,
+    "s02": 0.0,
+    "s03": 0.0,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0
+   }
+  },
+  {
+   "row": "MAST|clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00010#NCT00002623",
+   "framework": "clinical_agent",
+   "taxonomy": "MAST",
+   "n_steps": 6,
+   "gold_step": "s03",
+   "gold_agent": "SafetyAgent-0",
+   "pred_step": "s01",
+   "pred_agent": "Planner-0",
+   "pred_role": "Planner",
+   "offset": -2,
+   "gold_rank_in_model": 2,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": false,
+   "present_code_steps": [
+    "s03",
+    "s06"
+   ],
+   "first_step_baseline_hit": false,
+   "faulty_agents": [
+    "EfficacyAgent-0",
+    "Reasoner-0",
+    "SafetyAgent-0"
+   ],
+   "agent_head_top": "Planner-0",
+   "agent_head_top_role": "Planner",
+   "agent_head_top_is_faulty": false,
+   "step_probs": {
+    "s01": 0.998,
+    "s02": 0.0,
+    "s03": 0.001,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0
+   }
+  },
+  {
+   "row": "MAST|clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00016#NCT00002967",
+   "framework": "clinical_agent",
+   "taxonomy": "MAST",
+   "n_steps": 6,
+   "gold_step": "s02",
+   "gold_agent": "ClinicalAgent-0",
+   "pred_step": "s01",
+   "pred_agent": "Planner-0",
+   "pred_role": "Planner",
+   "offset": -1,
+   "gold_rank_in_model": 3,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": false,
+   "present_code_steps": [
+    "s02",
+    "s03",
+    "s06"
+   ],
+   "first_step_baseline_hit": false,
+   "faulty_agents": [
+    "ClinicalAgent-0",
+    "EfficacyAgent-0",
+    "Reasoner-0",
+    "SafetyAgent-0"
+   ],
+   "agent_head_top": "Reasoner-0",
+   "agent_head_top_role": "Reasoner",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 0.91,
+    "s02": 0.0,
+    "s03": 0.089,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0
+   }
+  },
+  {
+   "row": "MAST|clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00026#NCT00003251",
+   "framework": "clinical_agent",
+   "taxonomy": "MAST",
+   "n_steps": 6,
+   "gold_step": "s02",
+   "gold_agent": "ClinicalAgent-0",
+   "pred_step": "s02",
+   "pred_agent": "ClinicalAgent-0",
+   "pred_role": "ClinicalAgent",
+   "offset": 0,
+   "gold_rank_in_model": 1,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": true,
+   "present_code_steps": [
+    "s02",
+    "s06"
+   ],
+   "first_step_baseline_hit": false,
+   "faulty_agents": [
+    "ClinicalAgent-0",
+    "EfficacyAgent-0",
+    "EnrollmentAgent-0",
+    "Reasoner-0",
+    "SafetyAgent-0"
+   ],
+   "agent_head_top": "ClinicalAgent-0",
+   "agent_head_top_role": "ClinicalAgent",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 0.139,
+    "s02": 0.861,
+    "s03": 0.0,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0
+   }
+  },
+  {
+   "row": "MAST|clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00034#NCT00003640",
+   "framework": "clinical_agent",
+   "taxonomy": "MAST",
+   "n_steps": 6,
+   "gold_step": "s01",
+   "gold_agent": "Planner-0",
+   "pred_step": "s01",
+   "pred_agent": "Planner-0",
+   "pred_role": "Planner",
+   "offset": 0,
+   "gold_rank_in_model": 1,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": true,
+   "present_code_steps": [
+    "s01",
+    "s03",
+    "s06"
+   ],
+   "first_step_baseline_hit": true,
+   "faulty_agents": [
+    "Planner-0",
+    "Reasoner-0",
+    "SafetyAgent-0"
+   ],
+   "agent_head_top": "EnrollmentAgent-0",
+   "agent_head_top_role": "EnrollmentAgent",
+   "agent_head_top_is_faulty": false,
+   "step_probs": {
+    "s01": 0.816,
+    "s02": 0.183,
+    "s03": 0.001,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0
+   }
+  },
+  {
+   "row": "MAST|dylan::dylan_fm_clean_none_none-allfalse#00003#mmlu_pro_health_b342a27b",
+   "framework": "dylan",
+   "taxonomy": "MAST",
+   "n_steps": 10,
+   "gold_step": "s05",
+   "gold_agent": "Physician-0",
+   "pred_step": "s03",
+   "pred_agent": "Pathologist-2",
+   "pred_role": "Pathologist",
+   "offset": -2,
+   "gold_rank_in_model": 5,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": false,
+   "present_code_steps": [
+    "s05",
+    "s09"
+   ],
+   "first_step_baseline_hit": false,
+   "faulty_agents": [
+    "Medical_Researcher-3",
+    "Pathologist-2",
+    "Physician-0"
+   ],
+   "agent_head_top": "Physician-0",
+   "agent_head_top_role": "Physician",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 0.036,
+    "s02": 0.0,
+    "s03": 0.964,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0,
+    "s08": 0.0,
+    "s09": 0.0,
+    "s10": 0.0
+   }
+  },
+  {
+   "row": "MAST|dylan::dylan_fm_clean_none_none-allfalse#00010#mmlu_pro_health_eda2b16b",
+   "framework": "dylan",
+   "taxonomy": "MAST",
+   "n_steps": 10,
+   "gold_step": "s06",
+   "gold_agent": "Pharmacologist-1",
+   "pred_step": "s01",
+   "pred_agent": "Physician-0",
+   "pred_role": "Physician",
+   "offset": -5,
+   "gold_rank_in_model": 9,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": false,
+   "present_code_steps": [
+    "s06",
+    "s10"
+   ],
+   "first_step_baseline_hit": false,
+   "faulty_agents": [
+    "Medical_Researcher-3",
+    "Pathologist-2",
+    "Pharmacologist-1"
+   ],
+   "agent_head_top": "Pathologist-2",
+   "agent_head_top_role": "Pathologist",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 1.0,
+    "s02": 0.0,
+    "s03": 0.0,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0,
+    "s08": 0.0,
+    "s09": 0.0,
+    "s10": 0.0
+   }
+  },
+  {
+   "row": "MAST|dylan::dylan_fm_clean_none_none-allfalse#00015#mmlu_pro_health_5badfa1f",
+   "framework": "dylan",
+   "taxonomy": "MAST",
+   "n_steps": 10,
+   "gold_step": "s05",
+   "gold_agent": "Physician-0",
+   "pred_step": "s01",
+   "pred_agent": "Physician-0",
+   "pred_role": "Physician",
+   "offset": -4,
+   "gold_rank_in_model": 5,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": false,
+   "present_code_steps": [
+    "s05",
+    "s09"
+   ],
+   "first_step_baseline_hit": false,
+   "faulty_agents": [
+    "Pathologist-2",
+    "Pharmacologist-1",
+    "Physician-0"
+   ],
+   "agent_head_top": "Pathologist-2",
+   "agent_head_top_role": "Pathologist",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 0.996,
+    "s02": 0.004,
+    "s03": 0.0,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0,
+    "s08": 0.0,
+    "s09": 0.0,
+    "s10": 0.0
+   }
+  },
+  {
+   "row": "MAST|dylan::dylan_fm_clean_none_none-allfalse#00032#mmlu_pro_health_7a49adc4",
+   "framework": "dylan",
+   "taxonomy": "MAST",
+   "n_steps": 10,
+   "gold_step": "s01",
+   "gold_agent": "Physician-0",
+   "pred_step": "s02",
+   "pred_agent": "Pharmacologist-1",
+   "pred_role": "Pharmacologist",
+   "offset": 1,
+   "gold_rank_in_model": 2,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": false,
+   "present_code_steps": [
+    "s01",
+    "s07",
+    "s10"
+   ],
+   "first_step_baseline_hit": true,
+   "faulty_agents": [
+    "Medical_Researcher-3",
+    "Pathologist-2",
+    "Physician-0"
+   ],
+   "agent_head_top": "Pharmacologist-1",
+   "agent_head_top_role": "Pharmacologist",
+   "agent_head_top_is_faulty": false,
+   "step_probs": {
+    "s01": 0.0,
+    "s02": 1.0,
+    "s03": 0.0,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0,
+    "s08": 0.0,
+    "s09": 0.0,
+    "s10": 0.0
+   }
+  },
+  {
+   "row": "MAST|dylan::dylan_fm_clean_none_none-allfalse#00037#mmlu_pro_health_e09cdd6d",
+   "framework": "dylan",
+   "taxonomy": "MAST",
+   "n_steps": 10,
+   "gold_step": "s01",
+   "gold_agent": "Physician-0",
+   "pred_step": "s01",
+   "pred_agent": "Physician-0",
+   "pred_role": "Physician",
+   "offset": 0,
+   "gold_rank_in_model": 1,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": true,
+   "present_code_steps": [
+    "s01",
+    "s05",
+    "s09"
+   ],
+   "first_step_baseline_hit": true,
+   "faulty_agents": [
+    "Medical_Researcher-3",
+    "Pathologist-2",
+    "Pharmacologist-1",
+    "Physician-0"
+   ],
+   "agent_head_top": "Physician-0",
+   "agent_head_top_role": "Physician",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 1.0,
+    "s02": 0.0,
+    "s03": 0.0,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0,
+    "s08": 0.0,
+    "s09": 0.0,
+    "s10": 0.0
+   }
+  },
+  {
+   "row": "MAST|mdagents::mdagents_fm_clean_none_none-allfalse#00009#MM-21",
+   "framework": "mdagents",
+   "taxonomy": "MAST",
+   "n_steps": 7,
+   "gold_step": "s01",
+   "gold_agent": "Recruiter-0",
+   "pred_step": "s02",
+   "pred_agent": "Expert-0",
+   "pred_role": "Attending Physician",
+   "offset": 1,
+   "gold_rank_in_model": 6,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": false,
+   "present_code_steps": [
+    "s01",
+    "s07"
+   ],
+   "first_step_baseline_hit": true,
+   "faulty_agents": [
+    "Aggregator-0",
+    "Expert-2",
+    "Recruiter-0"
+   ],
+   "agent_head_top": "Expert-2",
+   "agent_head_top_role": "Expert",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 0.0,
+    "s02": 1.0,
+    "s03": 0.0,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0
+   }
+  },
+  {
+   "row": "MAST|mdagents::mdagents_fm_clean_none_none-allfalse#00018#MM-51",
+   "framework": "mdagents",
+   "taxonomy": "MAST",
+   "n_steps": 7,
+   "gold_step": "s01",
+   "gold_agent": "Recruiter-0",
+   "pred_step": "s01",
+   "pred_agent": "Recruiter-0",
+   "pred_role": "Recruiter",
+   "offset": 0,
+   "gold_rank_in_model": 1,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": true,
+   "present_code_steps": [
+    "s01",
+    "s02",
+    "s07"
+   ],
+   "first_step_baseline_hit": true,
+   "faulty_agents": [
+    "Aggregator-0",
+    "Expert-0",
+    "Expert-1",
+    "Expert-2",
+    "Expert-3",
+    "Expert-4",
+    "Recruiter-0"
+   ],
+   "agent_head_top": "Expert-3",
+   "agent_head_top_role": "Expert",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 0.526,
+    "s02": 0.473,
+    "s03": 0.001,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0
+   }
+  },
+  {
+   "row": "MAST|mdagents::mdagents_fm_clean_none_none-allfalse#00040#MM-99",
+   "framework": "mdagents",
+   "taxonomy": "MAST",
+   "n_steps": 7,
+   "gold_step": "s01",
+   "gold_agent": "Recruiter-0",
+   "pred_step": "s01",
+   "pred_agent": "Recruiter-0",
+   "pred_role": "Recruiter",
+   "offset": 0,
+   "gold_rank_in_model": 1,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": true,
+   "present_code_steps": [
+    "s01",
+    "s07"
+   ],
+   "first_step_baseline_hit": true,
+   "faulty_agents": [
+    "Aggregator-0",
+    "Expert-0",
+    "Expert-1",
+    "Expert-2",
+    "Expert-3",
+    "Expert-4",
+    "Recruiter-0"
+   ],
+   "agent_head_top": "Expert-2",
+   "agent_head_top_role": "Expert",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 1.0,
+    "s02": 0.0,
+    "s03": 0.0,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0
+   }
+  },
+  {
+   "row": "MedAgentAudit|clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00016#NCT00002967",
+   "framework": "clinical_agent",
+   "taxonomy": "MedAgentAudit",
+   "n_steps": 6,
+   "gold_step": "s02",
+   "gold_agent": "ClinicalAgent-0",
+   "pred_step": "s01",
+   "pred_agent": "Planner-0",
+   "pred_role": "Planner",
+   "offset": -1,
+   "gold_rank_in_model": 3,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": false,
+   "present_code_steps": [
+    "s02",
+    "s06"
+   ],
+   "first_step_baseline_hit": false,
+   "faulty_agents": [
+    "ClinicalAgent-0",
+    "Reasoner-0"
+   ],
+   "agent_head_top": "Reasoner-0",
+   "agent_head_top_role": "Reasoner",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 0.91,
+    "s02": 0.0,
+    "s03": 0.089,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0
+   }
+  },
+  {
+   "row": "MedAgentAudit|dylan::dylan_fm_clean_none_none-allfalse#00032#mmlu_pro_health_7a49adc4",
+   "framework": "dylan",
+   "taxonomy": "MedAgentAudit",
+   "n_steps": 10,
+   "gold_step": "s09",
+   "gold_agent": "Physician-0",
+   "pred_step": "s02",
+   "pred_agent": "Pharmacologist-1",
+   "pred_role": "Pharmacologist",
+   "offset": -7,
+   "gold_rank_in_model": 5,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": false,
+   "present_code_steps": [
+    "s09"
+   ],
+   "first_step_baseline_hit": false,
+   "faulty_agents": [
+    "Physician-0"
+   ],
+   "agent_head_top": "Pharmacologist-1",
+   "agent_head_top_role": "Pharmacologist",
+   "agent_head_top_is_faulty": false,
+   "step_probs": {
+    "s01": 0.0,
+    "s02": 1.0,
+    "s03": 0.0,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0,
+    "s08": 0.0,
+    "s09": 0.0,
+    "s10": 0.0
+   }
+  },
+  {
+   "row": "MedAgentAudit|mdagents::mdagents_fm_clean_none_none-allfalse#00002#MM-7",
+   "framework": "mdagents",
+   "taxonomy": "MedAgentAudit",
+   "n_steps": 7,
+   "gold_step": "s01",
+   "gold_agent": "Recruiter-0",
+   "pred_step": "s04",
+   "pred_agent": "Expert-2",
+   "pred_role": "Bone Pathologist",
+   "offset": 3,
+   "gold_rank_in_model": 2,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": false,
+   "present_code_steps": [
+    "s01",
+    "s07"
+   ],
+   "first_step_baseline_hit": true,
+   "faulty_agents": [
+    "Aggregator-0",
+    "Expert-0",
+    "Expert-1",
+    "Expert-2",
+    "Expert-3",
+    "Recruiter-0"
+   ],
+   "agent_head_top": "Expert-2",
+   "agent_head_top_role": "Expert",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 0.235,
+    "s02": 0.0,
+    "s03": 0.0,
+    "s04": 0.765,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0
+   }
+  },
+  {
+   "row": "MedAgentAudit|mdagents::mdagents_fm_clean_none_none-allfalse#00017#MM-47",
+   "framework": "mdagents",
+   "taxonomy": "MedAgentAudit",
+   "n_steps": 7,
+   "gold_step": "s01",
+   "gold_agent": "Recruiter-0",
+   "pred_step": "s02",
+   "pred_agent": "Expert-0",
+   "pred_role": "Attending Physician",
+   "offset": 1,
+   "gold_rank_in_model": 2,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": true,
+   "present_code_steps": [
+    "s02"
+   ],
+   "first_step_baseline_hit": true,
+   "faulty_agents": [
+    "Expert-0",
+    "Expert-2",
+    "Expert-3",
+    "Expert-4",
+    "Recruiter-0"
+   ],
+   "agent_head_top": "Expert-3",
+   "agent_head_top_role": "Expert",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 0.005,
+    "s02": 0.995,
+    "s03": 0.0,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0
+   }
+  },
+  {
+   "row": "MedAgentAudit|mdagents::mdagents_fm_clean_none_none-allfalse#00023#MM-61",
+   "framework": "mdagents",
+   "taxonomy": "MedAgentAudit",
+   "n_steps": 7,
+   "gold_step": "s01",
+   "gold_agent": "Recruiter-0",
+   "pred_step": "s01",
+   "pred_agent": "Recruiter-0",
+   "pred_role": "Recruiter",
+   "offset": 0,
+   "gold_rank_in_model": 1,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": false,
+   "present_code_steps": [
+    "s02",
+    "s07"
+   ],
+   "first_step_baseline_hit": true,
+   "faulty_agents": [
+    "Aggregator-0",
+    "Expert-0",
+    "Expert-1",
+    "Expert-2",
+    "Expert-3",
+    "Expert-4",
+    "Recruiter-0"
+   ],
+   "agent_head_top": "Expert-4",
+   "agent_head_top_role": "Expert",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 0.999,
+    "s02": 0.0,
+    "s03": 0.001,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0
+   }
+  },
+  {
+   "row": "MedAgentAudit|mdagents::mdagents_fm_clean_none_none-allfalse#00028#MM-72",
+   "framework": "mdagents",
+   "taxonomy": "MedAgentAudit",
+   "n_steps": 7,
+   "gold_step": "s01",
+   "gold_agent": "Recruiter-0",
+   "pred_step": "s01",
+   "pred_agent": "Recruiter-0",
+   "pred_role": "Recruiter",
+   "offset": 0,
+   "gold_rank_in_model": 1,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": true,
+   "present_code_steps": [
+    "s01"
+   ],
+   "first_step_baseline_hit": true,
+   "faulty_agents": [
+    "Aggregator-0",
+    "Expert-0",
+    "Expert-3",
+    "Expert-4",
+    "Recruiter-0"
+   ],
+   "agent_head_top": "Recruiter-0",
+   "agent_head_top_role": "Recruiter",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 1.0,
+    "s02": 0.0,
+    "s03": 0.0,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0
+   }
+  },
+  {
+   "row": "MedAgentAudit|mdagents::mdagents_fm_clean_none_none-allfalse#00040#MM-99",
+   "framework": "mdagents",
+   "taxonomy": "MedAgentAudit",
+   "n_steps": 7,
+   "gold_step": "s01",
+   "gold_agent": "Recruiter-0",
+   "pred_step": "s01",
+   "pred_agent": "Recruiter-0",
+   "pred_role": "Recruiter",
+   "offset": 0,
+   "gold_rank_in_model": 1,
+   "pred_is_last": false,
+   "pred_in_present_code_steps": true,
+   "present_code_steps": [
+    "s01"
+   ],
+   "first_step_baseline_hit": true,
+   "faulty_agents": [
+    "Aggregator-0",
+    "Expert-0",
+    "Expert-1",
+    "Expert-2",
+    "Expert-3",
+    "Expert-4",
+    "Recruiter-0"
+   ],
+   "agent_head_top": "Expert-2",
+   "agent_head_top_role": "Expert",
+   "agent_head_top_is_faulty": true,
+   "step_probs": {
+    "s01": 1.0,
+    "s02": 0.0,
+    "s03": 0.0,
+    "s04": 0.0,
+    "s05": 0.0,
+    "s06": 0.0,
+    "s07": 0.0
+   }
+  }
+ ],
+ "by_framework": {
+  "clinical_agent": {
+   "rows": 6,
+   "when_exact": 2,
+   "first_step_when_exact": 1,
+   "pred_later": 0,
+   "pred_earlier": 4,
+   "pred_last": 0,
+   "wrong_but_on_present_step": 0,
+   "gold_is_s01": 1,
+   "pred_is_s01": 5,
+   "pred_role:Planner": 5,
+   "head_top_role:Reasoner": 3,
+   "head_top_role:Planner": 1,
+   "pred_role:ClinicalAgent": 1,
+   "head_top_role:ClinicalAgent": 1,
+   "head_top_role:EnrollmentAgent": 1
+  },
+  "ALL": {
+   "rows": 20,
+   "when_exact": 8,
+   "first_step_when_exact": 11,
+   "pred_later": 4,
+   "pred_earlier": 8,
+   "pred_last": 0,
+   "wrong_but_on_present_step": 1,
+   "gold_is_s01": 11,
+   "pred_is_s01": 13,
+   "pred_role:Planner": 5,
+   "head_top_role:Reasoner": 3,
+   "head_top_role:Planner": 1,
+   "pred_role:ClinicalAgent": 1,
+   "head_top_role:ClinicalAgent": 1,
+   "head_top_role:EnrollmentAgent": 1,
+   "pred_role:Pathologist": 1,
+   "head_top_role:Physician": 2,
+   "pred_role:Physician": 3,
+   "head_top_role:Pathologist": 2,
+   "pred_role:Pharmacologist": 2,
+   "head_top_role:Pharmacologist": 2,
+   "pred_role:Attending Physician": 2,
+   "head_top_role:Expert": 7,
+   "pred_role:Recruiter": 5,
+   "pred_role:Bone Pathologist": 1,
+   "head_top_role:Recruiter": 1
+  },
+  "dylan": {
+   "rows": 6,
+   "when_exact": 1,
+   "first_step_when_exact": 2,
+   "pred_later": 1,
+   "pred_earlier": 4,
+   "pred_last": 0,
+   "wrong_but_on_present_step": 0,
+   "gold_is_s01": 2,
+   "pred_is_s01": 3,
+   "pred_role:Pathologist": 1,
+   "head_top_role:Physician": 2,
+   "pred_role:Physician": 3,
+   "head_top_role:Pathologist": 2,
+   "pred_role:Pharmacologist": 2,
+   "head_top_role:Pharmacologist": 2
+  },
+  "mdagents": {
+   "rows": 8,
+   "when_exact": 5,
+   "first_step_when_exact": 8,
+   "pred_later": 3,
+   "pred_earlier": 0,
+   "pred_last": 0,
+   "wrong_but_on_present_step": 1,
+   "gold_is_s01": 8,
+   "pred_is_s01": 5,
+   "pred_role:Attending Physician": 2,
+   "head_top_role:Expert": 7,
+   "pred_role:Recruiter": 5,
+   "pred_role:Bone Pathologist": 1,
+   "head_top_role:Recruiter": 1
+  }
+ }
+}

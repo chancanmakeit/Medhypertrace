@@ -1,0 +1,17 @@
+{
+ "clinical_agent": {
+  "model_step_top1": 0.686,
+  "first_step_baseline": 0.6,
+  "n": 105
+ },
+ "dylan": {
+  "model_step_top1": 0.694,
+  "first_step_baseline": 0.513,
+  "n": 337
+ },
+ "mdagents": {
+  "model_step_top1": 0.693,
+  "first_step_baseline": 0.68,
+  "n": 300
+ }
+}
