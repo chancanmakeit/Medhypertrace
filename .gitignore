@@ -1,13 +1,11 @@
-# Dataset and data-derived files: repo is PUBLIC, do not push without the owner's OK
-*.7z
+# Repo is PRIVATE (confirmed 2026-10-09). Dataset .7z, emb_cache and eval_samples are tracked.
+# Extracted dataset lives outside the repo (/home/claude/aegis_813) or here:
 data/AEGIS-custom-dataset/
-data/emb_cache/
-baselines/aegis_sft_ood/eval_samples/
+
+# API keys — never commit, even to a private repo (they live in the Project doc "api端点")
+*.env
+.mht_api.env
 
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
-
-# API keys — never commit
-*.env
-.mht_api.env

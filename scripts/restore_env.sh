@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-# Restore the sandbox environment in a fresh session.
-# Usage: bash scripts/restore_env.sh <path-to-AEGIS-custom-dataset-8-13.7z | path-to-medhypertrace_FULL_handoff.zip>
+# Restore the sandbox environment in a fresh session (after cloning the private repo).
+# Usage: bash scripts/restore_env.sh            # uses data/AEGIS-custom-dataset-8-13.7z from the repo
+#        bash scripts/restore_env.sh <.7z|FULL handoff .zip>
 # Afterwards:  export MHT_DATA_DIR=/home/claude/aegis_813/AEGIS-custom-dataset
+# API keys are NOT in the repo: read the Project doc "api端点" and write /home/claude/.mht_api.env.
 set -euo pipefail
-SRC="${1:?give the dataset .7z or the FULL handoff .zip}"
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
+SRC="${1:-$REPO/data/AEGIS-custom-dataset-8-13.7z}"
 DEST=/home/claude/aegis_813
 
 pip install py7zr matplotlib numpy scipy scikit-learn pandas --break-system-packages -q
@@ -29,5 +31,5 @@ fi
 mkdir -p "$DEST"
 python3 -c "import py7zr,sys; py7zr.SevenZipFile(sys.argv[1]).extractall(sys.argv[2])" "$SEVENZ" "$DEST"
 export MHT_DATA_DIR="$DEST/AEGIS-custom-dataset"
-cd "$REPO" && python3 validate.py | head -5
+cd "$REPO" && python3 validate.py > /tmp/mht_validate.log && grep -m1 "^instances" /tmp/mht_validate.log
 echo "OK. Now run: export MHT_DATA_DIR=$MHT_DATA_DIR"

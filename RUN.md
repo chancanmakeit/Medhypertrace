@@ -37,3 +37,15 @@
 - `HANDOFF.md §0.1` 的 API 一行更新为端点清单(不含密钥)。
 
 **未决:** 用户改私有后实测读写;若确认私有,再决定是否推数据集和派生文件。
+
+## 第 4 轮 · 2026-10-09 03:07 · 仓库改私有,端点存 Project doc,数据入库
+
+**做了:**
+- 确认仓库私有(`gh api` 读到 `private: true`),会话读写正常。
+- **更正第 2 轮的判断**:当时用「未认证请求返回 200」推断仓库公开,但沙箱的请求会被会话代理自动加认证,200 不能说明公开。改私有前的真实状态未验证;现在已确认私有。
+- API 端点(含密钥)存为 Project doc `claude/api端点`;密钥仍不进 git。
+- 数据集 `.7z`、嵌入缓存、`eval_samples` 入库;`.gitignore` 只排除解压目录和 `*.env`。
+- `scripts/restore_env.sh` 改为无参数即用仓库内 `.7z`;修了 `validate.py | head` 在 `pipefail` 下 BrokenPipe 导致脚本中断的 bug。实测脚本从头跑通。
+- `HANDOFF.md §0.1` 同步更新(私有、数据在库、端点在 Project doc)。
+
+**结论:** 新会话续接只需 clone 仓库 + `bash scripts/restore_env.sh` + 读 Project doc `api端点`,不需要用户再上传任何文件。

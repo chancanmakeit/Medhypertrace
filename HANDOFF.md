@@ -5,7 +5,7 @@
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
 > **新会话开场顺序:** ① 本文 §0(当前状态)→ ② `RUN.md` 最后两轮 → ③ 按需读 `RUN_EXPERIMENTS.md`(完整实验命令)和 `docs/`。
-> **仓库:** https://github.com/chancanmakeit/Medhypertrace (**公开仓库**)。§一 以下是 2026-10-08 旧会话的内容,§0 中与之冲突的以 §0 为准。
+> **仓库:** https://github.com/chancanmakeit/Medhypertrace (**私有仓库**,2026-10-09 起)。§一 以下是 2026-10-08 旧会话的内容,§0 中与之冲突的以 §0 为准。
 
 ---
 
@@ -17,9 +17,9 @@
 | 工作目录 | `/home/claude/medhypertrace`(本仓库的 git clone,推送走会话 git 代理,**不需要 token**) |
 | torch | **可用**:沙箱现有 30G 磁盘,CPU 版 torch 2.14.1 已装上。HGNN 训练 + `hgnn_unified_eval.py` 在 CPU 上已跑通(clinical_agent 2 epoch 约 10 秒)。旧会话"沙箱装不了 torch"的限制已不存在。仍无 GPU,LLM 基线(Who&When/med-SFT)仍需用户服务器 |
 | 机器 | 2 核 CPU / 7G 内存 |
-| 数据集 | **不在仓库里**(仓库公开,未经用户同意不推数据)。每个新会话需要用户重新上传 `AEGIS-custom-dataset-8-13.7z`(或 `medhypertrace_FULL_handoff.zip`,里面有它),再跑 `scripts/restore_env.sh <7z路径>` |
-| 被 .gitignore 排除 | `*.7z`、`data/AEGIS-custom-dataset/`、`data/emb_cache/`(嵌入缓存,数据派生)、`baselines/aegis_sft_ood/eval_samples/`(数据派生)。前两项从 FULL 包恢复,后两项也在 FULL 包的代码目录里 |
-| API 端点 | 用户 2026-10-09 提供,存在**仓库外**的 `/home/claude/.mht_api.env`(权限 600,`.gitignore` 排除 `*.env`)。**密钥绝不进仓库**(仓库公开)。新会话沙箱会重置,需要用户重新上传端点文件。提供方:aiberm(claude-opus-5)、aihubmix(gpt-5.6-sol-disc,有 logprobs)、deepseek(deepseek-flash)、阿里云(qwen3.8-flash;chat 和 responses 两个 base_url 不同)、智谱(glm-5.3-flash)、小米 MiMo(mimo-v2.6-flash/pro;不返回 logprobs,推理开关用 `extra_body={"thinking":{"type":...}}`)。**调用前先小规模试跑估算成本,停下来问用户** |
+| 数据集 | **在仓库里**:`data/AEGIS-custom-dataset-8-13.7z`(11.5M);嵌入缓存 `data/emb_cache/mxbai/`(只有 clinical_agent、mdagents)和 `baselines/aegis_sft_ood/eval_samples/` 也已入库。新会话恢复:clone 仓库后跑 `bash scripts/restore_env.sh`(无参数即用仓库内的 .7z,解压到 `/home/claude/aegis_813`,装依赖含 CPU torch,跑 validate),再 `export MHT_DATA_DIR=/home/claude/aegis_813/AEGIS-custom-dataset`。**不需要用户再上传** |
+| 被 .gitignore 排除 | 解压后的 `data/AEGIS-custom-dataset/`、`*.env`(API 密钥) |
+| API 端点 | 用户 2026-10-09 提供,完整内容(含密钥)存在 **Project doc `claude/api端点`**(用 Projects 工具 `project_read` 读取)。新会话需要时读它,写到仓库外的 `/home/claude/.mht_api.env`(权限 600)。**密钥绝不进 git**(即使仓库私有)。提供方:aiberm(claude-opus-5)、aihubmix(gpt-5.6-sol-disc,有 logprobs)、deepseek(deepseek-flash)、阿里云(qwen3.8-flash;chat 和 responses 两个 base_url 不同)、智谱(glm-5.3-flash)、小米 MiMo(mimo-v2.6-flash/pro;不返回 logprobs,推理开关用 `extra_body={"thinking":{"type":...}}`)。**调用前先小规模试跑估算成本,停下来问用户** |
 
 ### 0.2 本会话已核对的事实
 - 两个代码包(`medhypertrace.zip` 和 FULL 包里的 `medhypertrace/`)逐文件一致。
