@@ -7,3 +7,7 @@ baselines/aegis_sft_ood/eval_samples/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+# API keys — never commit
+*.env
+.mht_api.env

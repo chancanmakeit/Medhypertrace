@@ -19,7 +19,7 @@
 | 机器 | 2 核 CPU / 7G 内存 |
 | 数据集 | **不在仓库里**(仓库公开,未经用户同意不推数据)。每个新会话需要用户重新上传 `AEGIS-custom-dataset-8-13.7z`(或 `medhypertrace_FULL_handoff.zip`,里面有它),再跑 `scripts/restore_env.sh <7z路径>` |
 | 被 .gitignore 排除 | `*.7z`、`data/AEGIS-custom-dataset/`、`data/emb_cache/`(嵌入缓存,数据派生)、`baselines/aegis_sft_ood/eval_samples/`(数据派生)。前两项从 FULL 包恢复,后两项也在 FULL 包的代码目录里 |
-| API 端点 | 旧交接文档说在 project doc `api端点`,**但当前 Project 里没有任何 doc**。需要调模型时向用户要;调用前先小规模试跑估算成本,停下来问用户 |
+| API 端点 | 用户 2026-10-09 提供,存在**仓库外**的 `/home/claude/.mht_api.env`(权限 600,`.gitignore` 排除 `*.env`)。**密钥绝不进仓库**(仓库公开)。新会话沙箱会重置,需要用户重新上传端点文件。提供方:aiberm(claude-opus-5)、aihubmix(gpt-5.6-sol-disc,有 logprobs)、deepseek(deepseek-flash)、阿里云(qwen3.8-flash;chat 和 responses 两个 base_url 不同)、智谱(glm-5.3-flash)、小米 MiMo(mimo-v2.6-flash/pro;不返回 logprobs,推理开关用 `extra_body={"thinking":{"type":...}}`)。**调用前先小规模试跑估算成本,停下来问用户** |
 
 ### 0.2 本会话已核对的事实
 - 两个代码包(`medhypertrace.zip` 和 FULL 包里的 `medhypertrace/`)逐文件一致。
