@@ -1,0 +1,9 @@
+# Dataset and data-derived files: repo is PUBLIC, do not push without the owner's OK
+*.7z
+data/AEGIS-custom-dataset/
+data/emb_cache/
+baselines/aegis_sft_ood/eval_samples/
+
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

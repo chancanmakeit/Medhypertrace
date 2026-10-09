@@ -1,0 +1,26 @@
+文献题目	文章链接
+Which Agent Causes Task Failures and When On Automated Failure Attribution of LLM Multi-Agent Systems	https://arxiv.org/pdf/2505.00212
+Scope Delineation Before Localization: A Two-Stage Framework for Enhancing Failure Attribution in Multi-Agent Systems	https://ojs.aaai.org/index.php/AAAI/article/view/40594/44555
+Aegis: Automated Error Generation and Attribution for Multi-Agent Systems	https://arxiv.org/pdf/2509.14295
+From Flat Logs to Causal Graphs: Hierarchical Failure Attribution for LLM-based Multi-Agent Systems	https://arxiv.org/html/2602.23701v1
+Seeing the Whole Elephant: A Benchmark for Failure Attribution in LLM-based Multi-Agent Systems	https://arxiv.org/html/2604.22708v1
+Detecting Silent Failures in Multi-Agentic AI Trajectories	https://arxiv.org/html/2511.04032v1
+AGENTRX: Diagnosing AI Agent Failures from Execution Trajectories	https://arxiv.org/pdf/2602.02475
+Diagnosing Failure Root Causes in Platform-Orchestrated Agentic Systems: Dataset, Taxonomy, and Benchmark	https://arxiv.org/html/2509.23735v1
+Who is Introducing the Failure? Automatically Attributing Failures of Multi-Agent Systems via Spectrum Analysis	https://arxiv.org/html/2509.13782v1
+DoVer: Intervention-Driven Auto Debugging for LLM Multi-Agent Systems	https://arxiv.org/html/2512.06749v3
+GraphTracer: Graph-Guided Failure Tracing in LLM Agents for Robust Multi-Turn Deep Search	https://arxiv.org/html/2510.10581v1
+Towards Self-Improving Error Diagnosis in Multi-Agent Systems	https://arxiv.org/html/2604.17658v1
+From Laboratory to Real-World Applications: Benchmarking Agentic Code Reasoning at the Repository Level	https://arxiv.org/html/2601.03731v3
+Verifying the Verifiers: Failure Attribution for Agentic Benchmark Diagnostics and Training Data Curation	https://openreview.net/pdf?id=iRhaK8PsuB
+RAFFLES: Reasoning-based Attribution of Faults for LLM Systems	https://arxiv.org/html/2509.06822v3
+MASPrism: Lightweight Failure Attribution for Multi-Agent Systems Using Prefill-Stage Signals	https://arxiv.org/html/2605.07509v1
+AgentTrace: Causal Graph Tracing for Root Cause Analysis in Deployed Multi-Agent Systems	https://arxiv.org/html/2603.14688v2
+Metacognitive Self-Correction for Multi-Agent System via Prototype-Guided Next-Execution Reconstruction	https://arxiv.org/html/2510.14319v1
+Interpreting Agentic Systems: Beyond Model Explanations to System-Level Accountability	https://arxiv.org/html/2601.17168v1
+DiLLS: Interactive Diagnosis of LLM-based Multi-agent Systems via Layered Summary of Agent Behaviors	https://arxiv.org/html/2602.05446v1
+Skilltracer: Structural failure attribution and refinement of agentic skills in long-horizon web tasks	https://openreview.net/pdf?id=OiyEjThGeZ
+Misinformation Propagation in Benign Multi-Agent Systems	https://arxiv.org/html/2606.16710
+MedSentry: Understanding and Mitigating Safety Risks in Medical LLM Multi-Agent Systems	https://arxiv.org/pdf/2505.20824
+Willful Disobedience: Automatically Detecting Failures in Agentic Traces	https://arxiv.org/html/2603.23806v2
+MP-Bench: Multi-Perspective Failure Attribution Benchmark for Multi-Agent Systems	https://arxiv.org/html/2603.25001v1

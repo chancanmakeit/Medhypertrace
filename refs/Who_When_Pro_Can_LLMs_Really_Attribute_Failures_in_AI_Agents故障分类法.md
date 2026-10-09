@@ -1,0 +1,24 @@
+# Who&When Pro: Can LLMs Really Attribute Failures in AI Agents?（https://arxiv.org/html/2607.09996v1）
+
+## Error taxonomy of WHO&WHEN PRO
+
+| Family                     | Mode                                   | Description                                                  |
+| -------------------------- | -------------------------------------- | ------------------------------------------------------------ |
+| Perception                 | P.1 Visual misidentification           | Wrong object, entity, or text recognition in image input. Includes misreading chart values, OCR errors, and confusing visually similar entities. Often cascades into downstream reasoning errors when the agent builds on a wrong visual premise. |
+| Perception                 | P.2 Grounding error                    | Selecting or targeting the wrong spatial region in an image or UI. Includes misclicking elements, wrong bounding boxes, or cropping the wrong area. |
+| Reasoning                  | R.1 Hallucination                      | Generating claims not grounded in any retrieved observation. The agent fabricates facts from parametric knowledge or stale training data, asserting something absent from its search results or tool outputs. |
+| Reasoning                  | R.2 Reasoning error                    | The agent has correct information in its observations but misapplies it. Includes entity confusion, temporal mix-ups, reversed comparisons, sign errors, missing edge cases, and broken invariants. |
+| Reasoning                  | R.3 Calculation error                  | Arithmetic mistakes, unit conversion errors, counting errors, measurement errors, off-by-one errors, and rounding errors. |
+| Reasoning                  | R.4 Task misunderstanding              | The agent’s mental model of the task is structurally wrong. Includes misreading the question scope, answering a different question, committing to a wrong algorithmic abstraction, or choosing an over-restrictive solution space. |
+| Planning                   | PL.1 Ineffective planning              | The agent’s high-level plan or strategy is unsound, leading the rollout toward a dead end. Includes adopting wrong premises, poor sub-goal decomposition, or failing to reformulate when the initial approach is unworkable. |
+| Planning                   | PL.2 Goal drift                        | Gradually deviating from the original task objective during multi-step execution. The agent starts correctly but progressively shifts focus to tangential or irrelevant sub-goals, losing sight of the original question. |
+| Action                     | A.1 Tool parameter error               | Correct tool but wrong arguments, malformed call, missing required parameters, or incomplete action sequence. For example, omitting required precondition calls in stateful workflows. |
+| Action                     | A.2 Hallucinated tool or action        | Invoking non-existent tools, APIs, or actions. Calling functions with made-up names or executing impossible operations. The tool simply does not exist in the agent’s available toolkit. |
+| Action                     | A.3 Output format error                | Malformed structured output, broken syntax, or final answer in the wrong format. Includes verbose explanations when a concise answer is expected. |
+| Action                     | A.4 Premature termination              | Stopping before task objectives are fully met. Includes returning partial results as final, producing zero tool calls on a valid turn, or refusing to engage with a task entirely. |
+| Action                     | A.5 Looping behavior                   | Repeating the same or equivalent actions without progress. Includes retry loops with identical parameters and re-executing completed steps. |
+| Verification               | V.1 Context loss                       | Losing or failing to retrieve relevant information from conversation history or prior observations. Includes context window overflow and forgetting earlier constraints. |
+| Verification               | V.2 Inadequate verification            | Failing to verify results before returning them, or verifying incorrectly. Includes skipping verification, uncritically accepting conflicting information, and overcorrecting a correct answer. |
+| Coordination (multi-agent) | C.1 Delegation and orchestration error | Assigning a subtask to the wrong agent, improper sub-task decomposition, role confusion, or conflicting actions between agents. |
+| Coordination (multi-agent) | C.2 Communication failure              | Withholding critical information from other agents, ignoring input or recommendations, or losing shared context across agent boundaries. |
+| Coordination (multi-agent) | C.3 Over-reliance on other agents      | Agent produces a sound answer independently, then revises it after seeing another agent’s output, adopting a less accurate position. |

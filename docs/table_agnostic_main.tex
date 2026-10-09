@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering
+\caption{Framework-agnostic failure attribution on the pooled test set of all five frameworks ($n{=}1641$), under a unified set-prediction metric family (all $\times100$). Micro-F1 is pooled over concatenated predictions. $^\dagger$ zero-shot LLM baselines (set-prediction variant). Best per column in \textbf{bold}.}
+\label{tab:agnostic-main}
+\begin{tabular}{lcccc}
+\toprule
+Method & Agent-Micro-F1 & Error-Micro-F1 & Pair-Micro-F1 & Step-Acc \\
+\midrule
+Who\&When (all-at-once)$^\dagger$ & \textbf{52.8} & \textbf{16.9} & 4.4 & 34.0 \\
+Who\&When (step-by-step)$^\dagger$ & 22.9 & 7.0 & 1.7 & 7.6 \\
+SDBL$^\dagger$ & 50.5 & 15.6 & \textbf{4.5} & 36.6 \\
+AEGIS-med-SFT & 35.3 & 11.3 & 2.7 & \textbf{38.6} \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,13 @@
+# Core (local, CPU-runnable pieces: parser, pointwise, HGNN)
+numpy
+scipy
+scikit-learn
+torch            # CPU build is fine for HGNN
+pandas
+pyarrow          # read/write verl parquet
+py7zr            # extract the dataset .7z
+
+# Optional — only for baselines that need an LLM (run on your GPU box)
+# openai         # Who&When backend / vLLM-compatible endpoint
+# transformers   # AEGIS-SFT / AEGIS-med-SFT local checkpoint inference
+# vllm           # fast SFT inference

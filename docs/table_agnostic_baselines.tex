@@ -1,0 +1,42 @@
+% ============================================================================
+% Table 1 — Framework-AGNOSTIC baselines (zero-shot LLM attribution).
+%
+% These methods take a trajectory's dialogue and output which agent / step failed.
+% Their output space does not depend on a framework's specific agent set, so results
+% are reported on the MERGED test pool (all 5 frameworks' fixed test splits pooled):
+%   n = 1641 trajectories (mdagents 300 + dylan 337 + llm_debate 585
+%                          + clinical_agent 105 + clinical_agent5 314).
+%
+% Metrics:
+%   Agent-Hit@1 : predicted agent is in the trajectory's ground-truth faulty set.
+%   Step-Acc    : predicted step index == earliest injected step index.
+%   FM-Acc      : predicted MAST failure mode matches (Who&When variants: this is an
+%                 ADDED classification query; AEGIS-SFT predicts error_type natively).
+%
+% NOTE: all four rows require a capable LLM (GPT-4o / >=7B) or your trained SFT model.
+% Numbers are placeholders (--) to be filled from your GPU runs. On the CPU sandbox we
+% verified only <=135M models, which score below chance and must NOT be reported here.
+% Commands to generate each row: see RUN_EXPERIMENTS.md sections 4, 5, 5d.
+% ============================================================================
+\begin{table}[t]
+\centering
+\caption{Framework-agnostic failure attribution (zero-shot LLM baselines), evaluated
+on the pooled test set across all five multi-agent frameworks ($n{=}1641$).
+Who\&When variants use \texttt{<MODEL>}; AEGIS-SFT is the out-of-domain transfer of a
+general-domain SFT model. FM-Acc for Who\&When is an added classification query.}
+\label{tab:agnostic-baselines}
+\begin{tabular}{lccc}
+\toprule
+Method & Agent-Hit@1 & Step-Acc & FM-Acc \\
+\midrule
+Who\&When (all-at-once)   & -- & -- & -- \\
+Who\&When (step-by-step)  & -- & -- & -- \\
+Who\&When (binary-search) & -- & -- & -- \\
+AEGIS-SFT (OOD transfer)  & -- & -- & -- \\
+\midrule
+\multicolumn{4}{l}{\footnotesize\textit{Trivial controls (no model, sanity floor):}} \\
+Constant ``first step''   & -- & -- & -- \\
+Constant ``last step''    & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}

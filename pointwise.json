@@ -1,0 +1,92 @@
+{
+ "mdagents": {
+  "pointwise": {
+   "pair_micro_p": 38.32769453842436,
+   "pair_micro_r": 70.30141843971631,
+   "pair_micro_f1": 49.60900844541759,
+   "pair_macro_f1": 39.248995463323496,
+   "agent_micro_p": 97.89473684210527,
+   "agent_micro_r": 74.54909819639278,
+   "agent_micro_f1": 84.64163822525597,
+   "agent_macro_f1": 52.779020046290846,
+   "error_micro_p": 40.818363273453095,
+   "error_micro_r": 75.25298988040478,
+   "error_micro_f1": 52.92785506308638,
+   "error_macro_f1": 51.98010660723962,
+   "n": 300,
+   "step_acc": null
+  }
+ },
+ "dylan": {
+  "pointwise": {
+   "pair_micro_p": 33.74233128834356,
+   "pair_micro_r": 65.28189910979229,
+   "pair_micro_f1": 44.48938321536907,
+   "pair_macro_f1": 40.3387215587653,
+   "agent_micro_p": 69.52841596130592,
+   "agent_micro_r": 85.31157270029674,
+   "agent_micro_f1": 76.61558960692871,
+   "agent_macro_f1": 76.06951181963352,
+   "error_micro_p": 48.66666666666667,
+   "error_micro_r": 68.22429906542055,
+   "error_micro_f1": 56.80933852140079,
+   "error_macro_f1": 59.017758739603984,
+   "n": 337,
+   "step_acc": null
+  }
+ },
+ "llm_debate": {
+  "pointwise": {
+   "pair_micro_p": 12.502152574479078,
+   "pair_micro_r": 61.787234042553195,
+   "pair_micro_f1": 20.79633342881696,
+   "pair_macro_f1": 16.58281207570138,
+   "agent_micro_p": 59.78865406006674,
+   "agent_micro_r": 91.48936170212765,
+   "agent_micro_f1": 72.31752438614194,
+   "agent_macro_f1": 67.48132834731244,
+   "error_micro_p": 21.372965322009907,
+   "error_micro_r": 77.6349614395887,
+   "error_micro_f1": 33.51831298557158,
+   "error_macro_f1": 32.800724347769275,
+   "n": 585,
+   "step_acc": null
+  }
+ },
+ "clinical_agent": {
+  "pointwise": {
+   "pair_micro_p": 48.113207547169814,
+   "pair_micro_r": 72.85714285714285,
+   "pair_micro_f1": 57.95454545454546,
+   "pair_macro_f1": 41.61659347804592,
+   "agent_micro_p": 68.67469879518072,
+   "agent_micro_r": 81.42857142857143,
+   "agent_micro_f1": 74.50980392156863,
+   "agent_macro_f1": 64.04491590350882,
+   "error_micro_p": 51.162790697674424,
+   "error_micro_r": 73.68421052631578,
+   "error_micro_f1": 60.3921568627451,
+   "error_macro_f1": 51.38475857967754,
+   "n": 105,
+   "step_acc": null
+  }
+ },
+ "clinical_agent5": {
+  "pointwise": {
+   "pair_micro_p": 52.25903614457831,
+   "pair_micro_r": 94.29347826086956,
+   "pair_micro_f1": 67.24806201550388,
+   "pair_macro_f1": 58.474752039534515,
+   "agent_micro_p": 88.79093198992443,
+   "agent_micro_r": 95.78804347826086,
+   "agent_micro_f1": 92.15686274509804,
+   "agent_macro_f1": 93.15455609138412,
+   "error_micro_p": 53.430994602929836,
+   "error_micro_r": 94.93150684931507,
+   "error_micro_f1": 68.3769116921559,
+   "error_macro_f1": 75.12904966207056,
+   "n": 314,
+   "step_acc": null
+  }
+ }
+}
