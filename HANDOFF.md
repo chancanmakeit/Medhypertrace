@@ -27,7 +27,7 @@
 - 接入人类标注时:只能用 `anchors.jsonl`(`status=done`、present/absent);`reviewer.kind=llm` 的 human-like 标签**绝不能**当真值;MAST 包的框架固有码(MDAgents 的 FM-1.1/1.2、ClinicalAgent 的 FM-1.2)不能当「故障→答错」监督信号。轨迹 ID 必须用整串做键。
 
 ### 0.25 MAFA 联合评估(2026-10-09 第 5 轮)
-- MAFA 仓库 `chancanmakeit/MAFA-human-ai-annotation` 在本会话**只读**,克隆在 `/home/claude/mafa-human-ai-annotation`,锁定 `908bc74`;AEGIS 原始记录需在其根目录跑 `bash scripts/fetch_data.sh`(约 1.9G,很快)。新会话需重新 add_repo(只读)+ 克隆 + checkout。
+- MAFA 仓库 `chancanmakeit/MAFA-human-ai-annotation` 在本会话**只读**,克隆在 `/home/claude/mafa-human-ai-annotation`,锁定 `cc1606f`(第 5 轮评估时为 `908bc74`);AEGIS 原始记录需在其根目录跑 `bash scripts/fetch_data.sh`(约 1.9G,很快)。新会话需重新 add_repo(只读)+ 克隆 + checkout。
 - 评估代码在 `eval_mafa/`,产物在 `eval_mafa/out/`,详见 `eval_mafa/out/error_analysis_notes.md`。结论:可行性成立,**方法在 human-like-v1 上四项指标都没超过「猜第一步」基线**,智能体排序 AUROC 0.41。
 - MedHyperTrace 没有保存权重;评估时按默认超参在合成训练集上现训(每框架 ~1–2 分钟 CPU)。
 - **发现:** 合成测试集上 step head 对「猜第一步」在 mdagents 只高 1 个点(0.693 对 0.680),主表 Step-Acc 需加此对照。
@@ -42,6 +42,12 @@
 - 评测主目标:智能体层 = 责任层 agent_auroc(缺陷层辅助);步骤层 = 最早责任步(最早缺陷步辅助)。
 - 本方提出的未决问题:31% 的存在码挂多个智能体,责任若挂在整码上会过度归因 → 建议挂在(码, 智能体, 步骤)实例上。
 - MAFA `data/simulated/` 与本项目合成数据是同一份(无 llm_debate)。注入伪迹的比例两边抽取器结果不一致(dylan 差异大),引用前需统一抽取器。
+
+### 0.28 MAFA 接口 v3 已落地(第 8 轮,MAFA `cc1606f` / 0.7.49)
+- 本地 MAFA 副本已切到 `cc1606f`(只读)。人类版到位后:`import_review_labels.py` 产出 `attribution.jsonl` → `eval_attribution.py --layer responsibility|responsibility_any`(主)/ `defect`(辅)。我们的 `medhypertrace_pred.jsonl` 格式不变。
+- 已向 MAFA 提交 `apply_layer` 修正(`eval_mafa/mafa_patches/apply_layer_unsure.py`):贡献「不确定」的智能体和 coded 层里只经无码缺陷负责的智能体不应作 AUROC 负例。正式评测前确认对方是否采纳,否则用本地补丁版评分并注明。
+- MAFA 新增缺陷层视角 `--view code|excl_const`;excl_const 下「猜第一步」只有 6/18,MedHyperTrace 5/18,两者持平。
+- 待办(双方):引用注入伪迹比例前统一抽取器 + 人工抽查。
 
 ### 0.3 下一步
 见 §七;另加:接入标注数据(接口 v1)时先写一个 loader,把 `anchors.jsonl` 对齐到本项目的轨迹对象,并在失效边界上实测(ID 重复、框架固有码)。

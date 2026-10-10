@@ -21,3 +21,8 @@ done
 python3 eval_mafa/error_analysis.py "$MAFA" $OUT
 python3 eval_mafa/context_in_distribution.py $OUT
 python3 eval_mafa/make_report.py $OUT "$MAFA"
+# label views added in MAFA cc1606f (defect layer only): orig / code / excl_const
+T=$MAFA/results/human_like_eval/traces_v1.jsonl
+for v in orig code excl_const; do
+  python3 $MAFA/scripts/eval_attribution.py --labels $L --traces $T --view $v --pred $OUT/medhypertrace_pred.jsonl --out $OUT/report_view_$v.json >/dev/null
+done
