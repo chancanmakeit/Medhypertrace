@@ -1,0 +1,53 @@
+{
+ "mdagents": {
+  "n_templates": 16,
+  "test_template_rate_injected_steps": 0.216,
+  "test_template_rate_non_injected_steps": 0.0,
+  "detector_fires_on_traj": 0.383,
+  "first_step": [
+   0.68,
+   300
+  ],
+  "template_detector": [
+   0.54,
+   300
+  ],
+  "mht_orig": 0.693,
+  "mht_stripped_test": 0.677,
+  "mht_stripped_both": 0.667
+ },
+ "dylan": {
+  "n_templates": 23,
+  "test_template_rate_injected_steps": 0.412,
+  "test_template_rate_non_injected_steps": 0.005,
+  "detector_fires_on_traj": 0.638,
+  "first_step": [
+   0.513,
+   337
+  ],
+  "template_detector": [
+   0.555,
+   337
+  ],
+  "mht_orig": 0.694,
+  "mht_stripped_test": 0.576,
+  "mht_stripped_both": 0.599
+ },
+ "clinical_agent": {
+  "n_templates": 3,
+  "test_template_rate_injected_steps": 0.048,
+  "test_template_rate_non_injected_steps": 0.0,
+  "detector_fires_on_traj": 0.095,
+  "first_step": [
+   0.6,
+   105
+  ],
+  "template_detector": [
+   0.629,
+   105
+  ],
+  "mht_orig": 0.686,
+  "mht_stripped_test": 0.686,
+  "mht_stripped_both": 0.676
+ }
+}

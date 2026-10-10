@@ -1,0 +1,43 @@
+== mdagents: 16 templates; test coverage injected 21.6% vs non-injected 0.0%; detector fires on 38% of test trajectories
+  ep01 loss=3.696 val stepTop1=0.725 Top3=0.925
+  ep04 loss=2.188 val stepTop1=0.750 Top3=0.925
+  ep08 loss=1.621 val stepTop1=0.725 Top3=0.925
+  ep12 loss=1.419 val stepTop1=0.725 Top3=0.900
+  ep16 loss=1.267 val stepTop1=0.750 Top3=0.900
+  ep20 loss=1.192 val stepTop1=0.725 Top3=0.875
+  ep01 loss=3.711 val stepTop1=0.725 Top3=0.925
+  ep04 loss=2.162 val stepTop1=0.725 Top3=0.925
+  ep08 loss=1.737 val stepTop1=0.675 Top3=0.925
+  ep12 loss=1.587 val stepTop1=0.700 Top3=0.925
+  ep16 loss=1.423 val stepTop1=0.725 Top3=0.900
+  ep20 loss=1.353 val stepTop1=0.750 Top3=0.925
+{"n_templates": 16, "test_template_rate_injected_steps": 0.216, "test_template_rate_non_injected_steps": 0.0, "detector_fires_on_traj": 0.383, "first_step": [0.68, 300], "template_detector": [0.54, 300], "mht_orig": 0.693, "mht_stripped_test": 0.677, "mht_stripped_both": 0.667}
+== dylan: 23 templates; test coverage injected 41.2% vs non-injected 0.5%; detector fires on 64% of test trajectories
+  ep01 loss=3.800 val stepTop1=0.604 Top3=0.896
+  ep04 loss=2.267 val stepTop1=0.708 Top3=0.958
+  ep08 loss=1.668 val stepTop1=0.708 Top3=0.938
+  ep12 loss=1.511 val stepTop1=0.646 Top3=0.938
+  ep16 loss=1.140 val stepTop1=0.688 Top3=0.958
+  ep20 loss=0.887 val stepTop1=0.688 Top3=0.958
+  ep01 loss=3.979 val stepTop1=0.562 Top3=0.896
+  ep04 loss=2.585 val stepTop1=0.562 Top3=0.938
+  ep08 loss=2.311 val stepTop1=0.583 Top3=0.958
+  ep12 loss=2.039 val stepTop1=0.562 Top3=0.938
+  ep16 loss=1.823 val stepTop1=0.521 Top3=0.896
+  ep20 loss=1.692 val stepTop1=0.438 Top3=0.938
+{"n_templates": 23, "test_template_rate_injected_steps": 0.412, "test_template_rate_non_injected_steps": 0.005, "detector_fires_on_traj": 0.638, "first_step": [0.513, 337], "template_detector": [0.555, 337], "mht_orig": 0.694, "mht_stripped_test": 0.576, "mht_stripped_both": 0.599}
+== clinical_agent: 3 templates; test coverage injected 4.8% vs non-injected 0.0%; detector fires on 10% of test trajectories
+  ep01 loss=4.362 val stepTop1=0.688 Top3=1.000
+  ep04 loss=2.555 val stepTop1=0.719 Top3=1.000
+  ep08 loss=1.731 val stepTop1=0.688 Top3=1.000
+  ep12 loss=1.106 val stepTop1=0.812 Top3=1.000
+  ep16 loss=0.835 val stepTop1=0.688 Top3=1.000
+  ep20 loss=0.680 val stepTop1=0.750 Top3=1.000
+  ep01 loss=4.313 val stepTop1=0.688 Top3=0.969
+  ep04 loss=2.529 val stepTop1=0.719 Top3=1.000
+  ep08 loss=1.697 val stepTop1=0.719 Top3=1.000
+  ep12 loss=1.016 val stepTop1=0.781 Top3=1.000
+  ep16 loss=0.797 val stepTop1=0.688 Top3=1.000
+  ep20 loss=0.634 val stepTop1=0.688 Top3=1.000
+{"n_templates": 3, "test_template_rate_injected_steps": 0.048, "test_template_rate_non_injected_steps": 0.0, "detector_fires_on_traj": 0.095, "first_step": [0.6, 105], "template_detector": [0.629, 105], "mht_orig": 0.686, "mht_stripped_test": 0.686, "mht_stripped_both": 0.676}
+wrote /home/claude/medhypertrace/analysis/artifact_audit.json
