@@ -49,10 +49,15 @@
 - MAFA 新增缺陷层视角 `--view code|excl_const`;excl_const 下「猜第一步」只有 6/18,MedHyperTrace 5/18,两者持平。
 - 待办(双方):引用注入伪迹比例前统一抽取器 + 人工抽查。
 
-### 0.29 注入模板捷径(第 9 轮,`analysis/artifact_audit.py`)
+### 0.29 注入模板(第 9 轮,`analysis/artifact_audit.py`)【第 10 轮更正:模板句就是 RC 注入的故障本身,「删模板后」的结论撤回,以 §0.30 为准】
 - 合成数据里有一批只出现在被注入步骤的尾部模板句(如 "On re-reading the question more generically, the answer is A.")。被注入步骤覆盖率:mdagents 21.6%、dylan 41.2%、clinical_agent 4.8%;未注入步骤 ≈0。
 - 删模板后 MHT 步骤 top-1:dylan 0.694→0.599(猜第一步 0.513),mdagents 0.693→0.667(猜第一步 0.680),clinical_agent 0.686→0.676(0.600)。**现有合成集主表数字被抬高,尤其 dylan;mdagents 上方法不超过位置先验。**
 - 计划(待用户确认):先改数据和评测协议(去模板重跑本方法 + 全部基线;主表加猜第一步、模板检测器两条平凡基线),结构改进等人类 dev 集;与 MAFA 预注册 dev/test 划分。
+
+### 0.30 按注入策略分开评估(第 10 轮,`analysis/strategy_split_eval.json`)
+- response_corruption(RC)的故障 = 固定模板句;prompt_injection(PI)由模型在改写的提示下生成,较接近真实故障,但 PI 步骤常为空(llm_debate 33.8%、ca5 11.8%)。
+- PI 子集上 MHT 比最强平凡基线(猜第一步 / 结构先验 / 模板 / 空输出)高:dylan +13、llm_debate +11(非空步骤)、clinical_agent +10(边缘);mdagents 无增益;ca5 不可信(整体上单靠模板检测器就有 0.90)。
+- 主表改为按策略分开 + 4 条平凡基线。MAFA 建议:花钱重新生成注入数据前,先在 PI 子集上重跑全部基线(Who&When/med-SFT 需 GPU/API)。
 
 ### 0.3 下一步
 见 §七;另加:接入标注数据(接口 v1)时先写一个 loader,把 `anchors.jsonl` 对齐到本项目的轨迹对象,并在失效边界上实测(ID 重复、框架固有码)。

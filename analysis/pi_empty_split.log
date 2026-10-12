@@ -1,0 +1,16 @@
+  ep01 loss=2.636 val stepTop1=0.939 Top3=0.988
+  ep04 loss=0.768 val stepTop1=0.951 Top3=0.988
+  ep08 loss=0.389 val stepTop1=0.963 Top3=1.000
+  ep12 loss=0.290 val stepTop1=0.963 Top3=1.000
+  ep16 loss=0.263 val stepTop1=0.951 Top3=1.000
+  ep20 loss=0.197 val stepTop1=0.976 Top3=1.000
+clinical_agent5  earliest_PI gold_step_nonempty  n=  39  MHT 36/39=0.92  struct 7/39=0.18
+clinical_agent5  earliest_PI gold_step_empty     n=   8  MHT 8/8=1.00  struct 4/8=0.50
+  ep01 loss=3.730 val stepTop1=0.550 Top3=0.885
+  ep04 loss=2.305 val stepTop1=0.611 Top3=0.893
+  ep08 loss=1.874 val stepTop1=0.519 Top3=0.908
+  ep12 loss=1.589 val stepTop1=0.527 Top3=0.916
+  ep16 loss=1.411 val stepTop1=0.557 Top3=0.901
+  ep20 loss=1.247 val stepTop1=0.557 Top3=0.924
+llm_debate       earliest_PI gold_step_nonempty  n= 279  MHT 177/279=0.63  struct 146/279=0.52
+llm_debate       earliest_PI gold_step_empty     n=  71  MHT 20/71=0.28  struct 2/71=0.03

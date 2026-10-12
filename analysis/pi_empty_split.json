@@ -1,0 +1,26 @@
+{
+ "clinical_agent5": {
+  "gold_step_nonempty": {
+   "n": 39,
+   "mht": 36,
+   "struct": 7
+  },
+  "gold_step_empty": {
+   "n": 8,
+   "mht": 8,
+   "struct": 4
+  }
+ },
+ "llm_debate": {
+  "gold_step_nonempty": {
+   "n": 279,
+   "mht": 177,
+   "struct": 146
+  },
+  "gold_step_empty": {
+   "n": 71,
+   "mht": 20,
+   "struct": 2
+  }
+ }
+}
