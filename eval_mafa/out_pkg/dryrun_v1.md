@@ -228,11 +228,11 @@ Every number is computed within ONE taxonomy: MAST and MedAgentAudit labels are 
 | method | who_earliest | who_any | when_exact | when_pm1 | agent_auroc (n) | code_micro_f1 |
 |---|---|---|---|---|---|---|
 | mht | 3/7 | 5/7 | 3/7 | 5/7 | 0.500 (5) | - |
-| first_step | 4/7 | 6/7 | 3/7 | 6/7 | - | - |
+| first_step | 6/7 | 6/7 | 5/7 | 6/7 | - | - |
 | last_step | 0/7 | 5/7 | 0/7 | 1/7 | - | - |
 | always_none | - | - | 0/7 | - | - | - |
-| structure_prior | 4/7 | 6/7 | 3/7 | 6/7 | 0.465 (5) | - |
-| mafa_primary | 5/7 | 7/7 | 4/7 | 6/7 | 0.713 (5) | 0.545 |
+| structure_prior | 6/7 | 6/7 | 5/7 | 6/7 | 0.465 (5) | - |
+| mafa_primary | 7/7 | 7/7 | 6/7 | 6/7 | 0.713 (5) | 0.545 |
 | mafa_secondary | 5/7 | 7/7 | 5/7 | 6/7 | 0.758 (5) | 0.182 |
 
 ## MedAgentAudit · defect_any · no_leak (rows=7)
@@ -240,11 +240,11 @@ Every number is computed within ONE taxonomy: MAST and MedAgentAudit labels are 
 | method | who_earliest | who_any | when_exact | when_pm1 | agent_auroc (n) | code_micro_f1 |
 |---|---|---|---|---|---|---|
 | mht | 3/7 | 5/7 | 3/7 | 5/7 | 0.500 (5) | - |
-| first_step | 4/7 | 6/7 | 3/7 | 6/7 | - | - |
+| first_step | 6/7 | 6/7 | 5/7 | 6/7 | - | - |
 | last_step | 0/7 | 5/7 | 0/7 | 1/7 | - | - |
 | always_none | - | - | 0/7 | - | - | - |
-| structure_prior | 4/7 | 6/7 | 3/7 | 6/7 | 0.465 (5) | - |
-| mafa_primary | 5/7 | 7/7 | 4/7 | 6/7 | 0.713 (5) | 0.545 |
+| structure_prior | 6/7 | 6/7 | 5/7 | 6/7 | 0.465 (5) | - |
+| mafa_primary | 7/7 | 7/7 | 6/7 | 6/7 | 0.713 (5) | 0.545 |
 | mafa_secondary | 5/7 | 7/7 | 5/7 | 6/7 | 0.758 (5) | 0.182 |
 
 ## MedAgentAudit · defect_any · fw=clinical_agent (rows=1)
@@ -276,11 +276,11 @@ Every number is computed within ONE taxonomy: MAST and MedAgentAudit labels are 
 | method | who_earliest | who_any | when_exact | when_pm1 | agent_auroc (n) | code_micro_f1 |
 |---|---|---|---|---|---|---|
 | mht | 3/5 | 5/5 | 3/5 | 4/5 | 0.556 (3) | - |
-| first_step | 3/5 | 5/5 | 3/5 | 5/5 | - | - |
+| first_step | 5/5 | 5/5 | 5/5 | 5/5 | - | - |
 | last_step | 0/5 | 4/5 | 0/5 | 0/5 | - | - |
 | always_none | - | - | 0/5 | - | - | - |
-| structure_prior | 3/5 | 5/5 | 3/5 | 5/5 | 0.539 (3) | - |
-| mafa_primary | 3/5 | 5/5 | 3/5 | 5/5 | 0.633 (3) | 0.375 |
+| structure_prior | 5/5 | 5/5 | 5/5 | 5/5 | 0.539 (3) | - |
+| mafa_primary | 5/5 | 5/5 | 5/5 | 5/5 | 0.633 (3) | 0.375 |
 | mafa_secondary | 3/5 | 5/5 | 3/5 | 4/5 | 0.639 (3) | 0.235 |
 
 ## MedAgentAudit · defect_any · split=faulty (rows=7)
@@ -288,9 +288,9 @@ Every number is computed within ONE taxonomy: MAST and MedAgentAudit labels are 
 | method | who_earliest | who_any | when_exact | when_pm1 | agent_auroc (n) | code_micro_f1 |
 |---|---|---|---|---|---|---|
 | mht | 3/7 | 5/7 | 3/7 | 5/7 | 0.500 (5) | - |
-| first_step | 4/7 | 6/7 | 3/7 | 6/7 | - | - |
+| first_step | 6/7 | 6/7 | 5/7 | 6/7 | - | - |
 | last_step | 0/7 | 5/7 | 0/7 | 1/7 | - | - |
 | always_none | - | - | 0/7 | - | - | - |
-| structure_prior | 4/7 | 6/7 | 3/7 | 6/7 | 0.465 (5) | - |
-| mafa_primary | 5/7 | 7/7 | 4/7 | 6/7 | 0.713 (5) | 0.545 |
+| structure_prior | 6/7 | 6/7 | 5/7 | 6/7 | 0.465 (5) | - |
+| mafa_primary | 7/7 | 7/7 | 6/7 | 6/7 | 0.713 (5) | 0.545 |
 | mafa_secondary | 5/7 | 7/7 | 5/7 | 6/7 | 0.758 (5) | 0.182 |

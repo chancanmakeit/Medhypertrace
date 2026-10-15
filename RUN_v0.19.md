@@ -1,4 +1,4 @@
-# RUN_v0.18 — 每轮讨论记录
+# RUN_v0.19 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -235,3 +235,10 @@
 **核对:** 官方 defect_any 与我们本地版本在 human-like v2(19 行)、closest v2(39 行)上逐行一致。**发现:** human-like v1 未重建(20/20 行无 `earliest_step_any`),走官方回退时智能体恒为 `None` → 这些行在 `who_*` 中被静默跳过(v1 defect_any who_earliest 的 n 会变成 0)。不影响 MAFA 新导出的标签(导入时写入该字段)。
 **做了:** `evaluate.py` 的 defect_any 改用 MAFA 官方实现;缺字段的行先用数据包的「步骤→发言者」补上(字段齐全的行完全走官方代码)。closest v2 结果切换前后逐项相同;v1 defect_any who_earliest n 恢复为 MAST 13、MAA 7。MAFA 本地副本切到 `96eed97`。
 **同意 ②:** 定义说清楚后三条归无码合理;建议复核时统计 `nearest` 的分布,把「接近已有码的边界情况」和「确实新的缺陷」分开报告——这正是逃逸率论证需要的。
+
+## 第 19 轮 · 2026-10-15 01:36 · MAFA 修好 defect_any 回退;uncoded_nearest 进入导入报告
+
+**MAFA 回复(241f6af,0.7.58):** ① defect_any 回退时用「步骤→发言者」补智能体,找不到就报错;称 human-like v1 在 defect_any 下与 defect 一致(who_earliest 9/20、when_exact 8/20),已加自检;who_any 用 faulty_agents,未受影响。② 导入报告新增 `uncoded_nearest`(按 escape 分组,none 表示确实的新缺陷),组织者手册要求复核时分开报告边界情况和新缺陷;现有 LLM 标签显示「未记录」。
+**核对:** 官方回退现在与我们本地的补齐逐行一致,智能体不再丢。但 v1 的 defect_any 与 defect 并非完全一致:MedAgentAudit 的 `MM-47`、`MM-61` 标注者填的最早步是 s01(招募者),s01 上没有任何 MAA 码,回退按码推到 s02/Expert-0。MHT 的数字碰巧不变(两条它都猜错),但猜第一步在 MAA 从 6/7、5/7 变成 4/7、3/7。MAFA 引的 9/20、8/20 是两套体系合并的数字。
+**判断:** v1 是旧格式(没有无码缺陷一栏),标注者直接填的 s01 本身就是一个无码缺陷(第 6 轮已发现 MM-61 的这个情况)→ 对旧格式行,defect_any 应取标注者原填的最早步,即「与 defect 一致」才是正确语义,当前实现没有做到。
+**做了:** `evaluate.py`:缺 `earliest_step_any` 且没有 `uncoded` 字段(label_schema 1)的行,defect_any 取标注者原填的最早步;有 `uncoded` 字段的行照旧按 codes+uncoded 推。v1 两套体系的 defect_any 现在与 defect 完全一致(MAST MHT 6/13、5/13,猜第一步 8/13、6/13;MAA MHT 3/7、3/7,猜第一步 6/7、5/7)。MAFA 本地副本切到 `241f6af`。

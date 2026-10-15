@@ -217,7 +217,15 @@ def main():
                 filled = []
                 for L, Lx in zip(TL, defect_any(TL, items)):
                     if "earliest_step_any" not in L:
-                        L = dict(L, earliest_step_any=Lx["earliest_step"], earliest_step_agent_any=Lx["earliest_step_agent"])
+                        if "uncoded" not in L:
+                            # label_schema 1 (e.g. human-like v1) has no uncoded row: the annotator's own
+                            # earliest_step can sit on a defect no code captures (MAA MM-47/MM-61: recruiter @ s01),
+                            # which is exactly what the uncoded row records in v3 -> keep the annotator's value.
+                            L = dict(L, earliest_step_any=L.get("earliest_step"),
+                                     earliest_step_agent_any=L.get("earliest_step_agent"))
+                        else:
+                            L = dict(L, earliest_step_any=Lx["earliest_step"],
+                                     earliest_step_agent_any=Lx["earliest_step_agent"])
                     filled.append(L)
                 Ls = E.apply_layer(filled, layer) if "defect_any" in getattr(E, "__doc__", "") else defect_any(TL, items)
             else:
