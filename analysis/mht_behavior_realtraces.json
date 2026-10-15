@@ -1,0 +1,46 @@
+{
+ "mdagents": {
+  "n": 90,
+  "same_as_first_step": 28,
+  "same_as_structure_prior": 28,
+  "top_prob_ge_0.95": 63,
+  "n_steps_max": 7,
+  "chosen:s01": 28,
+  "chosen:s02": 42,
+  "chosen:s04": 5,
+  "chosen:s03": 13,
+  "chosen:s05": 2
+ },
+ "clinical_agent": {
+  "n": 90,
+  "same_as_first_step": 70,
+  "same_as_structure_prior": 70,
+  "top_prob_ge_0.95": 74,
+  "n_steps_max": 6,
+  "chosen:s01": 70,
+  "chosen:s02": 11,
+  "chosen:s03": 9
+ },
+ "dylan": {
+  "n": 90,
+  "same_as_first_step": 64,
+  "same_as_structure_prior": 64,
+  "top_prob_ge_0.95": 76,
+  "n_steps_max": 10,
+  "chosen:s03": 4,
+  "chosen:s01": 64,
+  "chosen:s02": 20,
+  "chosen:s04": 2
+ },
+ "clinical_agent5": {
+  "n": 90,
+  "same_as_first_step": 46,
+  "same_as_structure_prior": 31,
+  "top_prob_ge_0.95": 53,
+  "n_steps_max": 5,
+  "chosen:s01": 46,
+  "chosen:s04": 1,
+  "chosen:s03": 31,
+  "chosen:s02": 12
+ }
+}
