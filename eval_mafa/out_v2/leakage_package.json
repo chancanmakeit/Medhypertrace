@@ -5,21 +5,25 @@
   "dev/faulty:step": 6,
   "dev/faulty:question_any": 8,
   "dev/faulty:same_fw_train": 2,
+  "dev/faulty:same_fw_any": 3,
   "test/faulty:n": 120,
   "test/faulty:trace": 0,
   "test/faulty:step": 8,
   "test/faulty:question_any": 8,
   "test/faulty:same_fw_train": 1,
+  "test/faulty:same_fw_any": 1,
   "test/clean:n": 120,
   "test/clean:trace": 0,
   "test/clean:step": 59,
   "test/clean:question_any": 120,
   "test/clean:same_fw_train": 94,
+  "test/clean:same_fw_any": 120,
   "dev/clean:n": 60,
   "dev/clean:trace": 0,
   "dev/clean:step": 34,
   "dev/clean:question_any": 60,
-  "dev/clean:same_fw_train": 35
+  "dev/clean:same_fw_train": 35,
+  "dev/clean:same_fw_any": 60
  },
  "rows": [
   {
@@ -30,7 +34,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00040#MM-99",
@@ -40,7 +46,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00005#NCT00001830",
@@ -50,7 +58,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00003#mmlu_pro_health_b342a27b",
@@ -62,7 +72,9 @@
    "question_match": [
     "llm_debate/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00037#mmlu_pro_health_e09cdd6d",
@@ -72,7 +84,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00009#MM-21",
@@ -82,7 +96,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00010#NCT00002623",
@@ -92,7 +108,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00026#NCT00003251",
@@ -102,7 +120,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00010#mmlu_pro_health_eda2b16b",
@@ -112,7 +132,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00015#mmlu_pro_health_5badfa1f",
@@ -127,7 +149,9 @@
     "dylan/test",
     "llm_debate/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00032#mmlu_pro_health_7a49adc4",
@@ -137,7 +161,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00016#NCT00002967",
@@ -147,7 +173,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00034#NCT00003640",
@@ -157,7 +185,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00033#mmlu_pro_health_e9093f2e",
@@ -167,7 +197,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00002#MM-7",
@@ -177,7 +209,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00017#MM-47",
@@ -187,7 +221,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00030#MM-76",
@@ -197,7 +233,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00031#MM-85",
@@ -207,7 +245,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00033#NCT00047008",
@@ -219,7 +259,9 @@
     "clinical_agent5/test"
    ],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00011#NCT00002570",
@@ -229,7 +271,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00033#NCT00003643",
@@ -239,7 +283,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00043#NCT00004039",
@@ -249,7 +295,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00012#mmlu_pro_health_6718f611",
@@ -261,7 +309,9 @@
    "question_match": [
     "llm_debate/train"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00001#NCT00034125",
@@ -271,7 +321,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00004#NCT00033683",
@@ -281,7 +333,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00037#NCT00048633",
@@ -294,7 +348,9 @@
     "clinical_agent5/train"
    ],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00001#NCT00001132",
@@ -304,7 +360,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00014#NCT00002772",
@@ -314,7 +372,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00038#NCT00003728",
@@ -324,7 +384,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00042#NCT00003941",
@@ -334,7 +396,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00006#mmlu_pro_health_68ab0723",
@@ -346,7 +410,9 @@
    "question_match": [
     "llm_debate/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00025#mmlu_pro_health_228041a0",
@@ -356,7 +422,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00042#mmlu_pro_health_f445e4ef",
@@ -366,7 +434,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00005#NCT00031824",
@@ -376,7 +446,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00042#NCT00049517",
@@ -386,7 +458,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00003#NCT00000811",
@@ -396,7 +470,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00008#NCT00002525",
@@ -406,7 +482,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00030#NCT00003592",
@@ -416,7 +494,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00044#NCT00003958",
@@ -426,7 +506,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00008#mmlu_pro_health_822dab4a",
@@ -436,7 +518,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00024#mmlu_pro_health_828d13eb",
@@ -446,7 +530,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00012#MM-37",
@@ -456,7 +542,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00028#MM-72",
@@ -466,7 +554,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00007#NCT00038194",
@@ -476,7 +566,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00023#NCT00003215",
@@ -486,7 +578,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00028#NCT00003298",
@@ -496,7 +590,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00032#NCT00003644",
@@ -506,7 +602,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00039#NCT00003843",
@@ -516,7 +614,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00018#mmlu_pro_health_d9a2dddc",
@@ -526,7 +626,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00020#mmlu_pro_health_15255c7e",
@@ -536,7 +638,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00021#mmlu_pro_health_9ac19f1f",
@@ -548,7 +652,9 @@
    "question_match": [
     "llm_debate/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00029#mmlu_pro_health_75d77ba5",
@@ -560,7 +666,9 @@
    "question_match": [
     "llm_debate/train"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00035#mmlu_pro_health_a659db27",
@@ -570,7 +678,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00039#mmlu_pro_health_ace095ad",
@@ -580,7 +690,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00042#MM-110",
@@ -590,7 +702,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00029#NCT00043134",
@@ -602,7 +716,9 @@
     "clinical_agent5/test"
    ],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00019#NCT00002717",
@@ -612,7 +728,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00022#NCT00003212",
@@ -622,7 +740,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00041#NCT00003912",
@@ -632,7 +752,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00000#mmlu_pro_health_5e4b9947",
@@ -642,7 +764,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00026#mmlu_pro_health_f825cf48",
@@ -652,7 +776,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00036#MM-95",
@@ -662,7 +788,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00013#NCT00039546",
@@ -672,7 +800,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00014#NCT00040326",
@@ -682,7 +812,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00016#NCT00039039",
@@ -692,7 +824,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00030#NCT00045162",
@@ -702,7 +836,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00000#NCT00000577",
@@ -712,7 +848,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00004#NCT00000914",
@@ -722,7 +860,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00006#NCT00000173",
@@ -732,7 +872,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00007#NCT00001723",
@@ -742,7 +884,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00015#NCT00002597",
@@ -752,7 +896,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00018#NCT00003152",
@@ -762,7 +908,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00024#NCT00003235",
@@ -772,7 +920,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00029#NCT00003624",
@@ -782,7 +932,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00031#NCT00003605",
@@ -792,7 +944,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00037#NCT00003803",
@@ -802,7 +956,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00001#mmlu_pro_health_2cde435c",
@@ -812,7 +968,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00005#mmlu_pro_health_61625dab",
@@ -822,7 +980,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00013#mmlu_pro_health_83a800b4",
@@ -834,7 +994,9 @@
    "question_match": [
     "llm_debate/train"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00019#mmlu_pro_health_00c09cf0",
@@ -846,7 +1008,9 @@
    "question_match": [
     "llm_debate/train"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00027#mmlu_pro_health_af679dcd",
@@ -856,7 +1020,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00044#mmlu_pro_health_9c755956",
@@ -866,7 +1032,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00019#MM-52",
@@ -876,7 +1044,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00027#MM-73",
@@ -886,7 +1056,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00029#MM-74",
@@ -896,7 +1068,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00034#MM-89",
@@ -906,7 +1080,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00038#MM-97",
@@ -916,7 +1092,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00037#MM-96",
@@ -926,7 +1104,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00004#MM-11",
@@ -936,7 +1116,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00042#MM-83",
@@ -950,7 +1132,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00044#MM-86",
@@ -964,7 +1148,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00028#MM-50",
@@ -978,7 +1164,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00039#NCT00003219",
@@ -990,7 +1178,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00029#NCT00003041",
@@ -1002,7 +1192,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00027#NCT00036400",
@@ -1014,7 +1206,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00000#NCT00000172",
@@ -1026,7 +1220,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00007#NCT00001789",
@@ -1038,7 +1234,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00013#NCT00002633",
@@ -1050,7 +1248,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00023#NCT00002895",
@@ -1062,7 +1262,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00031#NCT00003062",
@@ -1074,7 +1276,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00043#NCT00003293",
@@ -1086,7 +1290,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00005#mmlu_pro_health_125d94aa",
@@ -1101,7 +1307,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00030#NCT00003052",
@@ -1113,7 +1321,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00033#mmlu_pro_health_66f1a3b7",
@@ -1128,7 +1338,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00005#NCT00001596",
@@ -1140,7 +1352,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00012#NCT00002556",
@@ -1152,7 +1366,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00001#mmlu_pro_health_03ae1784",
@@ -1167,7 +1383,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00006#mmlu_pro_health_1699d9e5",
@@ -1181,7 +1399,9 @@
    "question_match": [
     "dylan/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00010#mmlu_pro_health_1f468a60",
@@ -1195,7 +1415,9 @@
    "question_match": [
     "dylan/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00012#mmlu_pro_health_2359d062",
@@ -1210,7 +1432,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00020#mmlu_pro_health_43af2abe",
@@ -1225,7 +1449,9 @@
     "dylan/test",
     "llm_debate/train"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00043#mmlu_pro_health_921787cc",
@@ -1240,7 +1466,9 @@
     "dylan/test",
     "llm_debate/train"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00000#MM-1",
@@ -1254,7 +1482,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00002#MM-13",
@@ -1268,7 +1498,9 @@
    "question_match": [
     "mdagents/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00029#MM-53",
@@ -1282,7 +1514,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00004#NCT00032084",
@@ -1296,7 +1530,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00021#NCT00034944",
@@ -1311,7 +1547,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00037#NCT00038298",
@@ -1323,7 +1561,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00008#NCT00001934",
@@ -1335,7 +1575,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00014#NCT00002635",
@@ -1347,7 +1589,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00020#NCT00002874",
@@ -1359,7 +1603,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00025#NCT00002922",
@@ -1371,7 +1617,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00028#NCT00003005",
@@ -1383,7 +1631,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00032#NCT00003118",
@@ -1395,7 +1645,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00036#NCT00003194",
@@ -1407,7 +1659,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00044#NCT00003317",
@@ -1419,7 +1673,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00019#mmlu_pro_health_4182116c",
@@ -1434,7 +1690,9 @@
     "dylan/test",
     "llm_debate/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00040#mmlu_pro_health_87404b54",
@@ -1449,7 +1707,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00013#MM-29",
@@ -1463,7 +1723,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00020#MM-39",
@@ -1477,7 +1739,9 @@
    "question_match": [
     "mdagents/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00002#NCT00031798",
@@ -1489,7 +1753,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00033#NCT00036868",
@@ -1503,7 +1769,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00002#NCT00000390",
@@ -1515,7 +1783,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00009#NCT00002523",
@@ -1527,7 +1797,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00024#NCT00002911",
@@ -1539,7 +1811,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00033#NCT00003120",
@@ -1551,7 +1825,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00037#NCT00003205",
@@ -1563,7 +1839,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00010#MM-25",
@@ -1577,7 +1855,9 @@
    "question_match": [
     "mdagents/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00017#MM-32",
@@ -1591,7 +1871,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00003#NCT00000419",
@@ -1603,7 +1885,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00013#mmlu_pro_health_2a19c5e3",
@@ -1618,7 +1902,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00015#mmlu_pro_health_322d099a",
@@ -1633,7 +1919,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00023#mmlu_pro_health_4a164137",
@@ -1648,7 +1936,9 @@
     "dylan/test",
     "llm_debate/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00027#mmlu_pro_health_535a4846",
@@ -1663,7 +1953,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00030#mmlu_pro_health_5badfa1f",
@@ -1678,7 +1970,9 @@
     "dylan/test",
     "llm_debate/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00034#mmlu_pro_health_72b8ddfe",
@@ -1691,7 +1985,9 @@
     "dylan/train",
     "llm_debate/test"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00042#mmlu_pro_health_8cfacb78",
@@ -1706,7 +2002,9 @@
     "dylan/test",
     "llm_debate/train"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00008#MM-23",
@@ -1720,7 +2018,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00000#NCT00031551",
@@ -1735,7 +2035,9 @@
    "question_match": [
     "clinical_agent5/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00003#NCT00031863",
@@ -1747,7 +2049,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00006#NCT00033163",
@@ -1759,7 +2063,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00007#NCT00033254",
@@ -1771,7 +2077,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00012#NCT00034203",
@@ -1786,7 +2094,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00016#NCT00034502",
@@ -1798,7 +2108,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00026#NCT00035815",
@@ -1810,7 +2122,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00032#NCT00036842",
@@ -1824,7 +2138,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00001#NCT00000174",
@@ -1836,7 +2152,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00004#NCT00000614",
@@ -1848,7 +2166,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00011#NCT00002549",
@@ -1860,7 +2180,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00026#NCT00002972",
@@ -1872,7 +2194,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00038#NCT00003216",
@@ -1884,7 +2208,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00002#mmlu_pro_health_06f084ea",
@@ -1899,7 +2225,9 @@
     "dylan/test",
     "llm_debate/train"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00003#mmlu_pro_health_0a9ca8f8",
@@ -1912,9 +2240,12 @@
    ],
    "question_match": [
     "dylan/train",
-    "llm_debate/test"
+    "llm_debate/test",
+    "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00032#mmlu_pro_health_63b2931c",
@@ -1929,7 +2260,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00037#mmlu_pro_health_7d54d0ed",
@@ -1943,7 +2276,9 @@
    "question_match": [
     "dylan/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00004#MM-19",
@@ -1957,7 +2292,9 @@
    "question_match": [
     "mdagents/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00018#MM-34",
@@ -1971,7 +2308,9 @@
    "question_match": [
     "mdagents/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00024#MM-43",
@@ -1985,7 +2324,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00010#NCT00002545",
@@ -1997,7 +2338,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00018#NCT00002819",
@@ -2009,7 +2352,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00021#NCT00002878",
@@ -2021,7 +2366,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00022#NCT00002882",
@@ -2033,7 +2380,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00034#NCT00003140",
@@ -2045,7 +2394,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00041#NCT00003256",
@@ -2057,7 +2408,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00039#mmlu_pro_health_86ebd2f7",
@@ -2071,7 +2424,9 @@
    "question_match": [
     "dylan/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00003#MM-18",
@@ -2085,7 +2440,9 @@
    "question_match": [
     "mdagents/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00033#MM-65",
@@ -2099,7 +2456,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00040#MM-78",
@@ -2113,7 +2472,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00020#NCT00003215",
@@ -2123,7 +2484,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00022#mmlu_pro_health_79948375",
@@ -2133,7 +2496,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00025#NCT00003389",
@@ -2143,7 +2508,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00036#NCT00003695",
@@ -2153,7 +2520,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00007#mmlu_pro_health_3df3ddda",
@@ -2165,7 +2534,9 @@
    "question_match": [
     "llm_debate/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00016#mmlu_pro_health_5fffa8ac",
@@ -2178,7 +2549,9 @@
     "dylan/train",
     "llm_debate/test"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00015#NCT00041067",
@@ -2188,7 +2561,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00036#NCT00047541",
@@ -2198,7 +2573,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00009#NCT00002593",
@@ -2208,7 +2585,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00013#NCT00002868",
@@ -2218,7 +2597,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00021#NCT00003204",
@@ -2228,7 +2609,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00035#NCT00003679",
@@ -2238,7 +2621,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00011#mmlu_pro_health_a4570148",
@@ -2250,7 +2635,9 @@
    "question_match": [
     "llm_debate/train"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00030#mmlu_pro_health_e1c5afe6",
@@ -2262,7 +2649,9 @@
    "question_match": [
     "llm_debate/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00036#mmlu_pro_health_b3854a44",
@@ -2272,7 +2661,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00003#MM-14",
@@ -2282,7 +2673,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00006#MM-15",
@@ -2292,7 +2685,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00011#MM-33",
@@ -2302,7 +2697,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00013#MM-38",
@@ -2312,7 +2709,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00014#MM-41",
@@ -2322,7 +2721,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00039#MM-101",
@@ -2332,7 +2733,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00044#MM-114",
@@ -2342,7 +2745,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00042#NCT00003276",
@@ -2354,7 +2759,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00015#NCT00002646",
@@ -2366,7 +2773,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00016#NCT00002684",
@@ -2378,7 +2787,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00019#NCT00002869",
@@ -2390,7 +2801,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00001#NCT00031590",
@@ -2402,7 +2815,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00009#NCT00033371",
@@ -2414,7 +2829,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00034#NCT00037128",
@@ -2428,7 +2845,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00017#NCT00002764",
@@ -2440,7 +2859,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00027#NCT00002976",
@@ -2452,7 +2873,9 @@
    "question_match": [
     "clinical_agent/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00040#NCT00003223",
@@ -2464,7 +2887,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00022#mmlu_pro_health_48f73af5",
@@ -2478,7 +2903,9 @@
    "question_match": [
     "dylan/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00035#mmlu_pro_health_753c275e",
@@ -2493,7 +2920,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00014#MM-3",
@@ -2507,7 +2936,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00015#MM-30",
@@ -2519,7 +2950,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00019#MM-35",
@@ -2531,7 +2964,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00034#MM-66",
@@ -2545,7 +2980,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00038#MM-75",
@@ -2559,7 +2996,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00041#MM-81",
@@ -2573,7 +3012,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00000#NCT00035971",
@@ -2583,7 +3024,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00002#NCT00032890",
@@ -2593,7 +3036,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00003#NCT00031629",
@@ -2603,7 +3048,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00006#NCT00034788",
@@ -2613,7 +3060,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00008#NCT00038142",
@@ -2625,7 +3074,9 @@
     "clinical_agent5/test"
    ],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00009#NCT00033553",
@@ -2635,7 +3086,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00010#NCT00031044",
@@ -2647,7 +3100,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00011#NCT00038948",
@@ -2659,7 +3114,9 @@
     "clinical_agent5/train"
    ],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00012#NCT00038532",
@@ -2669,7 +3126,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00017#NCT00042887",
@@ -2679,7 +3138,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00018#NCT00041106",
@@ -2689,7 +3150,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00019#NCT00041938",
@@ -2699,7 +3162,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00020#NCT00042562",
@@ -2709,7 +3174,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00021#NCT00038766",
@@ -2721,7 +3188,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00022#NCT00043082",
@@ -2733,7 +3202,9 @@
     "clinical_agent5/train"
    ],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00023#NCT00041119",
@@ -2743,7 +3214,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00024#NCT00044044",
@@ -2753,7 +3226,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00025#NCT00041574",
@@ -2763,7 +3238,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00026#NCT00041327",
@@ -2775,7 +3252,9 @@
     "clinical_agent5/train"
    ],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00027#NCT00043004",
@@ -2787,7 +3266,9 @@
     "clinical_agent5/test"
    ],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00028#NCT00043862",
@@ -2797,7 +3278,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00031#NCT00047112",
@@ -2809,7 +3292,9 @@
     "clinical_agent5/test"
    ],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00032#NCT00045721",
@@ -2819,7 +3304,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00034#NCT00046462",
@@ -2829,7 +3316,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00035#NCT00045604",
@@ -2841,7 +3330,9 @@
     "clinical_agent5/train"
    ],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00038#NCT00044993",
@@ -2853,7 +3344,9 @@
     "clinical_agent5/test"
    ],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00039#NCT00049335",
@@ -2865,7 +3358,9 @@
     "clinical_agent5/train"
    ],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00040#NCT00049179",
@@ -2875,7 +3370,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00041#NCT00049179",
@@ -2885,7 +3382,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00043#NCT00049660",
@@ -2897,7 +3396,9 @@
     "clinical_agent5/test"
    ],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00044#NCT00049452",
@@ -2907,7 +3408,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00002#NCT00000897",
@@ -2917,7 +3420,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00012#NCT00002790",
@@ -2927,7 +3432,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00017#NCT00003034",
@@ -2937,7 +3444,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00027#NCT00003457",
@@ -2947,7 +3456,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00040#NCT00003782",
@@ -2957,7 +3468,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00002#mmlu_pro_health_7bb225d9",
@@ -2967,7 +3480,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00004#mmlu_pro_health_d6377a3b",
@@ -2977,7 +3492,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00009#mmlu_pro_health_f4ac0e0c",
@@ -2987,7 +3504,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00014#mmlu_pro_health_40d2f70f",
@@ -3001,7 +3520,9 @@
     "llm_debate/test",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00017#mmlu_pro_health_9ac19f1f",
@@ -3013,7 +3534,9 @@
    "question_match": [
     "llm_debate/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00023#mmlu_pro_health_8fc2a29b",
@@ -3023,7 +3546,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00028#mmlu_pro_health_191717a1",
@@ -3033,7 +3558,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00031#mmlu_pro_health_f7d34d74",
@@ -3043,7 +3570,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00034#mmlu_pro_health_63ac82a6",
@@ -3053,7 +3582,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00038#mmlu_pro_health_1ca76a62",
@@ -3063,7 +3594,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00040#mmlu_pro_health_e4c9e287",
@@ -3073,7 +3606,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00041#mmlu_pro_health_8e06756b",
@@ -3083,7 +3618,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00043#mmlu_pro_health_f9f2dd75",
@@ -3093,7 +3630,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00000#MM-6",
@@ -3103,7 +3642,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00001#MM-9",
@@ -3113,7 +3654,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00005#MM-10",
@@ -3123,7 +3666,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00007#MM-16",
@@ -3133,7 +3678,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00008#MM-17",
@@ -3143,7 +3690,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00010#MM-28",
@@ -3153,7 +3702,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00015#MM-46",
@@ -3163,7 +3714,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00016#MM-45",
@@ -3173,7 +3726,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00020#MM-55",
@@ -3183,7 +3738,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00021#MM-56",
@@ -3193,7 +3750,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00022#MM-58",
@@ -3203,7 +3762,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00023#MM-61",
@@ -3213,7 +3774,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00024#MM-64",
@@ -3223,7 +3786,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00025#MM-69",
@@ -3233,7 +3798,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00026#MM-70",
@@ -3243,7 +3810,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00032#MM-82",
@@ -3253,7 +3822,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00033#MM-91",
@@ -3263,7 +3834,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00035#MM-92",
@@ -3273,7 +3846,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00041#MM-103",
@@ -3283,7 +3858,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00043#MM-112",
@@ -3293,7 +3870,9 @@
    "trace_match": [],
    "step_match": [],
    "question_match": [],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": false,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00005#NCT00032643",
@@ -3305,7 +3884,9 @@
    "question_match": [
     "clinical_agent5/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00008#NCT00033306",
@@ -3317,7 +3898,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00010#NCT00033384",
@@ -3329,7 +3912,9 @@
    "question_match": [
     "clinical_agent5/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00011#NCT00033735",
@@ -3341,7 +3926,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00013#NCT00034268",
@@ -3353,7 +3940,9 @@
    "question_match": [
     "clinical_agent5/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00014#NCT00034333",
@@ -3365,7 +3954,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00015#NCT00034476",
@@ -3379,7 +3970,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00017#NCT00034697",
@@ -3391,7 +3984,9 @@
    "question_match": [
     "clinical_agent5/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00018#NCT00034710",
@@ -3403,7 +3998,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00019#NCT00034749",
@@ -3415,7 +4012,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00020#NCT00034827",
@@ -3427,7 +4026,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00022#NCT00035048",
@@ -3439,7 +4040,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00023#NCT00035360",
@@ -3451,7 +4054,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00024#NCT00035529",
@@ -3463,7 +4068,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00025#NCT00035802",
@@ -3475,7 +4082,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00028#NCT00036621",
@@ -3489,7 +4098,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00029#NCT00036634",
@@ -3503,7 +4114,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00030#NCT00036660",
@@ -3515,7 +4128,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00031#NCT00036764",
@@ -3527,7 +4142,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00035#NCT00037557",
@@ -3541,7 +4158,9 @@
    "question_match": [
     "clinical_agent5/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00036#NCT00038051",
@@ -3555,7 +4174,9 @@
    "question_match": [
     "clinical_agent5/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00038#NCT00038402",
@@ -3569,7 +4190,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00039#NCT00038480",
@@ -3583,7 +4206,9 @@
    "question_match": [
     "clinical_agent5/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00040#NCT00038571",
@@ -3595,7 +4220,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00041#NCT00038610",
@@ -3607,7 +4234,9 @@
    "question_match": [
     "clinical_agent5/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00042#NCT00038701",
@@ -3619,7 +4248,9 @@
    "question_match": [
     "clinical_agent5/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00043#NCT00038766",
@@ -3633,7 +4264,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00044#NCT00038792",
@@ -3645,7 +4278,9 @@
    "question_match": [
     "clinical_agent5/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00006#NCT00001781",
@@ -3657,7 +4292,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00035#NCT00003172",
@@ -3669,7 +4306,9 @@
    "question_match": [
     "clinical_agent/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00000#mmlu_pro_health_0295bfa6",
@@ -3684,7 +4323,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00004#mmlu_pro_health_0ac8dace",
@@ -3699,7 +4340,9 @@
     "dylan/test",
     "llm_debate/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00007#mmlu_pro_health_186381db",
@@ -3714,7 +4357,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00008#mmlu_pro_health_1980ab1c",
@@ -3729,7 +4374,9 @@
     "dylan/test",
     "llm_debate/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00009#mmlu_pro_health_1ed8b54e",
@@ -3745,7 +4392,9 @@
     "llm_debate/test",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00011#mmlu_pro_health_22f57623",
@@ -3760,7 +4409,9 @@
     "dylan/test",
     "llm_debate/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00014#mmlu_pro_health_30789f59",
@@ -3775,7 +4426,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00016#mmlu_pro_health_33ce3654",
@@ -3790,7 +4443,9 @@
     "dylan/test",
     "llm_debate/train"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00017#mmlu_pro_health_3e5d0a89",
@@ -3805,7 +4460,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00018#mmlu_pro_health_4038a878",
@@ -3820,7 +4477,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00021#mmlu_pro_health_48b24888",
@@ -3835,7 +4494,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00024#mmlu_pro_health_4b44bfc8",
@@ -3850,7 +4511,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00025#mmlu_pro_health_4e7d8774",
@@ -3865,7 +4528,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00026#mmlu_pro_health_52673809",
@@ -3880,7 +4545,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00028#mmlu_pro_health_5575c4b7",
@@ -3895,7 +4562,9 @@
     "dylan/train",
     "llm_debate/test"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00029#mmlu_pro_health_5ac36295",
@@ -3910,7 +4579,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00031#mmlu_pro_health_60bc5ae1",
@@ -3925,7 +4596,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00036#mmlu_pro_health_7b47861e",
@@ -3940,7 +4613,9 @@
     "dylan/test",
     "llm_debate/train"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00038#mmlu_pro_health_85b10be2",
@@ -3955,7 +4630,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00041#mmlu_pro_health_875a11d9",
@@ -3970,7 +4647,9 @@
     "dylan/train",
     "llm_debate/test"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00044#mmlu_pro_health_9302d921",
@@ -3985,7 +4664,9 @@
     "dylan/train",
     "llm_debate/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00001#MM-12",
@@ -3997,7 +4678,9 @@
    "question_match": [
     "mdagents/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00005#MM-2",
@@ -4011,7 +4694,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00006#MM-20",
@@ -4023,7 +4708,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00007#MM-22",
@@ -4037,7 +4724,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00009#MM-24",
@@ -4051,7 +4740,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00011#MM-26",
@@ -4065,7 +4756,9 @@
    "question_match": [
     "mdagents/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00012#MM-27",
@@ -4079,7 +4772,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00016#MM-31",
@@ -4091,7 +4786,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00021#MM-4",
@@ -4105,7 +4802,9 @@
    "question_match": [
     "mdagents/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00022#MM-40",
@@ -4117,7 +4816,9 @@
    "question_match": [
     "mdagents/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00023#MM-42",
@@ -4131,7 +4832,9 @@
    "question_match": [
     "mdagents/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00025#MM-48",
@@ -4143,7 +4846,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00026#MM-49",
@@ -4157,7 +4862,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00027#MM-5",
@@ -4169,7 +4876,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00030#MM-57",
@@ -4183,7 +4892,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00031#MM-59",
@@ -4195,7 +4906,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00032#MM-62",
@@ -4209,7 +4922,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00035#MM-67",
@@ -4223,7 +4938,9 @@
    "question_match": [
     "mdagents/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00036#MM-68",
@@ -4237,7 +4954,9 @@
    "question_match": [
     "mdagents/test"
    ],
-   "same_framework_train": false
+   "same_framework_train": false,
+   "same_framework_any": true,
+   "not_in_train_only": true
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00037#MM-71",
@@ -4251,7 +4970,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00039#MM-77",
@@ -4263,7 +4984,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   },
   {
    "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00043#MM-84",
@@ -4275,7 +4998,9 @@
    "question_match": [
     "mdagents/train"
    ],
-   "same_framework_train": true
+   "same_framework_train": true,
+   "same_framework_any": true,
+   "not_in_train_only": false
   }
  ]
 }

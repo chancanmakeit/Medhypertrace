@@ -40,6 +40,18 @@ def load_raw(mafa_root: str, source: dict) -> dict:
     return rec
 
 
+def source_from_id(mafa_root: str, trace_id: str) -> dict:
+    """Package items carry no `source`; the trace id is <framework>::<file stem>#<line5>#<record id> (interface doc §2).
+    The stem names a file under data/faulty or data/clean (run scripts/fetch_data.sh in the MAFA root first)."""
+    body = trace_id.split("::", 1)[1]
+    stem, line, rid = body.rsplit("#", 2)
+    hits = [os.path.join(d, stem + ".jsonl") for d in ("data/faulty", "data/clean")
+            if os.path.exists(os.path.join(mafa_root, d, stem + ".jsonl"))]
+    if len(hits) != 1:
+        raise FileNotFoundError(f"{trace_id}: source file for stem {stem!r} found {len(hits)} times")
+    return {"file": hits[0], "line_index": int(line), "record_id": rid}
+
+
 def build(trace: dict, mafa_root: str):
     """Return (Trajectory, mapping) for one MAFA trace.
 
@@ -49,7 +61,8 @@ def build(trace: dict, mafa_root: str):
       "align":     per-step sha1 check results,
     }
     """
-    rec = load_raw(mafa_root, trace["source"])
+    trace.setdefault("trace_id", trace.get("id"))
+    rec = load_raw(mafa_root, trace.get("source") or source_from_id(mafa_root, trace["trace_id"]))
     traj = parse_record(rec, framework_override=trace["framework"])
     ch = rec["injection_log"]["conversation_history"]
 
@@ -67,8 +80,9 @@ def build(trace: dict, mafa_root: str):
     align = {"n_mafa": len(mafa), "n_ours": len(traj.steps),
              "raw_order_match": 0, "parser_order_match": 0, "mismatch_ids": []}
     for k, ms in enumerate(mafa):
-        ok_raw = k < len(raw_steps) and sha1(raw_steps[k].content) == ms["content_sha1"]
-        ok_par = k < len(traj.steps) and sha1(traj.steps[k].content) == ms["content_sha1"]
+        ref = ms.get("content_sha1") or sha1(ms["content"] or "")   # package items carry the content itself
+        ok_raw = k < len(raw_steps) and sha1(raw_steps[k].content) == ref
+        ok_par = k < len(traj.steps) and sha1(traj.steps[k].content) == ref
         align["raw_order_match"] += ok_raw
         align["parser_order_match"] += ok_par
         if not ok_raw:
@@ -93,8 +107,13 @@ def build(trace: dict, mafa_root: str):
 
 
 def load_eval(mafa_root: str, traces_rel: str = "results/human_like_eval/traces_v1.jsonl"):
+    """traces_rel: an evaluation-set traces_*.jsonl, or a review package (*.json with "items") -- the latter covers
+    all 360 package traces, i.e. everything the human-version labels can refer to."""
     path = os.path.join(mafa_root, traces_rel)
-    traces = [json.loads(l) for l in open(path, encoding="utf-8")]
+    if path.endswith(".json"):
+        traces = [dict(it, trace_id=it["id"]) for it in json.load(open(path, encoding="utf-8"))["items"]]
+    else:
+        traces = [json.loads(l) for l in open(path, encoding="utf-8")]
     return [(t, *build(t, mafa_root)) for t in traces]
 
 

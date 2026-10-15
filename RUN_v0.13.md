@@ -1,4 +1,4 @@
-# RUN_v0.12 — 每轮讨论记录
+# RUN_v0.13 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -167,3 +167,15 @@
 **MAFA 回复:** ① 文档改为「成员哈希」并注明文件 sha256(f60f324,§8);② 按题目编号核对:答对 180/180 题目在合成数据里,78 条至少一步相同;答错 dev 2/60、test 0/120;同意我们的处理,写入 §6.6;MAFA 不用合成数据训练任何东西;③ **答对 ≠ 无缺陷**:主标注模型在答对的 180 条里判出码的 MAST 120 条(去框架固有 63)、MedAgentAudit 94 条;v2 答对 9 条中 6 条有缺陷;答对轨迹的目标是缺陷层(有哪些缺陷,没有就答「无」),责任层在答对轨迹上按定义为空(§6.7);④ 人类标签回来前 dev 上只有大模型标签,在上面调参等于拟合扮演专家的模型——先搭框架、跑通流程。
 **核对与更正:** 我们上轮报的答错 test「4/120」有误:其中 3 条(ClinicalAgent5)只是 Reasoner 的加权平均算式文本碰巧相同(固定权重 → 相同字符串),不是泄漏。泄漏判定改为**题目文本**相同(`eval_mafa/leakage_package.py` 已改):答错 dev 2/60(`5fffa8ac`、`NCT00038766`)、test 1/120(`mmlu_pro_health_40d2f70f`,与合成训练集里的 `1ed8b54e` 题目文本完全相同但编号不同——按编号核对会漏掉)。答对 180/180 题目在合成数据里,其中 129 条在同框架训练集。
 **同意 ③④:** 目标改述为「答对轨迹上做缺陷层(含输出『无』)」;不在 LLM 标签上调参。仍需要的方法能力:输出「无缺陷」(MAST 答对轨迹约 1/3 无码)。
+
+## 第 13 轮 · 2026-10-14 23:23 · 泄漏改按题干比对;搭评测框架(统一评测脚本 + 「无缺陷」输出接口)
+
+**MAFA 回复(3195cb3,§6.6):** 改按题干(选项之前)比对。`40d2f70f` 与 `1ed8b54e` 题干相同、选项不同(MMLU-Pro 变体),编号和全文都会漏。答错:dev 3/60(`5badfa1f` 全文与编号都相同,`NCT00038766`,`5fffa8ac`↔`72b8ddfe`)、test 1/120;答对 180/180。指出我们漏了 `5badfa1f`(其合成记录在我们的测试集,不在训练集)。**用户批准执行前两项。**
+**泄漏(`eval_mafa/leakage_package.py`):** 改为题干比对 + 增加 `same_framework_any` / `not_in_train_only`。初版只比题干时多出两条 mdagents 误报(`MM-41`、`MM-16`:通用题干 "What is the diagnosis?",图片和选项都不同)→ 影像题要求图片也相同。最终与 MAFA 一致:答错 dev 3/60(`5badfa1f` 仅在合成测试集)、test 1/120;答对 180/180(同框架训练集 129)。
+**第 2 项 输出接口(`eval_mafa/predict.py`、`adapter.py`):**
+- 适配器可直接读审查数据包(由 trace_id 反推 `data/faulty|clean` 源文件),**360/360 sha1 对齐**。
+- 每条轨迹输出 `defect_score`(智能体头 max)和 `pred_step="none"`(defect_score < 0.5;0.5 是该头自身的判定边界,未在任何 MAFA 标签上调;以后只在**人类** dev 标签上校准)。两套体系各一行。`run_eval.sh` 用 `--abstain_threshold 0` 复现第 5 轮。
+- 全包预测(种子 0)在 `eval_mafa/out_pkg/`。dev 上输出「无」的比例:dylan 答对 9/15、答错 2/15(defect_score 中位数 0.08 对 0.98),clinical_agent5 各 6/15,其余 0–3/15。这区分的是答对/答错,不是有无缺陷,且答对轨迹与训练集同题——只记录,不据此调阈值。
+**第 1 项 统一评测脚本(`eval_mafa/evaluate.py`):** 调用 MAFA 自己的 `score`/`apply_layer`(两边同一份代码);三层 × {全部、去泄漏、各框架、答对/答错};内置基线 first_step、last_step、always_none、structure_prior(只用合成训练集的位置×角色、uid 频率),加 MAFA 两个标注模型。保护:默认只收 `source=human`;`--subset test` 必须 `--final`,并写入 `eval_mafa/test_runs.jsonl`(入库;同一方法再评 test 须 `--repeat_reason`)。核对:在 v2 上与直接调用 MAFA 评分脚本的数字完全一致。
+**dry run(LLM 标签,不是结果):** `eval_mafa/out_pkg/dryrun_v{1,2}.md`。
+**下一步:** 等人类 dev 标签(试标 19 条先到)→ `python eval_mafa/evaluate.py --labels <attribution.jsonl> --pred mht=eval_mafa/out_pkg/medhypertrace_pred.jsonl`。

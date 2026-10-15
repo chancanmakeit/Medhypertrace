@@ -15,6 +15,14 @@ Decision rules (fixed BEFORE scoring, not chosen on the eval rows):
                instances mapping to one MAFA uid
   pred_agent   PRIMARY  (rule "step-owner"): the agent that executed pred_step
                SECONDARY(rule "agent-head"): argmax agent_scores  -> separate file
+  defect_score max of the agent head over the trace's agents (P(some agent is faulty)); pred_step = "none"
+               (no defect, defect layer) when defect_score < --abstain_threshold. Default 0.5 = the head's own
+               decision boundary (trained with class-balanced pos_weight), fixed a priori and NOT tuned on any MAFA
+               label; to be calibrated on HUMAN dev labels only. --abstain_threshold 0 reproduces the round-5 runs.
+               pred_agent stays the owner of the top-scored step either way (who_* are scored only where the label
+               names a faulty agent).
+  rows         one row per (trace, taxonomy) for BOTH taxonomies, so any MAFA label file (human-like v1/v2, the
+               human attribution.jsonl) finds its prediction.
   pred_codes   MAST rows only: per FM code, max over agents of the pair-head probability,
                monotonically rescaled so the code's val-calibrated threshold maps to 0.5
                (the scorer thresholds at 0.5; this preserves the method's own decision).
@@ -63,20 +71,16 @@ def main():
     ap.add_argument("--mafa_root", default="/home/claude/mafa-human-ai-annotation")
     ap.add_argument("--out_dir", default="eval_mafa/out")
     ap.add_argument("--traces", default="results/human_like_eval/traces_v1.jsonl")
-    ap.add_argument("--labels", default="results/human_like_eval/labels_v1.jsonl")
+    ap.add_argument("--labels", default=None, help="unused (kept for old command lines)")
+    ap.add_argument("--abstain_threshold", type=float, default=0.5)
     a = ap.parse_args()
     os.makedirs(a.out_dir, exist_ok=True)
 
     rows = load_eval(a.mafa_root, a.traces)
-    labels = [json.loads(x) for x in open(
-        os.path.join(a.mafa_root, a.labels), encoding="utf-8")]
-    tax_of = {}
-    for L in labels:
-        tax_of.setdefault(L["trace_id"], []).append(L["taxonomy"])
 
     args = T.get_args(["x"])                      # code defaults, untouched
     fws = sorted({t["framework"] for t, _, _ in rows})
-    models, meta = {}, {"seed": a.seed, "config": {k: v for k, v in vars(args).items()
+    models, meta = {}, {"seed": a.seed, "abstain_threshold": a.abstain_threshold, "traces": a.traces, "config": {k: v for k, v in vars(args).items()
                                                     if k not in ("target",)}, "frameworks": {}}
     for fw in fws:
         seed_all(a.seed)
@@ -104,13 +108,16 @@ def main():
             agent_scores[uid] = max(agent_scores.get(uid, 0.0), float(ap_[k]))
             for j, fm in enumerate(FM_TYPES):
                 code_p[fm] = max(code_p.get(fm, 0.0), float(pp[k, j]))
-        pred_step = max(step_scores, key=step_scores.get)
+        top_step = max(step_scores, key=step_scores.get)
+        defect_score = max(agent_scores.values())
+        pred_step = top_step if defect_score >= a.abstain_threshold else "none"
         sid2uid = {m["turn2sid"][x.turn]: m["inst2uid"][x.instance] for x in acting.values()}
-        owner = sid2uid[pred_step]
+        owner = sid2uid[top_step]
         head = max(agent_scores, key=agent_scores.get)
         codes = {fm: round(rescale(code_p[fm], thr[j]), 4) for j, fm in enumerate(FM_TYPES)}
-        for tax in tax_of.get(t["trace_id"], []):
-            base = {"trace_id": t["trace_id"], "taxonomy": tax,
+        for tax in ("MAST", "MedAgentAudit"):
+            base = {"trace_id": t["trace_id"], "taxonomy": tax, "framework": t["framework"],
+                    "defect_score": round(defect_score, 4),
                     "agent_scores": {u: round(v, 4) for u, v in agent_scores.items()},
                     "step_scores": {k: round(v, 4) for k, v in sorted(step_scores.items())},
                     "pred_step": pred_step}
@@ -119,7 +126,7 @@ def main():
             prim.append({**base, "pred_agent": owner})
             sec.append({**base, "pred_agent": head})
         detail.append({"trace_id": t["trace_id"], "framework": t["framework"],
-                       "pred_step": pred_step, "pred_agent_step_owner": owner,
+                       "pred_step": pred_step, "top_step": top_step, "defect_score": defect_score, "pred_agent_step_owner": owner,
                        "pred_agent_head": head, "step_scores": step_scores,
                        "agent_scores": agent_scores, "code_probs_raw": code_p,
                        "step_agents": sid2uid})

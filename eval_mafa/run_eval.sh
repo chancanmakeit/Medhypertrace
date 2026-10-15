@@ -7,7 +7,7 @@ MAFA=${MAFA:-/home/claude/mafa-human-ai-annotation}
 OUT=eval_mafa/out; mkdir -p $OUT
 python3 eval_mafa/adapter.py "$MAFA"                       # §2 sha1 alignment (must be 17/17)
 python3 eval_mafa/leakage_check.py "$MAFA" $OUT/leakage.json   # §3 leakage
-for s in 0 1 2; do python3 eval_mafa/predict.py --seed $s --mafa_root "$MAFA" --out_dir $OUT; done
+for s in 0 1 2; do python3 eval_mafa/predict.py --seed $s --mafa_root "$MAFA" --out_dir $OUT --abstain_threshold 0; done
 L=$MAFA/results/human_like_eval/labels_v1.jsonl
 for v in "" _agenthead; do
   for t in ALL MAST MedAgentAudit; do
