@@ -74,6 +74,11 @@
 - 评测脚本另有本地 `defect_any` 层(最早故障步也算无码缺陷);已建议 MAFA 加 `earliest_step_any`。**test 人类标签由 MAFA 保管**,平时只收 `attribution_dev.jsonl`;最终评测时 MAFA 交出 test 标签并记录时间、提交号。
 - **当前在等:** 试标 19 条(全在 dev)的 `attribution_dev.jsonl`。
 
+### 0.33 硬规则:MAST 与 MedAgentAudit 分开(第 17 轮,用户要求)
+- 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
+- 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
+- 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
 ### 0.3 下一步
 见 §七;另加:接入标注数据(接口 v1)时先写一个 loader,把 `anchors.jsonl` 对齐到本项目的轨迹对象,并在失效边界上实测(ID 重复、框架固有码)。
 

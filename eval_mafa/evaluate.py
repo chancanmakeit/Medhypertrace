@@ -1,6 +1,7 @@
 """Unified evaluation harness for MAFA labels (human version: import_review_labels.py -> attribution.jsonl;
 also works on the LLM eval sets for dry runs). One command scores every method and every trivial baseline on
-every label layer, overall / per framework / per split / without leaked traces, using MAFA's OWN scorer code
+every label layer, SEPARATELY PER TAXONOMY (MAST / MedAgentAudit are never pooled), overall / per framework / per
+split / without leaked traces, using MAFA's OWN scorer code
 (scripts/eval_attribution.py: score, apply_layer) so both projects compute identical numbers.
 
     python eval_mafa/evaluate.py --labels <attribution.jsonl> --pred mht=eval_mafa/out_pkg/medhypertrace_pred.jsonl \
@@ -190,40 +191,46 @@ def main():
                     if k.startswith("mafa_")})
 
     leak = {r["trace_id"]: r["same_framework_train"] for r in json.load(open(a.leakage))["rows"]}
-    groups = {"all": lambda L: True, "no_leak": lambda L: not leak.get(L["trace_id"], False)}
-    for fw in sorted({L["framework"] for L in labels}):
-        groups[f"fw={fw}"] = (lambda f: lambda L: L["framework"] == f)(fw)
-    for sp_ in ("clean", "faulty"):
-        groups[f"split={sp_}"] = (lambda s: lambda L: L.get("split") == s)(sp_)
-
     report = {"subset": a.subset, "source": a.source, "labels": lp, "labels_sha256": sha256(lp),
-              "split_sha256": split["sha256"], "n_label_rows": len(labels), "layers": {}}
-    for layer in LAYERS:
-        Ls = defect_any(labels, items) if layer == "defect_any" else E.apply_layer(labels, layer)
-        report["layers"][layer] = {}
-        for g, f in groups.items():
-            sub = [L for L in Ls if f(L)]
-            if not sub:
-                continue
-            report["layers"][layer][g] = {"n_rows": len(sub),
-                                          "methods": {n: E.score(sub, p) for n, p in methods.items()}}
+              "split_sha256": split["sha256"], "n_label_rows": len(labels), "taxonomies": {}}
+    lines = [f"# MAFA evaluation · subset={a.subset} · source={a.source} · rows={len(labels)}",
+             f"labels `{os.path.relpath(lp, a.mafa_root)}` sha256 {report['labels_sha256'][:12]} · split {split['sha256'][:12]}",
+             "", "Every number is computed within ONE taxonomy: MAST and MedAgentAudit labels are different label "
+             "definitions (and the same trace can appear under both), so rows are never pooled across them. "
+             "MedHyperTrace is trained on MAST-coded synthetic data only and has no MedAgentAudit code head.", ""]
+    for tax in sorted({L["taxonomy"] for L in labels}):
+        TL = [L for L in labels if L["taxonomy"] == tax]
+        groups = {"all": lambda L: True, "no_leak": lambda L: not leak.get(L["trace_id"], False)}
+        for fw in sorted({L["framework"] for L in TL}):
+            groups[f"fw={fw}"] = (lambda f: lambda L: L["framework"] == f)(fw)
+        for sp_ in ("clean", "faulty"):
+            groups[f"split={sp_}"] = (lambda s_: lambda L: L.get("split") == s_)(sp_)
+        rep_t = report["taxonomies"][tax] = {"n_label_rows": len(TL), "layers": {}}
+        lines += [f"# {tax} (rows={len(TL)})", ""]
+        for layer in LAYERS:
+            Ls = defect_any(TL, items) if layer == "defect_any" else E.apply_layer(TL, layer)
+            assert {L["taxonomy"] for L in Ls} <= {tax}
+            rep_t["layers"][layer] = {}
+            for g, f in groups.items():
+                sub = [L for L in Ls if f(L)]
+                if not sub:
+                    continue
+                blk = rep_t["layers"][layer][g] = {"n_rows": len(sub),
+                                                   "methods": {n: E.score(sub, p) for n, p in methods.items()}}
+                if g not in ("all", "no_leak") and not g.startswith("fw=") and \
+                        not (layer.startswith("defect") and g.startswith("split=")):
+                    continue
+                lines += [f"## {tax} · {layer} · {g} (rows={blk['n_rows']})", "",
+                          "| method | " + " | ".join(METRICS) + " | agent_auroc (n) | code_micro_f1 |",
+                          "|---" * (len(METRICS) + 3) + "|"]
+                for n, r in blk["methods"].items():
+                    c = compact(r, layer)
+                    au = f"{c['agent_auroc']:.3f} ({c['auroc_n']})" if c["agent_auroc"] is not None else "-"
+                    lines.append(f"| {n} | " + " | ".join(c.get(k, "-") for k in METRICS) +
+                                 f" | {au} | {c.get('code_micro_f1', '-')} |")
+                lines.append("")
     if a.out:
         json.dump(report, open(a.out, "w"), indent=1, ensure_ascii=False)
-    lines = [f"# MAFA evaluation · subset={a.subset} · source={a.source} · rows={len(labels)}",
-             f"labels `{os.path.relpath(lp, a.mafa_root)}` sha256 {report['labels_sha256'][:12]} · split {split['sha256'][:12]}", ""]
-    for layer, gs in report["layers"].items():
-        for g, blk in gs.items():
-            if g not in ("all", "no_leak") and not g.startswith("fw="):
-                if not (layer.startswith("defect") and g.startswith("split=")):
-                    continue
-            lines += [f"## {layer} · {g} (rows={blk['n_rows']})", "",
-                      "| method | " + " | ".join(METRICS) + " | agent_auroc (n) | code_micro_f1 |", "|---" * (len(METRICS) + 3) + "|"]
-            for n, r in blk["methods"].items():
-                c = compact(r, layer)
-                au = f"{c['agent_auroc']:.3f} ({c['auroc_n']})" if c["agent_auroc"] is not None else "-"
-                lines.append(f"| {n} | " + " | ".join(c.get(k, "-") for k in METRICS) +
-                             f" | {au} | {c.get('code_micro_f1', '-')} |")
-            lines.append("")
     md = "\n".join(lines)
     if a.md:
         open(a.md, "w").write(md)
