@@ -4,22 +4,22 @@
   "dev/faulty:trace": 0,
   "dev/faulty:step": 6,
   "dev/faulty:question_any": 8,
-  "dev/faulty:same_fw_train": 5,
+  "dev/faulty:same_fw_train": 2,
   "test/faulty:n": 120,
   "test/faulty:trace": 0,
   "test/faulty:step": 8,
   "test/faulty:question_any": 8,
-  "test/faulty:same_fw_train": 4,
+  "test/faulty:same_fw_train": 1,
   "test/clean:n": 120,
   "test/clean:trace": 0,
   "test/clean:step": 59,
   "test/clean:question_any": 120,
-  "test/clean:same_fw_train": 95,
+  "test/clean:same_fw_train": 94,
   "dev/clean:n": 60,
   "dev/clean:trace": 0,
   "dev/clean:step": 34,
   "dev/clean:question_any": 60,
-  "dev/clean:same_fw_train": 36
+  "dev/clean:same_fw_train": 35
  },
  "rows": [
   {
@@ -294,7 +294,7 @@
     "clinical_agent5/train"
    ],
    "question_match": [],
-   "same_framework_train": true
+   "same_framework_train": false
   },
   {
    "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00001#NCT00001132",
@@ -1735,7 +1735,7 @@
    "question_match": [
     "clinical_agent5/test"
    ],
-   "same_framework_train": true
+   "same_framework_train": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00003#NCT00031863",
@@ -2659,7 +2659,7 @@
     "clinical_agent5/train"
    ],
    "question_match": [],
-   "same_framework_train": true
+   "same_framework_train": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00012#NCT00038532",
@@ -2733,7 +2733,7 @@
     "clinical_agent5/train"
    ],
    "question_match": [],
-   "same_framework_train": true
+   "same_framework_train": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00023#NCT00041119",
@@ -2775,7 +2775,7 @@
     "clinical_agent5/train"
    ],
    "question_match": [],
-   "same_framework_train": true
+   "same_framework_train": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00027#NCT00043004",
@@ -2841,7 +2841,7 @@
     "clinical_agent5/train"
    ],
    "question_match": [],
-   "same_framework_train": true
+   "same_framework_train": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00038#NCT00044993",
@@ -2865,7 +2865,7 @@
     "clinical_agent5/train"
    ],
    "question_match": [],
-   "same_framework_train": true
+   "same_framework_train": false
   },
   {
    "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00040#NCT00049179",
@@ -3555,7 +3555,7 @@
    "question_match": [
     "clinical_agent5/test"
    ],
-   "same_framework_train": true
+   "same_framework_train": false
   },
   {
    "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00038#NCT00038402",

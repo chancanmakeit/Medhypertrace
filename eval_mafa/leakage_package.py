@@ -1,6 +1,8 @@
 """Leakage check of ALL 360 MAFA package traces (dev + test, eval_split_v1) against MedHyperTrace's training data.
-Uses trace CONTENT only (no labels): whole-trace step-sha1 sequence, non-trivial single-step matches (>= 20 chars),
-and the same question text in a synthetic framework's train / test split."""
+Uses trace CONTENT only (no labels). The leakage FLAG is `same_framework_train`: the same question TEXT (normalised,
+so duplicated questions filed under a different id are caught -- an id-based check misses them) appears in the same
+framework's synthetic TRAIN split. Single-step content matches are listed for reference only: step-only matches
+without a shared question are formulaic outputs (e.g. ClinicalAgent5's Reasoner weighted-average line), not leakage."""
 import collections, hashlib, json, os, sys
 _r = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, _r)
@@ -30,7 +32,7 @@ for tid, it in items.items():
     tr_hit = sorted(trace_ix.get(hs, set()))
     st_hit = sorted({tag for s in it["steps"] if len((s["content"] or "").strip()) >= 20 for tag in step_ix.get(h(s["content"]), set())})
     q_hit = sorted(q_ix.get(qn(it["question"]), set()))
-    same_fw_train = f"{it['framework']}/train" in set(st_hit) | set(q_hit) | set(tr_hit)
+    same_fw_train = f"{it['framework']}/train" in set(q_hit) | set(tr_hit)
     key = f"{es[tid]}/{it['split']}"
     agg[key + ":n"] += 1; agg[key + ":trace"] += bool(tr_hit); agg[key + ":step"] += bool(st_hit)
     agg[key + ":question_any"] += bool(q_hit); agg[key + ":same_fw_train"] += same_fw_train
