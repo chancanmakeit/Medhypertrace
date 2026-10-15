@@ -49,7 +49,9 @@ def load_scorer(mafa_root):
 
 
 def defect_any(labels, items):
-    """LOCAL view (not in MAFA's scorer yet): defect layer whose earliest step also counts the `_uncoded` row, i.e.
+    """Local equivalent of MAFA's defect_any (official since MAFA 0.7.57; identical on rows that carry
+    earliest_step_any -- checked on human-like v2 and closest-human-like v2). Used to fill rows that lack the field.
+    Originally a LOCAL view: defect layer whose earliest step also counts the `_uncoded` row, i.e.
     taxonomy-free like responsibility_any. In MAFA's defect layer a trace whose only defect has no matching code
     gets earliest_step = "none", so always predicting "no defect" is credited on traces that DO have a defect."""
     spk = {it["id"]: {s["id"]: s["agent"] for s in it["steps"]} for it in items}
@@ -208,7 +210,18 @@ def main():
         rep_t = report["taxonomies"][tax] = {"n_label_rows": len(TL), "layers": {}}
         lines += [f"# {tax} (rows={len(TL)})", ""]
         for layer in LAYERS:
-            Ls = defect_any(TL, items) if layer == "defect_any" else E.apply_layer(TL, layer)
+            if layer == "defect_any":
+                # MAFA's official layer (0.7.57+). Rows exported before it lack earliest_step_any; MAFA's fallback
+                # then returns agent=None, silently dropping them from who_*. Fill those rows from the package's
+                # step->speaker map first, so rows WITH the field go through MAFA's code unchanged.
+                filled = []
+                for L, Lx in zip(TL, defect_any(TL, items)):
+                    if "earliest_step_any" not in L:
+                        L = dict(L, earliest_step_any=Lx["earliest_step"], earliest_step_agent_any=Lx["earliest_step_agent"])
+                    filled.append(L)
+                Ls = E.apply_layer(filled, layer) if "defect_any" in getattr(E, "__doc__", "") else defect_any(TL, items)
+            else:
+                Ls = E.apply_layer(TL, layer)
             assert {L["taxonomy"] for L in Ls} <= {tax}
             rep_t["layers"][layer] = {}
             for g, f in groups.items():

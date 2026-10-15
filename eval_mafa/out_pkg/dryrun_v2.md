@@ -1,5 +1,5 @@
 # MAFA evaluation · subset=dev · source=llm · rows=19
-labels `results/human_like_eval_v2/labels_v2.jsonl` sha256 2a098da62899 · split 916fee301529
+labels `results/human_like_eval_v2/labels_v2.jsonl` sha256 e10dc633b405 · split 916fee301529
 
 Every number is computed within ONE taxonomy: MAST and MedAgentAudit labels are different label definitions (and the same trace can appear under both), so rows are never pooled across them. MedHyperTrace is trained on MAST-coded synthetic data only and has no MedAgentAudit code head.
 

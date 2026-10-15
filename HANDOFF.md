@@ -27,7 +27,7 @@
 - 接入人类标注时:只能用 `anchors.jsonl`(`status=done`、present/absent);`reviewer.kind=llm` 的 human-like 标签**绝不能**当真值;MAST 包的框架固有码(MDAgents 的 FM-1.1/1.2、ClinicalAgent 的 FM-1.2)不能当「故障→答错」监督信号。轨迹 ID 必须用整串做键。
 
 ### 0.25 MAFA 联合评估(2026-10-09 第 5 轮)
-- MAFA 仓库 `chancanmakeit/MAFA-human-ai-annotation` 在本会话**只读**,克隆在 `/home/claude/mafa-human-ai-annotation`,锁定 `39fc840`(第 5 轮评估时为 `908bc74`);AEGIS 原始记录需在其根目录跑 `bash scripts/fetch_data.sh`(约 1.9G,很快)。新会话需重新 add_repo(只读)+ 克隆 + checkout。
+- MAFA 仓库 `chancanmakeit/MAFA-human-ai-annotation` 在本会话**只读**,克隆在 `/home/claude/mafa-human-ai-annotation`,锁定 `96eed97`(第 5 轮评估时为 `908bc74`);AEGIS 原始记录需在其根目录跑 `bash scripts/fetch_data.sh`(约 1.9G,很快)。新会话需重新 add_repo(只读)+ 克隆 + checkout。
 - 评估代码在 `eval_mafa/`,产物在 `eval_mafa/out/`,详见 `eval_mafa/out/error_analysis_notes.md`。结论:可行性成立,**方法在 human-like-v1 上四项指标都没超过「猜第一步」基线**,智能体排序 AUROC 0.41。
 - MedHyperTrace 没有保存权重;评估时按默认超参在合成训练集上现训(每框架 ~1–2 分钟 CPU)。
 - **发现:** 合成测试集上 step head 对「猜第一步」在 mdagents 只高 1 个点(0.693 对 0.680),主表 Step-Acc 需加此对照。
@@ -70,8 +70,8 @@
 - **评分:** `python eval_mafa/evaluate.py --labels <MAFA 导入产物 attribution.jsonl 的路径> --pred mht=eval_mafa/out_pkg/medhypertrace_pred.jsonl [--subset dev] --out r.json --md r.md`。默认只收 `source=human`、只评 dev;评 test 必须 `--final`,自动记入 `eval_mafa/test_runs.jsonl`(test 只评一次)。大模型标签 dry run 用 `--source llm`。
 - **预测:** `python eval_mafa/predict.py --traces review_packages/mast_v1.json --out_dir eval_mafa/out_pkg`(全部 360 条;需先在 MAFA 根目录 `bash scripts/fetch_data.sh`)。输出 `defect_score`,低于 0.5 输出 `pred_step="none"`(阈值固定,未调;只能在人类 dev 上校准)。
 - **泄漏标记:** `eval_mafa/out_v2/leakage_package.json`,按题干(不区分大小写,影像题加图片)比对,与 MAFA §6.6(v3.2)一致:答错 dev 3/60、test 1/120;答对 180/180。
-- MAFA 本地副本锁定 `39fc840`(工具 2.1.0、接口 v3.3)。**当前 LLM 评估集用 `results/closest_human_like_eval_v2/`**(39 条,全 dev,只用于跑通和错误分析);结果 `eval_mafa/out_chl_v2/`。
-- 评测脚本另有本地 `defect_any` 层(最早故障步也算无码缺陷);已建议 MAFA 加 `earliest_step_any`。**test 人类标签由 MAFA 保管**,平时只收 `attribution_dev.jsonl`;最终评测时 MAFA 交出 test 标签并记录时间、提交号。
+- MAFA 本地副本锁定 `96eed97`(工具 2.2.0、接口 v3.4;无码缺陷须填最接近的码 `codes._uncoded.nearest`)。**当前 LLM 评估集用 `results/closest_human_like_eval_v2/`**(39 条,全 dev,只用于跑通和错误分析);结果 `eval_mafa/out_chl_v2/`。
+- `defect_any` 层已用 MAFA 官方实现(0.7.57);缺 `earliest_step_any` 的旧行由评测脚本先补齐(官方回退会把智能体置为 None,静默丢行)。**test 人类标签由 MAFA 保管**,平时只收 `attribution_dev.jsonl`;最终评测时 MAFA 交出 test 标签并记录时间、提交号。
 - **当前在等:** 试标 19 条(全在 dev)的 `attribution_dev.jsonl`。
 
 ### 0.33 硬规则:MAST 与 MedAgentAudit 分开(第 17 轮,用户要求)
