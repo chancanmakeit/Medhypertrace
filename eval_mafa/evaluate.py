@@ -6,7 +6,8 @@ every label layer, overall / per framework / per split / without leaked traces, 
     python eval_mafa/evaluate.py --labels <attribution.jsonl> --pred mht=eval_mafa/out_pkg/medhypertrace_pred.jsonl \
         [--subset dev] [--source human] [--out report.json --md report.md]
 
-TEST GUARD (pre-registered split, MAFA interface doc §8): --subset test needs --final, and every test run is
+Label files: MAFA hands out attribution_dev.jsonl (dev rows only) for development and keeps the test labels until
+the final evaluation (MAFA 0.7.53). TEST GUARD (pre-registered split, MAFA interface doc §8): --subset test needs --final, and every test run is
 appended to eval_mafa/test_runs.jsonl (git-tracked: commit, pred/label/split hashes). A method name that already
 has a test run is refused unless --repeat_reason "<why>" is given (also logged). Develop on dev only.
 
@@ -152,7 +153,11 @@ def main():
             sys.exit(f"no labels with source={a.source} (LLM eval sets need --source llm and are never results)")
     split = json.load(open(os.path.join(a.mafa_root, "review_packages", "eval_split_v1.json")))
     keep = set(split[a.subset])
+    other = sum(L["trace_id"] not in keep for L in labels)
     labels = [L for L in labels if L["trace_id"] in keep]
+    if not labels:
+        sys.exit(f"no label rows in subset={a.subset} ({other} rows belong to the other side). MAFA hands out "
+                 f"attribution_dev.jsonl for development; test labels are released by MAFA only for the final run")
     pred_paths = dict(p.split("=", 1) for p in a.pred)
     guard(a, pred_paths, lp, split["sha256"])
 

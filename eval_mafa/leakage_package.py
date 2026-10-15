@@ -18,12 +18,12 @@ STEM_MARK = re.compile(r"\bOptions:|Answer Choices:?")
 
 def qn(q, images=()):
     """Question STEM (text before the option list; whole text for the clinical-trial frameworks), normalised, plus
-    the image file names. MMLU-Pro variants share a stem but differ in the option set/order, so neither ids nor
+    the image file names; case-insensitive (MAFA §6.6: e.g. MM-89 "what is the diagnosis?"). MMLU-Pro variants share a stem but differ in the option set/order, so neither ids nor
     full text catch them. Image questions often share a generic stem ("What is the diagnosis?") with a DIFFERENT
     image, so for them the images must match too."""
     q = q or ""
     m = STEM_MARK.search(q)
-    return h(" ".join((q[:m.start()] if m else q).split()) + "||" + "|".join(sorted(images or ())))
+    return h(" ".join((q[:m.start()] if m else q).split()).lower() + "||" + "|".join(sorted(images or ())))
 sp = json.load(open(SPLITS_JSON))
 step_ix, trace_ix, q_ix = collections.defaultdict(set), collections.defaultdict(set), collections.defaultdict(set)
 for fw, p in FILES.items():

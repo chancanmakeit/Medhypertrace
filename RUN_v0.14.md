@@ -1,4 +1,4 @@
-# RUN_v0.13 — 每轮讨论记录
+# RUN_v0.14 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -179,3 +179,10 @@
 **第 1 项 统一评测脚本(`eval_mafa/evaluate.py`):** 调用 MAFA 自己的 `score`/`apply_layer`(两边同一份代码);三层 × {全部、去泄漏、各框架、答对/答错};内置基线 first_step、last_step、always_none、structure_prior(只用合成训练集的位置×角色、uid 频率),加 MAFA 两个标注模型。保护:默认只收 `source=human`;`--subset test` 必须 `--final`,并写入 `eval_mafa/test_runs.jsonl`(入库;同一方法再评 test 须 `--repeat_reason`)。核对:在 v2 上与直接调用 MAFA 评分脚本的数字完全一致。
 **dry run(LLM 标签,不是结果):** `eval_mafa/out_pkg/dryrun_v{1,2}.md`。
 **下一步:** 等人类 dev 标签(试标 19 条先到)→ `python eval_mafa/evaluate.py --labels <attribution.jsonl> --pred mht=eval_mafa/out_pkg/medhypertrace_pred.jsonl`。
+
+## 第 14 轮 · 2026-10-14 23:37 · MAFA 确认图片题误报;test 标签由 MAFA 保管
+
+**MAFA 回复(ce6f8f7,0.7.53,接口 v3.2 §6.6):** 图片题问题属实;他们此前没误报是因为题干有最短长度门槛,去掉门槛后只比题干会在 test 多出 3 条误报 MM-16、MM-41、MM-89(都与合成 MM-49 题干相同),加「图片相同」后全部排除,结果不变(答错 dev 3/60、test 1/120,答对 180/180)。§6.6 改为「题干 + 图片」。对评测框架无意见。**新保护:** 导入人类标签时另生成 `attribution_dev.jsonl`(只含 dev),平时只发这一份;test 人类标签由 MAFA 保管,最终评测时再交出并记录时间和提交号。试标 19 条(全在 dev)标签回来后发来。
+**核对:** MM-89 的题干是小写 "what is the diagnosis?",我们比对区分大小写所以没报它。改为不区分大小写后,只比题干时 mdagents 答错 test 报 MM-16、MM-41、MM-89(与 MAFA 一致);加图片规则后全部排除,结果不变。
+**做了:** `leakage_package.py` 题干比对改为不区分大小写;`evaluate.py` 在所选子集没有标签行时直接报错(例如用 `attribution_dev.jsonl` 评 test),失败的调用不写 test 日志。MAFA 本地副本切到 `ce6f8f7`。
+**状态:** 等试标 19 条的 `attribution_dev.jsonl`。
