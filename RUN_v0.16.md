@@ -1,4 +1,4 @@
-# RUN_v0.15 — 每轮讨论记录
+# RUN_v0.16 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -196,3 +196,12 @@
 - **走查 `NCT00002967`:** 金标准 s02 ClinicalAgent 编造子智能体分数;模型 s01 Planner 0.91、s02 0.000;智能体头给 ClinicalAgent 0.00、Reasoner 0.92。s02 的结构特征与其他步骤几乎没有区别,文本特征(TF-IDF)也看不出「编造」;合成集里 ClinicalAgent 作为最早故障只占 9%。
 - **不看标签的预测行为(`analysis/mht_behavior_realtraces.py`,360 条):** 模型只选靠前的步骤(dylan 10 步里只选到 s04;clinical_agent 只选 s01–s03);与猜第一步一致的比例 clinical_agent 70/90、dylan 64/90、mdagents 28/90(mdagents 偏向第一个专家 s02);最高概率 ≥0.95 的轨迹占 59%–84%。
 **结论:** 在真实轨迹上,方法的行为接近「合成数据里的位置/角色先验 + 过度自信」,读不出语义层面的缺陷;这与第 10 轮合成 PI 子集上有内容信号并不矛盾——那里的故障形态在训练分布内。
+
+## 第 16 轮 · 2026-10-15 01:16 · MAFA 新口径(工具 2.1.0、接口 v3.3)与 closest-human-like v2 评估集
+
+**MAFA 回复(39fc840,0.7.56):** ①「无对应码的缺陷」按「这段输出有没有缺陷」判断,个体医学错误(知识、误读图像/检查数据、算错、编造)都算;「找不到可追溯的缺陷」只用于没有任何缺陷输出能追溯到答案的情况。②新评估集 `results/closest_human_like_eval_v2/`:gemini-4-argon 按 2.1.0 说明标注,39 行/39 条(试标 19 + dev 扩充 20,清单 `review_packages/dev_extension_ext1.json`),全部 dev,LLM 标签只用于跑通和错误分析;答错 22 条中 9 条只能追溯到无码缺陷。
+**核对:** 39 行 39 条全在 dev;MAST 20 / MedAgentAudit 19;答错 22 / 答对 17;盲审 9;escape:uncoded_only 9(MAA 6、MAST 3)、coded 9、untraceable 4;扩充 20 条全在 dev、恰为新增轨迹、引用的成员哈希正确。39/39 sha1 对齐。
+**评分(`eval_mafa/out_chl_v2/report.md`,包级预测,未重训):** 缺陷层 MHT who_earliest 6/21、when_exact 10/39、AUROC 0.48;猜第一步 9/21、6/39;**always_none 18/39**;MAFA 主标注模型 17/21、23/39、0.81。责任层(有码)MHT 3/9、0/9、AUROC 0.32;responsibility_any 6/18、3/18、0.47(结构先验 5/18、4/18、0.44)。去泄漏后结论不变。
+**发现 1(口径):** MAFA 的缺陷层最早故障步只算有码缺陷;18 条「无缺陷」里 8 条其实有无码缺陷(答对 3、答错 5)。本地加 `defect_any` 层(最早步也算 `_uncoded`):always_none 18/39→10/39,猜第一步 6/39→15/39,MHT 10/39→11/39 → **缺陷层定义会颠倒平凡基线排名,需 MAFA 在 derive() 加 `earliest_step_any`。**
+**发现 2(无码缺陷的边界):** MAA 6 条 uncoded_only 中,`NCT00003034`、`MM-51` 的无码说明写了「内部矛盾 / 自相矛盾」,但 3.1.3(忽视推理中的矛盾)判 absent;两条医学知识错误(`8e06756b`、`NCT00049517`)与 2.1.2(未调用专科知识)的边界未定义;`NCT00000914` 的越权在 clinical_agent 上 2.1.1 不适用,归无码合理。另:每条轨迹只有一行 `_uncoded`,多个智能体、多种缺陷混在一行。→ 「体系覆盖不到」比例目前可能偏高。
+**做了:** `evaluate.py` 加本地 `defect_any` 层;MAFA 本地副本切到 `39fc840`。

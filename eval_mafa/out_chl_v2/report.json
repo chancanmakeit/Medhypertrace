@@ -1,0 +1,10265 @@
+{
+ "subset": "dev",
+ "source": "llm",
+ "labels": "/home/claude/mafa-human-ai-annotation/results/closest_human_like_eval_v2/labels_v2.jsonl",
+ "labels_sha256": "2fde4232a1ee3b3d9543ca4f066ed4fa520916f7fa6ab83ee95b96c2dc558ca8",
+ "split_sha256": "916fee301529defd3b14816fcf6186bdd9933882704e5e9029c2d244c29c173d",
+ "n_label_rows": 39,
+ "layers": {
+  "defect": {
+   "all": {
+    "n_rows": 39,
+    "methods": {
+     "mht": {
+      "when_exact": {
+       "k": 10,
+       "n": 39,
+       "rate": 0.256,
+       "ci95": [
+        0.146,
+        0.411
+       ]
+      },
+      "who_earliest": {
+       "k": 6,
+       "n": 21,
+       "rate": 0.286,
+       "ci95": [
+        0.138,
+        0.5
+       ]
+      },
+      "who_any": {
+       "k": 16,
+       "n": 29,
+       "rate": 0.552,
+       "ci95": [
+        0.375,
+        0.716
+       ]
+      },
+      "when_pm1": {
+       "k": 8,
+       "n": 18,
+       "rate": 0.444,
+       "ci95": [
+        0.246,
+        0.663
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.478,
+       "n_traces": 20
+      },
+      "code_micro_f1": 0.157,
+      "code_f1": {
+       "FM-1.1": 0.909,
+       "FM-1.2": 0.182,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.154,
+       "FM-3.1": 0.0,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "when_exact": {
+       "k": 6,
+       "n": 39,
+       "rate": 0.154,
+       "ci95": [
+        0.072,
+        0.297
+       ]
+      },
+      "who_earliest": {
+       "k": 9,
+       "n": 21,
+       "rate": 0.429,
+       "ci95": [
+        0.245,
+        0.635
+       ]
+      },
+      "who_any": {
+       "k": 18,
+       "n": 29,
+       "rate": 0.621,
+       "ci95": [
+        0.44,
+        0.773
+       ]
+      },
+      "when_pm1": {
+       "k": 9,
+       "n": 21,
+       "rate": 0.429,
+       "ci95": [
+        0.245,
+        0.635
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "when_exact": {
+       "k": 2,
+       "n": 39,
+       "rate": 0.051,
+       "ci95": [
+        0.014,
+        0.169
+       ]
+      },
+      "who_earliest": {
+       "k": 2,
+       "n": 21,
+       "rate": 0.095,
+       "ci95": [
+        0.027,
+        0.289
+       ]
+      },
+      "who_any": {
+       "k": 18,
+       "n": 29,
+       "rate": 0.621,
+       "ci95": [
+        0.44,
+        0.773
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 21,
+       "rate": 0.143,
+       "ci95": [
+        0.05,
+        0.346
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 18,
+       "n": 39,
+       "rate": 0.462,
+       "ci95": [
+        0.316,
+        0.614
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "when_exact": {
+       "k": 6,
+       "n": 39,
+       "rate": 0.154,
+       "ci95": [
+        0.072,
+        0.297
+       ]
+      },
+      "who_earliest": {
+       "k": 9,
+       "n": 21,
+       "rate": 0.429,
+       "ci95": [
+        0.245,
+        0.635
+       ]
+      },
+      "who_any": {
+       "k": 18,
+       "n": 29,
+       "rate": 0.621,
+       "ci95": [
+        0.44,
+        0.773
+       ]
+      },
+      "when_pm1": {
+       "k": 9,
+       "n": 21,
+       "rate": 0.429,
+       "ci95": [
+        0.245,
+        0.635
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.348,
+       "n_traces": 20
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "when_exact": {
+       "k": 23,
+       "n": 39,
+       "rate": 0.59,
+       "ci95": [
+        0.434,
+        0.729
+       ]
+      },
+      "who_earliest": {
+       "k": 17,
+       "n": 21,
+       "rate": 0.81,
+       "ci95": [
+        0.6,
+        0.923
+       ]
+      },
+      "who_any": {
+       "k": 29,
+       "n": 29,
+       "rate": 1.0,
+       "ci95": [
+        0.883,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 16,
+       "n": 19,
+       "rate": 0.842,
+       "ci95": [
+        0.624,
+        0.945
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.812,
+       "n_traces": 20
+      },
+      "code_micro_f1": 0.732,
+      "code_f1": {
+       "1.1.1": 0.571,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.8,
+       "2.2.1": 1.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": 0.0,
+       "3.2.1": null,
+       "FM-1.1": 0.909,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.5
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "when_exact": {
+       "k": 25,
+       "n": 39,
+       "rate": 0.641,
+       "ci95": [
+        0.484,
+        0.773
+       ]
+      },
+      "who_earliest": {
+       "k": 16,
+       "n": 21,
+       "rate": 0.762,
+       "ci95": [
+        0.549,
+        0.894
+       ]
+      },
+      "who_any": {
+       "k": 25,
+       "n": 29,
+       "rate": 0.862,
+       "ci95": [
+        0.694,
+        0.945
+       ]
+      },
+      "when_pm1": {
+       "k": 11,
+       "n": 12,
+       "rate": 0.917,
+       "ci95": [
+        0.646,
+        0.985
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.692,
+       "n_traces": 20
+      },
+      "code_micro_f1": 0.386,
+      "code_f1": {
+       "1.1.1": 0.667,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 0.5,
+       "FM-1.2": 0.333,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.8,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.8
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "no_leak": {
+    "n_rows": 24,
+    "methods": {
+     "mht": {
+      "when_exact": {
+       "k": 6,
+       "n": 24,
+       "rate": 0.25,
+       "ci95": [
+        0.12,
+        0.449
+       ]
+      },
+      "who_earliest": {
+       "k": 4,
+       "n": 13,
+       "rate": 0.308,
+       "ci95": [
+        0.127,
+        0.576
+       ]
+      },
+      "who_any": {
+       "k": 12,
+       "n": 18,
+       "rate": 0.667,
+       "ci95": [
+        0.437,
+        0.837
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 11,
+       "rate": 0.273,
+       "ci95": [
+        0.097,
+        0.566
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.425,
+       "n_traces": 10
+      },
+      "code_micro_f1": 0.14,
+      "code_f1": {
+       "FM-1.1": 0.857,
+       "FM-1.2": 0.25,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "when_exact": {
+       "k": 3,
+       "n": 24,
+       "rate": 0.125,
+       "ci95": [
+        0.043,
+        0.31
+       ]
+      },
+      "who_earliest": {
+       "k": 5,
+       "n": 13,
+       "rate": 0.385,
+       "ci95": [
+        0.177,
+        0.645
+       ]
+      },
+      "who_any": {
+       "k": 11,
+       "n": 18,
+       "rate": 0.611,
+       "ci95": [
+        0.386,
+        0.797
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 13,
+       "rate": 0.308,
+       "ci95": [
+        0.127,
+        0.576
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "when_exact": {
+       "k": 2,
+       "n": 24,
+       "rate": 0.083,
+       "ci95": [
+        0.023,
+        0.258
+       ]
+      },
+      "who_earliest": {
+       "k": 2,
+       "n": 13,
+       "rate": 0.154,
+       "ci95": [
+        0.043,
+        0.422
+       ]
+      },
+      "who_any": {
+       "k": 15,
+       "n": 18,
+       "rate": 0.833,
+       "ci95": [
+        0.608,
+        0.942
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 13,
+       "rate": 0.154,
+       "ci95": [
+        0.043,
+        0.422
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 11,
+       "n": 24,
+       "rate": 0.458,
+       "ci95": [
+        0.279,
+        0.649
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "when_exact": {
+       "k": 3,
+       "n": 24,
+       "rate": 0.125,
+       "ci95": [
+        0.043,
+        0.31
+       ]
+      },
+      "who_earliest": {
+       "k": 5,
+       "n": 13,
+       "rate": 0.385,
+       "ci95": [
+        0.177,
+        0.645
+       ]
+      },
+      "who_any": {
+       "k": 11,
+       "n": 18,
+       "rate": 0.611,
+       "ci95": [
+        0.386,
+        0.797
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 13,
+       "rate": 0.308,
+       "ci95": [
+        0.127,
+        0.576
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.369,
+       "n_traces": 10
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "when_exact": {
+       "k": 12,
+       "n": 24,
+       "rate": 0.5,
+       "ci95": [
+        0.314,
+        0.686
+       ]
+      },
+      "who_earliest": {
+       "k": 9,
+       "n": 13,
+       "rate": 0.692,
+       "ci95": [
+        0.424,
+        0.873
+       ]
+      },
+      "who_any": {
+       "k": 18,
+       "n": 18,
+       "rate": 1.0,
+       "ci95": [
+        0.824,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 9,
+       "n": 12,
+       "rate": 0.75,
+       "ci95": [
+        0.468,
+        0.911
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.804,
+       "n_traces": 10
+      },
+      "code_micro_f1": 0.681,
+      "code_f1": {
+       "1.1.1": 0.8,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 1.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": 0.0,
+       "3.2.1": null,
+       "FM-1.1": 0.857,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.5
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "when_exact": {
+       "k": 15,
+       "n": 24,
+       "rate": 0.625,
+       "ci95": [
+        0.427,
+        0.788
+       ]
+      },
+      "who_earliest": {
+       "k": 10,
+       "n": 13,
+       "rate": 0.769,
+       "ci95": [
+        0.497,
+        0.918
+       ]
+      },
+      "who_any": {
+       "k": 16,
+       "n": 18,
+       "rate": 0.889,
+       "ci95": [
+        0.672,
+        0.969
+       ]
+      },
+      "when_pm1": {
+       "k": 7,
+       "n": 8,
+       "rate": 0.875,
+       "ci95": [
+        0.529,
+        0.978
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.713,
+       "n_traces": 10
+      },
+      "code_micro_f1": 0.368,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.444,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.8
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=clinical_agent": {
+    "n_rows": 10,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 1,
+       "n": 5,
+       "rate": 0.2,
+       "ci95": [
+        0.036,
+        0.624
+       ]
+      },
+      "who_any": {
+       "k": 1,
+       "n": 9,
+       "rate": 0.111,
+       "ci95": [
+        0.02,
+        0.435
+       ]
+      },
+      "when_exact": {
+       "k": 2,
+       "n": 10,
+       "rate": 0.2,
+       "ci95": [
+        0.057,
+        0.51
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 4,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.49
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.407,
+       "n_traces": 9
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "FM-1.1": null,
+       "FM-1.2": 0.0,
+       "FM-1.3": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 5,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.434
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 5,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.434
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 5,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.434
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 9,
+       "rate": 0.556,
+       "ci95": [
+        0.267,
+        0.811
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 5,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.434
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 5,
+       "n": 10,
+       "rate": 0.5,
+       "ci95": [
+        0.237,
+        0.763
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 0,
+       "n": 5,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.434
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 5,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.434
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.435,
+       "n_traces": 9
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 5,
+       "n": 5,
+       "rate": 1.0,
+       "ci95": [
+        0.566,
+        1.0
+       ]
+      },
+      "who_any": {
+       "k": 9,
+       "n": 9,
+       "rate": 1.0,
+       "ci95": [
+        0.701,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 5,
+       "n": 10,
+       "rate": 0.5,
+       "ci95": [
+        0.237,
+        0.763
+       ]
+      },
+      "when_pm1": {
+       "k": 5,
+       "n": 5,
+       "rate": 1.0,
+       "ci95": [
+        0.566,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.829,
+       "n_traces": 9
+      },
+      "code_micro_f1": 0.556,
+      "code_f1": {
+       "1.1.1": 0.0,
+       "1.2.1": null,
+       "2.1.2": null,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": 0.0,
+       "FM-1.1": null,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 3,
+       "n": 5,
+       "rate": 0.6,
+       "ci95": [
+        0.231,
+        0.882
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "when_exact": {
+       "k": 5,
+       "n": 10,
+       "rate": 0.5,
+       "ci95": [
+        0.237,
+        0.763
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.736,
+       "n_traces": 9
+      },
+      "code_micro_f1": 0.429,
+      "code_f1": {
+       "1.1.1": 0.0,
+       "1.2.1": null,
+       "2.1.2": null,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.571,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 1.0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=clinical_agent5": {
+    "n_rows": 10,
+    "methods": {
+     "mht": {
+      "when_exact": {
+       "k": 4,
+       "n": 10,
+       "rate": 0.4,
+       "ci95": [
+        0.168,
+        0.687
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "who_earliest": {
+       "k": 1,
+       "n": 2,
+       "rate": 0.5,
+       "ci95": [
+        0.095,
+        0.905
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 2,
+       "rate": 1.0,
+       "ci95": [
+        0.342,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.583,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": 0.0,
+       "FM-2.4": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": null
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "who_any": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "who_earliest": {
+       "k": 0,
+       "n": 2,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.658
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 2,
+       "rate": 1.0,
+       "ci95": [
+        0.342,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "who_earliest": {
+       "k": 0,
+       "n": 2,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.658
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 2,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.658
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 8,
+       "n": 10,
+       "rate": 0.8,
+       "ci95": [
+        0.49,
+        0.943
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "who_any": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "who_earliest": {
+       "k": 0,
+       "n": 2,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.658
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 2,
+       "rate": 1.0,
+       "ci95": [
+        0.342,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.278,
+       "n_traces": 3
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "when_exact": {
+       "k": 7,
+       "n": 10,
+       "rate": 0.7,
+       "ci95": [
+        0.397,
+        0.892
+       ]
+      },
+      "who_any": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "who_earliest": {
+       "k": 2,
+       "n": 2,
+       "rate": 1.0,
+       "ci95": [
+        0.342,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 2,
+       "rate": 1.0,
+       "ci95": [
+        0.342,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.917,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.8,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": 1.0,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": null
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "when_exact": {
+       "k": 9,
+       "n": 10,
+       "rate": 0.9,
+       "ci95": [
+        0.596,
+        0.982
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "who_earliest": {
+       "k": 1,
+       "n": 2,
+       "rate": 0.5,
+       "ci95": [
+        0.095,
+        0.905
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 1,
+       "rate": 1.0,
+       "ci95": [
+        0.207,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.667,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": 0.0,
+       "2.1.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": null
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=dylan": {
+    "n_rows": 9,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 3,
+       "n": 5,
+       "rate": 0.6,
+       "ci95": [
+        0.231,
+        0.882
+       ]
+      },
+      "who_any": {
+       "k": 7,
+       "n": 7,
+       "rate": 1.0,
+       "ci95": [
+        0.646,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.569,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "FM-1.1": 0.0,
+       "FM-1.2": null,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 3,
+       "n": 5,
+       "rate": 0.6,
+       "ci95": [
+        0.231,
+        0.882
+       ]
+      },
+      "who_any": {
+       "k": 7,
+       "n": 7,
+       "rate": 1.0,
+       "ci95": [
+        0.646,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 5,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.434
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 1,
+       "n": 5,
+       "rate": 0.2,
+       "ci95": [
+        0.036,
+        0.624
+       ]
+      },
+      "who_any": {
+       "k": 7,
+       "n": 7,
+       "rate": 1.0,
+       "ci95": [
+        0.646,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 1,
+       "n": 9,
+       "rate": 0.111,
+       "ci95": [
+        0.02,
+        0.435
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 5,
+       "rate": 0.4,
+       "ci95": [
+        0.118,
+        0.769
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 4,
+       "n": 9,
+       "rate": 0.444,
+       "ci95": [
+        0.189,
+        0.733
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 3,
+       "n": 5,
+       "rate": 0.6,
+       "ci95": [
+        0.231,
+        0.882
+       ]
+      },
+      "who_any": {
+       "k": 7,
+       "n": 7,
+       "rate": 1.0,
+       "ci95": [
+        0.646,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 5,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.434
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.0,
+       "n_traces": 3
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 4,
+       "n": 5,
+       "rate": 0.8,
+       "ci95": [
+        0.376,
+        0.964
+       ]
+      },
+      "who_any": {
+       "k": 7,
+       "n": 7,
+       "rate": 1.0,
+       "ci95": [
+        0.646,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 4,
+       "rate": 0.75,
+       "ci95": [
+        0.301,
+        0.954
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.75,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.727,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": null,
+       "2.2.1": 1.0,
+       "2.2.2": null,
+       "3.2.1": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": 1.0
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 4,
+       "n": 5,
+       "rate": 0.8,
+       "ci95": [
+        0.376,
+        0.964
+       ]
+      },
+      "who_any": {
+       "k": 7,
+       "n": 7,
+       "rate": 1.0,
+       "ci95": [
+        0.646,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.667,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.5,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": null,
+       "3.2.1": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": 1.0
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=mdagents": {
+    "n_rows": 10,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 1,
+       "n": 9,
+       "rate": 0.111,
+       "ci95": [
+        0.02,
+        0.435
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 10,
+       "rate": 0.6,
+       "ci95": [
+        0.313,
+        0.832
+       ]
+      },
+      "when_exact": {
+       "k": 1,
+       "n": 10,
+       "rate": 0.1,
+       "ci95": [
+        0.018,
+        0.404
+       ]
+      },
+      "when_pm1": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.49,
+       "n_traces": 5
+      },
+      "code_micro_f1": 0.326,
+      "code_f1": {
+       "FM-1.1": 1.0,
+       "FM-1.2": 0.333,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.333,
+       "FM-3.1": 0.0,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "who_any": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 6,
+       "n": 10,
+       "rate": 0.6,
+       "ci95": [
+        0.313,
+        0.832
+       ]
+      },
+      "when_pm1": {
+       "k": 7,
+       "n": 9,
+       "rate": 0.778,
+       "ci95": [
+        0.453,
+        0.937
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 1,
+       "n": 9,
+       "rate": 0.111,
+       "ci95": [
+        0.02,
+        0.435
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 10,
+       "rate": 0.6,
+       "ci95": [
+        0.313,
+        0.832
+       ]
+      },
+      "when_exact": {
+       "k": 1,
+       "n": 10,
+       "rate": 0.1,
+       "ci95": [
+        0.018,
+        0.404
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 9,
+       "rate": 0.111,
+       "ci95": [
+        0.02,
+        0.435
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 1,
+       "n": 10,
+       "rate": 0.1,
+       "ci95": [
+        0.018,
+        0.404
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "who_any": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 6,
+       "n": 10,
+       "rate": 0.6,
+       "ci95": [
+        0.313,
+        0.832
+       ]
+      },
+      "when_pm1": {
+       "k": 7,
+       "n": 9,
+       "rate": 0.778,
+       "ci95": [
+        0.453,
+        0.937
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.445,
+       "n_traces": 5
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "who_any": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 5,
+       "n": 10,
+       "rate": 0.5,
+       "ci95": [
+        0.237,
+        0.763
+       ]
+      },
+      "when_pm1": {
+       "k": 6,
+       "n": 8,
+       "rate": 0.75,
+       "ci95": [
+        0.409,
+        0.929
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.758,
+       "n_traces": 5
+      },
+      "code_micro_f1": 0.811,
+      "code_f1": {
+       "1.1.1": 0.8,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 1.0,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 1.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 8,
+       "n": 9,
+       "rate": 0.889,
+       "ci95": [
+        0.565,
+        0.98
+       ]
+      },
+      "who_any": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 5,
+       "n": 10,
+       "rate": 0.5,
+       "ci95": [
+        0.237,
+        0.763
+       ]
+      },
+      "when_pm1": {
+       "k": 5,
+       "n": 5,
+       "rate": 1.0,
+       "ci95": [
+        0.566,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.642,
+       "n_traces": 5
+      },
+      "code_micro_f1": 0.357,
+      "code_f1": {
+       "1.1.1": 0.8,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": 0.571,
+       "FM-1.2": 0.0,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 1.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "split=clean": {
+    "n_rows": 17,
+    "methods": {
+     "mht": {
+      "when_exact": {
+       "k": 4,
+       "n": 17,
+       "rate": 0.235,
+       "ci95": [
+        0.096,
+        0.473
+       ]
+      },
+      "who_earliest": {
+       "k": 2,
+       "n": 8,
+       "rate": 0.25,
+       "ci95": [
+        0.071,
+        0.591
+       ]
+      },
+      "who_any": {
+       "k": 3,
+       "n": 11,
+       "rate": 0.273,
+       "ci95": [
+        0.097,
+        0.566
+       ]
+      },
+      "when_pm1": {
+       "k": 5,
+       "n": 7,
+       "rate": 0.714,
+       "ci95": [
+        0.359,
+        0.918
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.538,
+       "n_traces": 11
+      },
+      "code_micro_f1": 0.154,
+      "code_f1": {
+       "FM-1.1": 1.0,
+       "FM-1.2": 0.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.333,
+       "FM-3.1": 0.0,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "when_exact": {
+       "k": 3,
+       "n": 17,
+       "rate": 0.176,
+       "ci95": [
+        0.062,
+        0.41
+       ]
+      },
+      "who_earliest": {
+       "k": 4,
+       "n": 8,
+       "rate": 0.5,
+       "ci95": [
+        0.215,
+        0.785
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 11,
+       "rate": 0.545,
+       "ci95": [
+        0.28,
+        0.787
+       ]
+      },
+      "when_pm1": {
+       "k": 5,
+       "n": 8,
+       "rate": 0.625,
+       "ci95": [
+        0.306,
+        0.863
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "when_exact": {
+       "k": 0,
+       "n": 17,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.184
+       ]
+      },
+      "who_earliest": {
+       "k": 0,
+       "n": 8,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.324
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 11,
+       "rate": 0.182,
+       "ci95": [
+        0.051,
+        0.477
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 8,
+       "rate": 0.125,
+       "ci95": [
+        0.022,
+        0.471
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 9,
+       "n": 17,
+       "rate": 0.529,
+       "ci95": [
+        0.31,
+        0.738
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "when_exact": {
+       "k": 3,
+       "n": 17,
+       "rate": 0.176,
+       "ci95": [
+        0.062,
+        0.41
+       ]
+      },
+      "who_earliest": {
+       "k": 4,
+       "n": 8,
+       "rate": 0.5,
+       "ci95": [
+        0.215,
+        0.785
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 11,
+       "rate": 0.545,
+       "ci95": [
+        0.28,
+        0.787
+       ]
+      },
+      "when_pm1": {
+       "k": 5,
+       "n": 8,
+       "rate": 0.625,
+       "ci95": [
+        0.306,
+        0.863
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.317,
+       "n_traces": 11
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "when_exact": {
+       "k": 11,
+       "n": 17,
+       "rate": 0.647,
+       "ci95": [
+        0.413,
+        0.827
+       ]
+      },
+      "who_earliest": {
+       "k": 8,
+       "n": 8,
+       "rate": 1.0,
+       "ci95": [
+        0.676,
+        1.0
+       ]
+      },
+      "who_any": {
+       "k": 11,
+       "n": 11,
+       "rate": 1.0,
+       "ci95": [
+        0.741,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 7,
+       "n": 7,
+       "rate": 1.0,
+       "ci95": [
+        0.646,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.837,
+       "n_traces": 11
+      },
+      "code_micro_f1": 0.741,
+      "code_f1": {
+       "1.1.1": 0.0,
+       "1.2.1": null,
+       "2.1.1": null,
+       "2.1.2": 1.0,
+       "2.2.1": 1.0,
+       "2.2.2": null,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": 0.0,
+       "3.2.1": null,
+       "FM-1.1": 0.8,
+       "FM-1.2": 1.0,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 1.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": null
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "when_exact": {
+       "k": 11,
+       "n": 17,
+       "rate": 0.647,
+       "ci95": [
+        0.413,
+        0.827
+       ]
+      },
+      "who_earliest": {
+       "k": 5,
+       "n": 8,
+       "rate": 0.625,
+       "ci95": [
+        0.306,
+        0.863
+       ]
+      },
+      "who_any": {
+       "k": 8,
+       "n": 11,
+       "rate": 0.727,
+       "ci95": [
+        0.434,
+        0.903
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.655,
+       "n_traces": 11
+      },
+      "code_micro_f1": 0.333,
+      "code_f1": {
+       "1.1.1": 0.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": null,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 0.0,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 1.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": null
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "split=faulty": {
+    "n_rows": 22,
+    "methods": {
+     "mht": {
+      "when_exact": {
+       "k": 6,
+       "n": 22,
+       "rate": 0.273,
+       "ci95": [
+        0.132,
+        0.482
+       ]
+      },
+      "who_earliest": {
+       "k": 4,
+       "n": 13,
+       "rate": 0.308,
+       "ci95": [
+        0.127,
+        0.576
+       ]
+      },
+      "who_any": {
+       "k": 13,
+       "n": 18,
+       "rate": 0.722,
+       "ci95": [
+        0.491,
+        0.875
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 11,
+       "rate": 0.273,
+       "ci95": [
+        0.097,
+        0.566
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.406,
+       "n_traces": 9
+      },
+      "code_micro_f1": 0.16,
+      "code_f1": {
+       "FM-1.1": 0.857,
+       "FM-1.2": 0.286,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "when_exact": {
+       "k": 3,
+       "n": 22,
+       "rate": 0.136,
+       "ci95": [
+        0.047,
+        0.333
+       ]
+      },
+      "who_earliest": {
+       "k": 5,
+       "n": 13,
+       "rate": 0.385,
+       "ci95": [
+        0.177,
+        0.645
+       ]
+      },
+      "who_any": {
+       "k": 12,
+       "n": 18,
+       "rate": 0.667,
+       "ci95": [
+        0.437,
+        0.837
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 13,
+       "rate": 0.308,
+       "ci95": [
+        0.127,
+        0.576
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "when_exact": {
+       "k": 2,
+       "n": 22,
+       "rate": 0.091,
+       "ci95": [
+        0.025,
+        0.278
+       ]
+      },
+      "who_earliest": {
+       "k": 2,
+       "n": 13,
+       "rate": 0.154,
+       "ci95": [
+        0.043,
+        0.422
+       ]
+      },
+      "who_any": {
+       "k": 16,
+       "n": 18,
+       "rate": 0.889,
+       "ci95": [
+        0.672,
+        0.969
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 13,
+       "rate": 0.154,
+       "ci95": [
+        0.043,
+        0.422
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 9,
+       "n": 22,
+       "rate": 0.409,
+       "ci95": [
+        0.233,
+        0.613
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "when_exact": {
+       "k": 3,
+       "n": 22,
+       "rate": 0.136,
+       "ci95": [
+        0.047,
+        0.333
+       ]
+      },
+      "who_earliest": {
+       "k": 5,
+       "n": 13,
+       "rate": 0.385,
+       "ci95": [
+        0.177,
+        0.645
+       ]
+      },
+      "who_any": {
+       "k": 12,
+       "n": 18,
+       "rate": 0.667,
+       "ci95": [
+        0.437,
+        0.837
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 13,
+       "rate": 0.308,
+       "ci95": [
+        0.127,
+        0.576
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.387,
+       "n_traces": 9
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "when_exact": {
+       "k": 12,
+       "n": 22,
+       "rate": 0.545,
+       "ci95": [
+        0.347,
+        0.731
+       ]
+      },
+      "who_earliest": {
+       "k": 9,
+       "n": 13,
+       "rate": 0.692,
+       "ci95": [
+        0.424,
+        0.873
+       ]
+      },
+      "who_any": {
+       "k": 18,
+       "n": 18,
+       "rate": 1.0,
+       "ci95": [
+        0.824,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 9,
+       "n": 12,
+       "rate": 0.75,
+       "ci95": [
+        0.468,
+        0.911
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.782,
+       "n_traces": 9
+      },
+      "code_micro_f1": 0.727,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 1.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.5,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.5
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "when_exact": {
+       "k": 14,
+       "n": 22,
+       "rate": 0.636,
+       "ci95": [
+        0.43,
+        0.803
+       ]
+      },
+      "who_earliest": {
+       "k": 11,
+       "n": 13,
+       "rate": 0.846,
+       "ci95": [
+        0.578,
+        0.957
+       ]
+      },
+      "who_any": {
+       "k": 17,
+       "n": 18,
+       "rate": 0.944,
+       "ci95": [
+        0.742,
+        0.99
+       ]
+      },
+      "when_pm1": {
+       "k": 8,
+       "n": 9,
+       "rate": 0.889,
+       "ci95": [
+        0.565,
+        0.98
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.736,
+       "n_traces": 9
+      },
+      "code_micro_f1": 0.41,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.5,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.8
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     }
+    }
+   }
+  },
+  "defect_any": {
+   "all": {
+    "n_rows": 39,
+    "methods": {
+     "mht": {
+      "when_exact": {
+       "k": 11,
+       "n": 39,
+       "rate": 0.282,
+       "ci95": [
+        0.165,
+        0.438
+       ]
+      },
+      "who_earliest": {
+       "k": 11,
+       "n": 29,
+       "rate": 0.379,
+       "ci95": [
+        0.227,
+        0.56
+       ]
+      },
+      "who_any": {
+       "k": 16,
+       "n": 29,
+       "rate": 0.552,
+       "ci95": [
+        0.375,
+        0.716
+       ]
+      },
+      "when_pm1": {
+       "k": 14,
+       "n": 21,
+       "rate": 0.667,
+       "ci95": [
+        0.454,
+        0.828
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.478,
+       "n_traces": 20
+      },
+      "code_micro_f1": 0.157,
+      "code_f1": {
+       "FM-1.1": 0.909,
+       "FM-1.2": 0.182,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.154,
+       "FM-3.1": 0.0,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "when_exact": {
+       "k": 15,
+       "n": 39,
+       "rate": 0.385,
+       "ci95": [
+        0.249,
+        0.541
+       ]
+      },
+      "who_earliest": {
+       "k": 16,
+       "n": 29,
+       "rate": 0.552,
+       "ci95": [
+        0.375,
+        0.716
+       ]
+      },
+      "who_any": {
+       "k": 18,
+       "n": 29,
+       "rate": 0.621,
+       "ci95": [
+        0.44,
+        0.773
+       ]
+      },
+      "when_pm1": {
+       "k": 18,
+       "n": 29,
+       "rate": 0.621,
+       "ci95": [
+        0.44,
+        0.773
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "when_exact": {
+       "k": 0,
+       "n": 39,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.09
+       ]
+      },
+      "who_earliest": {
+       "k": 2,
+       "n": 29,
+       "rate": 0.069,
+       "ci95": [
+        0.019,
+        0.22
+       ]
+      },
+      "who_any": {
+       "k": 18,
+       "n": 29,
+       "rate": 0.621,
+       "ci95": [
+        0.44,
+        0.773
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 29,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.117
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 10,
+       "n": 39,
+       "rate": 0.256,
+       "ci95": [
+        0.146,
+        0.411
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "when_exact": {
+       "k": 14,
+       "n": 39,
+       "rate": 0.359,
+       "ci95": [
+        0.227,
+        0.516
+       ]
+      },
+      "who_earliest": {
+       "k": 15,
+       "n": 29,
+       "rate": 0.517,
+       "ci95": [
+        0.344,
+        0.686
+       ]
+      },
+      "who_any": {
+       "k": 18,
+       "n": 29,
+       "rate": 0.621,
+       "ci95": [
+        0.44,
+        0.773
+       ]
+      },
+      "when_pm1": {
+       "k": 17,
+       "n": 29,
+       "rate": 0.586,
+       "ci95": [
+        0.407,
+        0.745
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.348,
+       "n_traces": 20
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "when_exact": {
+       "k": 25,
+       "n": 39,
+       "rate": 0.641,
+       "ci95": [
+        0.484,
+        0.773
+       ]
+      },
+      "who_earliest": {
+       "k": 23,
+       "n": 29,
+       "rate": 0.793,
+       "ci95": [
+        0.616,
+        0.902
+       ]
+      },
+      "who_any": {
+       "k": 29,
+       "n": 29,
+       "rate": 1.0,
+       "ci95": [
+        0.883,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 20,
+       "n": 25,
+       "rate": 0.8,
+       "ci95": [
+        0.609,
+        0.911
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.812,
+       "n_traces": 20
+      },
+      "code_micro_f1": 0.732,
+      "code_f1": {
+       "1.1.1": 0.571,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.8,
+       "2.2.1": 1.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": 0.0,
+       "3.2.1": null,
+       "FM-1.1": 0.909,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.5
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "when_exact": {
+       "k": 19,
+       "n": 39,
+       "rate": 0.487,
+       "ci95": [
+        0.339,
+        0.638
+       ]
+      },
+      "who_earliest": {
+       "k": 18,
+       "n": 29,
+       "rate": 0.621,
+       "ci95": [
+        0.44,
+        0.773
+       ]
+      },
+      "who_any": {
+       "k": 25,
+       "n": 29,
+       "rate": 0.862,
+       "ci95": [
+        0.694,
+        0.945
+       ]
+      },
+      "when_pm1": {
+       "k": 10,
+       "n": 15,
+       "rate": 0.667,
+       "ci95": [
+        0.417,
+        0.848
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.692,
+       "n_traces": 20
+      },
+      "code_micro_f1": 0.386,
+      "code_f1": {
+       "1.1.1": 0.667,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 0.5,
+       "FM-1.2": 0.333,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.8,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.8
+      },
+      "labels": 39,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "no_leak": {
+    "n_rows": 24,
+    "methods": {
+     "mht": {
+      "when_exact": {
+       "k": 7,
+       "n": 24,
+       "rate": 0.292,
+       "ci95": [
+        0.149,
+        0.492
+       ]
+      },
+      "who_earliest": {
+       "k": 9,
+       "n": 18,
+       "rate": 0.5,
+       "ci95": [
+        0.29,
+        0.71
+       ]
+      },
+      "who_any": {
+       "k": 12,
+       "n": 18,
+       "rate": 0.667,
+       "ci95": [
+        0.437,
+        0.837
+       ]
+      },
+      "when_pm1": {
+       "k": 7,
+       "n": 12,
+       "rate": 0.583,
+       "ci95": [
+        0.32,
+        0.807
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.425,
+       "n_traces": 10
+      },
+      "code_micro_f1": 0.14,
+      "code_f1": {
+       "FM-1.1": 0.857,
+       "FM-1.2": 0.25,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "when_exact": {
+       "k": 10,
+       "n": 24,
+       "rate": 0.417,
+       "ci95": [
+        0.245,
+        0.612
+       ]
+      },
+      "who_earliest": {
+       "k": 11,
+       "n": 18,
+       "rate": 0.611,
+       "ci95": [
+        0.386,
+        0.797
+       ]
+      },
+      "who_any": {
+       "k": 11,
+       "n": 18,
+       "rate": 0.611,
+       "ci95": [
+        0.386,
+        0.797
+       ]
+      },
+      "when_pm1": {
+       "k": 11,
+       "n": 18,
+       "rate": 0.611,
+       "ci95": [
+        0.386,
+        0.797
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "when_exact": {
+       "k": 0,
+       "n": 24,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.138
+       ]
+      },
+      "who_earliest": {
+       "k": 0,
+       "n": 18,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.176
+       ]
+      },
+      "who_any": {
+       "k": 15,
+       "n": 18,
+       "rate": 0.833,
+       "ci95": [
+        0.608,
+        0.942
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 18,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.176
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 6,
+       "n": 24,
+       "rate": 0.25,
+       "ci95": [
+        0.12,
+        0.449
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "when_exact": {
+       "k": 9,
+       "n": 24,
+       "rate": 0.375,
+       "ci95": [
+        0.212,
+        0.573
+       ]
+      },
+      "who_earliest": {
+       "k": 10,
+       "n": 18,
+       "rate": 0.556,
+       "ci95": [
+        0.337,
+        0.754
+       ]
+      },
+      "who_any": {
+       "k": 11,
+       "n": 18,
+       "rate": 0.611,
+       "ci95": [
+        0.386,
+        0.797
+       ]
+      },
+      "when_pm1": {
+       "k": 10,
+       "n": 18,
+       "rate": 0.556,
+       "ci95": [
+        0.337,
+        0.754
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.369,
+       "n_traces": 10
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "when_exact": {
+       "k": 15,
+       "n": 24,
+       "rate": 0.625,
+       "ci95": [
+        0.427,
+        0.788
+       ]
+      },
+      "who_earliest": {
+       "k": 15,
+       "n": 18,
+       "rate": 0.833,
+       "ci95": [
+        0.608,
+        0.942
+       ]
+      },
+      "who_any": {
+       "k": 18,
+       "n": 18,
+       "rate": 1.0,
+       "ci95": [
+        0.824,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 13,
+       "n": 16,
+       "rate": 0.812,
+       "ci95": [
+        0.57,
+        0.934
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.804,
+       "n_traces": 10
+      },
+      "code_micro_f1": 0.681,
+      "code_f1": {
+       "1.1.1": 0.8,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 1.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": 0.0,
+       "3.2.1": null,
+       "FM-1.1": 0.857,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.5
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "when_exact": {
+       "k": 11,
+       "n": 24,
+       "rate": 0.458,
+       "ci95": [
+        0.279,
+        0.649
+       ]
+      },
+      "who_earliest": {
+       "k": 12,
+       "n": 18,
+       "rate": 0.667,
+       "ci95": [
+        0.437,
+        0.837
+       ]
+      },
+      "who_any": {
+       "k": 16,
+       "n": 18,
+       "rate": 0.889,
+       "ci95": [
+        0.672,
+        0.969
+       ]
+      },
+      "when_pm1": {
+       "k": 6,
+       "n": 10,
+       "rate": 0.6,
+       "ci95": [
+        0.313,
+        0.832
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.713,
+       "n_traces": 10
+      },
+      "code_micro_f1": 0.368,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.444,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.8
+      },
+      "labels": 24,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=clinical_agent": {
+    "n_rows": 10,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "who_any": {
+       "k": 1,
+       "n": 9,
+       "rate": 0.111,
+       "ci95": [
+        0.02,
+        0.435
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.407,
+       "n_traces": 9
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "FM-1.1": null,
+       "FM-1.2": 0.0,
+       "FM-1.3": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 9,
+       "rate": 0.111,
+       "ci95": [
+        0.02,
+        0.435
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 9,
+       "rate": 0.556,
+       "ci95": [
+        0.267,
+        0.811
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 1,
+       "n": 10,
+       "rate": 0.1,
+       "ci95": [
+        0.018,
+        0.404
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 9,
+       "rate": 0.111,
+       "ci95": [
+        0.02,
+        0.435
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.435,
+       "n_traces": 9
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "who_any": {
+       "k": 9,
+       "n": 9,
+       "rate": 1.0,
+       "ci95": [
+        0.701,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 6,
+       "n": 10,
+       "rate": 0.6,
+       "ci95": [
+        0.313,
+        0.832
+       ]
+      },
+      "when_pm1": {
+       "k": 7,
+       "n": 9,
+       "rate": 0.778,
+       "ci95": [
+        0.453,
+        0.937
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.829,
+       "n_traces": 9
+      },
+      "code_micro_f1": 0.556,
+      "code_f1": {
+       "1.1.1": 0.0,
+       "1.2.1": null,
+       "2.1.2": null,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": 0.0,
+       "FM-1.1": null,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 4,
+       "n": 9,
+       "rate": 0.444,
+       "ci95": [
+        0.189,
+        0.733
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "when_exact": {
+       "k": 5,
+       "n": 10,
+       "rate": 0.5,
+       "ci95": [
+        0.237,
+        0.763
+       ]
+      },
+      "when_pm1": {
+       "k": 5,
+       "n": 6,
+       "rate": 0.833,
+       "ci95": [
+        0.436,
+        0.97
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.736,
+       "n_traces": 9
+      },
+      "code_micro_f1": 0.429,
+      "code_f1": {
+       "1.1.1": 0.0,
+       "1.2.1": null,
+       "2.1.2": null,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.571,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 1.0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=clinical_agent5": {
+    "n_rows": 10,
+    "methods": {
+     "mht": {
+      "when_exact": {
+       "k": 3,
+       "n": 10,
+       "rate": 0.3,
+       "ci95": [
+        0.108,
+        0.603
+       ]
+      },
+      "who_earliest": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 2,
+       "rate": 1.0,
+       "ci95": [
+        0.342,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.583,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": 0.0,
+       "FM-2.4": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": null
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "when_exact": {
+       "k": 1,
+       "n": 10,
+       "rate": 0.1,
+       "ci95": [
+        0.018,
+        0.404
+       ]
+      },
+      "who_earliest": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "who_any": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "who_earliest": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 7,
+       "n": 10,
+       "rate": 0.7,
+       "ci95": [
+        0.397,
+        0.892
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "who_earliest": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "who_any": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.278,
+       "n_traces": 3
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "when_exact": {
+       "k": 8,
+       "n": 10,
+       "rate": 0.8,
+       "ci95": [
+        0.49,
+        0.943
+       ]
+      },
+      "who_earliest": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "who_any": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.917,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.8,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": 1.0,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": null
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "when_exact": {
+       "k": 8,
+       "n": 10,
+       "rate": 0.8,
+       "ci95": [
+        0.49,
+        0.943
+       ]
+      },
+      "who_earliest": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 1,
+       "rate": 1.0,
+       "ci95": [
+        0.207,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.667,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": 0.0,
+       "2.1.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": null
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=dylan": {
+    "n_rows": 9,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 5,
+       "n": 7,
+       "rate": 0.714,
+       "ci95": [
+        0.359,
+        0.918
+       ]
+      },
+      "who_any": {
+       "k": 7,
+       "n": 7,
+       "rate": 1.0,
+       "ci95": [
+        0.646,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 4,
+       "n": 9,
+       "rate": 0.444,
+       "ci95": [
+        0.189,
+        0.733
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.569,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "FM-1.1": 0.0,
+       "FM-1.2": null,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 5,
+       "n": 7,
+       "rate": 0.714,
+       "ci95": [
+        0.359,
+        0.918
+       ]
+      },
+      "who_any": {
+       "k": 7,
+       "n": 7,
+       "rate": 1.0,
+       "ci95": [
+        0.646,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 4,
+       "n": 9,
+       "rate": 0.444,
+       "ci95": [
+        0.189,
+        0.733
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 7,
+       "rate": 0.571,
+       "ci95": [
+        0.25,
+        0.842
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 2,
+       "n": 7,
+       "rate": 0.286,
+       "ci95": [
+        0.082,
+        0.641
+       ]
+      },
+      "who_any": {
+       "k": 7,
+       "n": 7,
+       "rate": 1.0,
+       "ci95": [
+        0.646,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 7,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.354
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 5,
+       "n": 7,
+       "rate": 0.714,
+       "ci95": [
+        0.359,
+        0.918
+       ]
+      },
+      "who_any": {
+       "k": 7,
+       "n": 7,
+       "rate": 1.0,
+       "ci95": [
+        0.646,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 4,
+       "n": 9,
+       "rate": 0.444,
+       "ci95": [
+        0.189,
+        0.733
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 7,
+       "rate": 0.571,
+       "ci95": [
+        0.25,
+        0.842
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.0,
+       "n_traces": 3
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 4,
+       "n": 7,
+       "rate": 0.571,
+       "ci95": [
+        0.25,
+        0.842
+       ]
+      },
+      "who_any": {
+       "k": 7,
+       "n": 7,
+       "rate": 1.0,
+       "ci95": [
+        0.646,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 4,
+       "rate": 0.25,
+       "ci95": [
+        0.046,
+        0.699
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.75,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.727,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": null,
+       "2.2.1": 1.0,
+       "2.2.2": null,
+       "3.2.1": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": 1.0
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 4,
+       "n": 7,
+       "rate": 0.571,
+       "ci95": [
+        0.25,
+        0.842
+       ]
+      },
+      "who_any": {
+       "k": 7,
+       "n": 7,
+       "rate": 1.0,
+       "ci95": [
+        0.646,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.667,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.5,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": null,
+       "3.2.1": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": 1.0
+      },
+      "labels": 9,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=mdagents": {
+    "n_rows": 10,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 4,
+       "n": 10,
+       "rate": 0.4,
+       "ci95": [
+        0.168,
+        0.687
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 10,
+       "rate": 0.6,
+       "ci95": [
+        0.313,
+        0.832
+       ]
+      },
+      "when_exact": {
+       "k": 4,
+       "n": 10,
+       "rate": 0.4,
+       "ci95": [
+        0.168,
+        0.687
+       ]
+      },
+      "when_pm1": {
+       "k": 9,
+       "n": 10,
+       "rate": 0.9,
+       "ci95": [
+        0.596,
+        0.982
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.49,
+       "n_traces": 5
+      },
+      "code_micro_f1": 0.326,
+      "code_f1": {
+       "FM-1.1": 1.0,
+       "FM-1.2": 0.333,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.333,
+       "FM-3.1": 0.0,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "who_any": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 10,
+       "rate": 0.6,
+       "ci95": [
+        0.313,
+        0.832
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 10,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.278
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "who_any": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.445,
+       "n_traces": 5
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "who_any": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 9,
+       "n": 10,
+       "rate": 0.9,
+       "ci95": [
+        0.596,
+        0.982
+       ]
+      },
+      "when_pm1": {
+       "k": 9,
+       "n": 9,
+       "rate": 1.0,
+       "ci95": [
+        0.701,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.758,
+       "n_traces": 5
+      },
+      "code_micro_f1": 0.811,
+      "code_f1": {
+       "1.1.1": 0.8,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 1.0,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 1.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 8,
+       "n": 10,
+       "rate": 0.8,
+       "ci95": [
+        0.49,
+        0.943
+       ]
+      },
+      "who_any": {
+       "k": 10,
+       "n": 10,
+       "rate": 1.0,
+       "ci95": [
+        0.722,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 10,
+       "rate": 0.3,
+       "ci95": [
+        0.108,
+        0.603
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 5,
+       "rate": 0.6,
+       "ci95": [
+        0.231,
+        0.882
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.642,
+       "n_traces": 5
+      },
+      "code_micro_f1": 0.357,
+      "code_f1": {
+       "1.1.1": 0.8,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": 0.571,
+       "FM-1.2": 0.0,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 1.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 10,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "split=clean": {
+    "n_rows": 17,
+    "methods": {
+     "mht": {
+      "when_exact": {
+       "k": 3,
+       "n": 17,
+       "rate": 0.176,
+       "ci95": [
+        0.062,
+        0.41
+       ]
+      },
+      "who_earliest": {
+       "k": 1,
+       "n": 11,
+       "rate": 0.091,
+       "ci95": [
+        0.016,
+        0.377
+       ]
+      },
+      "who_any": {
+       "k": 3,
+       "n": 11,
+       "rate": 0.273,
+       "ci95": [
+        0.097,
+        0.566
+       ]
+      },
+      "when_pm1": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.538,
+       "n_traces": 11
+      },
+      "code_micro_f1": 0.154,
+      "code_f1": {
+       "FM-1.1": 1.0,
+       "FM-1.2": 0.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.333,
+       "FM-3.1": 0.0,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "when_exact": {
+       "k": 4,
+       "n": 17,
+       "rate": 0.235,
+       "ci95": [
+        0.096,
+        0.473
+       ]
+      },
+      "who_earliest": {
+       "k": 4,
+       "n": 11,
+       "rate": 0.364,
+       "ci95": [
+        0.152,
+        0.646
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 11,
+       "rate": 0.545,
+       "ci95": [
+        0.28,
+        0.787
+       ]
+      },
+      "when_pm1": {
+       "k": 6,
+       "n": 11,
+       "rate": 0.545,
+       "ci95": [
+        0.28,
+        0.787
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "when_exact": {
+       "k": 0,
+       "n": 17,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.184
+       ]
+      },
+      "who_earliest": {
+       "k": 2,
+       "n": 11,
+       "rate": 0.182,
+       "ci95": [
+        0.051,
+        0.477
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 11,
+       "rate": 0.182,
+       "ci95": [
+        0.051,
+        0.477
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 11,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.259
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 6,
+       "n": 17,
+       "rate": 0.353,
+       "ci95": [
+        0.173,
+        0.587
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "when_exact": {
+       "k": 4,
+       "n": 17,
+       "rate": 0.235,
+       "ci95": [
+        0.096,
+        0.473
+       ]
+      },
+      "who_earliest": {
+       "k": 4,
+       "n": 11,
+       "rate": 0.364,
+       "ci95": [
+        0.152,
+        0.646
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 11,
+       "rate": 0.545,
+       "ci95": [
+        0.28,
+        0.787
+       ]
+      },
+      "when_pm1": {
+       "k": 6,
+       "n": 11,
+       "rate": 0.545,
+       "ci95": [
+        0.28,
+        0.787
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.317,
+       "n_traces": 11
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "when_exact": {
+       "k": 11,
+       "n": 17,
+       "rate": 0.647,
+       "ci95": [
+        0.413,
+        0.827
+       ]
+      },
+      "who_earliest": {
+       "k": 9,
+       "n": 11,
+       "rate": 0.818,
+       "ci95": [
+        0.523,
+        0.949
+       ]
+      },
+      "who_any": {
+       "k": 11,
+       "n": 11,
+       "rate": 1.0,
+       "ci95": [
+        0.741,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 8,
+       "n": 9,
+       "rate": 0.889,
+       "ci95": [
+        0.565,
+        0.98
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.837,
+       "n_traces": 11
+      },
+      "code_micro_f1": 0.741,
+      "code_f1": {
+       "1.1.1": 0.0,
+       "1.2.1": null,
+       "2.1.1": null,
+       "2.1.2": 1.0,
+       "2.2.1": 1.0,
+       "2.2.2": null,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": 0.0,
+       "3.2.1": null,
+       "FM-1.1": 0.8,
+       "FM-1.2": 1.0,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 1.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": null
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "when_exact": {
+       "k": 10,
+       "n": 17,
+       "rate": 0.588,
+       "ci95": [
+        0.36,
+        0.784
+       ]
+      },
+      "who_earliest": {
+       "k": 6,
+       "n": 11,
+       "rate": 0.545,
+       "ci95": [
+        0.28,
+        0.787
+       ]
+      },
+      "who_any": {
+       "k": 8,
+       "n": 11,
+       "rate": 0.727,
+       "ci95": [
+        0.434,
+        0.903
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 4,
+       "rate": 1.0,
+       "ci95": [
+        0.51,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.655,
+       "n_traces": 11
+      },
+      "code_micro_f1": 0.333,
+      "code_f1": {
+       "1.1.1": 0.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": null,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 0.0,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 1.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": null
+      },
+      "labels": 17,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "split=faulty": {
+    "n_rows": 22,
+    "methods": {
+     "mht": {
+      "when_exact": {
+       "k": 8,
+       "n": 22,
+       "rate": 0.364,
+       "ci95": [
+        0.197,
+        0.57
+       ]
+      },
+      "who_earliest": {
+       "k": 10,
+       "n": 18,
+       "rate": 0.556,
+       "ci95": [
+        0.337,
+        0.754
+       ]
+      },
+      "who_any": {
+       "k": 13,
+       "n": 18,
+       "rate": 0.722,
+       "ci95": [
+        0.491,
+        0.875
+       ]
+      },
+      "when_pm1": {
+       "k": 8,
+       "n": 12,
+       "rate": 0.667,
+       "ci95": [
+        0.391,
+        0.862
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.406,
+       "n_traces": 9
+      },
+      "code_micro_f1": 0.16,
+      "code_f1": {
+       "FM-1.1": 0.857,
+       "FM-1.2": 0.286,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "when_exact": {
+       "k": 11,
+       "n": 22,
+       "rate": 0.5,
+       "ci95": [
+        0.307,
+        0.693
+       ]
+      },
+      "who_earliest": {
+       "k": 12,
+       "n": 18,
+       "rate": 0.667,
+       "ci95": [
+        0.437,
+        0.837
+       ]
+      },
+      "who_any": {
+       "k": 12,
+       "n": 18,
+       "rate": 0.667,
+       "ci95": [
+        0.437,
+        0.837
+       ]
+      },
+      "when_pm1": {
+       "k": 12,
+       "n": 18,
+       "rate": 0.667,
+       "ci95": [
+        0.437,
+        0.837
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "when_exact": {
+       "k": 0,
+       "n": 22,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.149
+       ]
+      },
+      "who_earliest": {
+       "k": 0,
+       "n": 18,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.176
+       ]
+      },
+      "who_any": {
+       "k": 16,
+       "n": 18,
+       "rate": 0.889,
+       "ci95": [
+        0.672,
+        0.969
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 18,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.176
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 4,
+       "n": 22,
+       "rate": 0.182,
+       "ci95": [
+        0.073,
+        0.385
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "when_exact": {
+       "k": 10,
+       "n": 22,
+       "rate": 0.455,
+       "ci95": [
+        0.269,
+        0.653
+       ]
+      },
+      "who_earliest": {
+       "k": 11,
+       "n": 18,
+       "rate": 0.611,
+       "ci95": [
+        0.386,
+        0.797
+       ]
+      },
+      "who_any": {
+       "k": 12,
+       "n": 18,
+       "rate": 0.667,
+       "ci95": [
+        0.437,
+        0.837
+       ]
+      },
+      "when_pm1": {
+       "k": 11,
+       "n": 18,
+       "rate": 0.611,
+       "ci95": [
+        0.386,
+        0.797
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.387,
+       "n_traces": 9
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "when_exact": {
+       "k": 14,
+       "n": 22,
+       "rate": 0.636,
+       "ci95": [
+        0.43,
+        0.803
+       ]
+      },
+      "who_earliest": {
+       "k": 14,
+       "n": 18,
+       "rate": 0.778,
+       "ci95": [
+        0.548,
+        0.91
+       ]
+      },
+      "who_any": {
+       "k": 18,
+       "n": 18,
+       "rate": 1.0,
+       "ci95": [
+        0.824,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 12,
+       "n": 16,
+       "rate": 0.75,
+       "ci95": [
+        0.505,
+        0.898
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.782,
+       "n_traces": 9
+      },
+      "code_micro_f1": 0.727,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 1.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.5,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.5
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "when_exact": {
+       "k": 9,
+       "n": 22,
+       "rate": 0.409,
+       "ci95": [
+        0.233,
+        0.613
+       ]
+      },
+      "who_earliest": {
+       "k": 12,
+       "n": 18,
+       "rate": 0.667,
+       "ci95": [
+        0.437,
+        0.837
+       ]
+      },
+      "who_any": {
+       "k": 17,
+       "n": 18,
+       "rate": 0.944,
+       "ci95": [
+        0.742,
+        0.99
+       ]
+      },
+      "when_pm1": {
+       "k": 6,
+       "n": 11,
+       "rate": 0.545,
+       "ci95": [
+        0.28,
+        0.787
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.736,
+       "n_traces": 9
+      },
+      "code_micro_f1": 0.41,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.5,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.8
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     }
+    }
+   }
+  },
+  "responsibility": {
+   "all": {
+    "n_rows": 22,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "who_any": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 7,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.354
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.315,
+       "n_traces": 7
+      },
+      "code_micro_f1": 0.16,
+      "code_f1": {
+       "FM-1.1": 0.857,
+       "FM-1.2": 0.286,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "who_any": {
+       "k": 8,
+       "n": 9,
+       "rate": 0.889,
+       "ci95": [
+        0.565,
+        0.98
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.28,
+       "n_traces": 7
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 5,
+       "n": 9,
+       "rate": 0.556,
+       "ci95": [
+        0.267,
+        0.811
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 9,
+       "rate": 0.556,
+       "ci95": [
+        0.267,
+        0.811
+       ]
+      },
+      "when_exact": {
+       "k": 4,
+       "n": 9,
+       "rate": 0.444,
+       "ci95": [
+        0.189,
+        0.733
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 8,
+       "rate": 0.5,
+       "ci95": [
+        0.215,
+        0.785
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.708,
+       "n_traces": 7
+      },
+      "code_micro_f1": 0.727,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 1.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.5,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.5
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "when_exact": {
+       "k": 5,
+       "n": 9,
+       "rate": 0.556,
+       "ci95": [
+        0.267,
+        0.811
+       ]
+      },
+      "when_pm1": {
+       "k": 5,
+       "n": 7,
+       "rate": 0.714,
+       "ci95": [
+        0.359,
+        0.918
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.792,
+       "n_traces": 7
+      },
+      "code_micro_f1": 0.41,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.5,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.8
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "no_leak": {
+    "n_rows": 20,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "who_any": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 7,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.354
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.315,
+       "n_traces": 7
+      },
+      "code_micro_f1": 0.182,
+      "code_f1": {
+       "FM-1.1": 0.857,
+       "FM-1.2": 0.286,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "who_any": {
+       "k": 8,
+       "n": 9,
+       "rate": 0.889,
+       "ci95": [
+        0.565,
+        0.98
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.28,
+       "n_traces": 7
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 5,
+       "n": 9,
+       "rate": 0.556,
+       "ci95": [
+        0.267,
+        0.811
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 9,
+       "rate": 0.556,
+       "ci95": [
+        0.267,
+        0.811
+       ]
+      },
+      "when_exact": {
+       "k": 4,
+       "n": 9,
+       "rate": 0.444,
+       "ci95": [
+        0.189,
+        0.733
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 8,
+       "rate": 0.5,
+       "ci95": [
+        0.215,
+        0.785
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.708,
+       "n_traces": 7
+      },
+      "code_micro_f1": 0.714,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 1.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.5
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "when_exact": {
+       "k": 5,
+       "n": 9,
+       "rate": 0.556,
+       "ci95": [
+        0.267,
+        0.811
+       ]
+      },
+      "when_pm1": {
+       "k": 5,
+       "n": 7,
+       "rate": 0.714,
+       "ci95": [
+        0.359,
+        0.918
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.792,
+       "n_traces": 7
+      },
+      "code_micro_f1": 0.378,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.5,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.8
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=clinical_agent": {
+    "n_rows": 6,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "who_any": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 2,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.658
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.542,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "FM-1.1": null,
+       "FM-1.2": 0.0,
+       "FM-1.3": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.542,
+       "n_traces": 3
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "who_any": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.875,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.545,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": null,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": null,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "who_any": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.903,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.545,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": null,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.8,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 1.0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=clinical_agent5": {
+    "n_rows": 5,
+    "methods": {
+     "mht": {
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": null
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "code_micro_f1": null,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": null,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": null
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "code_micro_f1": null,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": null,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": null
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=dylan": {
+    "n_rows": 5,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 2,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.658
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.333,
+       "n_traces": 1
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "FM-1.1": 0.0,
+       "FM-1.2": null,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "who_any": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.0,
+       "n_traces": 1
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "when_exact": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 2,
+       "rate": 0.5,
+       "ci95": [
+        0.095,
+        0.905
+       ]
+      },
+      "agent_auroc": {
+       "mean": 1.0,
+       "n_traces": 1
+      },
+      "code_micro_f1": 0.75,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": null,
+       "2.2.1": 1.0,
+       "2.2.2": null,
+       "3.2.1": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": 1.0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "when_exact": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 2,
+       "rate": 0.5,
+       "ci95": [
+        0.095,
+        0.905
+       ]
+      },
+      "agent_auroc": {
+       "mean": 1.0,
+       "n_traces": 1
+      },
+      "code_micro_f1": 0.545,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": null,
+       "3.2.1": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": 1.0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=mdagents": {
+    "n_rows": 6,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.083,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.32,
+      "code_f1": {
+       "FM-1.1": 1.0,
+       "FM-1.2": 0.5,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "who_any": {
+       "k": 3,
+       "n": 3,
+       "rate": 1.0,
+       "ci95": [
+        0.438,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.111,
+       "n_traces": 3
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.444,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.8,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 1.0,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": 0.0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "who_any": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "when_exact": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 2,
+       "rate": 0.5,
+       "ci95": [
+        0.095,
+        0.905
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.611,
+       "n_traces": 3
+      },
+      "code_micro_f1": 0.235,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.0,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": 0.0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "split=faulty": {
+    "n_rows": 22,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "who_any": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 7,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.354
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.315,
+       "n_traces": 7
+      },
+      "code_micro_f1": 0.16,
+      "code_f1": {
+       "FM-1.1": 0.857,
+       "FM-1.2": 0.286,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "who_any": {
+       "k": 8,
+       "n": 9,
+       "rate": 0.889,
+       "ci95": [
+        0.565,
+        0.98
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 9,
+       "rate": 0.333,
+       "ci95": [
+        0.121,
+        0.646
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 9,
+       "rate": 0.222,
+       "ci95": [
+        0.063,
+        0.547
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 9,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.299
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.28,
+       "n_traces": 7
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 5,
+       "n": 9,
+       "rate": 0.556,
+       "ci95": [
+        0.267,
+        0.811
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 9,
+       "rate": 0.556,
+       "ci95": [
+        0.267,
+        0.811
+       ]
+      },
+      "when_exact": {
+       "k": 4,
+       "n": 9,
+       "rate": 0.444,
+       "ci95": [
+        0.189,
+        0.733
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 8,
+       "rate": 0.5,
+       "ci95": [
+        0.215,
+        0.785
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.708,
+       "n_traces": 7
+      },
+      "code_micro_f1": 0.727,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 1.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.5,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.5
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 9,
+       "rate": 0.667,
+       "ci95": [
+        0.354,
+        0.879
+       ]
+      },
+      "when_exact": {
+       "k": 5,
+       "n": 9,
+       "rate": 0.556,
+       "ci95": [
+        0.267,
+        0.811
+       ]
+      },
+      "when_pm1": {
+       "k": 5,
+       "n": 7,
+       "rate": 0.714,
+       "ci95": [
+        0.359,
+        0.918
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.792,
+       "n_traces": 7
+      },
+      "code_micro_f1": 0.41,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.5,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.8
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     }
+    }
+   }
+  },
+  "responsibility_any": {
+   "all": {
+    "n_rows": 22,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 6,
+       "n": 18,
+       "rate": 0.333,
+       "ci95": [
+        0.163,
+        0.563
+       ]
+      },
+      "who_any": {
+       "k": 8,
+       "n": 18,
+       "rate": 0.444,
+       "ci95": [
+        0.246,
+        0.663
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 18,
+       "rate": 0.167,
+       "ci95": [
+        0.058,
+        0.392
+       ]
+      },
+      "when_pm1": {
+       "k": 6,
+       "n": 12,
+       "rate": 0.5,
+       "ci95": [
+        0.254,
+        0.746
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.466,
+       "n_traces": 14
+      },
+      "code_micro_f1": 0.16,
+      "code_f1": {
+       "FM-1.1": 0.857,
+       "FM-1.2": 0.286,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 4,
+       "n": 18,
+       "rate": 0.222,
+       "ci95": [
+        0.09,
+        0.452
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 18,
+       "rate": 0.278,
+       "ci95": [
+        0.125,
+        0.509
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 18,
+       "rate": 0.167,
+       "ci95": [
+        0.058,
+        0.392
+       ]
+      },
+      "when_pm1": {
+       "k": 7,
+       "n": 18,
+       "rate": 0.389,
+       "ci95": [
+        0.203,
+        0.614
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 18,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.176
+       ]
+      },
+      "who_any": {
+       "k": 16,
+       "n": 18,
+       "rate": 0.889,
+       "ci95": [
+        0.672,
+        0.969
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 18,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.176
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 18,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.176
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 18,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.176
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 5,
+       "n": 18,
+       "rate": 0.278,
+       "ci95": [
+        0.125,
+        0.509
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 18,
+       "rate": 0.333,
+       "ci95": [
+        0.163,
+        0.563
+       ]
+      },
+      "when_exact": {
+       "k": 4,
+       "n": 18,
+       "rate": 0.222,
+       "ci95": [
+        0.09,
+        0.452
+       ]
+      },
+      "when_pm1": {
+       "k": 8,
+       "n": 18,
+       "rate": 0.444,
+       "ci95": [
+        0.246,
+        0.663
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.437,
+       "n_traces": 14
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 8,
+       "n": 18,
+       "rate": 0.444,
+       "ci95": [
+        0.246,
+        0.663
+       ]
+      },
+      "who_any": {
+       "k": 11,
+       "n": 18,
+       "rate": 0.611,
+       "ci95": [
+        0.386,
+        0.797
+       ]
+      },
+      "when_exact": {
+       "k": 5,
+       "n": 18,
+       "rate": 0.278,
+       "ci95": [
+        0.125,
+        0.509
+       ]
+      },
+      "when_pm1": {
+       "k": 10,
+       "n": 16,
+       "rate": 0.625,
+       "ci95": [
+        0.386,
+        0.815
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.533,
+       "n_traces": 14
+      },
+      "code_micro_f1": 0.727,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 1.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.5,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.5
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 9,
+       "n": 18,
+       "rate": 0.5,
+       "ci95": [
+        0.29,
+        0.71
+       ]
+      },
+      "who_any": {
+       "k": 12,
+       "n": 18,
+       "rate": 0.667,
+       "ci95": [
+        0.437,
+        0.837
+       ]
+      },
+      "when_exact": {
+       "k": 6,
+       "n": 18,
+       "rate": 0.333,
+       "ci95": [
+        0.163,
+        0.563
+       ]
+      },
+      "when_pm1": {
+       "k": 7,
+       "n": 11,
+       "rate": 0.636,
+       "ci95": [
+        0.354,
+        0.848
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.682,
+       "n_traces": 14
+      },
+      "code_micro_f1": 0.41,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.5,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.8
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "no_leak": {
+    "n_rows": 20,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 6,
+       "n": 17,
+       "rate": 0.353,
+       "ci95": [
+        0.173,
+        0.587
+       ]
+      },
+      "who_any": {
+       "k": 7,
+       "n": 17,
+       "rate": 0.412,
+       "ci95": [
+        0.216,
+        0.64
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 17,
+       "rate": 0.176,
+       "ci95": [
+        0.062,
+        0.41
+       ]
+      },
+      "when_pm1": {
+       "k": 6,
+       "n": 11,
+       "rate": 0.545,
+       "ci95": [
+        0.28,
+        0.787
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.466,
+       "n_traces": 14
+      },
+      "code_micro_f1": 0.182,
+      "code_f1": {
+       "FM-1.1": 0.857,
+       "FM-1.2": 0.286,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 4,
+       "n": 17,
+       "rate": 0.235,
+       "ci95": [
+        0.096,
+        0.473
+       ]
+      },
+      "who_any": {
+       "k": 4,
+       "n": 17,
+       "rate": 0.235,
+       "ci95": [
+        0.096,
+        0.473
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 17,
+       "rate": 0.176,
+       "ci95": [
+        0.062,
+        0.41
+       ]
+      },
+      "when_pm1": {
+       "k": 7,
+       "n": 17,
+       "rate": 0.412,
+       "ci95": [
+        0.216,
+        0.64
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 17,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.184
+       ]
+      },
+      "who_any": {
+       "k": 15,
+       "n": 17,
+       "rate": 0.882,
+       "ci95": [
+        0.657,
+        0.967
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 17,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.184
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 17,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.184
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 17,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.184
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 5,
+       "n": 17,
+       "rate": 0.294,
+       "ci95": [
+        0.133,
+        0.531
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 17,
+       "rate": 0.294,
+       "ci95": [
+        0.133,
+        0.531
+       ]
+      },
+      "when_exact": {
+       "k": 4,
+       "n": 17,
+       "rate": 0.235,
+       "ci95": [
+        0.096,
+        0.473
+       ]
+      },
+      "when_pm1": {
+       "k": 8,
+       "n": 17,
+       "rate": 0.471,
+       "ci95": [
+        0.262,
+        0.69
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.437,
+       "n_traces": 14
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 8,
+       "n": 17,
+       "rate": 0.471,
+       "ci95": [
+        0.262,
+        0.69
+       ]
+      },
+      "who_any": {
+       "k": 10,
+       "n": 17,
+       "rate": 0.588,
+       "ci95": [
+        0.36,
+        0.784
+       ]
+      },
+      "when_exact": {
+       "k": 5,
+       "n": 17,
+       "rate": 0.294,
+       "ci95": [
+        0.133,
+        0.531
+       ]
+      },
+      "when_pm1": {
+       "k": 9,
+       "n": 15,
+       "rate": 0.6,
+       "ci95": [
+        0.357,
+        0.802
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.533,
+       "n_traces": 14
+      },
+      "code_micro_f1": 0.714,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 1.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.5
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 9,
+       "n": 17,
+       "rate": 0.529,
+       "ci95": [
+        0.31,
+        0.738
+       ]
+      },
+      "who_any": {
+       "k": 11,
+       "n": 17,
+       "rate": 0.647,
+       "ci95": [
+        0.413,
+        0.827
+       ]
+      },
+      "when_exact": {
+       "k": 6,
+       "n": 17,
+       "rate": 0.353,
+       "ci95": [
+        0.173,
+        0.587
+       ]
+      },
+      "when_pm1": {
+       "k": 6,
+       "n": 10,
+       "rate": 0.6,
+       "ci95": [
+        0.313,
+        0.832
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.682,
+       "n_traces": 14
+      },
+      "code_micro_f1": 0.378,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.5,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.8
+      },
+      "labels": 20,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=clinical_agent": {
+    "n_rows": 6,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 1,
+       "n": 6,
+       "rate": 0.167,
+       "ci95": [
+        0.03,
+        0.564
+       ]
+      },
+      "who_any": {
+       "k": 1,
+       "n": 6,
+       "rate": 0.167,
+       "ci95": [
+        0.03,
+        0.564
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 3,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.562
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.498,
+       "n_traces": 6
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "FM-1.1": null,
+       "FM-1.2": 0.0,
+       "FM-1.3": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 6,
+       "rate": 0.833,
+       "ci95": [
+        0.436,
+        0.97
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.539,
+       "n_traces": 6
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 4,
+       "n": 6,
+       "rate": 0.667,
+       "ci95": [
+        0.3,
+        0.903
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 6,
+       "rate": 1.0,
+       "ci95": [
+        0.61,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 4,
+       "n": 6,
+       "rate": 0.667,
+       "ci95": [
+        0.3,
+        0.903
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 6,
+       "rate": 0.667,
+       "ci95": [
+        0.3,
+        0.903
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.764,
+       "n_traces": 6
+      },
+      "code_micro_f1": 0.545,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": null,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": null,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 4,
+       "n": 6,
+       "rate": 0.667,
+       "ci95": [
+        0.3,
+        0.903
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 6,
+       "rate": 0.833,
+       "ci95": [
+        0.436,
+        0.97
+       ]
+      },
+      "when_exact": {
+       "k": 4,
+       "n": 6,
+       "rate": 0.667,
+       "ci95": [
+        0.3,
+        0.903
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 5,
+       "rate": 0.8,
+       "ci95": [
+        0.376,
+        0.964
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.771,
+       "n_traces": 6
+      },
+      "code_micro_f1": 0.545,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": null,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.8,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 1.0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=clinical_agent5": {
+    "n_rows": 5,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.75,
+       "n_traces": 1
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": null
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 1,
+       "n": 1,
+       "rate": 1.0,
+       "ci95": [
+        0.207,
+        1.0
+       ]
+      },
+      "who_any": {
+       "k": 1,
+       "n": 1,
+       "rate": 1.0,
+       "ci95": [
+        0.207,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 1,
+       "n": 1,
+       "rate": 1.0,
+       "ci95": [
+        0.207,
+        1.0
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 1,
+       "rate": 1.0,
+       "ci95": [
+        0.207,
+        1.0
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.75,
+       "n_traces": 1
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.375,
+       "n_traces": 1
+      },
+      "code_micro_f1": null,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": null,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": null
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 1,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.793
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.5,
+       "n_traces": 1
+      },
+      "code_micro_f1": null,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": null,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": null
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=dylan": {
+    "n_rows": 5,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 4,
+       "n": 5,
+       "rate": 0.8,
+       "ci95": [
+        0.376,
+        0.964
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 5,
+       "rate": 1.0,
+       "ci95": [
+        0.566,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 2,
+       "n": 5,
+       "rate": 0.4,
+       "ci95": [
+        0.118,
+        0.769
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.333,
+       "n_traces": 1
+      },
+      "code_micro_f1": 0.0,
+      "code_f1": {
+       "FM-1.1": 0.0,
+       "FM-1.2": null,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 4,
+       "n": 5,
+       "rate": 0.8,
+       "ci95": [
+        0.376,
+        0.964
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 5,
+       "rate": 1.0,
+       "ci95": [
+        0.566,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 5,
+       "rate": 0.6,
+       "ci95": [
+        0.231,
+        0.882
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 5,
+       "rate": 0.6,
+       "ci95": [
+        0.231,
+        0.882
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 5,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.434
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 5,
+       "rate": 1.0,
+       "ci95": [
+        0.566,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 5,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.434
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 5,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.434
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 5,
+       "rate": 0.0,
+       "ci95": [
+        -0.0,
+        0.434
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 4,
+       "n": 5,
+       "rate": 0.8,
+       "ci95": [
+        0.376,
+        0.964
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 5,
+       "rate": 1.0,
+       "ci95": [
+        0.566,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 5,
+       "rate": 0.6,
+       "ci95": [
+        0.231,
+        0.882
+       ]
+      },
+      "when_pm1": {
+       "k": 3,
+       "n": 5,
+       "rate": 0.6,
+       "ci95": [
+        0.231,
+        0.882
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.0,
+       "n_traces": 1
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 4,
+       "n": 5,
+       "rate": 0.8,
+       "ci95": [
+        0.376,
+        0.964
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 5,
+       "rate": 1.0,
+       "ci95": [
+        0.566,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 1,
+       "n": 5,
+       "rate": 0.2,
+       "ci95": [
+        0.036,
+        0.624
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "agent_auroc": {
+       "mean": 1.0,
+       "n_traces": 1
+      },
+      "code_micro_f1": 0.75,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": null,
+       "2.2.1": 1.0,
+       "2.2.2": null,
+       "3.2.1": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": 1.0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 4,
+       "n": 5,
+       "rate": 0.8,
+       "ci95": [
+        0.376,
+        0.964
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 5,
+       "rate": 1.0,
+       "ci95": [
+        0.566,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 1,
+       "n": 5,
+       "rate": 0.2,
+       "ci95": [
+        0.036,
+        0.624
+       ]
+      },
+      "when_pm1": {
+       "k": 2,
+       "n": 3,
+       "rate": 0.667,
+       "ci95": [
+        0.208,
+        0.939
+       ]
+      },
+      "agent_auroc": {
+       "mean": 1.0,
+       "n_traces": 1
+      },
+      "code_micro_f1": 0.545,
+      "code_f1": {
+       "1.1.1": null,
+       "1.2.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": null,
+       "3.2.1": null,
+       "FM-1.1": null,
+       "FM-1.2": null,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": 1.0
+      },
+      "labels": 5,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "fw=mdagents": {
+    "n_rows": 6,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 1,
+       "n": 6,
+       "rate": 0.167,
+       "ci95": [
+        0.03,
+        0.564
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 6,
+       "rate": 0.333,
+       "ci95": [
+        0.097,
+        0.7
+       ]
+      },
+      "when_exact": {
+       "k": 1,
+       "n": 6,
+       "rate": 0.167,
+       "ci95": [
+        0.03,
+        0.564
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 6,
+       "rate": 0.667,
+       "ci95": [
+        0.3,
+        0.903
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.408,
+       "n_traces": 6
+      },
+      "code_micro_f1": 0.32,
+      "code_f1": {
+       "FM-1.1": 1.0,
+       "FM-1.2": 0.5,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 6,
+       "rate": 0.667,
+       "ci95": [
+        0.3,
+        0.903
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 6,
+       "rate": 1.0,
+       "ci95": [
+        0.61,
+        1.0
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 6,
+       "rate": 0.667,
+       "ci95": [
+        0.3,
+        0.903
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.356,
+       "n_traces": 6
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "who_any": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 6,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.39
+       ]
+      },
+      "when_pm1": {
+       "k": 4,
+       "n": 6,
+       "rate": 0.667,
+       "ci95": [
+        0.3,
+        0.903
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.25,
+       "n_traces": 6
+      },
+      "code_micro_f1": 0.8,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 1.0,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": 0.0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 1,
+       "n": 6,
+       "rate": 0.167,
+       "ci95": [
+        0.03,
+        0.564
+       ]
+      },
+      "who_any": {
+       "k": 2,
+       "n": 6,
+       "rate": 0.333,
+       "ci95": [
+        0.097,
+        0.7
+       ]
+      },
+      "when_exact": {
+       "k": 1,
+       "n": 6,
+       "rate": 0.167,
+       "ci95": [
+        0.03,
+        0.564
+       ]
+      },
+      "when_pm1": {
+       "k": 1,
+       "n": 3,
+       "rate": 0.333,
+       "ci95": [
+        0.061,
+        0.792
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.569,
+       "n_traces": 6
+      },
+      "code_micro_f1": 0.235,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": null,
+       "3.1.3": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.0,
+       "FM-1.3": null,
+       "FM-1.4": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": null,
+       "FM-3.1": null,
+       "FM-3.2": null,
+       "FM-3.3": 0.0
+      },
+      "labels": 6,
+      "missing_predictions": 0
+     }
+    }
+   },
+   "split=faulty": {
+    "n_rows": 22,
+    "methods": {
+     "mht": {
+      "who_earliest": {
+       "k": 6,
+       "n": 18,
+       "rate": 0.333,
+       "ci95": [
+        0.163,
+        0.563
+       ]
+      },
+      "who_any": {
+       "k": 8,
+       "n": 18,
+       "rate": 0.444,
+       "ci95": [
+        0.246,
+        0.663
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 18,
+       "rate": 0.167,
+       "ci95": [
+        0.058,
+        0.392
+       ]
+      },
+      "when_pm1": {
+       "k": 6,
+       "n": 12,
+       "rate": 0.5,
+       "ci95": [
+        0.254,
+        0.746
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.466,
+       "n_traces": 14
+      },
+      "code_micro_f1": 0.16,
+      "code_f1": {
+       "FM-1.1": 0.857,
+       "FM-1.2": 0.286,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": 0.0,
+       "FM-2.2": 0.0,
+       "FM-2.3": 0.0,
+       "FM-2.4": null,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.0,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "first_step": {
+      "who_earliest": {
+       "k": 4,
+       "n": 18,
+       "rate": 0.222,
+       "ci95": [
+        0.09,
+        0.452
+       ]
+      },
+      "who_any": {
+       "k": 5,
+       "n": 18,
+       "rate": 0.278,
+       "ci95": [
+        0.125,
+        0.509
+       ]
+      },
+      "when_exact": {
+       "k": 3,
+       "n": 18,
+       "rate": 0.167,
+       "ci95": [
+        0.058,
+        0.392
+       ]
+      },
+      "when_pm1": {
+       "k": 7,
+       "n": 18,
+       "rate": 0.389,
+       "ci95": [
+        0.203,
+        0.614
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "last_step": {
+      "who_earliest": {
+       "k": 0,
+       "n": 18,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.176
+       ]
+      },
+      "who_any": {
+       "k": 16,
+       "n": 18,
+       "rate": 0.889,
+       "ci95": [
+        0.672,
+        0.969
+       ]
+      },
+      "when_exact": {
+       "k": 0,
+       "n": 18,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.176
+       ]
+      },
+      "when_pm1": {
+       "k": 0,
+       "n": 18,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.176
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "always_none": {
+      "when_exact": {
+       "k": 0,
+       "n": 18,
+       "rate": 0.0,
+       "ci95": [
+        0.0,
+        0.176
+       ]
+      },
+      "agent_auroc": {
+       "mean": null,
+       "n_traces": 0
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "structure_prior": {
+      "who_earliest": {
+       "k": 5,
+       "n": 18,
+       "rate": 0.278,
+       "ci95": [
+        0.125,
+        0.509
+       ]
+      },
+      "who_any": {
+       "k": 6,
+       "n": 18,
+       "rate": 0.333,
+       "ci95": [
+        0.163,
+        0.563
+       ]
+      },
+      "when_exact": {
+       "k": 4,
+       "n": 18,
+       "rate": 0.222,
+       "ci95": [
+        0.09,
+        0.452
+       ]
+      },
+      "when_pm1": {
+       "k": 8,
+       "n": 18,
+       "rate": 0.444,
+       "ci95": [
+        0.246,
+        0.663
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.437,
+       "n_traces": 14
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "mafa_primary": {
+      "who_earliest": {
+       "k": 8,
+       "n": 18,
+       "rate": 0.444,
+       "ci95": [
+        0.246,
+        0.663
+       ]
+      },
+      "who_any": {
+       "k": 11,
+       "n": 18,
+       "rate": 0.611,
+       "ci95": [
+        0.386,
+        0.797
+       ]
+      },
+      "when_exact": {
+       "k": 5,
+       "n": 18,
+       "rate": 0.278,
+       "ci95": [
+        0.125,
+        0.509
+       ]
+      },
+      "when_pm1": {
+       "k": 10,
+       "n": 16,
+       "rate": 0.625,
+       "ci95": [
+        0.386,
+        0.815
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.533,
+       "n_traces": 14
+      },
+      "code_micro_f1": 0.727,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 1.0,
+       "2.2.2": 0.8,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 1.0,
+       "FM-1.2": 1.0,
+       "FM-1.3": 0.0,
+       "FM-1.4": 0.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": null,
+       "FM-2.5": null,
+       "FM-2.6": 0.5,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.5
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     },
+     "mafa_secondary": {
+      "who_earliest": {
+       "k": 9,
+       "n": 18,
+       "rate": 0.5,
+       "ci95": [
+        0.29,
+        0.71
+       ]
+      },
+      "who_any": {
+       "k": 12,
+       "n": 18,
+       "rate": 0.667,
+       "ci95": [
+        0.437,
+        0.837
+       ]
+      },
+      "when_exact": {
+       "k": 6,
+       "n": 18,
+       "rate": 0.333,
+       "ci95": [
+        0.163,
+        0.563
+       ]
+      },
+      "when_pm1": {
+       "k": 7,
+       "n": 11,
+       "rate": 0.636,
+       "ci95": [
+        0.354,
+        0.848
+       ]
+      },
+      "agent_auroc": {
+       "mean": 0.682,
+       "n_traces": 14
+      },
+      "code_micro_f1": 0.41,
+      "code_f1": {
+       "1.1.1": 1.0,
+       "1.2.1": 0.0,
+       "2.1.1": null,
+       "2.1.2": 0.0,
+       "2.2.1": 0.0,
+       "2.2.2": 0.0,
+       "3.1.1": null,
+       "3.1.2": 0.0,
+       "3.1.3": null,
+       "3.2.1": null,
+       "FM-1.1": 0.0,
+       "FM-1.2": 0.5,
+       "FM-1.3": null,
+       "FM-1.4": 1.0,
+       "FM-1.5": null,
+       "FM-2.1": null,
+       "FM-2.2": null,
+       "FM-2.3": null,
+       "FM-2.4": 0.0,
+       "FM-2.5": 0.0,
+       "FM-2.6": 0.667,
+       "FM-3.1": null,
+       "FM-3.2": 0.0,
+       "FM-3.3": 0.8
+      },
+      "labels": 22,
+      "missing_predictions": 0
+     }
+    }
+   }
+  }
+ }
+}

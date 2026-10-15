@@ -31,7 +31,7 @@ import sys
 
 _R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, _R)
-LAYERS = ["defect", "responsibility", "responsibility_any"]
+LAYERS = ["defect", "defect_any", "responsibility", "responsibility_any"]
 METRICS = ["who_earliest", "who_any", "when_exact", "when_pm1"]
 GUARD_LOG = os.path.join(_R, "eval_mafa", "test_runs.jsonl")
 
@@ -45,6 +45,25 @@ def load_scorer(mafa_root):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
+
+
+def defect_any(labels, items):
+    """LOCAL view (not in MAFA's scorer yet): defect layer whose earliest step also counts the `_uncoded` row, i.e.
+    taxonomy-free like responsibility_any. In MAFA's defect layer a trace whose only defect has no matching code
+    gets earliest_step = "none", so always predicting "no defect" is credited on traces that DO have a defect."""
+    spk = {it["id"]: {s["id"]: s["agent"] for s in it["steps"]} for it in items}
+    sidx = lambda x: int(x[1:]) if isinstance(x, str) and x[1:].isdigit() else None  # noqa: E731
+    out = []
+    for L in labels:
+        L = dict(L)
+        steps = [v.get("step") for v in list((L.get("codes") or {}).values()) + [L.get("uncoded") or {}]
+                 if (v or {}).get("decision") == "present" and sidx(v.get("step")) is not None]
+        if steps:
+            es = min(steps, key=sidx)
+            L["earliest_step"], L["earliest_step_agent"] = es, spk[L["trace_id"]].get(es)
+        L["label_layer"] = "defect_any"
+        out.append(L)
+    return out
 
 
 def src_of(L):
@@ -125,7 +144,7 @@ def compact(r, layer="defect"):
     out = {k: (f"{r[k]['k']}/{r[k]['n']}" if r[k]["n"] else "-") for k in METRICS if k in r}
     out["agent_auroc"] = r["agent_auroc"]["mean"]
     out["auroc_n"] = r["agent_auroc"]["n_traces"]
-    if layer == "defect" and r.get("code_micro_f1") is not None:   # codes are defect-layer judgments
+    if layer.startswith("defect") and r.get("code_micro_f1") is not None:   # codes are defect-layer judgments
         out["code_micro_f1"] = r["code_micro_f1"]
     return out
 
@@ -180,7 +199,7 @@ def main():
     report = {"subset": a.subset, "source": a.source, "labels": lp, "labels_sha256": sha256(lp),
               "split_sha256": split["sha256"], "n_label_rows": len(labels), "layers": {}}
     for layer in LAYERS:
-        Ls = E.apply_layer(labels, layer)
+        Ls = defect_any(labels, items) if layer == "defect_any" else E.apply_layer(labels, layer)
         report["layers"][layer] = {}
         for g, f in groups.items():
             sub = [L for L in Ls if f(L)]
@@ -195,7 +214,7 @@ def main():
     for layer, gs in report["layers"].items():
         for g, blk in gs.items():
             if g not in ("all", "no_leak") and not g.startswith("fw="):
-                if not (layer == "defect" and g.startswith("split=")):
+                if not (layer.startswith("defect") and g.startswith("split=")):
                     continue
             lines += [f"## {layer} · {g} (rows={blk['n_rows']})", "",
                       "| method | " + " | ".join(METRICS) + " | agent_auroc (n) | code_micro_f1 |", "|---" * (len(METRICS) + 3) + "|"]
