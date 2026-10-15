@@ -1,0 +1,67 @@
+{
+ "label_view": "orig",
+ "label_layer": "responsibility",
+ "subset": "dev",
+ "split_sha256": "916fee301529defd3b14816fcf6186bdd9933882704e5e9029c2d244c29c173d",
+ "method": {
+  "who_earliest": {
+   "k": 3,
+   "n": 6,
+   "rate": 0.5,
+   "ci95": [
+    0.188,
+    0.812
+   ]
+  },
+  "who_any": {
+   "k": 3,
+   "n": 6,
+   "rate": 0.5,
+   "ci95": [
+    0.188,
+    0.812
+   ]
+  },
+  "when_exact": {
+   "k": 2,
+   "n": 6,
+   "rate": 0.333,
+   "ci95": [
+    0.097,
+    0.7
+   ]
+  },
+  "when_pm1": {
+   "k": 2,
+   "n": 6,
+   "rate": 0.333,
+   "ci95": [
+    0.097,
+    0.7
+   ]
+  },
+  "agent_auroc": {
+   "mean": 0.529,
+   "n_traces": 6
+  },
+  "code_micro_f1": 0.083,
+  "code_f1": {
+   "FM-1.1": 1.0,
+   "FM-1.2": 0.0,
+   "FM-1.3": 0.0,
+   "FM-1.4": 0.0,
+   "FM-1.5": null,
+   "FM-2.1": 0.0,
+   "FM-2.2": 0.0,
+   "FM-2.3": 0.0,
+   "FM-2.4": null,
+   "FM-2.5": 0.0,
+   "FM-2.6": 0.0,
+   "FM-3.1": null,
+   "FM-3.2": 0.0,
+   "FM-3.3": 0.0
+  },
+  "labels": 10,
+  "missing_predictions": 0
+ }
+}

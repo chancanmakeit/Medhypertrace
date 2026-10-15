@@ -62,12 +62,14 @@ def main():
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--mafa_root", default="/home/claude/mafa-human-ai-annotation")
     ap.add_argument("--out_dir", default="eval_mafa/out")
+    ap.add_argument("--traces", default="results/human_like_eval/traces_v1.jsonl")
+    ap.add_argument("--labels", default="results/human_like_eval/labels_v1.jsonl")
     a = ap.parse_args()
     os.makedirs(a.out_dir, exist_ok=True)
 
-    rows = load_eval(a.mafa_root)
+    rows = load_eval(a.mafa_root, a.traces)
     labels = [json.loads(x) for x in open(
-        os.path.join(a.mafa_root, "results/human_like_eval/labels_v1.jsonl"), encoding="utf-8")]
+        os.path.join(a.mafa_root, a.labels), encoding="utf-8")]
     tax_of = {}
     for L in labels:
         tax_of.setdefault(L["trace_id"], []).append(L["taxonomy"])

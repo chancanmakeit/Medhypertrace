@@ -27,7 +27,7 @@
 - 接入人类标注时:只能用 `anchors.jsonl`(`status=done`、present/absent);`reviewer.kind=llm` 的 human-like 标签**绝不能**当真值;MAST 包的框架固有码(MDAgents 的 FM-1.1/1.2、ClinicalAgent 的 FM-1.2)不能当「故障→答错」监督信号。轨迹 ID 必须用整串做键。
 
 ### 0.25 MAFA 联合评估(2026-10-09 第 5 轮)
-- MAFA 仓库 `chancanmakeit/MAFA-human-ai-annotation` 在本会话**只读**,克隆在 `/home/claude/mafa-human-ai-annotation`,锁定 `cc1606f`(第 5 轮评估时为 `908bc74`);AEGIS 原始记录需在其根目录跑 `bash scripts/fetch_data.sh`(约 1.9G,很快)。新会话需重新 add_repo(只读)+ 克隆 + checkout。
+- MAFA 仓库 `chancanmakeit/MAFA-human-ai-annotation` 在本会话**只读**,克隆在 `/home/claude/mafa-human-ai-annotation`,锁定 `3d80c11`(第 5 轮评估时为 `908bc74`);AEGIS 原始记录需在其根目录跑 `bash scripts/fetch_data.sh`(约 1.9G,很快)。新会话需重新 add_repo(只读)+ 克隆 + checkout。
 - 评估代码在 `eval_mafa/`,产物在 `eval_mafa/out/`,详见 `eval_mafa/out/error_analysis_notes.md`。结论:可行性成立,**方法在 human-like-v1 上四项指标都没超过「猜第一步」基线**,智能体排序 AUROC 0.41。
 - MedHyperTrace 没有保存权重;评估时按默认超参在合成训练集上现训(每框架 ~1–2 分钟 CPU)。
 - **发现:** 合成测试集上 step head 对「猜第一步」在 mdagents 只高 1 个点(0.693 对 0.680),主表 Step-Acc 需加此对照。
@@ -58,6 +58,12 @@
 - response_corruption(RC)的故障 = 固定模板句;prompt_injection(PI)由模型在改写的提示下生成,较接近真实故障,但 PI 步骤常为空(llm_debate 33.8%、ca5 11.8%)。
 - PI 子集上 MHT 比最强平凡基线(猜第一步 / 结构先验 / 模板 / 空输出)高:dylan +13、llm_debate +11(非空步骤)、clinical_agent +10(边缘);mdagents 无增益;ca5 不可信(整体上单靠模板检测器就有 0.90)。
 - 主表改为按策略分开 + 4 条平凡基线。MAFA 建议:花钱重新生成注入数据前,先在 PI 子集上重跑全部基线(Who&When/med-SFT 需 GPU/API)。
+
+### 0.31 预注册 dev/test 划分(第 11 轮,MAFA `3d80c11`)— 硬约束
+- `review_packages/eval_split_v1.json`:dev 120 / test 240(按轨迹,框架 × 答对/答错分层)。成员哈希 `916fee301529…`(文件本身 sha256 不同,是正常的)。**只在 dev 上开发、调参;test 只在最后评一次。** 评分加 `--subset dev`。
+- v2 演练集 `results/human_like_eval_v2/`(19 条,全在 dev)已跑通三层评分,产物在 `eval_mafa/out_v2/`。
+- **泄漏:** 答对轨迹与合成训练集同题(test 95/120),部分前缀步骤完全相同;答错轨迹基本干净(test 4/120)。结果按 `eval_mafa/out_v2/leakage_package.json` 的逐条标记分开报告。
+- 方法缺口:无法输出「无故障」,人类版 180 条答对轨迹需要轨迹级判断。
 
 ### 0.3 下一步
 见 §七;另加:接入标注数据(接口 v1)时先写一个 loader,把 `anchors.jsonl` 对齐到本项目的轨迹对象,并在失效边界上实测(ID 重复、框架固有码)。

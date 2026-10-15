@@ -92,15 +92,15 @@ def build(trace: dict, mafa_root: str):
     return traj, {"turn2sid": turn2sid, "inst2uid": inst2uid, "align": align}
 
 
-def load_eval(mafa_root: str):
-    path = os.path.join(mafa_root, "results/human_like_eval/traces_v1.jsonl")
+def load_eval(mafa_root: str, traces_rel: str = "results/human_like_eval/traces_v1.jsonl"):
+    path = os.path.join(mafa_root, traces_rel)
     traces = [json.loads(l) for l in open(path, encoding="utf-8")]
     return [(t, *build(t, mafa_root)) for t in traces]
 
 
 if __name__ == "__main__":
     root = sys.argv[1] if len(sys.argv) > 1 else "/home/claude/mafa-human-ai-annotation"
-    rows = load_eval(root)
+    rows = load_eval(root, *(sys.argv[2:3] or []))
     n_ok = 0
     for t, traj, m in rows:
         a = m["align"]

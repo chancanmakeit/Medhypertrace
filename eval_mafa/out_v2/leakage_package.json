@@ -1,0 +1,4281 @@
+{
+ "summary": {
+  "dev/faulty:n": 60,
+  "dev/faulty:trace": 0,
+  "dev/faulty:step": 6,
+  "dev/faulty:question_any": 8,
+  "dev/faulty:same_fw_train": 5,
+  "test/faulty:n": 120,
+  "test/faulty:trace": 0,
+  "test/faulty:step": 8,
+  "test/faulty:question_any": 8,
+  "test/faulty:same_fw_train": 4,
+  "test/clean:n": 120,
+  "test/clean:trace": 0,
+  "test/clean:step": 59,
+  "test/clean:question_any": 120,
+  "test/clean:same_fw_train": 95,
+  "dev/clean:n": 60,
+  "dev/clean:trace": 0,
+  "dev/clean:step": 34,
+  "dev/clean:question_any": 60,
+  "dev/clean:same_fw_train": 36
+ },
+ "rows": [
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00018#MM-51",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00040#MM-99",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00005#NCT00001830",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00003#mmlu_pro_health_b342a27b",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "llm_debate/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00037#mmlu_pro_health_e09cdd6d",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00009#MM-21",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00010#NCT00002623",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00026#NCT00003251",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00010#mmlu_pro_health_eda2b16b",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00015#mmlu_pro_health_5badfa1f",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test",
+    "llm_debate/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00032#mmlu_pro_health_7a49adc4",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00016#NCT00002967",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00034#NCT00003640",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00033#mmlu_pro_health_e9093f2e",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00002#MM-7",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00017#MM-47",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00030#MM-76",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00031#MM-85",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00033#NCT00047008",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test"
+   ],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00011#NCT00002570",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00033#NCT00003643",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00043#NCT00004039",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00012#mmlu_pro_health_6718f611",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "llm_debate/train"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00001#NCT00034125",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00004#NCT00033683",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00037#NCT00048633",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test",
+    "clinical_agent5/train"
+   ],
+   "question_match": [],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00001#NCT00001132",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00014#NCT00002772",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00038#NCT00003728",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00042#NCT00003941",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00006#mmlu_pro_health_68ab0723",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "llm_debate/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00025#mmlu_pro_health_228041a0",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00042#mmlu_pro_health_f445e4ef",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00005#NCT00031824",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00042#NCT00049517",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00003#NCT00000811",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00008#NCT00002525",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00030#NCT00003592",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00044#NCT00003958",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00008#mmlu_pro_health_822dab4a",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00024#mmlu_pro_health_828d13eb",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00012#MM-37",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00028#MM-72",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00007#NCT00038194",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00023#NCT00003215",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00028#NCT00003298",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00032#NCT00003644",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00039#NCT00003843",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00018#mmlu_pro_health_d9a2dddc",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00020#mmlu_pro_health_15255c7e",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00021#mmlu_pro_health_9ac19f1f",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "llm_debate/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00029#mmlu_pro_health_75d77ba5",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "llm_debate/train"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00035#mmlu_pro_health_a659db27",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00039#mmlu_pro_health_ace095ad",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00042#MM-110",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00029#NCT00043134",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test"
+   ],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00019#NCT00002717",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00022#NCT00003212",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00041#NCT00003912",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00000#mmlu_pro_health_5e4b9947",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00026#mmlu_pro_health_f825cf48",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00036#MM-95",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00013#NCT00039546",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00014#NCT00040326",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00016#NCT00039039",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00030#NCT00045162",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00000#NCT00000577",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00004#NCT00000914",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00006#NCT00000173",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00007#NCT00001723",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00015#NCT00002597",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00018#NCT00003152",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00024#NCT00003235",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00029#NCT00003624",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00031#NCT00003605",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00037#NCT00003803",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00001#mmlu_pro_health_2cde435c",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00005#mmlu_pro_health_61625dab",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00013#mmlu_pro_health_83a800b4",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "llm_debate/train"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00019#mmlu_pro_health_00c09cf0",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "llm_debate/train"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00027#mmlu_pro_health_af679dcd",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00044#mmlu_pro_health_9c755956",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00019#MM-52",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00027#MM-73",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00029#MM-74",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00034#MM-89",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00038#MM-97",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00037#MM-96",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00004#MM-11",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00042#MM-83",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00044#MM-86",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00028#MM-50",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00039#NCT00003219",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00029#NCT00003041",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00027#NCT00036400",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00000#NCT00000172",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00007#NCT00001789",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00013#NCT00002633",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00023#NCT00002895",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00031#NCT00003062",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00043#NCT00003293",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00005#mmlu_pro_health_125d94aa",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00030#NCT00003052",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00033#mmlu_pro_health_66f1a3b7",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00005#NCT00001596",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00012#NCT00002556",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00001#mmlu_pro_health_03ae1784",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00006#mmlu_pro_health_1699d9e5",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00010#mmlu_pro_health_1f468a60",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00012#mmlu_pro_health_2359d062",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00020#mmlu_pro_health_43af2abe",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test",
+    "llm_debate/train"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00043#mmlu_pro_health_921787cc",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test",
+    "llm_debate/train"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00000#MM-1",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00002#MM-13",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/test"
+   ],
+   "question_match": [
+    "mdagents/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00029#MM-53",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00004#NCT00032084",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/train"
+   ],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00021#NCT00034944",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test",
+    "clinical_agent5/train"
+   ],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00037#NCT00038298",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00008#NCT00001934",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00014#NCT00002635",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00020#NCT00002874",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00025#NCT00002922",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00028#NCT00003005",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00032#NCT00003118",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00036#NCT00003194",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00044#NCT00003317",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00019#mmlu_pro_health_4182116c",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test",
+    "llm_debate/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00040#mmlu_pro_health_87404b54",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00013#MM-29",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00020#MM-39",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/test"
+   ],
+   "question_match": [
+    "mdagents/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00002#NCT00031798",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00033#NCT00036868",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test"
+   ],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00002#NCT00000390",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00009#NCT00002523",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00024#NCT00002911",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00033#NCT00003120",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00037#NCT00003205",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00010#MM-25",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/test"
+   ],
+   "question_match": [
+    "mdagents/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00017#MM-32",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00003#NCT00000419",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00013#mmlu_pro_health_2a19c5e3",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00015#mmlu_pro_health_322d099a",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00023#mmlu_pro_health_4a164137",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test",
+    "llm_debate/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00027#mmlu_pro_health_535a4846",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00030#mmlu_pro_health_5badfa1f",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test",
+    "llm_debate/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00034#mmlu_pro_health_72b8ddfe",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/test"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00042#mmlu_pro_health_8cfacb78",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test",
+    "llm_debate/train"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00008#MM-23",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00000#NCT00031551",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test",
+    "clinical_agent5/train"
+   ],
+   "question_match": [
+    "clinical_agent5/test"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00003#NCT00031863",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00006#NCT00033163",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00007#NCT00033254",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00012#NCT00034203",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test",
+    "clinical_agent5/train"
+   ],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00016#NCT00034502",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00026#NCT00035815",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00032#NCT00036842",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/train"
+   ],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00001#NCT00000174",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00004#NCT00000614",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00011#NCT00002549",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00026#NCT00002972",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00038#NCT00003216",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00002#mmlu_pro_health_06f084ea",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test",
+    "llm_debate/train"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00003#mmlu_pro_health_0a9ca8f8",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/test"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00032#mmlu_pro_health_63b2931c",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00037#mmlu_pro_health_7d54d0ed",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00004#MM-19",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/test"
+   ],
+   "question_match": [
+    "mdagents/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00018#MM-34",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/test"
+   ],
+   "question_match": [
+    "mdagents/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00024#MM-43",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00010#NCT00002545",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00018#NCT00002819",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00021#NCT00002878",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00022#NCT00002882",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00034#NCT00003140",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00041#NCT00003256",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00039#mmlu_pro_health_86ebd2f7",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00003#MM-18",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/test"
+   ],
+   "question_match": [
+    "mdagents/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00033#MM-65",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00040#MM-78",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00020#NCT00003215",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00022#mmlu_pro_health_79948375",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00025#NCT00003389",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00036#NCT00003695",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00007#mmlu_pro_health_3df3ddda",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "llm_debate/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00016#mmlu_pro_health_5fffa8ac",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/test"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00015#NCT00041067",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00036#NCT00047541",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00009#NCT00002593",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00013#NCT00002868",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00021#NCT00003204",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00035#NCT00003679",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00011#mmlu_pro_health_a4570148",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "llm_debate/train"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00030#mmlu_pro_health_e1c5afe6",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "llm_debate/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00036#mmlu_pro_health_b3854a44",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00003#MM-14",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00006#MM-15",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00011#MM-33",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00013#MM-38",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00014#MM-41",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00039#MM-101",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00044#MM-114",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00042#NCT00003276",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00015#NCT00002646",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00016#NCT00002684",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00019#NCT00002869",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00001#NCT00031590",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00009#NCT00033371",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00034#NCT00037128",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/train"
+   ],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00017#NCT00002764",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00027#NCT00002976",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00040#NCT00003223",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00022#mmlu_pro_health_48f73af5",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00035#mmlu_pro_health_753c275e",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00014#MM-3",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00015#MM-30",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00019#MM-35",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00034#MM-66",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00038#MM-75",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00041#MM-81",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00000#NCT00035971",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00002#NCT00032890",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00003#NCT00031629",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00006#NCT00034788",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00008#NCT00038142",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test"
+   ],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00009#NCT00033553",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00010#NCT00031044",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00011#NCT00038948",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/train"
+   ],
+   "question_match": [],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00012#NCT00038532",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00017#NCT00042887",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00018#NCT00041106",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00019#NCT00041938",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00020#NCT00042562",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00021#NCT00038766",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00022#NCT00043082",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/train"
+   ],
+   "question_match": [],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00023#NCT00041119",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00024#NCT00044044",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00025#NCT00041574",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00026#NCT00041327",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/train"
+   ],
+   "question_match": [],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00027#NCT00043004",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test"
+   ],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00028#NCT00043862",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00031#NCT00047112",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test"
+   ],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00032#NCT00045721",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00034#NCT00046462",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00035#NCT00045604",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/train"
+   ],
+   "question_match": [],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00038#NCT00044993",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test"
+   ],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00039#NCT00049335",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/train"
+   ],
+   "question_match": [],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00040#NCT00049179",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00041#NCT00049179",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00043#NCT00049660",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test"
+   ],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::clinical_agent5_fm_clean_none_none-allfalse#00044#NCT00049452",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00002#NCT00000897",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00012#NCT00002790",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00017#NCT00003034",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00027#NCT00003457",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent::clinical_agent_fm_clean_none_none-allfalse#00040#NCT00003782",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00002#mmlu_pro_health_7bb225d9",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00004#mmlu_pro_health_d6377a3b",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00009#mmlu_pro_health_f4ac0e0c",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00014#mmlu_pro_health_40d2f70f",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/test",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00017#mmlu_pro_health_9ac19f1f",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "llm_debate/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00023#mmlu_pro_health_8fc2a29b",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00028#mmlu_pro_health_191717a1",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00031#mmlu_pro_health_f7d34d74",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00034#mmlu_pro_health_63ac82a6",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00038#mmlu_pro_health_1ca76a62",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00040#mmlu_pro_health_e4c9e287",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00041#mmlu_pro_health_8e06756b",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::dylan_fm_clean_none_none-allfalse#00043#mmlu_pro_health_f9f2dd75",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00000#MM-6",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00001#MM-9",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00005#MM-10",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00007#MM-16",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00008#MM-17",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00010#MM-28",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00015#MM-46",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00016#MM-45",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00020#MM-55",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00021#MM-56",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00022#MM-58",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00023#MM-61",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00024#MM-64",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00025#MM-69",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00026#MM-70",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00032#MM-82",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00033#MM-91",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00035#MM-92",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00041#MM-103",
+   "eval_set": "dev",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::mdagents_fm_clean_none_none-allfalse#00043#MM-112",
+   "eval_set": "test",
+   "split": "faulty",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00005#NCT00032643",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00008#NCT00033306",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00010#NCT00033384",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00011#NCT00033735",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00013#NCT00034268",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00014#NCT00034333",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00015#NCT00034476",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/train"
+   ],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00017#NCT00034697",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00018#NCT00034710",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00019#NCT00034749",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00020#NCT00034827",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00022#NCT00035048",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00023#NCT00035360",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00024#NCT00035529",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00025#NCT00035802",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00028#NCT00036621",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/train"
+   ],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00029#NCT00036634",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test"
+   ],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00030#NCT00036660",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00031#NCT00036764",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00035#NCT00037557",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test"
+   ],
+   "question_match": [
+    "clinical_agent5/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00036#NCT00038051",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/train"
+   ],
+   "question_match": [
+    "clinical_agent5/test"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00038#NCT00038402",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/train"
+   ],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00039#NCT00038480",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/test"
+   ],
+   "question_match": [
+    "clinical_agent5/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00040#NCT00038571",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00041#NCT00038610",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00042#NCT00038701",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00043#NCT00038766",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [
+    "clinical_agent5/train"
+   ],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent5::trial_success-200-500-clinical_agent5_clean-paired_normal#00044#NCT00038792",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent5",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent5/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00006#NCT00001781",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "clinical_agent::trial_success-200-clinical_agent_clean-paired_normal#00035#NCT00003172",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "clinical_agent",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "clinical_agent/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00000#mmlu_pro_health_0295bfa6",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00004#mmlu_pro_health_0ac8dace",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test",
+    "llm_debate/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00007#mmlu_pro_health_186381db",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00008#mmlu_pro_health_1980ab1c",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test",
+    "llm_debate/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00009#mmlu_pro_health_1ed8b54e",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/test",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00011#mmlu_pro_health_22f57623",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test",
+    "llm_debate/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00014#mmlu_pro_health_30789f59",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00016#mmlu_pro_health_33ce3654",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test",
+    "llm_debate/train"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00017#mmlu_pro_health_3e5d0a89",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00018#mmlu_pro_health_4038a878",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00021#mmlu_pro_health_48b24888",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00024#mmlu_pro_health_4b44bfc8",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00025#mmlu_pro_health_4e7d8774",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00026#mmlu_pro_health_52673809",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00028#mmlu_pro_health_5575c4b7",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/test"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00029#mmlu_pro_health_5ac36295",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00031#mmlu_pro_health_60bc5ae1",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00036#mmlu_pro_health_7b47861e",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/test"
+   ],
+   "question_match": [
+    "dylan/test",
+    "llm_debate/train"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00038#mmlu_pro_health_85b10be2",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00041#mmlu_pro_health_875a11d9",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/test"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "dylan::mmlu_pro_health-100-dylan_clean-paired_normal#00044#mmlu_pro_health_9302d921",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "dylan",
+   "trace_match": [],
+   "step_match": [
+    "dylan/train"
+   ],
+   "question_match": [
+    "dylan/train",
+    "llm_debate/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00001#MM-12",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "mdagents/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00005#MM-2",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00006#MM-20",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00007#MM-22",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00009#MM-24",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00011#MM-26",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/test"
+   ],
+   "question_match": [
+    "mdagents/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00012#MM-27",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00016#MM-31",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00021#MM-4",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/test"
+   ],
+   "question_match": [
+    "mdagents/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00022#MM-40",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "mdagents/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00023#MM-42",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/test"
+   ],
+   "question_match": [
+    "mdagents/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00025#MM-48",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00026#MM-49",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00027#MM-5",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00030#MM-57",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00031#MM-59",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00032#MM-62",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00035#MM-67",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/test"
+   ],
+   "question_match": [
+    "mdagents/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00036#MM-68",
+   "eval_set": "dev",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/test"
+   ],
+   "question_match": [
+    "mdagents/test"
+   ],
+   "same_framework_train": false
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00037#MM-71",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [
+    "mdagents/train"
+   ],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00039#MM-77",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  },
+  {
+   "trace_id": "mdagents::medxpertqa-mm-100-mdagents_clean-paired_normal#00043#MM-84",
+   "eval_set": "test",
+   "split": "clean",
+   "framework": "mdagents",
+   "trace_match": [],
+   "step_match": [],
+   "question_match": [
+    "mdagents/train"
+   ],
+   "same_framework_train": true
+  }
+ ]
+}
