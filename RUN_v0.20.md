@@ -1,4 +1,4 @@
-# RUN_v0.19 — 每轮讨论记录
+# RUN_v0.20 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -242,3 +242,16 @@
 **核对:** 官方回退现在与我们本地的补齐逐行一致,智能体不再丢。但 v1 的 defect_any 与 defect 并非完全一致:MedAgentAudit 的 `MM-47`、`MM-61` 标注者填的最早步是 s01(招募者),s01 上没有任何 MAA 码,回退按码推到 s02/Expert-0。MHT 的数字碰巧不变(两条它都猜错),但猜第一步在 MAA 从 6/7、5/7 变成 4/7、3/7。MAFA 引的 9/20、8/20 是两套体系合并的数字。
 **判断:** v1 是旧格式(没有无码缺陷一栏),标注者直接填的 s01 本身就是一个无码缺陷(第 6 轮已发现 MM-61 的这个情况)→ 对旧格式行,defect_any 应取标注者原填的最早步,即「与 defect 一致」才是正确语义,当前实现没有做到。
 **做了:** `evaluate.py`:缺 `earliest_step_any` 且没有 `uncoded` 字段(label_schema 1)的行,defect_any 取标注者原填的最早步;有 `uncoded` 字段的行照旧按 codes+uncoded 推。v1 两套体系的 defect_any 现在与 defect 完全一致(MAST MHT 6/13、5/13,猜第一步 8/13、6/13;MAA MHT 3/7、3/7,猜第一步 6/7、5/7)。MAFA 本地副本切到 `241f6af`。
+
+## 第 20 轮 · 2026-10-19 03:41 · 用户新想法:把 MAS 轨迹建成文本属性图 / 超图,走"(超)图大模型"路线做零样本故障归因;先精读 118 篇图大模型调研文档
+
+**用户要求:** 医学 MAS 的 JSON 轨迹本质是结构化文本 → 可建成文本属性图或超图 → 走 graph+LLM / hypergraph+LLM 路线,训一个既保留图结构、又能跨 MAS 框架零样本(最多轻量 adapter)的(超)图大模型,与"训 LLM 读轨迹推理"的现有路线区分开。完善 idea 之前,先用 Sonnet 子 agent 精读 `private-documents/muse-ai/graph大模型118篇全文解读.md`。参考轨迹:TriageAgent `results/showcase/trajectory_Test-1_case2.json`。
+**做了:** 文档按论文边界切成 6 段,6 个 Sonnet 子 agent 并行精读,每篇写"机制 + 关键数字 + 对 MAS 故障归因的可借鉴点 + 相关度";118 篇全覆盖。主 agent 抽查了若干关键数字与源文档一致,写综合笔记。看了 TriageAgent 样例轨迹的结构。
+**结论(详见 `docs/lit/graph_llm_118/00_synthesis.md`):**
+- 118 篇里没有一篇做 agent 轨迹上的故障定位,也没有在拓扑 / 角色差异大的图之间零样本迁移成功的先例。
+- 最可借的组件:跨 schema 零样本机制(ULTRA/HYPER 关系图 + 位置交互、REEF 关系文本→超网络、HiGPT 语言描述类型);任务统一(OFA、SCR、GFM-RAG 以失败答案为 query 一次前向打分);超图(HYPER、HypeBoy 超边填充自监督、HyperG 超边软 token);图-LLM 耦合(TEA-GLM、GOFA、GraphGPT 投影器);约束解码(PromptGFM)。
+- 主要反面证据:零样本绝对性能低且只在同类图间验证;换格式就崩(GraphWiz 0.2%–1.2%);多域负迁移;图结构未必有用(组织 GNN 打乱节点不变);Graph-as-Code 等"LLM 读结构化文本"是强廉价对手;过程奖励不能直接当逐步监督。
+- 与已有工作的关系:MedHyperTrace 本身就是异构超图 + HGNN,新颖性只能来自跨框架零样本、LLM 耦合、schema 无关的图构造。MHT 在 human-like v1 上未超过"猜第一步"、合成数据有模板伪迹——这两个瓶颈不会因换成图大模型自动消失。
+- TriageAgent 轨迹格式(stages 字典 + discussion_rounds + consensus_detail + llm_call_log)与 AEGIS 消息序列格式完全不同,图构造须 schema 无关。
+**产物:** `docs/lit/graph_llm_118/00_synthesis.md`(综合)、`p1`–`p6`(逐篇摘要)。
+**未决 / 下一步:** ① 118 篇不含 MAS 故障归因文献,需另做新颖性检索(图 / 依赖图 + MAS 故障归因,2025–2026);② 与用户确定任务形式(query-conditioned 超图打分器 vs 图 token 进冻结 LLM);③ 低成本可行性检验:5 个合成框架上留一框架零样本,PI 子集评测,对比平凡基线和 LLM 文本化。
