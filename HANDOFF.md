@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-19(第 21 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-19(第 22 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -78,6 +78,12 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.36 主线:超图基础模型 HGFM(第 22 轮)— 用户军令状
+- 用户定:基于结构化 JSON 轨迹的文本属性超图,训一个**超图基础模型**;处理图特征、推理是附带能力。**不复现 AFANet 作前置检验**(AFANet 仍是论文基线)。
+- 设计草案:`docs/design/HGFM_design_v0.1.md`(新会话先读这个)。
+- 数据依据:`analysis/read_hyperedge_stats.py`——AEGIS 每步有 `input_messages`,"读集超边"可通用恢复;读≥3 个前序步的比例 dylan 62%、llm_debate 44%(46% 步骤缺输入)、ca5 24%、clinical_agent 20%、mdagents 17%。
+- 待用户决定:是否自然运行医学 MAS 框架补成功 + 失败轨迹语料(先试跑估成本)。
 
 ### 0.35 图方法 MAS 故障归因文献与新颖性定位(第 21 轮)
 - 用户文献仓库 `chancanmakeit/graph-based-mas-fault-attribution-papers`(可写,新会话需 add_repo push 权限):原有 3 篇 + 本轮新增 42 篇,分 `01_graph_based_attribution/` `02_attribution_landscape/` `03_graph_hypergraph_adjacent/`,各有 `INDEX.md`;`notes/positioning_hypergraph_llm.md` 是定位分析(本仓库 `docs/lit/graph_mas_attribution_positioning.md` 为同一份)。
