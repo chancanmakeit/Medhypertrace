@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-19(第 20 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-19(第 21 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -78,6 +78,12 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.35 图方法 MAS 故障归因文献与新颖性定位(第 21 轮)
+- 用户文献仓库 `chancanmakeit/graph-based-mas-fault-attribution-papers`(可写,新会话需 add_repo push 权限):原有 3 篇 + 本轮新增 42 篇,分 `01_graph_based_attribution/` `02_attribution_landscape/` `03_graph_hypergraph_adjacent/`,各有 `INDEX.md`;`notes/positioning_hypergraph_llm.md` 是定位分析(本仓库 `docs/lit/graph_mas_attribution_positioning.md` 为同一份)。
+- 用户定的新颖点:超图 + 图特征与 LLM 推理结合。核对后:HPFA(COLM 2026)已用超图做归因(单智能体、未编码),AFANet 已用 GCN 做归因并做了 AEGIS-Bench→Who&When OOD;"被编码的 MAS 超图 + LLM 融合"仍空。
+- 首要基线:AFANet(同 AEGIS-Bench)、CHIEF/AIG(免训练)、GraphTracer、MHT、猜第一步。
+- MedHyperTrace 是本项目自己的方法(用户确认),新方法是对它的改进或替代。
 
 ### 0.34 新方向:(超)图大模型做跨框架零样本故障归因(第 20 轮,2026-10-19)— 讨论中
 - 用户提出:把 MAS 的 JSON 轨迹建成文本属性图 / 超图,训 graph+LLM / hypergraph+LLM 模型,跨 MAS 框架零样本(最多 adapter 适配),区别于"训 LLM 读轨迹推理"。

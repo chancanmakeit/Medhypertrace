@@ -1,4 +1,4 @@
-# RUN_v0.20 — 每轮讨论记录
+# RUN_v0.21 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -255,3 +255,16 @@
 - TriageAgent 轨迹格式(stages 字典 + discussion_rounds + consensus_detail + llm_call_log)与 AEGIS 消息序列格式完全不同,图构造须 schema 无关。
 **产物:** `docs/lit/graph_llm_118/00_synthesis.md`(综合)、`p1`–`p6`(逐篇摘要)。
 **未决 / 下一步:** ① 118 篇不含 MAS 故障归因文献,需另做新颖性检索(图 / 依赖图 + MAS 故障归因,2025–2026);② 与用户确定任务形式(query-conditioned 超图打分器 vs 图 token 进冻结 LLM);③ 低成本可行性检验:5 个合成框架上留一框架零样本,PI 子集评测,对比平凡基线和 LLM 文本化。
+
+## 第 21 轮 · 2026-10-19 06:36 · 用户澄清 + 图方法 MAS 故障归因文献检索
+
+**用户澄清:** ① MedHyperTrace 是本项目自己提出的方法,旧会话发现比不过平凡基线,所以要改进或提新 idea;② 已有基于图的 MAS 故障归因工作(用户文献仓库 `chancanmakeit/graph-based-mas-fault-attribution-papers`,原有 3 篇),新颖点定为"超图"和"图特征 + 大模型推理能力";③ 可用 Haiku 子 agent 检索整理并上传新文献到该仓库。
+**做了:** 主会话核读原有 3 篇(CHIEF、GraphTracer、AgentTrace);1 个 Haiku 子 agent 写这 3 篇的结构化笔记,3 个 Haiku 子 agent 分方向检索并下载 arXiv PDF(基于图的归因 / 非图方法与基准 / 图安全与超图相邻)。所有 PDF 按首页标题核对为真实论文,去重后新增 42 篇。主会话另读了 AFANet、HPFA、GRADE、Adaptive Influence Graphs 的摘要与方法、AFANet 的消融表。
+**结论(详见 `docs/lit/graph_mas_attribution_positioning.md`,与文献仓库 `notes/positioning_hypergraph_llm.md` 同一份):**
+- 现有图方法五类:LLM 建图 + LLM 推理(CHIEF、AIG、DCFA、EDGE、EMFA、FALAT、STRACE)/ 图造数据或奖励 + 微调 LLM(GraphTracer、HPFA)/ 规则图 + 启发式(AgentTrace、CDC-MAS)/ 训练 GNN(AFANet、AgentTether)/ 表示批评(GRADE)。
+- "首次把超图用于故障归因"已不成立:HPFA(COLM 2026)用依赖超图做归因,但在单智能体推理轨迹上、超图只用于成对比较与造数据,未被编码。仍空着:多智能体轨迹上被编码的超图表示。
+- "图特征 + LLM"确实空着:GNN 一侧(AFANet 明确主张不需要 LLM)与 LLM 一侧(图以文本/数据形式进入)之间没有融合工作。
+- 跨框架:AFANet 已做 AEGIS-Bench→Who&When OOD + 测试时适配,不能空口宣称。
+- 不利证据:AFANet 消融域内无边只降约 3 点(74.16→71.26)、只用时序边反而更高,OOD 上差距较大(37.93 对 32.18);GRADE 显示依赖层与度数匹配伪造不可区分;MHT 未超猜第一步;AgentTrace 位置特征权重 0.70。AFANet 正在 AEGIS-Bench 上训练,与我们合成数据同源。
+**产物:** 文献仓库 `f95fc76`(3 个目录 + 各 `INDEX.md` + `notes/` + `README.md`);本仓库 `docs/lit/graph_mas_attribution_positioning.md`。
+**未决 / 下一步:** ① 定卖点:超边要承载二元图表达不了的信息(投票/共识等多方事件,对应 FC4 共识动态故障),并设计"超边 / 星形展开 / 无边 / 度数匹配伪造"四方对照、按故障类型分层;② LLM 的分工:GNN 打分 + LLM 读 top-k 给出可验证理由(约束解码),补 AFANet 弱的 step 级和解释;③ 复现 AFANet 作为首要基线(同 AEGIS-Bench)。
