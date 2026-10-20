@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-20(第 24 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-20(第 25 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -78,6 +78,12 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.39 medical-aegis 新框架与旧数据剔除规则(第 25 轮)
+- 对方已集成:medagents_mc、consensus + 4 个辩论类基线(SleepEDF / WESAD)、mam(音频)、triage_agent;mock 样例在其 `docs/requests/samples/`,我方核对泄漏 0、漏记 0。
+- 家族分组(我方已确认,10 个):debate{llm_debate, consensus_debate/mad/reconcile/cmd}、modality_fusion{consensus}、mdagents、medagents、dylan、agentverse、clinical_agent{两版本}、cmas、mam、triage。锚点 MCQ 上目前 5 个家族,建议补 macnet > autogen > camel。
+- **旧数据剔除规则(硬约束):** clinical_agent / clinical_agent5 中"所有注入都是 direct_prepend"的轨迹(ca 151/402、ca5 614/1052)注入未生效(概率 bug),不作归因监督与评测,只作无标签自然失败轨迹。第 10 轮 clinical_agent PI 子集结论需剔除后重算。
+- 我方建议的对方顺序:导出器 + K 次重复 → medagents_mc + triage 真实小试点 → 迁移旧 wrapper → 补通用框架(待用户定)。
 
 ### 0.38 medical-aegis 进展与我方建议(第 24 轮)
 - 对方已回复 issue #1(两条评论)并集成 MedAgents(`medagents_mc`,mock 样例在其 `docs/requests/samples/`);用户定的后续:ConSensus(WESAD + SleepEDF,含 6 个 MAS 基线)→ MAM(Heartbeat / Sound-Dr,mimo-v2.6-flash 音频)。

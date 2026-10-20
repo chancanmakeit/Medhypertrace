@@ -1,4 +1,4 @@
-# RUN_v0.24 — 每轮讨论记录
+# RUN_v0.25 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -301,3 +301,11 @@
 **给对方的建议(issue #1 评论 6286759271;规格增补 v1.1 写入其 spec 文档末尾):** `agent_id`(P0 新增)、`structured` 升 P0(含 vote 与 Advisor↔投 NO 者对应)、`framework_family`(P0 新增,按家族留出;self-consistency / self-refine 作退化拓扑对照不计入缩放曲线)、`sources[].how`(P1)、`task.observations[]`(P1,ConSensus 15K 传感器特征与 MAM 音频共享观测,避免每步复制);MAM 每次音频调用记录文本感知输出,搜索记为 tool step;设固定 100 题医学 MCQ 锚点任务,缩放曲线在锚点上做,原生任务另报。目前能跑医学 MCQ 的家族 5 个,ConSensus 基线能否适配 MCQ 是到 8 个的关键。
 **设计草案同步:** 留一框架 → 留一家族 + 锚点任务;分歧伪标签定义在 `structured` 语义层;旧数据先过 `clean_inputs.py`。
 **仍待用户决定:** 注入频率 A / B(双方倾向 A);试点 backbone。
+
+## 第 25 轮 · 2026-10-20 08:44 · medical-aegis 三条新回复(第 6、7 轮,v9 第 3 轮);核对 + 回复
+
+**对方进展(其 `612374b` / `db880ea` / `a9791e9`,mock 回归,未调真实 API):** ConSensus + 4 个 MAS 基线(consensus、consensus_debate / mad / reconcile / cmd;SleepEDF 150、WESAD 90 样本;单 agent 基线未移植);MAM(heartbeat_b 主、heartbeat_a、sounddr;mimo-v2.6-flash 音频;搜索为 stub 工具步;跨样本记忆默认关;中性音频 id 防文件名泄漏标签);TriageAgent(`triage_agent`,216 条 ESI;RAG 记为工具步;读取集精确到字段来源);新增 `llm_meta`(含 reasoning);新 task_type `classification`、`classification_field`;修复 ClinicalAgent probability 注入(顶层 malicious_factory 原把 probability 静默回退为 mcq;修复前 RC 跨 0.5 阈值 0/14,修复后 11/14);注入目标可指定 phase/round。提出:辩论类 5 框架同一家族、Triage 单独成家族、ConSensus 基线不能跑 MCQ。
+**我方核对(全部 17 个 mock 文件):** 注入泄漏 0;漏记 sources 0(我方脚本在 MAM 报 3 处,核查为 mock 中同一专家多次发言近似文本导致的误报);`agent_id` / `structured` 仅 MAM 26/26、Triage 11/11 齐,medagents_mc 与 consensus 系列待导出器;`llm_meta` 仅 Triage mock 有。
+**旧 ClinicalAgent 数据影响(实测):** 全部注入为 direct_prepend 的轨迹 clinical_agent 151/402(38%)、clinical_agent5 614/1052(58%);这些轨迹最终预测全部在阈值错误一侧(ca 147/147、ca5 165/165,可解析者),因数据集只保留 is_valid_error——失败很可能是模型自身出错,注入标签指向未生效的 agent。**我方决定:这部分不作归因监督与评测,只作无标签自然失败轨迹用于自监督预训练。** 注:第 10 轮 clinical_agent PI 子集"+10(边缘)"的结论也受此影响,需在剔除后重算。
+**回复(issue #1 评论 6294946719):** 核对结果;旧数据影响与处理;确认 10 个家族分组(debate 粗家族 + 保留 `framework` 细 id 做敏感性分析;triage、modality_fusion 单列;ca 两版本同家族);锚点任务需再补 3 个通用框架,建议 macnet > autogen > camel,不建议 chatdev / mad;累积读取集保持现状,我方用 `agent_id` 自算增量;顺序建议:导出器 + K 次重复 → medagents_mc + triage_agent 真实小试点(估成本请用户确认)→ 迁移旧 wrapper(mdagents 在锚点上)并可重生成 ClinicalAgent → 补通用框架。
+**待用户决定:** 注入频率 A / B(新框架已按 A 实现);backbone;ClinicalAgent 是否重新生成;对方的工作顺序。
