@@ -6,19 +6,21 @@
 
 ## 0. 实测依据：通用"读集超边"可从调用输入中恢复
 
-AEGIS 合成数据每一步都存了该次 LLM 调用的 `input_messages`，TriageAgent 有 `llm_call_log`。用分片子串匹配（每条前序输出取 ≤5 个 60 字符片段，过半出现在本步输入中即算"读过"），统计非首步：
+AEGIS 合成数据每一步都存了该次 LLM 调用的 `input_messages`，TriageAgent 有 `llm_call_log`。用分片子串匹配（每条前序输出取 ≤5 个 60 字符片段，过半出现在本步输入中即算"读过"），统计 LLM 调用步（不含 `is_input=True` 的 User 提示条目），首个调用步除外：
 
 | 框架 | 中位步数 / agent 数 | 读了≥1 个前序步 | 读集大小 ≥3 | 缺 `input_messages` |
 |---|---|---|---|---|
 | dylan | 10 / 4 | 63% | 62% | 0% |
-| llm_debate | 13 / 5 | 58% | 44% | 46% |
+| llm_debate | 7 / 4 | 67% | 38% | 0% |
 | clinical_agent | 6 / 6 | 38% | 20% | 0% |
 | clinical_agent5 | 5 / 5 | 25% | 24% | 0% |
 | mdagents | 7 / 3 | 17% | 17% | 0% |
 
 （读集大小 = 读到的前序步数，不含写入步本身；脚本 `analysis/read_hyperedge_stats.py`。匹配是启发式的，改写过的引用会漏检。）
 
-**含义：** "一次调用同时读了哪几条"是天然的多元关系，在聚合 / 讨论类步骤里很普遍，且可以不针对框架手写规则地恢复——这是超图建模的数据依据，也是"schema 无关"的落脚点。缺口：llm_debate 有 46% 的步骤没存输入，需要按协议推断或日志补全。
+**含义：** "一次调用同时读了哪几条"是天然的多元关系，在聚合 / 讨论类步骤里很普遍，且可以不针对框架手写规则地恢复——这是超图建模的数据依据，也是"schema 无关"的落脚点。（第 23 轮更正：第 22 轮把 llm_debate 的 User 提示条目也算作步骤，误报"46% 缺输入"；agent 步实际缺失 0%。）
+
+**第 23 轮发现的泄漏：** prompt_injection 步骤记录的 `input_messages` 含注入指令原文（mdagents、clinical_agent、clinical_agent5 100%，dylan 99%，llm_debate 64%），且前三个框架未存注入前输入。HGFM 节点文本**不得**直接使用这些框架的 `input_messages`；读集超边可以只用它做来源匹配（匹配的是前序输出，不读注入文本），但须在新数据到位后改用干净输入或显式 `sources`。MedHyperTrace 现有代码只用 `input_messages` 建边、节点文本用 `content`，不受影响。
 
 ---
 
@@ -54,7 +56,7 @@ AEGIS 合成数据每一步都存了该次 LLM 调用的 `input_messages`，Tria
 
 - **现有：** 本项目 5 个合成框架（约 5.2k 条，全是注入后的失败轨迹，有模板伪迹）、Who&When、TRAIL、MAST 标注轨迹、AEGIS-Bench、GraphTraj-2.5K（若公开）、TriageAgent。
 - **缺口：** 现有数据几乎全是失败轨迹且以注入为主；没有成功轨迹就做不了结果预测和成对分歧这两个最有价值的自监督目标。
-- **建议补充：** 在医学 QA 上自然运行多个医学 MAS 框架（不注入，用便宜的 flash 模型），每题采样多次，同时得到成功与失败轨迹。**需先小规模试跑估算成本，再请用户确认。**
+- **由 medical-aegis 项目负责生成**（用户第 23 轮安排）。需求已写成 `docs/interfaces/medical_aegis_trajectory_spec_v1.md`（统一 schema v1：labels 与 steps 分离、干净输入、`sources`、`event_ids`、normal 每题 K 次采样、≥8 框架）。
 
 ## 5. 评测与必做实验
 
@@ -66,5 +68,5 @@ AEGIS 合成数据每一步都存了该次 LLM 调用的 `input_messages`，Tria
 
 1. 语料多样性不够，撑不起"基础模型"的说法 → 缩放曲线做不出来。
 2. 注入数据的模板伪迹被编码器学成捷径 → 预训练以自然运行为主，注入数据只用于微调，并按注入策略分开报。
-3. 部分框架缺 provenance（llm_debate 46%）→ 回退规则 + 证据等级。
+3. 部分框架缺 provenance → 回退规则 + 证据等级；已向 medical-aegis 申请生成时记录 `sources`（`docs/interfaces/medical_aegis_trajectory_spec_v1.md`）。
 4. 计算：4×A6000，冻结 8B LLM + 小超图编码器 + LoRA 投影器可行；文本嵌入需离线缓存。

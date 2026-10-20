@@ -1,4 +1,4 @@
-# RUN_v0.22 — 每轮讨论记录
+# RUN_v0.23 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -276,3 +276,15 @@
 **结论:** 一次调用同时读多个前序步在聚合 / 讨论类步骤中普遍,且可从调用输入通用恢复,不必按框架手写解析——这是超图建模的数据依据和 schema 无关构图的落脚点。写出设计草案 `docs/design/HGFM_design_v0.1.md`:统一轨迹超图(读集超边 + 事件超边,关系用自然语言描述)、查询条件化的有向超图 Transformer、图 token 进冻结 LLM + 约束解码、5 项自监督预训练(掩码重建、读集超边填充、结果预测、成对运行分歧定位、图-token 对齐)、留一框架零样本评测与必做消融。
 **关键风险:** 现有语料几乎全是注入后的失败轨迹,没有成功轨迹就做不了结果预测和成对分歧两项最有价值的自监督目标;"基础模型"需要框架数量的缩放曲线,语料多样性是成败关键。
 **待用户决定:** 是否在医学 QA 上自然运行多个医学 MAS 框架(不注入,flash 模型,每题多次采样)补充成功 + 失败轨迹语料——需先小规模试跑估算成本再确认。
+
+## 第 23 轮 · 2026-10-19 19:48 · 语料交给 medical-aegis 项目;向其提出轨迹需求
+
+**用户要求:** 语料由另一个项目 medical-aegis(医学 MAS 模拟故障轨迹 + 真实故障轨迹获取)负责。跟它沟通:我们需要知道什么、需要什么样的轨迹(是否像 TriageAgent 样例那样),以便统筹。
+**沟通渠道:** 本机没有正在运行的 medical-aegis 会话,改用仓库通信:`chancanmakeit/medical-aegis` 的 `docs/requests/` 目录,并在其 `docs/HANDOFF.md §4` 加了指针,下一个 medical-aegis 会话开场就会看到。对方回复也写在该目录。
+**核对到的事实:**
+- medical-aegis 已能生成 inject 和 normal 两种轨迹并配对(`scripts/build_paired_dataset.py`),注册了 dylan / llm_debate / agentverse / mdagents / clinical_agent / cmas 等。
+- **更正第 22 轮:** llm_debate 的"46% 缺 `input_messages`"全是 `is_input=True` 的 User 提示条目,不是 LLM 调用;agent 步缺失 0%。排除后 llm_debate 读≥1 前序步 67%、读≥3 38%(其余框架不变)。`analysis/read_hyperedge_stats.py` 已修正。
+- **标签泄漏:** prompt_injection 步骤记录的 `input_messages` 含注入指令原文——mdagents 748/748、clinical_agent 245/245、clinical_agent5 638/638、dylan 1317/1336、llm_debate 1238/1927;mdagents / clinical_agent / clinical_agent5 没存注入前输入。MedHyperTrace 现有代码只用 `input_messages` 做子串建边(`common/data.py::_content_ref_edges`、`structural_features.py`),节点文本用 `content`,不受影响;HGFM 不能把这些输入当节点文本。
+- TriageAgent 样例:`llm_call_log` 可恢复读集(Summarizer 读 3 位医生初判,讨论步读 Summarizer);但 8 次调用中 3 次 `finish_reason=length`、content 为空或只有 26 字符(max_tokens=1024 截断推理模型);`stages` 字典是框架专用结构,不适合作统一模板。
+**产出:** 需求文档 `medical-aegis/docs/requests/2026-10-19_from_medhypertrace_HGFM_trajectory_spec_v1.md`(本仓库副本 `docs/interfaces/medical_aegis_trajectory_spec_v1.md`):统一 schema v1(每次 LLM 调用一个 step;`labels` 与 `steps` 物理分离;干净的注入前输入;拼 prompt 时记录 `sources`;`event_ids` / `round` / `structured` 支撑共识类故障;`question_id` + `run_index` 支撑成对运行;`framework_description` 支撑零样本)、P0/P1/P2 优先级、TriageAgent 适配意见、数量建议(≥8 框架,normal 每题 K=4,≥2 个 backbone)、6 个问题。设计草案已同步更正。
+**待用户决定:** 注入频率统一(方案 A 只注入一次 / 方案 B 每次都注入;方法侧倾向 A);medical-aegis 试点的成本(由对方试跑估算后报给用户)。

@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-19(第 22 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-19(第 23 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -79,11 +79,17 @@
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
+### 0.37 与 medical-aegis 的统筹(第 23 轮)
+- 用户安排:轨迹语料(模拟故障 + 真实故障)由 `chancanmakeit/medical-aegis` 负责(可写;新会话需 add_repo push)。通信走其仓库 `docs/requests/`:我方需求 `2026-10-19_from_medhypertrace_HGFM_trajectory_spec_v1.md`(本仓库副本 `docs/interfaces/medical_aegis_trajectory_spec_v1.md`),对方回复也放该目录——**新会话先查有没有回复**。
+- 关键需求:统一 schema v1(labels 与 steps 分离、干净的注入前输入、`sources`、`event_ids`、`question_id`+`run_index`)、≥8 框架、normal 每题 K=4、≥2 个 backbone。
+- **标签泄漏警告:** 现有 AEGIS 合成数据的 PI 步骤 `input_messages` 含注入指令原文(mdagents / clinical_agent / ca5 100%),HGFM 不得把它当节点文本;MHT 现有代码不受影响。
+- 待用户决定:注入频率 A / B(我方倾向 A);对方试点成本。
+
 ### 0.36 主线:超图基础模型 HGFM(第 22 轮)— 用户军令状
 - 用户定:基于结构化 JSON 轨迹的文本属性超图,训一个**超图基础模型**;处理图特征、推理是附带能力。**不复现 AFANet 作前置检验**(AFANet 仍是论文基线)。
 - 设计草案:`docs/design/HGFM_design_v0.1.md`(新会话先读这个)。
-- 数据依据:`analysis/read_hyperedge_stats.py`——AEGIS 每步有 `input_messages`,"读集超边"可通用恢复;读≥3 个前序步的比例 dylan 62%、llm_debate 44%(46% 步骤缺输入)、ca5 24%、clinical_agent 20%、mdagents 17%。
-- 待用户决定:是否自然运行医学 MAS 框架补成功 + 失败轨迹语料(先试跑估成本)。
+- 数据依据:`analysis/read_hyperedge_stats.py`——AEGIS 每步有 `input_messages`,"读集超边"可通用恢复;读≥3 个前序步的比例 dylan 62%、llm_debate 38%、ca5 24%、clinical_agent 20%、mdagents 17%(第 23 轮更正:排除 User 提示条目后各框架 agent 步缺输入均为 0%)。
+- 语料由 medical-aegis 项目负责(见 §0.37)。
 
 ### 0.35 图方法 MAS 故障归因文献与新颖性定位(第 21 轮)
 - 用户文献仓库 `chancanmakeit/graph-based-mas-fault-attribution-papers`(可写,新会话需 add_repo push 权限):原有 3 篇 + 本轮新增 42 篇,分 `01_graph_based_attribution/` `02_attribution_landscape/` `03_graph_hypergraph_adjacent/`,各有 `INDEX.md`;`notes/positioning_hypergraph_llm.md` 是定位分析(本仓库 `docs/lit/graph_mas_attribution_positioning.md` 为同一份)。
