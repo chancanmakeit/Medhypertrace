@@ -20,7 +20,7 @@ AEGIS 合成数据每一步都存了该次 LLM 调用的 `input_messages`，Tria
 
 **含义：** "一次调用同时读了哪几条"是天然的多元关系，在聚合 / 讨论类步骤里很普遍，且可以不针对框架手写规则地恢复——这是超图建模的数据依据，也是"schema 无关"的落脚点。（第 23 轮更正：第 22 轮把 llm_debate 的 User 提示条目也算作步骤，误报"46% 缺输入"；agent 步实际缺失 0%。）
 
-**第 23 轮发现的泄漏：** prompt_injection 步骤记录的 `input_messages` 含注入指令原文（mdagents、clinical_agent、clinical_agent5 100%，dylan 99%，llm_debate 64%），且前三个框架未存注入前输入。HGFM 节点文本**不得**直接使用这些框架的 `input_messages`；读集超边可以只用它做来源匹配（匹配的是前序输出，不读注入文本），但须在新数据到位后改用干净输入或显式 `sources`。MedHyperTrace 现有代码只用 `input_messages` 建边、节点文本用 `content`，不受影响。
+**第 23 轮发现的泄漏：** prompt_injection 步骤记录的 `input_messages` 含注入指令原文（mdagents、clinical_agent、clinical_agent5 100%，dylan 99%，llm_debate 64%），且前三个框架未存注入前输入。HGFM 节点文本**不得**直接使用这些框架的原始 `input_messages`。第 24 轮已实现 `common/clean_inputs.py`：用 `raw_history.original_prompt`（mdagents / clinical_agent / ca5）和 `original_input_messages`（dylan / llm_debate）把 5 个框架的 PI 步骤 100% 恢复成干净输入、无模板残留；读入旧数据一律先过这一步。MedHyperTrace 现有代码只用 `input_messages` 建边、节点文本用 `content`，不受影响。
 
 ---
 
@@ -47,7 +47,7 @@ AEGIS 合成数据每一步都存了该次 LLM 调用的 `input_messages`，Tria
 | 掩码步骤重建（特征级） | 自身 | 内容与上下文的一致性 |
 | 读集超边填充（HypeBoy 式：给定头和部分尾，补缺失的尾） | provenance，免费 | 信息依赖结构 |
 | 结果预测（这条轨迹答对还是答错） | 医学 QA 有标准答案，免费 | 全局失败信号 |
-| 成对运行分歧定位（HPFA 式：同一问题多次运行，对齐成功与失败轨迹，找首个分歧步作伪标签） | 多次采样，免费 | step 级弱监督 |
+| 成对运行分歧定位（HPFA 式：同一问题多次运行，对齐成功与失败轨迹，找首个分歧步作伪标签；**分歧定义在 `structured`（答案/投票）语义层**，温度>0 时文本在 s1 就不同） | 多次采样，免费 | step 级弱监督 |
 | 图-token 对齐（TEA-GLM 特征级对比 / GraphGPT 匹配指令） | 自身 | 让冻结 LLM 读懂图 token |
 
 之后用有标签数据（AEGIS 合成注入、Who&When、AEGIS-Bench、GraphTraj 等）做归因微调；新框架只调投影器 LoRA + 框架描述 token（REEF 的数据集级偏置）。
@@ -60,7 +60,7 @@ AEGIS 合成数据每一步都存了该次 LLM 调用的 `input_messages`，Tria
 
 ## 5. 评测与必做实验
 
-- **主评测：** 留一框架零样本（≥8 个框架）+ MAFA 人类 dev/test（遵守预注册划分，MAST 与 MedAgentAudit 分开）。
+- **主评测：** 留一**家族**零样本（按 `framework_family` 留出，近似重复框架不得分处训练/测试；≥8 个家族），缩放曲线在**锚点任务**（固定 100 道医学 MCQ，所有框架都跑）上做，原生任务单独报"新框架 + 新任务"泛化+ MAFA 人类 dev/test（遵守预注册划分，MAST 与 MedAgentAudit 分开）。
 - **基线：** AFANet、CHIEF / Adaptive Influence Graphs（免训练）、GraphTracer / AgenTracer（图 + RL / RL）、MedHyperTrace、猜第一步 / 位置先验。
 - **论文必需的消融（不是前置门槛）：** 超边 vs 星形展开 vs 无边 vs 度数匹配伪造（GRADE）；按故障类型分层看增益是否集中在多方交互类；去掉 LLM / 去掉超图编码器；预训练目标逐项消融；**框架数量的缩放曲线**（"基础模型"的核心证据）。
 

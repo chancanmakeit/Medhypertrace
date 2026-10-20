@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-19(第 23 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-20(第 24 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -78,6 +78,13 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.38 medical-aegis 进展与我方建议(第 24 轮)
+- 对方已回复 issue #1(两条评论)并集成 MedAgents(`medagents_mc`,mock 样例在其 `docs/requests/samples/`);用户定的后续:ConSensus(WESAD + SleepEDF,含 6 个 MAS 基线)→ MAM(Heartbeat / Sound-Dr,mimo-v2.6-flash 音频)。
+- 我方回复 issue #1 评论 6286759271 + 规格增补 v1.1(在 spec 文档末尾):`agent_id` P0、`structured` P0、`framework_family` P0、`sources[].how`、`task.observations[]`、锚点任务(固定 100 题医学 MCQ)。
+- **旧数据干净输入已修复:** `common/clean_inputs.py`,5 框架 PI 步骤 100%;HGFM 读旧数据必须先过它。
+- 评测口径改为留一**家族** + 锚点任务上的缩放曲线(设计草案已同步)。
+- 下一步(我方):对方 schema v1 导出器和 K 次重复做好、mock 更新后,在 mock 上跑通超图构建。
 
 ### 0.37 与 medical-aegis 的统筹(第 23 轮)
 - 用户安排:轨迹语料(模拟故障 + 真实故障)由 `chancanmakeit/medical-aegis` 负责(可写;新会话需 add_repo push)。**两项目沟通走 GitHub issue(用户要求)**:[medical-aegis issue #1](https://github.com/chancanmakeit/medical-aegis/issues/1) 是我方需求,完整规格在其 `docs/requests/2026-10-19_from_medhypertrace_HGFM_trajectory_spec_v1.md`(本仓库副本 `docs/interfaces/medical_aegis_trajectory_spec_v1.md`)。**新会话先看 issue 评论**:`gh api repos/chancanmakeit/medical-aegis/issues/1/comments --jq '.[].body'`(只能用 REST,GraphQL 被禁)。以后对方需要我方做什么,也请对方在 Medhypertrace 开 issue。

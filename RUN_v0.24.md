@@ -1,4 +1,4 @@
-# RUN_v0.23 — 每轮讨论记录
+# RUN_v0.24 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -290,3 +290,14 @@
 **待用户决定:** 注入频率统一(方案 A 只注入一次 / 方案 B 每次都注入;方法侧倾向 A);medical-aegis 试点的成本(由对方试跑估算后报给用户)。
 
 **补充(19:59,用户建议):** 两个项目之间的通信改走 GitHub issue。已在 medical-aegis 开 [issue #1](https://github.com/chancanmakeit/medical-aegis/issues/1)(标签 enhancement + question):需求摘要、泄漏证据、TriageAgent 意见、6 个问题做成勾选清单,完整规格仍放在 `docs/requests/...spec_v1.md` 由 issue 引用。对方 HANDOFF 指针和规格文档的"沟通方式"已改为指向 issue。会话内 gh 只能用 REST(`gh api repos/chancanmakeit/medical-aegis/issues/1/comments`),GraphQL 被代理禁用。
+
+## 第 24 轮 · 2026-10-20 01:22 · medical-aegis 回复 issue #1,并开始集成新框架;核对并给建议
+
+**对方回复(issue #1 两条评论,其 `ff7a974` / `fce45a0`):** ① 可跑组合:dylan / llm_debate / agentverse / mdagents 跑医学 MCQ;clinical_agent 只跑 trial_success;cmas 只跑 NER;尚无已生成的 normal 轨迹(仅用户本地 clinical_agent×trial_success 141 条有效)。② normal 与 inject 同格式;`main.py` 缺 run_index / question_id / K 次重复。③ 三框架捕获层在注入层下面,可补存干净输入。④ `sources` 可在拼接处插桩,dylan 需运行时记录。⑤ 也倾向注入频率 A。⑥ 试点顺序:先离线改代码 + mock 样例,再试跑估成本请用户确认。另提醒:分歧伪标签需 `structured`;clinical_agent / ca5 是同框架两版本;框架与任务混淆。用户已定新增 MedAgents(已完成,`medagents_mc`)→ ConSensus(WESAD + SleepEDF,自带 6 个 MAS 基线)→ MAM(Heartbeat / Sound-Dr,音频用 mimo-v2.6-flash),MedAgent-Pro 暂缓。
+**我方核对:**
+- 对方提的"截断标记"修旧数据:旧数据混用 4 种注入配置,标记命中率仅 16.1%(mdagents)–50.1%(dylan)。改用 `raw_history` 的 `modified_prompt`→`original_prompt` 替换 + `original_input_messages`,5 个框架 PI 步骤全部修复(2024 / 1861 / 2661 / 638 / 520),无模板残留;llm_debate Aggregator 876 步标了 prompt_modified 但输入无注入文本。实现于 `common/clean_inputs.py`。
+- MedAgents mock:PI 步骤输入无注入模板 ✅;反向漏记 0;Classifier(22 处/条)和 Synthesizer(9 处/条)的 sources 是派生引用(领域名、"Total Analysis" 截取),非原文——合理但需 `how` 字段;mock 有 17/27 条重复输出,漏记检查待真实数据。
+- 发现 MedAgents 缺跨阶段稳定的 agent 身份:同一专家依阶段为 QuestionAnalyst / Voter / Advisor,`role_index` 跨角色复用。
+**给对方的建议(issue #1 评论 6286759271;规格增补 v1.1 写入其 spec 文档末尾):** `agent_id`(P0 新增)、`structured` 升 P0(含 vote 与 Advisor↔投 NO 者对应)、`framework_family`(P0 新增,按家族留出;self-consistency / self-refine 作退化拓扑对照不计入缩放曲线)、`sources[].how`(P1)、`task.observations[]`(P1,ConSensus 15K 传感器特征与 MAM 音频共享观测,避免每步复制);MAM 每次音频调用记录文本感知输出,搜索记为 tool step;设固定 100 题医学 MCQ 锚点任务,缩放曲线在锚点上做,原生任务另报。目前能跑医学 MCQ 的家族 5 个,ConSensus 基线能否适配 MCQ 是到 8 个的关键。
+**设计草案同步:** 留一框架 → 留一家族 + 锚点任务;分歧伪标签定义在 `structured` 语义层;旧数据先过 `clean_inputs.py`。
+**仍待用户决定:** 注入频率 A / B(双方倾向 A);试点 backbone。
