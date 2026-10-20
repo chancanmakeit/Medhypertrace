@@ -288,3 +288,5 @@
 - TriageAgent 样例:`llm_call_log` 可恢复读集(Summarizer 读 3 位医生初判,讨论步读 Summarizer);但 8 次调用中 3 次 `finish_reason=length`、content 为空或只有 26 字符(max_tokens=1024 截断推理模型);`stages` 字典是框架专用结构,不适合作统一模板。
 **产出:** 需求文档 `medical-aegis/docs/requests/2026-10-19_from_medhypertrace_HGFM_trajectory_spec_v1.md`(本仓库副本 `docs/interfaces/medical_aegis_trajectory_spec_v1.md`):统一 schema v1(每次 LLM 调用一个 step;`labels` 与 `steps` 物理分离;干净的注入前输入;拼 prompt 时记录 `sources`;`event_ids` / `round` / `structured` 支撑共识类故障;`question_id` + `run_index` 支撑成对运行;`framework_description` 支撑零样本)、P0/P1/P2 优先级、TriageAgent 适配意见、数量建议(≥8 框架,normal 每题 K=4,≥2 个 backbone)、6 个问题。设计草案已同步更正。
 **待用户决定:** 注入频率统一(方案 A 只注入一次 / 方案 B 每次都注入;方法侧倾向 A);medical-aegis 试点的成本(由对方试跑估算后报给用户)。
+
+**补充(19:59,用户建议):** 两个项目之间的通信改走 GitHub issue。已在 medical-aegis 开 [issue #1](https://github.com/chancanmakeit/medical-aegis/issues/1)(标签 enhancement + question):需求摘要、泄漏证据、TriageAgent 意见、6 个问题做成勾选清单,完整规格仍放在 `docs/requests/...spec_v1.md` 由 issue 引用。对方 HANDOFF 指针和规格文档的"沟通方式"已改为指向 issue。会话内 gh 只能用 REST(`gh api repos/chancanmakeit/medical-aegis/issues/1/comments`),GraphQL 被代理禁用。

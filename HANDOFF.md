@@ -80,7 +80,7 @@
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
 ### 0.37 与 medical-aegis 的统筹(第 23 轮)
-- 用户安排:轨迹语料(模拟故障 + 真实故障)由 `chancanmakeit/medical-aegis` 负责(可写;新会话需 add_repo push)。通信走其仓库 `docs/requests/`:我方需求 `2026-10-19_from_medhypertrace_HGFM_trajectory_spec_v1.md`(本仓库副本 `docs/interfaces/medical_aegis_trajectory_spec_v1.md`),对方回复也放该目录——**新会话先查有没有回复**。
+- 用户安排:轨迹语料(模拟故障 + 真实故障)由 `chancanmakeit/medical-aegis` 负责(可写;新会话需 add_repo push)。**两项目沟通走 GitHub issue(用户要求)**:[medical-aegis issue #1](https://github.com/chancanmakeit/medical-aegis/issues/1) 是我方需求,完整规格在其 `docs/requests/2026-10-19_from_medhypertrace_HGFM_trajectory_spec_v1.md`(本仓库副本 `docs/interfaces/medical_aegis_trajectory_spec_v1.md`)。**新会话先看 issue 评论**:`gh api repos/chancanmakeit/medical-aegis/issues/1/comments --jq '.[].body'`(只能用 REST,GraphQL 被禁)。以后对方需要我方做什么,也请对方在 Medhypertrace 开 issue。
 - 关键需求:统一 schema v1(labels 与 steps 分离、干净的注入前输入、`sources`、`event_ids`、`question_id`+`run_index`)、≥8 框架、normal 每题 K=4、≥2 个 backbone。
 - **标签泄漏警告:** 现有 AEGIS 合成数据的 PI 步骤 `input_messages` 含注入指令原文(mdagents / clinical_agent / ca5 100%),HGFM 不得把它当节点文本;MHT 现有代码不受影响。
 - 待用户决定:注入频率 A / B(我方倾向 A);对方试点成本。
