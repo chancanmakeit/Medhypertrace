@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-20(第 25 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-20(第 26 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -78,6 +78,14 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.40 第 26 轮:schema v1 已可用,超图构建已跑通
+- **每轮开场先跑 `bash scripts/issue_inbox.sh`**(第 26 轮漏看了对方 4 条评论);回复后把最新评论时间写入 `docs/interfaces/issue_last_seen.txt`。
+- 对方已交付 `main.py --num_runs K` + `scripts/export_schema_v1.py`(mas-traj/1),14 个框架同一契约,默认注入方案 A(已定案)。样例:其 `docs/requests/samples/schema_v1_mock_export.jsonl`、`real_probe_2026-10-20/`。
+- 我方:`ours/hgfm/uth.py`(mas-traj/1 → 统一轨迹超图)、`ours/hgfm/audit_schema_v1.py`(泄漏 / 来源 / token 侧信道审计)。**token 计数不得作特征**(RC 步骤侧信道)。
+- 旧数据规则:`common/clean_inputs.py`(干净输入)+ `common/old_data_filters.py`(ca/ca5 无效注入、ca5 Planner)。
+- backbone(用户定):文本 mercury-2.5-preview + llama-4-maverick,图像 Ling-3.0-flash-VL,音频 mimo-v2.6-flash。
+- 待用户:补 macnet / autogen / camel(仅锚点);400 条试点($6–12)。
 
 ### 0.39 medical-aegis 新框架与旧数据剔除规则(第 25 轮)
 - 对方已集成:medagents_mc、consensus + 4 个辩论类基线(SleepEDF / WESAD)、mam(音频)、triage_agent;mock 样例在其 `docs/requests/samples/`,我方核对泄漏 0、漏记 0。

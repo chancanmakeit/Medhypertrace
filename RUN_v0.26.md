@@ -1,4 +1,4 @@
-# RUN_v0.25 — 每轮讨论记录
+# RUN_v0.26 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -309,3 +309,34 @@
 **旧 ClinicalAgent 数据影响(实测):** 全部注入为 direct_prepend 的轨迹 clinical_agent 151/402(38%)、clinical_agent5 614/1052(58%);这些轨迹最终预测全部在阈值错误一侧(ca 147/147、ca5 165/165,可解析者),因数据集只保留 is_valid_error——失败很可能是模型自身出错,注入标签指向未生效的 agent。**我方决定:这部分不作归因监督与评测,只作无标签自然失败轨迹用于自监督预训练。** 注:第 10 轮 clinical_agent PI 子集"+10(边缘)"的结论也受此影响,需在剔除后重算。
 **回复(issue #1 评论 6294946719):** 核对结果;旧数据影响与处理;确认 10 个家族分组(debate 粗家族 + 保留 `framework` 细 id 做敏感性分析;triage、modality_fusion 单列;ca 两版本同家族);锚点任务需再补 3 个通用框架,建议 macnet > autogen > camel,不建议 chatdev / mad;累积读取集保持现状,我方用 `agent_id` 自算增量;顺序建议:导出器 + K 次重复 → medagents_mc + triage_agent 真实小试点(估成本请用户确认)→ 迁移旧 wrapper(mdagents 在锚点上)并可重生成 ClinicalAgent → 补通用框架。
 **待用户决定:** 注入频率 A / B(新框架已按 A 实现);backbone;ClinicalAgent 是否重新生成;对方的工作顺序。
+
+## 第 26 轮 · 2026-10-20 11:22 · 用户提醒:medical-aegis 有四轮回复未答;补答 + 首次在 schema v1 上建超图
+
+**漏看原因:** 第 25 轮回复后,对方 15:55–18:10 UTC 连发 4 条(v9 第 5、6、7 轮),我方未主动查看。**改进:** 新增 `scripts/issue_inbox.sh`(打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论 + Medhypertrace 上的 open issue),每轮开场先跑;回复后更新 last_seen。
+**对方进展(其 `ea5b0db` / `e92d913` / `e20e185` / `beaf31d`):** 用户决定:先做导出器 + K 次重复(已交付:`main.py --num_runs K`、`scripts/export_schema_v1.py` → mas-traj/1,steps 字段白名单、labels 分离、`task.observations`、内置检查);backbone 文本 mercury-2.5-preview(+备选 llama-4-maverick)、图像 Ling-3.0-flash-VL、音频 mimo-v2.6-flash;ClinicalAgent 重跑;cmas / dylan / llm_debate / agentverse 只迁移不重跑,但只在锚点 100 题上重跑;mdagents 保留旧数据 + 新生成。6 个旧框架全部迁到 StructuredFMWrapper,14 个框架同一契约,默认方案 A。reasoning 默认不导出。首批真实探测:medagents_mc、triage × 2 backbone × 1 题,62 次调用全 stop、structured 全解析;mercury 不返回 reasoning。试点提案 400 条,估 $6–12,待用户确认。
+**我方核对(`ours/hgfm/audit_schema_v1.py`,mock 42 + 真实 4 条):**
+```
+records=46  audit issues: none
+token side-channel: chars/completion_token  corrupted median=10.06 (n=12)  other median=7.10 (n=603)
+framework            fam              runs  nodes  steps agents read|tail|mean/max  read_new mean  events  ev.size  structured
+agentverse           agentverse          3   25.7   18.7   5.0    3.3/  6         1.7       7.7    2.4   56/56
+clinical_agent       clinical_agent      3   22.0   10.0  10.0    1.1/  3         1.1       0.0    0.0   15/15
+cmas                 cmas                3    9.0    3.0   3.0    1.7/  3         1.7       0.0    0.0   9/9
+consensus            modality_fusion     3   24.0    9.0   8.0    2.7/  7         2.4       1.0    2.0   27/27
+consensus_cmd        debate              3   28.0   16.0   5.0    5.9/ 12         2.8       2.0    5.0   48/48
+consensus_debate     debate              3   28.0   16.0   5.0    5.9/ 12         2.8       2.0    5.0   48/48
+consensus_mad        debate              3   32.0   19.0   6.0    7.5/ 17         3.7       2.0    5.0   57/57
+consensus_reconcile  debate              3   28.0   16.0   5.0    5.9/ 12         2.8       2.0    5.0   48/48
+dylan                dylan               3   18.0   11.0   5.0    2.5/  4         2.0       5.0    3.4   33/33
+llm_debate           debate              3   13.0    7.0   4.0    1.7/  3         1.3       3.0    3.0   21/21
+mam                  mam                 3   32.7   19.7  10.0    2.4/  9         1.5       5.0    4.8   34/56
+mdagents             mdagents            3   16.0    7.0   7.0    1.4/  5         1.4       1.0    5.0   21/21
+medagents_mc         medagents           5   39.2   25.4  11.8    2.1/  7         1.6       7.4    4.7   83/127
+triage_agent         triage              5   18.8   10.8   6.0    2.4/  4         1.8       2.6    2.6   49/49
+```
+- 泄漏、坏引用、漏记全部 0(工具步 `tool_stub` 字段已加入白名单,不含标签)。
+- **token 侧信道确认:** RC 步骤 chars/completion_token 中位 10.06 vs 其他 7.10——篡改后的输出配的是篡改前调用的 token 数。已要求对方把 API token 数移出 step,或对所有步骤统一重计;我方不使用 token 计数作特征(`uth.py` 注释)。
+- `ours/hgfm/uth.py`:mas-traj/1 → 统一轨迹超图,14 个框架零框架专用代码;dylan / llm_debate / triage 无 event_ids,按 (phase, round) 派生;并行组按"读取集相同且不互读"派生。
+- **Planner 核对(旧数据,干净输入 + 中段探针):** clinical_agent(6 agent)后续输入含 Planner 输出 397/402(被 orchestrator 读);clinical_agent5 0/1052。对方"Planner 断开"只在 ca5 成立。规则落在 `common/old_data_filters.py`:ca/ca5 全 direct_prepend 轨迹不作监督;ca5 的 Planner 从故障 agent 集去掉(265/1052);无"仅 Planner 注入生效"的轨迹。
+**回复(issue #1 评论 6298127574):** 注入频率定案 A(B 仅鲁棒性子集);同意双 backbone 交叉方案,建议多模态流程的纯文本步骤用文本 backbone、各 backbone 下 inject/normal 比例一致;锚点需补到 8 家族(5 家族只有 4 个曲线点),建议 macnet > autogen > camel,仅跑锚点;token 侧信道处理;event 派生语义请对方确认;Planner 版本差异;试点希望 RC 与 PI 都有。
+**待用户决定:** 是否补 macnet / autogen / camel(仅锚点);400 条试点($6–12)。
