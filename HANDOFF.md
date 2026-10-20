@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-20(第 26 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-20(第 27 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -78,6 +78,12 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.41 第 27 轮
+- 对方试点已开跑(400 条:medagents_mc + triage × mercury-2.5-preview / llama-4-maverick × 20 题 × (K=4 normal + 1 inject),inject 中 RC / PI 各半)。**结果出来后我方要做:** `audit_schema_v1.py` 审计 + 超图构建 + 模板捷径量化(TF-IDF+LR 单步篡改检测 AUROC 分 RC / PI;模板检测器步骤定位基线)+ 成对分歧统计(同题 K 次成败共存比例、按 `structured.answer` 的首个分歧步分布)。
+- token 数已在 `labels.llm_meta`,step 上只有 `output_tokens_est`;backbone 是候选池,用前问用户。
+- 锚点第 6–8 家族我方建议:macnet(按上游语义重新移植)+ mav + camel(改造);autogen 退化不要;待用户定。
+- 首要风险:RC 篡改模板文风可识别(旧数据 ca5 模板检测器 0.90);我方提议"改写池"。
 
 ### 0.40 第 26 轮:schema v1 已可用,超图构建已跑通
 - **每轮开场先跑 `bash scripts/issue_inbox.sh`**(第 26 轮漏看了对方 4 条评论);回复后把最新评论时间写入 `docs/interfaces/issue_last_seen.txt`。

@@ -26,7 +26,7 @@ STEP_FIELDS_ALLOWED = {
     "step_id", "order", "kind", "agent_id", "agent_role", "agent_label", "phase", "round",
     "event_ids", "input_messages", "sources", "output", "structured", "tool_calls",
     "finish_reason", "prompt_tokens", "completion_tokens", "reasoning_tokens", "reasoning",
-    "tool_stub",
+    "tool_stub", "output_tokens_est",
 }
 # NOTE: prompt/completion/reasoning token counts are NOT used as features: on
 # response_corruption steps they describe the clean pre-corruption call (label leak).
@@ -74,13 +74,18 @@ def build_uth(rec: dict) -> dict:
         for e in s.get("event_ids") or []:
             by_event[e].append(sid)
         by_agent[aid].append(sid)
-    # Derived events where the framework records `round` but no event_ids
-    # (dylan, llm_debate, triage_agent): one event per (phase, round).
+    # Derived events, only for records that carry no event_ids at all (dylan,
+    # llm_debate, triage_agent): one event per (phase, round). Frameworks that record
+    # event_ids (MAM meeting<k>, consensus_cmd debate<k>_group<g>, medagents vote<k>,
+    # agentverse) are NOT re-derived: medical-aegis v9 r9 -- MAM quality checks are
+    # pairwise and a same-round redo is a revision, not a multi-party event.
+    has_events = any(s.get("event_ids") for s in steps)
     for s in steps:
-        if not s.get("event_ids") and s.get("round") is not None and s.get("kind") != "tool":
+        if not has_events and s.get("round") is not None and s.get("kind") != "tool":
             by_event[f"derived:{s.get('phase')}:r{s['round']}"].append("step:" + s["step_id"])
     # Derived parallel cohorts: >=2 steps with the same non-empty read set that do not
     # read each other (mdagents expert panel, ConSensus modality interpreters, lanes).
+    # Sequential speakers (triage discussion) read each other, so they never qualify.
     cohorts = defaultdict(list)
     for s in steps:
         key = tuple(sorted(_src_id(x) for x in s.get("sources") or []))

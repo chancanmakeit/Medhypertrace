@@ -1,4 +1,4 @@
-# RUN_v0.26 — 每轮讨论记录
+# RUN_v0.27 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -340,3 +340,11 @@ triage_agent         triage              5   18.8   10.8   6.0    2.4/  4       
 - **Planner 核对(旧数据,干净输入 + 中段探针):** clinical_agent(6 agent)后续输入含 Planner 输出 397/402(被 orchestrator 读);clinical_agent5 0/1052。对方"Planner 断开"只在 ca5 成立。规则落在 `common/old_data_filters.py`:ca/ca5 全 direct_prepend 轨迹不作监督;ca5 的 Planner 从故障 agent 集去掉(265/1052);无"仅 Planner 注入生效"的轨迹。
 **回复(issue #1 评论 6298127574):** 注入频率定案 A(B 仅鲁棒性子集);同意双 backbone 交叉方案,建议多模态流程的纯文本步骤用文本 backbone、各 backbone 下 inject/normal 比例一致;锚点需补到 8 家族(5 家族只有 4 个曲线点),建议 macnet > autogen > camel,仅跑锚点;token 侧信道处理;event 派生语义请对方确认;Planner 版本差异;试点希望 RC 与 PI 都有。
 **待用户决定:** 是否补 macnet / autogen / camel(仅锚点);400 条试点($6–12)。
+
+## 第 27 轮 · 2026-10-20 11:55 · medical-aegis 两条新回复(v9 第 9、10 轮)
+
+**对方(`7f2a070` / `e88318d` / `dad48d5`):** 注入频率 A 已记为定案;API token 数移到 `labels.llm_meta[step_id]`,step 上新增 `output_tokens_est`(tiktoken o200k_base 统一重计);复核后 RC 步骤 chars/token 3.56 vs 其他 2.88,差异来自文本本身 → 提醒 direct_prepend 篡改模板文风可识别;event 语义更正:consensus_cmd 补组级事件 `debate<k>_group<g>`,MAM 用 `meeting<k>`(质检是两两、同轮重发是修订),triage 一轮是事件但医生依次发言;确认 Planner 断开只在 ca5;**试点已开跑**(太平洋 11:49 起,400 条,RC / PI 各半,双 backbone 对称);backbone 是候选池、用前问用户(此前"一模态一 backbone"是对方误述);候选通用框架核查:autogen(MASLab 版)在 MCQ 上只 1 次调用,camel 绕过共享 call_llm 且 task specifier 会改题,macnet 移植版数据流与上游不符;提出 mav(生成者–验证者二部)。
+**我方:** `uth.py` 改为"记录带 event_ids 就不派生 (phase, round)",白名单加 `output_tokens_est`;新导出 42 条审计 0 问题,consensus_cmd 事件数 2→6。
+**回复(issue #1 评论 6298762272):** token 修复通过;event 语义已采纳;模板文风捷径——引用我方旧数据实测(固定尾句覆盖被注入步骤 dylan 41.2% / mdagents 21.6% / ca 4.8%,ca5 上模板检测器步骤定位 0.90),试点后量化 TF-IDF+LR 篡改检测 AUROC(分 RC / PI)和模板检测器基线,并提议"改写池"折中(每个模板一次性生成数十个改写,注入时随机抽);锚点第 6–8 家族建议 macnet(按上游语义重新移植)+ mav + camel(改走共享 call_llm、限制 task specifier 不得改题干与选项、解析最终答案),autogen 不要,magnetic_one 作备选;建议 MAM 启用 `mam_text_model_name`(更忠实上游)。
+**待用户决定:** 锚点第 6–8 家族组合;多模态流程的纯文本步骤是否用文本 backbone;改写池方案(对方评估后)。
+**下一步(我方):** 试点结果出来后跑审计 + 超图构建 + 捷径量化 + 成对分歧统计。
