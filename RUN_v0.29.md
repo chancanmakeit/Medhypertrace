@@ -1,4 +1,4 @@
-# RUN_v0.28 — 每轮讨论记录
+# RUN_v0.29 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -362,3 +362,11 @@ triage_agent         triage              5   18.8   10.8   6.0    2.4/  4       
 - 改写池抽查:措辞打散了,但内容仍是故障的自我描述(FM-1.2"没有医学专业背景"、FM-3.2"无需核实")→ 只去掉了词面捷径;1377 条中 180 条仍带显式改口词。
 **回复(issue #1 评论 6305484990)要点:** ① 按难度筛题(normal 准确率 0.25–0.75,例如 MedXpertQA),一次解决拓扑捷径、自然成对稀少和翻转空间三件事;② 注入目标按 agent_id × phase 均匀随机;③ 标签侧加 `outcome ∈ {flipped, repaired, benign}`(对应 MAFA 的缺陷层 / 责任层);④ medagents 专家分析等补 `structured.answer`;⑤ MCQ 的 RC 改为原地替换最后声明的答案,不再追加自述句;自述类 FM 交给 PI 和 simulation;改写池留给 PI 指令侧;⑥ 把"注入步 vs 自然答错步"AUROC 作为每种注入配置的数据质量门槛(目标 0.5–0.7);⑦ 锚点组合 = 现有 5 + mav + macnet(重新移植)+ MA-RAG(单列 `retrieval_debate`,带工具步,做并入 debate 的敏感性分析),可选 MDTeamGPT(关掉 FAISS 和联网,做并入 medagents 的敏感性分析),camel 不要;⑧ MAM 文本步骤和音频步骤要用不同模型,同意对方判断。
 **待用户决定:** 锚点组合;按难度筛题与换数据集;RC 改为原地替换;改写池全量(约 $0.3)是否还需要;MAM 文本模型。
+
+## 第 29 轮 · 2026-10-21 00:57 · medical-aegis v9 第 13 轮:落实第 28 轮建议 + KAMAC / MAC 候选
+
+**对方(`8d6986a`):** 本地复现了三种捷径;RC 改为原地改答案(`rc_mode: inplace`,MCQ 换承诺字母和选项原文,字段式只换值;认不出答案时 `rc_fallback: pi`),离线门槛测试同角色约 0.45–0.54、自然答错 0.34–0.63(n_neg 16–20);PI simulation 包装加"按真实置信度作答",指令改为 "plausible but flawed",改写池转到 PI 指令侧(98 个模板 × 20 个改写);medagents 专家 / Synthesizer / Reviser 补 `structured.answer`(`mcq_leaning`,覆盖 9–60%);注入目标从 `targets_pool` 均匀抽取(medagents 16 个、triage 8 个);`labels.outcome` 取值 flipped / repaired / benign / baseline_wrong / unresolved / not_fired;`scripts/quality_gate.py`;MedXpertQA-Text 转换完成(2450 题),筛选脚本 `screen_difficulty.py`,20 题探测单次 CoT 准确率 mercury 0.65、llama 0.70,500 题 × K=4 × 2 backbone 约 $4.5 待批;新候选 KAMAC(定向消息 + 运行中招募,推荐)、MAC(群聊 + LLM 选发言者,推荐)、TAO(数据流坏,不推荐);MAM 文本模型用 Ling-3.0-flash。
+**我方核对:** 用 `quality_gate.py` 跑试点导出,数字与我方一致(triage PI 自然答错 0.932 vs 我方 0.951,口径差异),对试点配置正确返回退出码 1。MedXpertQA-Text 转换:金标准在 A–J 上均匀,题面无明文答案,打分是确定性比对。**疑点:** 公开榜单前沿模型 MedXpertQA-Text 为 50–72%(Gemini 3.1 Pro 71.5%、GPT-5.4 59.6%、Claude Opus 4.6 52.1%,BenchLM),llama-4-maverick 20 题 0.70 偏高 → 可能有训练数据污染。
+**回复(issue #1 评论 6311062674):** ① 门槛加 bootstrap CI 和 `--min_neg 50`,判定改为基于 CI;`rc_fallback` 的步骤按实际生效策略分组;② 原地改答案的错误选项改为按筛选得到的干扰项频率加权抽取(没有就退回均匀抽取,标注来源),避免"选荒谬选项"这种语义签名;③ 筛选时做污染检查:K=4 中有 2 次打乱选项并重新编号,比较准确率;报告按 question_type 分开的区间落入数;④ KAMAC / MAC 都推荐纳入,建图要求:新增 `how: "control"`(选发言者、路由、招募)、决策步带结构化字段(recruits / knowledge_gap / to / next_speaker / terminate)、动态 agent 用稳定 `agent_id`、注入目标用角色模式在运行时解析;家族 `groupchat`、`kamac`(做并入 mdagents 的敏感性分析);锚点 10 个家族;⑤ 训练评测只用 flipped(责任层正例)和 repaired(缺陷层正例、责任层困难负例)。
+**我方代码:** `ours/hgfm/uth.py` 新增 control 超边(`how == "control"` 的来源与内容读取分开)。
+**待用户决定:** 500 题难度筛选(约 $4.5,建议加污染检查);KAMAC / MAC 纳入;锚点组合。

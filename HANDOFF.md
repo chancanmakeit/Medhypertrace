@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-21(第 28 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-21(第 29 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -78,6 +78,11 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.43 第 29 轮
+- 对方已落实:原地改答案 RC、目标池均匀抽取、`labels.outcome`(我方只用 flipped / repaired)、`scripts/quality_gate.py`(已复核与我方一致)、medagents 补 `structured.answer`、MedXpertQA-Text。
+- 我方已要求:门槛加 CI + `--min_neg 50`;错误选项按干扰项频率加权;筛选时打乱选项做污染检查(llama 20 题 0.70 高于多数前沿模型的公开成绩);KAMAC / MAC 需要 `how: "control"` 和决策步结构化字段。
+- `uth.py` 已支持 control 超边。锚点计划 10 个家族:现有 5 + mav + macnet + MA-RAG + KAMAC + MAC(± MDTeamGPT)。
 
 ### 0.42 第 28 轮:试点结论——注入数据有三种强捷径(正式生成前必须解决)
 - 试点数据:medical-aegis `docs/requests/samples/pilot_2026-10-20/pilot_export.jsonl.gz`(420 条)。我方分析:`analysis/pilot_20261020.py`(输出 `analysis/pilot_20261020_out.txt`)。

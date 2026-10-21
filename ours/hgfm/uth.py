@@ -14,6 +14,9 @@ Nodes (all text-attributed):
 Hyperedges (directed: tail -> head):
   read      tail = sources of a step (+ task/obs), head = the step     [one per step]
   read_new  same, but only sources the agent had not seen before       [one per step, may be empty]
+  control   tail = sources with how == "control" (speaker selection, routing,
+            recruitment: the step happened because it was selected / recruited),
+            head = the step. Kept apart from content reads.               [round 29]
   event     all steps sharing an event_id (vote round, discussion turn) [undirected]
   agent     all steps by one agent_id                                  [undirected]
   final     tail = final.source_step_ids, head = final
@@ -66,8 +69,12 @@ def build_uth(rec: dict) -> dict:
                       "agent": aid, "role": s.get("agent_role"), "phase": s.get("phase"), "round": s.get("round"),
                       "order": s.get("order"), "structured": s.get("structured") or {}}
         nodes.setdefault("agent:" + aid, {"type": "agent", "text": s.get("agent_role") or aid})
-        tail = [(_node_of(_src_id(x)), _src_how(x)) for x in s.get("sources") or []]
+        allsrc = [(_node_of(_src_id(x)), _src_how(x)) for x in s.get("sources") or []]
+        ctrl = [(n, h) for n, h in allsrc if h == "control"]
+        tail = [(n, h) for n, h in allsrc if h != "control"]
         edges.append({"type": "read", "tail": tail, "head": sid})
+        if ctrl:
+            edges.append({"type": "control", "tail": ctrl, "head": sid})
         new = [(n, h) for n, h in tail if n not in seen[aid]]
         edges.append({"type": "read_new", "tail": new, "head": sid})
         seen[aid] |= {n for n, _ in tail} | {sid}
