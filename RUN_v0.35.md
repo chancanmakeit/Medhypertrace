@@ -1,4 +1,4 @@
-# RUN_v0.34 — 每轮讨论记录
+# RUN_v0.35 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -400,3 +400,21 @@ triage_agent         triage              5   18.8   10.8   6.0    2.4/  4       
 
 **做了:** `git mv` 重组目录(保留历史):原方法的全部代码、数据、结果和文档放进 `MedHyperTrace-v1/`;新方法放进 `MedHyperTrace-v2/`(`hgfm/`、`data_tools/`、`analysis/`、`docs/{design,lit,interfaces}`、`scripts/issue_inbox.sh`),import 从 `ours.hgfm` 改为 `hgfm`。根目录只留 README、HANDOFF、RUN 记录。冒烟测试:v1 的 `validate.py` 和 `train_hgnn.py --help` 正常;v2 全部模块 import 正常,审计脚本在试点导出上 0 问题,`clean_inputs.py` 正常。`.gitignore` 路径已更新。新写根目录 README(两代方法索引)、`MedHyperTrace-v2/README.md`(方法介绍、与 v1 的区别、文献来源,"已实现 / 设计中"分开写)。
 **回答用户的要点:** v1 是针对 AEGIS 合成数据的任务特定超图网络,超边由规则构造且无向,训练目标是最早注入步;v2 是跨框架超图基础模型,超边来自生成时记录的有向读取集,另有控制、事件超边,数据加入真实自然失败,目标是留一家族零样本,后续耦合冻结 LLM。**诚实说明:** v2 当前的编码器 v0 在网络结构上和 v1 接近,差别主要在数据、建图、目标和评测;自监督预训练、关系文本条件化、LLM 耦合还在设计中;结构的增益尚待第一阶段回答。
+
+## 第 35 轮 · 2026-10-21 08:21 · 用户质疑:为何没参考 IHP / HYPER / Beyond Graphs / HypeBoy / HyperG 和图方法 MAS 归因文献
+
+**核对结论(批评成立):** 这些文献都读过,也写进了第 20 轮的 118 篇综合与设计草案 v0.1。但第 34 轮的 README 只把 HYPER、HypeBoy、HyperG 列为"设计中",IHP 和 Beyond Graphs 根本没出现。更关键的是,已实现的 `model_v0.py` 只是按关系类型分参数的均值消息传递(HGNN+ / R-GCN)加任务向量拼接,**不含任何超图基础模型特有的机制**,与 v1 同源。称它为"新的超图大模型"是夸大。图方法 MAS 归因文献也只吸收了一部分:GraphTracer、AgentTrace、CHIEF、GRADE、HPFA、AFANet;SOAP、AgentTether、BlindGuard、G-Safeguard、XG-Guard、EDGE、DCFA、EMFA、CausalFlow、Node Contribution Backprop、HyperAgent 等都没有落到设计里。
+**做了:** 重读 5 篇超图论文与 MAS 文献索引的原文摘要,写 `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md`,逐项给出"文献 → 组件 → 原文机制 → 在 MAS 轨迹上的改法 → 解决什么问题":
+- C1 HYPER 位置感知 k 元消息:角色槽,read 超边按 `how` 分槽,event 成员无序共用一槽;
+- C2 HYPER / ULTRA 关系图:对关系改名不变,用于跨框架零样本;
+- C3 IHP 超边文本指令,加冻结提示的 adapter;
+- C4 HyperG 查询感知 edge→node;
+- C5 HypeBoy 超边填充自监督,加掩码热身;
+- C6 HyperG / TEA-GLM / G-Retriever 软 token 进冻结 LLM;
+- C7 PromptGFM 约束解码;
+- C8 Beyond Graphs 文本化超图基线,也是"编码而非文本化"的依据;
+- C9 SOAP 思路的只用结果标签的责任分配;
+- MAS 文献逐篇对应到读取超边来源、证据等级、自监督与异常检测、码间传播先验、反事实验证标签、免训练对照、新颖性边界。
+
+v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`MedHyperTrace-v2/README.md` 已同步更正。
+**实施顺序:** v0 基线跑完 → C1–C4 编码器本体,先在 MedAgentAudit 上与 v0 对照 → C5 → C9 → C6 / C7(需 GPU,在用户的 4×A6000 上做)。

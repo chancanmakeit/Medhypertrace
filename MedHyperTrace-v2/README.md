@@ -1,7 +1,7 @@
 # MedHyperTrace-v2：多智能体轨迹的超图基础模型（HGFM）
 
 > 状态（2026-10-21，第 34 轮）：**数据与建图已完成，编码器 v0 第一阶段训练进行中**。下文"已实现 / 设计中"分开写，请勿把设计中的部分当作已有结果引用。
-> 设计草案：`docs/design/HGFM_design_v0.1.md`；文献依据：`docs/lit/`。
+> **当前设计：`docs/design/HGFM_design_v0.2.md`**（文献 → 组件逐项对照）；旧草案 v0.1 只保留作历史记录。文献依据：`docs/lit/`。
 
 ## 1. 一句话
 
@@ -21,7 +21,15 @@
 | 评测 | 合成测试集 + MAFA human-like；平凡基线对照 | 留一家族零样本、锚点任务（固定 100 道医学选择题）、真实人工标注（MedAgentAudit 400 例、MAFA），每项都和"去掉结构"及参考标注者对照 |
 | 已知问题 | 在 human-like v1 上没超过"猜第一步"；合成数据存在模板捷径 | 结构的增益尚未证实（AFANet、GRADE 的证据都偏负面），这是第一阶段要回答的问题 |
 
-**诚实的说明：** 目前已实现的编码器 v0 在网络结构上和 v1 很接近（按关系类型做均值消息传递）。v2 现阶段的差别主要在**数据、建图方式、训练目标和评测口径**；"基础模型"所依赖的几块（自监督预训练、关系文本条件化、LLM 耦合）还在设计中。
+**诚实的说明（第 35 轮更正）：** 已实现的 `hgfm/model_v0.py` 本质上是按关系类型分参数的均值消息传递（HGNN+ / R-GCN），任务向量只是拼接，**不含任何超图基础模型特有的机制**，与 v1 同源。它现在只作为**结构基线（HGNN-baseline）**。v2 的方法本体是 HGFM v0.2（见设计文档），其中以下组件尚未实现：
+- C1 HYPER 式位置感知 k 元消息；
+- C2 HYPER / ULTRA 关系图；
+- C3 IHP 超边文本指令；
+- C4 HyperG 查询感知 edge→node；
+- C5 HypeBoy 超边填充自监督；
+- C6 HyperG / TEA-GLM 软 token 进冻结 LLM；
+- C7 约束解码；
+- C9 只用结果标签的责任分配（SOAP 思路）。
 
 ## 3. 方法（当前版本）
 
@@ -35,7 +43,7 @@
      - `event`：同一投票轮、讨论组或并行组；
      - `agent`：同一 agent 的全部步骤。
    - 整个构建过程**不写任何框架专用代码**，14 个 medical-aegis 框架和 6 个 MedAgentAudit MAS 都走同一路径。
-2. **编码器 v0**（`hgfm/model_v0.py`）
+2. **编码器 v0 = 结构基线 HGNN-baseline**（`hgfm/model_v0.py`；方法本体 HGFM v0.2 见设计文档）
    - 节点初值 = MLP(输出文本嵌入、角色/阶段嵌入、少量结构标量（是否给出答案、与最终答案或本轮多数是否一致、轮次、读者数等），任务向量)；
    - 2 层"节点 → 超边 → 节点"消息传递，每种关系类型一套参数，`read` 正反两向都传；
    - 两个输出头：逐步的故障码 logits 和运行级 logits（是否答错、角色分配故障）。`layers=0` 即"去掉结构"的消融，输入特征完全相同。
@@ -49,31 +57,33 @@
 
 ## 4. 参考和借用了哪些文献
 
-编号对应 `docs/lit/graph_llm_118/`（图大模型 118 篇解读）；MAS 归因文献在文献仓库 `chancanmakeit/graph-based-mas-fault-attribution-papers`。
+**逐项对照（每篇对应哪个组件、原文机制、在 MAS 上怎么改）见 `docs/design/HGFM_design_v0.2.md` §1–§2。** 摘要如下：
 
-**直接借用的核心技术（已实现）**
-- **超图消息传递的基本形式**：HGNN（Feng et al., AAAI 2019）/ HGNN+（Gao et al., TPAMI 2022）的"节点 → 超边 → 节点"两阶段传播，以及按关系类型分参数（R-GCN，Schlichtkrull et al., 2018）。这部分与 v1 同源。
-- **查询条件化、一次前向给所有节点打分**：GFM-RAG（#108）和 ULTRA（#3）的思路。用任务（失败的问题）作为查询，对每个 step 节点同时输出归因分数。v0 采用的是简化形式：把任务向量拼接到每个节点上，还不是 labeling trick。
-- **信息依赖图 / 读取集**：GraphTracer（AAMAS 2026）的 Information Dependency Graph、AgentTrace（ICLR 2026 workshop）的 data-dependency 边、CHIEF（arXiv 2602.23701）的因果图。v2 把这些"二元依赖边"推广为**一次调用读多个前序步的有向超边**，并要求在生成时记录，而不是事后靠 LLM 抽取。
-- **边的证据等级、度数匹配的伪造对照**：GRADE（arXiv 2606.22741）。对应 v2 的 `how` 字段（verbatim / excerpt / structured_field / matched / protocol / control）和计划中的消融。
-- **控制依赖**：受 MAC（pyautogen 群聊选人）和 KAMAC（运行中招募）的启发，单独建 `control` 超边。
+- **超图基础模型（方法本体）**
+  - HYPER（#54）：位置感知 k 元消息、关系图零样本，即 C1、C2；
+  - IHP（#53）：超边文本指令和冻结提示的 adapter，即 C3；
+  - HyperG（#93）：查询感知传播和超边软 token 进 LLM，即 C4、C6；
+  - HypeBoy（#52）：超边填充自监督，即 C5；
+  - Beyond Graphs / LLM4Hypergraph（#92）：文本化超图基线，也是"编码而不是文本化"的依据，即 C8；
+  - 辅助：ULTRA（#3）、REEF（#50）、GFM-RAG（#108）、TEA-GLM（#98）、GraphGPT（#55）、G-Retriever（#58）、G-reasoner（#85）、PromptGFM（#51）、COSMOS（#38）。
+- **基于图的 MAS 故障归因**
+  - 读取超边由二元依赖边推广而来：GraphTracer、AgentTrace、CHIEF、DCFA、EMFA；
+  - 边的证据等级与伪造对照：GRADE；
+  - 只用结果标签的责任分配：SOAP、Node Contribution Backpropagation；
+  - 只用正常运行的自监督与异常检测：AgentTether、BlindGuard；
+  - 节点异常分数基线：G-Safeguard、XG-Guard；
+  - 故障码传播先验：EDGE；
+  - 反事实验证责任标签：CausalFlow、Causal Agent Replay；
+  - 免训练对照：Adaptive Influence Graphs、FALAT、STRACE、CDC-MAS；
+  - 新颖性边界：HPFA、HyperAgent、MAGE；
+  - 最接近的竞品：AFANet；
+  - 数据与故障体系：MedAgentAudit。
+- **底层**：HGNN / HGNN+、R-GCN，即 v0 结构基线所用，与 v1 同源。
 
-**设计中、准备结合的技术**
-- **跨 schema 零样本**：ULTRA（#3）、HYPER（#54）的关系图加位置交互（对关系改名保持不变，HYPER 本身就处理 k 元超边）；REEF（#50）用关系文本经超网络生成参数；HiGPT（#61）用自然语言描述类型。对应 v2 计划用 `framework_description` 和关系文本条件化编码器。
-- **超图自监督**：HypeBoy（#52）的超边填充，用于读取超边填充预训练；HyperBERT（#99）。
-- **图与 LLM 耦合**：TEA-GLM（#98）把 GNN 表示和 LLM token 空间做特征级对齐、零样本；GraphGPT（#55）、LLaGA（#56）冻结 LLM、只训投影器；GOFA（#6）交错的 GNN 层；HyperG（#93）把超边表示作为软 token 输入 LLM；G-Retriever（#58）证明图 token 与文本化互补。
-- **约束解码**：PromptGFM（#51）的前缀树约束、RAR（#71）的路径幻觉问题，用于把 LLM 输出限制在真实存在的 (agent, step) 上。
-- **成对运行分歧伪标签**：HPFA（COLM 2026）用成功与失败轨迹对比定位根因。v2 改为定义在 `structured.answer` 等语义字段上。
-
-**必须正面对比的直接竞争工作**
-- **AFANet**（arXiv 2608.18575）：轮次图加 GCN，在 AEGIS-Bench 上训练、迁移到 Who&When。与 v2 最接近，而且它的消融显示结构增益很小。
-- **CHIEF / Adaptive Influence Graphs / DCFA / EDGE / EMFA**：LLM 建图、LLM 推理，免训练。
-- **GraphTracer / AgenTracer**：图或 RL 加微调 LLM。
-- **MedAgentAudit**（arXiv 2510.10185）：故障体系、数据和审计员。它做的是群体层面的审计，v2 做的是单条轨迹层面的定位和责任归因。
-
-**新颖性的边界（据文献检索，详见 `docs/lit/graph_mas_attribution_positioning.md`）**
-- "用超图做故障归因"本身已被 HPFA 占用，但 HPFA 是单智能体推理轨迹，超图也未被编码。
-- "把编码后的 MAS 轨迹超图和 LLM 推理结合"、"跨 MAS 框架零样本的超图基础模型"目前没有先例。
+**新颖性的边界：**
+- "用超图做故障归因"已有 HPFA，但它是单智能体推理轨迹，超图也没有被编码；
+- "超图建模 MAS"已有 HyperAgent 和 MAGE，但它们做的是拓扑优化和记忆，不做归因；
+- 目前没有先例的是：MAS 轨迹的**编码后**超图与 LLM 推理结合，以及跨 MAS 框架零样本的超图基础模型。
 
 ## 5. 运行（在本目录下）
 ```bash

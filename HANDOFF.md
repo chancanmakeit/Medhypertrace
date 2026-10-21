@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-21(第 34 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-21(第 35 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -80,6 +80,10 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.47 第 35 轮:v2 方法本体 = HGFM v0.2(以设计文档为准)
+- **`MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` 是当前设计**,包含文献 → 组件的逐项对照,以及 C1–C9 的实施顺序。`model_v0.py` 只是结构基线 HGNN-baseline,不得称为方法本体。
+- 实施顺序:第一阶段 v0 基线跑完 → C1–C4 → C5 → C9 → C6 / C7(需 GPU)。
 
 ### 0.46 第 33–34 轮:MedHyperTrace-v2 第一阶段(MedAgentAudit)
 - 数据:`GuihaiChen1998/nature-sub-record`(公开仓库,匿名只读 clone,`GIT_LFS_SKIP_SMUDGE=1`)里的 `MedAgentAudit-datasets_and_logs-9.2 - 1.zip.00{1,2,3}`,cat 合并后解压两层,得到 `github_release_files/`。本会话放在 `/home/claude/data_maa/maa2/github_release_files`。用户已确认授权。
