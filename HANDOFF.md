@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-21(第 30 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-21(第 31 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -83,7 +83,7 @@
 - 用户定锚点 4 个家族:mdagents、medagents、KAMAC、MAC(不用 MA-RAG)。我方建议加 llm_debate(约 $2–3)。
 - 我方立场:锚点只用 llama(题目按 llama 的筛选准确率选);K=2 不接受(成败并存期望题数 45 vs K=4 的 79.8,且平票概率 0.5);省钱改为每题 2 次注入;零样本证据 = 主数据留一家族(主张)+ 锚点留一家族(控制),锚点曲线只作趋势。
 - dylan / agentverse 只有旧数据,只用于预训练。
-- 500 题难度筛选进行中(阶段性准确率 mercury 0.38、llama 0.52),等打乱选项对照结果。
+- 500 题难度筛选已完成:无污染(打乱前后准确率不降);锚点 100 题从 llama 区间内 151 题分层抽取(`anchor_medxpertqa100.json`)。KAMAC / MAC 已移植(mock)。第 31 轮已明确请对方评估省钱反提案并给出真实单价。
 
 ### 0.43 第 29 轮
 - 对方已落实:原地改答案 RC、目标池均匀抽取、`labels.outcome`(我方只用 flipped / repaired)、`scripts/quality_gate.py`(已复核与我方一致)、medagents 补 `structured.answer`、MedXpertQA-Text。
