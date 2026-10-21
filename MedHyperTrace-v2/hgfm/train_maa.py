@@ -22,6 +22,7 @@ import numpy as np, torch
 from sklearn.metrics import roc_auc_score
 from hgfm.data_maa import Featuriser, CODES
 from hgfm.model_v0 import HGFMv0, collate
+from hgfm.splits_maa import folds as make_folds
 
 torch.set_num_threads(2)
 ALLC = CODES + ["2.1.1"]
@@ -76,7 +77,7 @@ def auc(y, s):
     return roc_auc_score(y, s) if len(set(y)) == 2 else float("nan")
 
 
-def main(src, emb, human, overlap, out):
+def main(src, emb, human, overlap, out, kinds="LOMO,QD"):
     os.makedirs(out, exist_ok=True)
     H = [json.loads(l) for l in open(human)]
     hq = {h["run_id"].split("|")[3] + "/" + h["qid"] for h in H}
@@ -84,8 +85,11 @@ def main(src, emb, human, overlap, out):
     for gold in (False, True):
         G = load(src, emb, overlap, gold); d_in = G[0]["X"].shape[1]
         by = {g["run_id"]: g for g in G}
-        folds = [("LOMO:" + m_, [g for g in G if g["mas"] != m_], [g for g in G if g["mas"] == m_]) for m_ in sorted({g["mas"] for g in G})]
-        folds.append(("QD", [g for g in G if g["qid"] not in hq], [g for g in G if g["qid"] in hq]))
+        if kinds == "LOMO,QD":   # round-33 protocol (QD = test on human-eval questions, train on the rest)
+            folds = [("LOMO:" + m_, [g for g in G if g["mas"] != m_], [g for g in G if g["mas"] == m_]) for m_ in sorted({g["mas"] for g in G})]
+            folds.append(("QD", [g for g in G if g["qid"] not in hq], [g for g in G if g["qid"] in hq]))
+        else:
+            folds = make_folds(G, hq, tuple(kinds.split(",")))
         for layers in (0, 2):
             for name, tr, te in folds:
                 t0 = time.time(); m = train(tr, layers, d_in=d_in); P = predict(m, te); te_ids = {g["run_id"]: k for k, g in enumerate(te)}
@@ -104,7 +108,7 @@ def main(src, emb, human, overlap, out):
                 hs = []
                 for h in H:
                     if h["run_id"] not in te_ids: continue
-                    if name.startswith("LOMO") and h["mas"] != name[5:]: continue
+                    if name[:4] in ("LOMO", "LQD:") and h["mas"] != name.split(":")[1]: continue
                     g = te[te_ids[h["run_id"]]]; p = P[te_ids[h["run_id"]]]
                     if h["code"] == "2.1.1": sc = float(p[1][1]); pr = np.nanmean([x["y211"] for x in tr])
                     else:
@@ -134,4 +138,4 @@ def main(src, emb, human, overlap, out):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:6])
+    main(*sys.argv[1:7])
