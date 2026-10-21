@@ -1,11 +1,13 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-21(第 32 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-21(第 34 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
 > **新会话开场顺序:** ① 本文 §0(当前状态)→ ② 最新的 `RUN_v0.<N>.md`(讨论记录,文件名带版本号,N=轮次)的最后两轮 → ③ 按需读 `RUN_EXPERIMENTS.md`(完整实验命令)和 `docs/`。
 > **仓库:** https://github.com/chancanmakeit/Medhypertrace (**私有仓库**,2026-10-09 起)。§一 以下是 2026-10-08 旧会话的内容,§0 中与之冲突的以 §0 为准。
+
+> **⚠️ 第 34 轮(2026-10-21)起目录重组(用户要求):** 原方法 = **MedHyperTrace-v1**,全部代码 / 数据 / 结果移入 `MedHyperTrace-v1/`;新的超图基础模型 = **MedHyperTrace-v2**,代码在 `MedHyperTrace-v2/`。根目录只留 `README.md`、`HANDOFF.md`、`RUN_v0.<N>.md`。**本文 §0.3x 及以前出现的路径,v1 的一律加前缀 `MedHyperTrace-v1/`**(例如 `scripts/restore_env.sh` → `MedHyperTrace-v1/scripts/restore_env.sh`、`eval_mafa/` → `MedHyperTrace-v1/eval_mafa/`);**v2 的对照表:** `ours/hgfm/*` → `MedHyperTrace-v2/hgfm/*`(包名 `hgfm`,在 `MedHyperTrace-v2/` 下 `python -m hgfm.<模块>`);`data_tools/*`、`common/clean_inputs.py`、`common/old_data_filters.py` → `MedHyperTrace-v2/data_tools/`;`analysis/{read_hyperedge_stats,pilot_20261020}.py` → `MedHyperTrace-v2/analysis/`;`docs/{design,lit,interfaces}` → `MedHyperTrace-v2/docs/`;`scripts/issue_inbox.sh` → `MedHyperTrace-v2/scripts/issue_inbox.sh`。v1 用 `validate.py` 和 `ours/train_hgnn.py --help`、v2 用全部模块 import 和审计脚本做过冒烟测试。
 
 ---
 
@@ -78,6 +80,12 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.46 第 33–34 轮:MedHyperTrace-v2 第一阶段(MedAgentAudit)
+- 数据:`GuihaiChen1998/nature-sub-record`(公开仓库,匿名只读 clone,`GIT_LFS_SKIP_SMUDGE=1`)里的 `MedAgentAudit-datasets_and_logs-9.2 - 1.zip.00{1,2,3}`,cat 合并后解压两层,得到 `github_release_files/`。本会话放在 `/home/claude/data_maa/maa2/github_release_files`。用户已确认授权。
+- 转换:`MedHyperTrace-v2/data_tools/maa_to_mas_traj.py` → 14,370 条 mas-traj/1(`/home/claude/data_maa/maa_mas_traj.jsonl`)。mdagents 的 basic 有 1,919 / 2,395 条,不使用。与锚点重复的题 2 道(`anchor_overlap_qids.json`)。400 例人工标注对齐见 `maa_human_eval.py`;审计员与人工多数票一致 346/400。
+- 嵌入:`hgfm/embed_maa.py`,all-MiniLM-L6-v2,8.6 万条文本,CPU 约 45/s。训练:`hgfm/train_maa.py`(留一 MAS 6 折 + 题目不重叠 1 折,× L0/L2,× 是否给金标准)。
+- 只在 MedAgentAudit 体系内;LLM 审计员标签只作弱标签。
 
 ### 0.45 第 32 轮
 - 已定:全量 normal K=3 + 每题 2 次注入;所有框架轮次上限 2;锚点只用 llama;锚点题 = `anchor_medxpertqa100.json`。锚点当前 = medagents、MAC、llm_debate + (KAMAC 或 mdagents,我方建议 mdagents:KAMAC 在 llama 上招募率 0%,退化成与 mdagents 相同的扇入拓扑)。

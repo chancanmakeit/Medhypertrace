@@ -2,7 +2,7 @@
 Model: sentence-transformers/all-MiniLM-L6-v2 (384-d), max_seq_length 256, CPU.
 Excludes mdagents complexity 'basic' runs (single-agent routing, no collaboration).
 Outputs <out_dir>/emb.npy (float16) and <out_dir>/index.json {text_sha1: row}.
-Usage: python -m ours.hgfm.embed_maa <mas_traj.jsonl> <out_dir>
+Usage: python -m hgfm.embed_maa <mas_traj.jsonl> <out_dir>
 """
 import json, sys, os, hashlib, time
 import numpy as np

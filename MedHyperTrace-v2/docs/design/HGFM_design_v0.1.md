@@ -20,7 +20,7 @@ AEGIS 合成数据每一步都存了该次 LLM 调用的 `input_messages`，Tria
 
 **含义：** "一次调用同时读了哪几条"是天然的多元关系，在聚合 / 讨论类步骤里很普遍，且可以不针对框架手写规则地恢复——这是超图建模的数据依据，也是"schema 无关"的落脚点。（第 23 轮更正：第 22 轮把 llm_debate 的 User 提示条目也算作步骤，误报"46% 缺输入"；agent 步实际缺失 0%。）
 
-**第 23 轮发现的泄漏：** prompt_injection 步骤记录的 `input_messages` 含注入指令原文（mdagents、clinical_agent、clinical_agent5 100%，dylan 99%，llm_debate 64%），且前三个框架未存注入前输入。HGFM 节点文本**不得**直接使用这些框架的原始 `input_messages`。第 24 轮已实现 `common/clean_inputs.py`：用 `raw_history.original_prompt`（mdagents / clinical_agent / ca5）和 `original_input_messages`（dylan / llm_debate）把 5 个框架的 PI 步骤 100% 恢复成干净输入、无模板残留；读入旧数据一律先过这一步。MedHyperTrace 现有代码只用 `input_messages` 建边、节点文本用 `content`，不受影响。
+**第 23 轮发现的泄漏：** prompt_injection 步骤记录的 `input_messages` 含注入指令原文（mdagents、clinical_agent、clinical_agent5 100%，dylan 99%，llm_debate 64%），且前三个框架未存注入前输入。HGFM 节点文本**不得**直接使用这些框架的原始 `input_messages`。第 24 轮已实现 `data_tools/clean_inputs.py`：用 `raw_history.original_prompt`（mdagents / clinical_agent / ca5）和 `original_input_messages`（dylan / llm_debate）把 5 个框架的 PI 步骤 100% 恢复成干净输入、无模板残留；读入旧数据一律先过这一步。MedHyperTrace 现有代码只用 `input_messages` 建边、节点文本用 `content`，不受影响。
 
 ---
 

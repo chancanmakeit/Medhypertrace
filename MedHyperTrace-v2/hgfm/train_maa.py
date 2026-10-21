@@ -15,13 +15,13 @@ Metrics:
   outcome AUROC of P(final wrong) on held-out runs (no-gold variants only)
 References on the 400: the auditor's own label (sees ground truth), and a prior
 (training-set positive rate of (phase, code)).
-Usage: python -m ours.hgfm.train_maa <mas_traj.jsonl> <emb_dir> <human400.jsonl> <anchor_overlap.json> <out_dir>
+Usage: python -m hgfm.train_maa <mas_traj.jsonl> <emb_dir> <human400.jsonl> <anchor_overlap.json> <out_dir>
 """
 import json, sys, os, time, pickle, collections, random
 import numpy as np, torch
 from sklearn.metrics import roc_auc_score
-from ours.hgfm.data_maa import Featuriser, CODES
-from ours.hgfm.model_v0 import HGFMv0, collate
+from hgfm.data_maa import Featuriser, CODES
+from hgfm.model_v0 import HGFMv0, collate
 
 torch.set_num_threads(2)
 ALLC = CODES + ["2.1.1"]

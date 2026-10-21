@@ -1,4 +1,4 @@
-# RUN_v0.32 — 每轮讨论记录
+# RUN_v0.34 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -390,3 +390,13 @@ triage_agent         triage              5   18.8   10.8   6.0    2.4/  4       
 **对方:** 用户决定锚点 = medagents、KAMAC、MAC、llm_debate(mdagents 因成本退出),所有框架轮次上限 2(主数据也改了默认值,`round_settings` 记录实际值);全量方案 normal K=3 + 每题 2 次注入(`strategy_cycle`);llama 真实单价(5 题试跑,约 $0.49):① K=4 方案约 $17,② K=3 方案约 $14;MAC 用 `nth` 目标后 not_fired 从 7/10 降到 1/10;**KAMAC 在 llama 上招募率 0%**(1 名或 3 名专家,participate 全答 No,与上游提示词语义一致),退化为 recruiter + 独立专家 + moderator 投票;mdagents(intermediate,1 轮,7 次调用)约 $1.05;锚点 normal 已开跑。用户提到 MedAgentAudit 数据(GuihaiChen1998/nature-sub-record):6 个 MAS × 6 个数据集 × 4 个 LLM,14,370 条真实轨迹,LLM 审计员按 agent × 步骤给 10 种故障码的二值判定,另有 400 例人工标注(每码 20 正 / 20 负,3 名标注者),无训练 / 评测划分。
 **回复(issue #1 评论 6318536928):** ① KAMAC → 用 mdagents:退化后的 KAMAC 与 mdagents 同为扇入型拓扑,挂 KAMAC 之名会误导;mdagents 在 MedAgentAudit 里有 MedXpertQA-text 自然失败轨迹可做跨来源评测;最便宜。锚点 4 个家族拓扑各异(medagents 投票修订 / MAC 群聊控制依赖 / llm_debate 对等辩论 / mdagents 扇入)。KAMAC 仅在找到会招募的 backbone 时进主数据(先用 mercury 测 5 题),不改提示词。② MedAgentAudit:价值很高(大规模真实自然失败,补注入数据的签名缺口),请写转换器(恢复输入或标 sources_recorded false;带 final / gold / is_correct;`labels.audit` 注明 taxonomy 与 source;家族映射 mac→groupchat、mdagents→mdagents、reconcile→debate)。四条约束:体系分开(项目硬规则);LLM 审计标签只作弱标签,评测真值只用 400 例人工标注并给出 κ;与锚点题干相同的轨迹不进训练;它是缺陷层标签,按码报 AUROC / F1。第一阶段训练计划:审核 + 建超图 → 自监督预训练 → 审计弱监督 → 400 例人工评测 + 按 MAS 留一。请对方向用户确认数据授权与引用方式。
 **待用户决定:** 锚点第 4 个家族用 mdagents 还是 KAMAC;MedAgentAudit 数据授权。
+
+## 第 33 轮 · 2026-10-21 07:32 · 用户:锚点用 mdagents(medical-aegis 已定);MedAgentAudit 已授权;开始
+
+**做了:** 从 `GuihaiChen1998/nature-sub-record` 取 MedAgentAudit 发布包(14,370 条 MAS 轨迹、400 例人工标注、6 个 MAS × 6 个数据集 × 4 个 LLM)。写转换器转 mas-traj/1:4 个 MAS 有 `llm_input`,读取集用中段探针匹配;mac、reconcile 按协议推断;个别没有输入的步骤按同轮协议补。审计判定 26.6 万条,除 5,257 条 2.1.1(运行级)外全部映射到步骤。mdagents 的 basic 共 1,919 条(占 80%)不用;与锚点重复 2 道题。400 例人工标注全部对齐,每例 3 票;审计员与人工多数票一致 346/400(86.5%)。在 issue 中说明转换器由我方写,并贴出转换规则(评论 14:42、14:52 UTC)。写了 HGFM v0(`model_v0.py`)、特征化(`data_maa.py`)、训练评测脚本(`train_maa.py`),在小样本上跑通;嵌入在后台运行。
+**评测口径上的提醒:** 400 例按审计员判定分层抽样(每码 20 阳 / 20 阴),审计员判定时看了金标准 → 只学审计员标签的模型天然占便宜,结果一律对照审计员本身报告;每码人工阳性只有 12–19 个,附 bootstrap CI。
+
+## 第 34 轮 · 2026-10-21 08:00 · 用户:仓库分成 MedHyperTrace-v1 / v2;问两者区别、新方法介绍与文献来源
+
+**做了:** `git mv` 重组目录(保留历史):原方法的全部代码、数据、结果和文档放进 `MedHyperTrace-v1/`;新方法放进 `MedHyperTrace-v2/`(`hgfm/`、`data_tools/`、`analysis/`、`docs/{design,lit,interfaces}`、`scripts/issue_inbox.sh`),import 从 `ours.hgfm` 改为 `hgfm`。根目录只留 README、HANDOFF、RUN 记录。冒烟测试:v1 的 `validate.py` 和 `train_hgnn.py --help` 正常;v2 全部模块 import 正常,审计脚本在试点导出上 0 问题,`clean_inputs.py` 正常。`.gitignore` 路径已更新。新写根目录 README(两代方法索引)、`MedHyperTrace-v2/README.md`(方法介绍、与 v1 的区别、文献来源,"已实现 / 设计中"分开写)。
+**回答用户的要点:** v1 是针对 AEGIS 合成数据的任务特定超图网络,超边由规则构造且无向,训练目标是最早注入步;v2 是跨框架超图基础模型,超边来自生成时记录的有向读取集,另有控制、事件超边,数据加入真实自然失败,目标是留一家族零样本,后续耦合冻结 LLM。**诚实说明:** v2 当前的编码器 v0 在网络结构上和 v1 接近,差别主要在数据、建图、目标和评测;自监督预训练、关系文本条件化、LLM 耦合还在设计中;结构的增益尚待第一阶段回答。

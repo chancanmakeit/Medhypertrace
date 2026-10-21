@@ -14,11 +14,11 @@ Checks, per record:
                          pre-corruption call; we report |output chars / completion_tokens| for
                          corrupted vs other steps (a detectable gap = a label leak)
 Then builds the UTH and prints hypergraph statistics per framework.
-Usage: python -m ours.hgfm.audit_schema_v1 <export.jsonl> [...]
+Usage: python -m hgfm.audit_schema_v1 <export.jsonl> [...]
 """
 import json, sys, statistics as st
 from collections import defaultdict
-from ours.hgfm.uth import build_uth, STEP_FIELDS_ALLOWED
+from hgfm.uth import build_uth, STEP_FIELDS_ALLOWED
 
 def norm(s): return " ".join(str(s).split())
 def msgs_text(ms): return norm(" ".join(m["content"] if isinstance(m.get("content"), str) else json.dumps(m.get("content"), ensure_ascii=False) for m in ms or []))

@@ -1,6 +1,6 @@
 # Repo is PRIVATE (confirmed 2026-10-09). Dataset .7z, emb_cache and eval_samples are tracked.
 # Extracted dataset lives outside the repo (/home/claude/aegis_813) or here:
-data/AEGIS-custom-dataset/
+MedHyperTrace-v1/data/AEGIS-custom-dataset/
 
 # API keys — never commit, even to a private repo (they live in the Project doc "api端点")
 *.env
