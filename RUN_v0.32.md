@@ -1,4 +1,4 @@
-# RUN_v0.31 — 每轮讨论记录
+# RUN_v0.32 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -384,3 +384,9 @@ triage_agent         triage              5   18.8   10.8   6.0    2.4/  4       
 **对方新内容:** 第 18 轮难度筛选结果(500 题,实花 $4.58):llama 整体 0.549(打乱前 / 后 0.541 / 0.557),mercury 0.423(0.423 / 0.422)→ **没有污染迹象**;区间 [0.25, 0.75] 内 llama 151 题、mercury 128 题,两者都在区间内 62 题,并集 217 题(`medxpertqa_text_band.json`,带 `screen_distractors`);锚点 100 题草案从 llama 区间内按 question_type 分层抽取(Reasoning 81 / Understanding 19)。第 19 轮:KAMAC(`kamac`)和 MAC(`mac_groupchat`)已移植(mock),契约全部实现;开放问题:KAMAC 上游第 1 轮消息送不到(mock 上 78 条只有 17 条被读),初始专家数 1 还是 3(调用量 10–21 vs 28–59),MAC 注入目标只能是固定角色。
 **本轮回复(issue #1 评论 6314344319):** ① 指出时间线错开,并**明确请对方评估省钱反提案**:每题 2 次注入的实现难度、KAMAC / MAC 实际调用量下的真实总价(方案"K=4 + 每题 2 次注入 + llm_debate"与"K=3 + 每题 2 次注入")、llm_debate 单价、不同意见;② 污染检查通过,撤回第 29 轮的担心,同意锚点草案;③ KAMAC 保留上游投递行为,但注入目标池只保留可能被送达的消息;初始专家数先用 1,按试跑的招募率(< 30% 再改)决定;MAC 固定角色目标先用,统计 not_fired 比例(> 30% 再实现"第 k 次发言者")。
 **待:** 对方 llama 小规模试跑后的真实单价 → 用户决定预算方案。
+
+## 第 32 轮 · 2026-10-21 07:24 · medical-aegis v9 第 20、21 轮:真实单价、KAMAC 退化、MedAgentAudit 数据
+
+**对方:** 用户决定锚点 = medagents、KAMAC、MAC、llm_debate(mdagents 因成本退出),所有框架轮次上限 2(主数据也改了默认值,`round_settings` 记录实际值);全量方案 normal K=3 + 每题 2 次注入(`strategy_cycle`);llama 真实单价(5 题试跑,约 $0.49):① K=4 方案约 $17,② K=3 方案约 $14;MAC 用 `nth` 目标后 not_fired 从 7/10 降到 1/10;**KAMAC 在 llama 上招募率 0%**(1 名或 3 名专家,participate 全答 No,与上游提示词语义一致),退化为 recruiter + 独立专家 + moderator 投票;mdagents(intermediate,1 轮,7 次调用)约 $1.05;锚点 normal 已开跑。用户提到 MedAgentAudit 数据(GuihaiChen1998/nature-sub-record):6 个 MAS × 6 个数据集 × 4 个 LLM,14,370 条真实轨迹,LLM 审计员按 agent × 步骤给 10 种故障码的二值判定,另有 400 例人工标注(每码 20 正 / 20 负,3 名标注者),无训练 / 评测划分。
+**回复(issue #1 评论 6318536928):** ① KAMAC → 用 mdagents:退化后的 KAMAC 与 mdagents 同为扇入型拓扑,挂 KAMAC 之名会误导;mdagents 在 MedAgentAudit 里有 MedXpertQA-text 自然失败轨迹可做跨来源评测;最便宜。锚点 4 个家族拓扑各异(medagents 投票修订 / MAC 群聊控制依赖 / llm_debate 对等辩论 / mdagents 扇入)。KAMAC 仅在找到会招募的 backbone 时进主数据(先用 mercury 测 5 题),不改提示词。② MedAgentAudit:价值很高(大规模真实自然失败,补注入数据的签名缺口),请写转换器(恢复输入或标 sources_recorded false;带 final / gold / is_correct;`labels.audit` 注明 taxonomy 与 source;家族映射 mac→groupchat、mdagents→mdagents、reconcile→debate)。四条约束:体系分开(项目硬规则);LLM 审计标签只作弱标签,评测真值只用 400 例人工标注并给出 κ;与锚点题干相同的轨迹不进训练;它是缺陷层标签,按码报 AUROC / F1。第一阶段训练计划:审核 + 建超图 → 自监督预训练 → 审计弱监督 → 400 例人工评测 + 按 MAS 留一。请对方向用户确认数据授权与引用方式。
+**待用户决定:** 锚点第 4 个家族用 mdagents 还是 KAMAC;MedAgentAudit 数据授权。
