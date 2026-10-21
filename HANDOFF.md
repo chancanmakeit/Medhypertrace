@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-21(第 35 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-21(第 36 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -80,6 +80,11 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.48 第 36 轮
+- **每次被唤醒(用户消息或后台任务完成)都先跑 `bash MedHyperTrace-v2/scripts/issue_inbox.sh`**;第 26、36 轮两次因专注实验漏看了对方评论。
+- MedAgentAudit 评测划分:**只用 LQD(留一 MAS 且题目不重叠,`hgfm/splits_maa.py`)和 QD**;原 LOMO 有题目泄漏,作废。v0 结果见 RUN_v0.36 第 36 轮(结构跨框架零样本无增益)。产物在 `/home/claude/data_maa/out_v0_lqd/`、`out_v02/`(沙箱本地)。
+- 锚点 4 个家族:medagents、MAC、llm_debate、mdagents;KAMAC 放弃。PI 门槛未过,对方在修;旧 PI = `pi_variant: v1_signature`,只作压力测试。
 
 ### 0.47 第 35 轮:v2 方法本体 = HGFM v0.2(以设计文档为准)
 - **`MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` 是当前设计**,包含文献 → 组件的逐项对照,以及 C1–C9 的实施顺序。`model_v0.py` 只是结构基线 HGNN-baseline,不得称为方法本体。

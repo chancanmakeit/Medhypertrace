@@ -1,0 +1,39 @@
+============================== A. content shortcut (single-step text, role-matched negatives)
+  llm_debate     response_corruption  roles=['Agent', 'Aggregator'] pos=100 neg=2100  AUROC=0.524
+  llm_debate     prompt_injection     roles=['Agent', 'Aggregator'] pos=100 neg=2100  AUROC=0.847
+  mac_groupchat  response_corruption  roles=['Doctor', 'Supervisor'] pos= 96 neg=1592  AUROC=0.525
+  mac_groupchat  prompt_injection     roles=['Doctor', 'Selector', 'Supervisor'] pos= 95 neg=3507  AUROC=0.693
+  medagents_mc   response_corruption  roles=['Decider', 'OptionAnalyst', 'Synthesizer'] pos= 87 neg=1200  AUROC=0.542
+  medagents_mc   prompt_injection     roles=['Decider', 'OptionAnalyst', 'QuestionAnalyst', 'Synthesizer', 'Voter'] pos=113 neg=4961  AUROC=0.647
+============================== B. topology shortcut (inject vs normal runs)
+  llm_debate     AUROC(#steps)=0.500  AUROC(max round)=0.500  normal #steps=[(np.int64(7), 300)] inject #steps=[(np.int64(7), 200)]
+  mac_groupchat  AUROC(#steps)=0.604  AUROC(max round)=0.606  normal #steps=[(np.int64(4), 9), (np.int64(6), 10), (np.int64(7), 7), (np.int64(8), 14), (np.int64(9), 36), (np.int64(10), 25), (np.int64(11), 84), (np.int64(12), 20), (np.int64(13), 35), (np.int64(14), 19), (np.int64(15), 22), (np.int64(16), 18), (np.int64(17), 7), (np.int64(18), 3)] inject #steps=[(np.int64(4), 4), (np.int64(6), 5), (np.int64(7), 4), (np.int64(8), 5), (np.int64(9), 14), (np.int64(10), 12), (np.int64(11), 37), (np.int64(12), 11), (np.int64(13), 22), (np.int64(14), 21), (np.int64(15), 25), (np.int64(16), 21), (np.int64(17), 7), (np.int64(18), 3)]
+  medagents_mc   AUROC(#steps)=0.582  AUROC(max round)=0.584  normal #steps=[(np.int64(18), 277), (np.int64(27), 1), (np.int64(28), 1), (np.int64(30), 2), (np.int64(31), 4), (np.int64(32), 4), (np.int64(33), 6), (np.int64(34), 2), (np.int64(35), 1), (np.int64(39), 1), (np.int64(41), 1)] inject #steps=[(np.int64(18), 151), (np.int64(27), 18), (np.int64(28), 1), (np.int64(30), 2), (np.int64(31), 1), (np.int64(32), 1), (np.int64(33), 23), (np.int64(39), 1), (np.int64(40), 2)]
+============================== C. role prior for step localisation
+  llm_debate     inject runs=200  target (agent_id, phase) distribution={('agent_0', 'discussion'): 46, ('agent_2', 'discussion'): 55, ('agent_1', 'discussion'): 66, ('aggregator', 'aggregation'): 33}  -> modal-role prior hits 66/200
+  mac_groupchat  inject runs=191  target (agent_id, phase) distribution={('supervisor', 'supervision'): 42, ('doctor_0', 'discussion'): 117, ('selector', 'select_speaker'): 23, ('doctor_2', 'discussion'): 8, ('doctor_1', 'discussion'): 1}  -> modal-role prior hits 117/191
+  medagents_mc   inject runs=200  target (agent_id, phase) distribution={('o_expert_1', 'option_analysis'): 30, ('decider', 'decision'): 32, ('synthesizer', 'synthesis'): 32, ('o_expert_0', 'option_analysis'): 31, ('q_expert_3', 'question_analysis'): 2, ('q_expert_3', 'consensus_vote'): 8, ('o_expert_0', 'consensus_vote'): 7, ('q_expert_1', 'consensus_vote'): 8, ('q_expert_2', 'question_analysis'): 8, ('q_expert_0', 'consensus_vote'): 8, ('q_expert_2', 'consensus_vote'): 11, ('q_expert_4', 'question_analysis'): 4, ('q_expert_4', 'consensus_vote'): 7, ('q_expert_0', 'question_analysis'): 3, ('q_expert_1', 'question_analysis'): 6, ('o_expert_1', 'consensus_vote'): 3}  -> modal-role prior hits 32/200
+============================== D. flips vs paired normal runs
+  llm_debate     llama-4-maverick     prompt_injection     runs=100 final wrong=42  flip=11/57 (eligible: paired normal acc>=0.5)
+  llm_debate     llama-4-maverick     response_corruption  runs=100 final wrong=60  flip=24/57 (eligible: paired normal acc>=0.5)
+  mac_groupchat  llama-4-maverick     prompt_injection     runs=95 final wrong=49  flip=14/53 (eligible: paired normal acc>=0.5)
+  mac_groupchat  llama-4-maverick     response_corruption  runs=96 final wrong=59  flip=26/54 (eligible: paired normal acc>=0.5)
+  medagents_mc   llama-4-maverick     prompt_injection     runs=113 final wrong=63  flip=12/53 (eligible: paired normal acc>=0.5)
+  medagents_mc   llama-4-maverick     response_corruption  runs=87 final wrong=59  flip=18/41 (eligible: paired normal acc>=0.5)
+============================== E. natural pairing among K normal runs
+  llm_debate     llama-4-maverick     questions=100 mixed (correct & wrong among K=4)=50  semantic-field coverage of aligned steps=1.00
+      first divergence at ('agent_0', 'discussion'): 39 pairs
+      first divergence at ('agent_1', 'discussion'): 35 pairs
+      first divergence at ('agent_2', 'discussion'): 15 pairs
+      first divergence at ('<none: no semantic divergence on aligned steps>',): 11 pairs
+  mac_groupchat  llama-4-maverick     questions=100 mixed (correct & wrong among K=4)=46  semantic-field coverage of aligned steps=0.45
+      first divergence at ('doctor_0', 'discussion'): 85 pairs
+      first divergence at ('<none: no semantic divergence on aligned steps>',): 11 pairs
+      first divergence at ('supervisor', 'supervision'): 1 pairs
+  medagents_mc   llama-4-maverick     questions=100 mixed (correct & wrong among K=4)=24  semantic-field coverage of aligned steps=0.59
+      first divergence at ('o_expert_0', 'option_analysis'): 27 pairs
+      first divergence at ('o_expert_1', 'option_analysis'): 13 pairs
+      first divergence at ('decider', 'decision'): 3 pairs
+      first divergence at ('q_expert_1', 'consensus_vote'): 2 pairs
+      first divergence at ('q_expert_0', 'question_analysis'): 2 pairs
+      first divergence at ('q_expert_0', 'consensus_vote'): 1 pairs
