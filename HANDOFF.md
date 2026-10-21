@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-21(第 37 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-21(第 38 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -80,6 +80,12 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.50 第 38 轮:LLM 层代码就绪 + sham 方案
+- **LLM 层**:`MedHyperTrace-v2/hgfm/llm/`(README 有完整命令)。服务器上执行 `bash scripts/prepare_maa.sh /data/mht`,然后 `bash scripts/run_llm_folds.sh /data/mht Qwen/Qwen3-8B {graph,text,zeroshot}`。CPU 冒烟测试已通过,**GPU 未跑**,耗时是估算。冒烟产物在 `/home/claude/data_maa/llm_smoke/`。
+- **关键对照**:graph 对 text(配对 bootstrap,同 400 例)。text 对编码器 0.645。审计员 0.886 是上限。
+- **medical-aegis 改用 sham 安慰剂注入**(v9 第 27 轮)。我方第 39 轮已回复:同意;训练用同槽位 PI / sham 配对;sham 自然答错的不作负例;门槛加 sham 对普通运行;评测分开报告 sham 与自然正常步骤的假阳性率。issue 最后读到 17:39Z。
+- **自监督(C5)尚未实现**。候选目标见 RUN_v0.38 第 38 轮第 3 问。数据瓶颈是框架多样性,不是样本数(MAA 共 95,833 步)。
 
 ### 0.49 第 37 轮:第一阶段结论
 - `MedHyperTrace-v2/results/phase1_maa/README.md`:LQD 零样本下,人工标注上 v0 和 v0.2(C1–C4)相对无结构都不显著(0.634 / 0.638 / 0.645);只有给金标准时 v0.2 比 v0 显著高 +0.040;交互类故障 0.56–0.62。**不能宣称结构提升零样本。**

@@ -76,6 +76,7 @@ class EntLayer(nn.Module):
         else:
             cnt = torch.zeros(h.shape[0]).index_add_(0, inc_v, torch.ones(len(inc_v))).clamp(min=1); b = 1.0 / cnt[inc_v]
         agg = torch.zeros_like(h).index_add_(0, inc_v, b[:, None] * msg)
+        self.last_m = m                     # hyperedge representations, read by HGFMv02.encode
         return self.ln(h + nn.functional.gelu(self.W0(h) + agg))
 
 
@@ -90,6 +91,13 @@ class HGFMv02(nn.Module):
         self.step_head = nn.Sequential(nn.Linear(d + d_q, d), nn.GELU(), nn.Dropout(drop), nn.Linear(d, n_codes))
         self.run_head = nn.Sequential(nn.Linear(2 * d + d_q, d), nn.GELU(), nn.Dropout(drop), nn.Linear(d, 2))
 
+    @torch.no_grad()
+    def encode(self, B):
+        """Node states h [N, d], hyperedge states m [E, d] (last layer) and logits,
+        for exporting graph tokens to the LLM layer (C6)."""
+        sl, rl = self.forward(B)
+        return self._h, self.layers[-1].last_m, sl, rl
+
     def forward(self, B):
         q_node = B["q"][B["node_run"]]
         h = self.inp(torch.cat([B["X"], q_node], 1))
@@ -97,6 +105,7 @@ class HGFMv02(nn.Module):
         erv = r[B["edge_rel"]]; q_edge = B["q"][B["edge_run"]]
         for L in self.layers:
             h = L(h, q_node, q_edge, B["inc_e"], B["inc_v"], B["inc_s"], B["n_edges"], erv, B["edge_instr"])
+        self._h = h
         step_logits = self.step_head(torch.cat([h, q_node], 1))
         R = B["q"].shape[0]
         pooled = torch.zeros(R, h.shape[1]).index_add_(0, B["node_run"], h) / B["n_nodes"][:, None]

@@ -2,3 +2,7 @@ numpy
 scikit-learn
 torch            # CPU wheel: pip install torch --index-url https://download.pytorch.org/whl/cpu
 sentence-transformers
+# LLM layer (hgfm/llm, GPU server)
+transformers>=4.56
+peft>=0.17
+accelerate
