@@ -1,0 +1,418 @@
+LQD:colacare|scratch|0 outcome=0.648 sec=37
+LQD:colacare|strict|0: pretrain on 5012 runs, fill keys [('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.3557 ans=0.2754 fill=0.5425 7s
+  pre ep1 rec=0.2787 ans=0.1747 fill=0.1900 7s
+  pre ep2 rec=0.2397 ans=0.1622 fill=0.1751 7s
+  pre ep3 rec=0.2195 ans=0.1539 fill=0.1115 7s
+  pre ep4 rec=0.1975 ans=0.1493 fill=0.0574 8s
+LQD:colacare|strict|0 fill_auc_test=0.789 n_fill_test=21554 fill_prior_test=0.500 outcome=0.640 sec=81
+LQD:colacare|shuffle|0: pretrain on 5012 runs, fill keys [('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('mdagents', 'decision'), ('mdagents', 'synthesis'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3389 ans=0.2554 fill=0.6807 7s
+  pre ep1 rec=0.2136 ans=0.1507 fill=0.6589 7s
+  pre ep2 rec=0.1565 ans=0.1462 fill=0.6567 7s
+  pre ep3 rec=0.1323 ans=0.1508 fill=0.6559 10s
+  pre ep4 rec=0.1113 ans=0.1313 fill=0.6399 11s
+LQD:colacare|shuffle|0 fill_auc_test=0.705 n_fill_test=21554 fill_prior_test=0.500 outcome=0.657 sec=92
+LQD:colacare|trans|0: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2754 ans=0.1926 fill=0.2970 18s
+  pre ep1 rec=0.1624 ans=0.1340 fill=0.1215 18s
+  pre ep2 rec=0.1272 ans=0.1291 fill=0.0929 18s
+  pre ep3 rec=0.1104 ans=0.1252 fill=0.0920 19s
+  pre ep4 rec=0.0998 ans=0.1248 fill=0.0805 19s
+LQD:colacare|trans|0 fill_auc_test=0.995 n_fill_test=21554 fill_prior_test=0.955 outcome=0.654 sec=140
+LQD:colacare|scratch|1 outcome=0.645 sec=35
+LQD:colacare|strict|1: pretrain on 5012 runs, fill keys [('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.3509 ans=0.2753 fill=0.4243 7s
+  pre ep1 rec=0.2602 ans=0.1702 fill=0.2161 8s
+  pre ep2 rec=0.2360 ans=0.1547 fill=0.1793 8s
+  pre ep3 rec=0.2133 ans=0.1580 fill=0.1314 8s
+  pre ep4 rec=0.1927 ans=0.1493 fill=0.1023 8s
+LQD:colacare|strict|1 fill_auc_test=0.709 n_fill_test=21554 fill_prior_test=0.500 outcome=0.626 sec=85
+LQD:colacare|shuffle|1: pretrain on 5012 runs, fill keys [('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('mdagents', 'decision'), ('mdagents', 'synthesis'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3294 ans=0.2530 fill=0.6797 7s
+  pre ep1 rec=0.2133 ans=0.1643 fill=0.6607 7s
+  pre ep2 rec=0.1590 ans=0.1461 fill=0.6543 7s
+  pre ep3 rec=0.1290 ans=0.1441 fill=0.6548 8s
+  pre ep4 rec=0.1092 ans=0.1359 fill=0.6435 12s
+LQD:colacare|shuffle|1 fill_auc_test=0.750 n_fill_test=21554 fill_prior_test=0.500 outcome=0.660 sec=93
+LQD:colacare|trans|1: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2768 ans=0.2003 fill=0.3192 19s
+  pre ep1 rec=0.1659 ans=0.1368 fill=0.1070 19s
+  pre ep2 rec=0.1300 ans=0.1292 fill=0.1041 20s
+  pre ep3 rec=0.1125 ans=0.1269 fill=0.0822 21s
+  pre ep4 rec=0.1015 ans=0.1213 fill=0.0709 22s
+LQD:colacare|trans|1 fill_auc_test=0.990 n_fill_test=21554 fill_prior_test=0.955 outcome=0.638 sec=145
+LQD:colacare|scratch|2 outcome=0.646 sec=36
+LQD:colacare|strict|2: pretrain on 5012 runs, fill keys [('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.3392 ans=0.2610 fill=0.5029 7s
+  pre ep1 rec=0.2479 ans=0.1681 fill=0.2035 7s
+  pre ep2 rec=0.2253 ans=0.1632 fill=0.1077 8s
+  pre ep3 rec=0.1954 ans=0.1449 fill=0.0467 8s
+  pre ep4 rec=0.1728 ans=0.1430 fill=0.0789 8s
+LQD:colacare|strict|2 fill_auc_test=0.770 n_fill_test=21554 fill_prior_test=0.500 outcome=0.662 sec=82
+LQD:colacare|shuffle|2: pretrain on 5012 runs, fill keys [('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('mdagents', 'decision'), ('mdagents', 'synthesis'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3179 ans=0.2385 fill=0.6801 7s
+  pre ep1 rec=0.2096 ans=0.1572 fill=0.6602 7s
+  pre ep2 rec=0.1521 ans=0.1480 fill=0.6493 7s
+  pre ep3 rec=0.1231 ans=0.1373 fill=0.6538 7s
+  pre ep4 rec=0.1050 ans=0.1283 fill=0.6453 7s
+LQD:colacare|shuffle|2 fill_auc_test=0.694 n_fill_test=21554 fill_prior_test=0.500 outcome=0.648 sec=81
+LQD:colacare|trans|2: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2668 ans=0.1932 fill=0.3127 18s
+  pre ep1 rec=0.1577 ans=0.1368 fill=0.1200 18s
+  pre ep2 rec=0.1241 ans=0.1305 fill=0.0999 18s
+  pre ep3 rec=0.1062 ans=0.1314 fill=0.0835 20s
+  pre ep4 rec=0.0969 ans=0.1252 fill=0.0784 21s
+LQD:colacare|trans|2 fill_auc_test=0.994 n_fill_test=21554 fill_prior_test=0.955 outcome=0.676 sec=137
+LQD:healthcareagent|scratch|0 outcome=0.577 sec=44
+LQD:healthcareagent|strict|0: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.3397 ans=0.2489 fill=0.4744 8s
+  pre ep1 rec=0.2258 ans=0.1596 fill=0.1963 8s
+  pre ep2 rec=0.1687 ans=0.1575 fill=0.1219 9s
+  pre ep3 rec=0.1334 ans=0.1424 fill=0.0914 9s
+  pre ep4 rec=0.1155 ans=0.1391 fill=0.0988 9s
+LQD:healthcareagent|strict|0 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.586 sec=92
+LQD:healthcareagent|shuffle|0: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('mdagents', 'decision'), ('mdagents', 'synthesis'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3345 ans=0.2415 fill=0.6612 9s
+  pre ep1 rec=0.2070 ans=0.1623 fill=0.6383 9s
+  pre ep2 rec=0.1430 ans=0.1466 fill=0.6342 9s
+  pre ep3 rec=0.1168 ans=0.1459 fill=0.6376 8s
+  pre ep4 rec=0.0991 ans=0.1303 fill=0.6322 9s
+LQD:healthcareagent|shuffle|0 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.598 sec=87
+LQD:healthcareagent|trans|0: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2754 ans=0.1926 fill=0.2970 19s
+  pre ep1 rec=0.1624 ans=0.1340 fill=0.1215 18s
+  pre ep2 rec=0.1272 ans=0.1291 fill=0.0929 18s
+  pre ep3 rec=0.1103 ans=0.1252 fill=0.0913 19s
+  pre ep4 rec=0.0999 ans=0.1242 fill=0.0809 21s
+LQD:healthcareagent|trans|0 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.603 sec=143
+LQD:healthcareagent|scratch|1 outcome=0.592 sec=43
+LQD:healthcareagent|strict|1: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.3422 ans=0.2598 fill=0.4788 8s
+  pre ep1 rec=0.2345 ans=0.1666 fill=0.2006 8s
+  pre ep2 rec=0.1788 ans=0.1480 fill=0.1359 8s
+  pre ep3 rec=0.1438 ans=0.1461 fill=0.1048 8s
+  pre ep4 rec=0.1230 ans=0.1459 fill=0.1130 8s
+LQD:healthcareagent|strict|1 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.582 sec=87
+LQD:healthcareagent|shuffle|1: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('mdagents', 'decision'), ('mdagents', 'synthesis'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3482 ans=0.2597 fill=0.6661 8s
+  pre ep1 rec=0.2322 ans=0.1656 fill=0.6390 8s
+  pre ep2 rec=0.1622 ans=0.1569 fill=0.6355 9s
+  pre ep3 rec=0.1224 ans=0.1489 fill=0.6317 9s
+  pre ep4 rec=0.1017 ans=0.1391 fill=0.6328 9s
+LQD:healthcareagent|shuffle|1 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.598 sec=87
+LQD:healthcareagent|trans|1: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2768 ans=0.2003 fill=0.3192 19s
+  pre ep1 rec=0.1659 ans=0.1368 fill=0.1070 20s
+  pre ep2 rec=0.1300 ans=0.1292 fill=0.1041 21s
+  pre ep3 rec=0.1125 ans=0.1269 fill=0.0822 21s
+  pre ep4 rec=0.1016 ans=0.1214 fill=0.0728 21s
+LQD:healthcareagent|trans|1 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.621 sec=152
+LQD:healthcareagent|scratch|2 outcome=0.592 sec=43
+LQD:healthcareagent|strict|2: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.3266 ans=0.2435 fill=0.4504 8s
+  pre ep1 rec=0.2212 ans=0.1530 fill=0.1841 8s
+  pre ep2 rec=0.1637 ans=0.1536 fill=0.1168 8s
+  pre ep3 rec=0.1301 ans=0.1443 fill=0.1022 8s
+  pre ep4 rec=0.1111 ans=0.1446 fill=0.0908 8s
+LQD:healthcareagent|strict|2 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.601 sec=87
+LQD:healthcareagent|shuffle|2: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('mdagents', 'decision'), ('mdagents', 'synthesis'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3264 ans=0.2477 fill=0.6673 9s
+  pre ep1 rec=0.2124 ans=0.1639 fill=0.6391 9s
+  pre ep2 rec=0.1415 ans=0.1461 fill=0.6367 9s
+  pre ep3 rec=0.1095 ans=0.1429 fill=0.6343 8s
+  pre ep4 rec=0.0927 ans=0.1405 fill=0.6291 8s
+LQD:healthcareagent|shuffle|2 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.604 sec=86
+LQD:healthcareagent|trans|2: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2668 ans=0.1932 fill=0.3127 19s
+  pre ep1 rec=0.1577 ans=0.1368 fill=0.1200 18s
+  pre ep2 rec=0.1241 ans=0.1305 fill=0.0999 18s
+  pre ep3 rec=0.1062 ans=0.1314 fill=0.0835 20s
+  pre ep4 rec=0.0969 ans=0.1252 fill=0.0784 20s
+LQD:healthcareagent|trans|2 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.624 sec=146
+LQD:mac|scratch|0 outcome=0.627 sec=42
+LQD:mac|strict|0: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.3347 ans=0.2431 fill=0.4655 8s
+  pre ep1 rec=0.2227 ans=0.1412 fill=0.1871 8s
+  pre ep2 rec=0.1745 ans=0.1343 fill=0.1204 8s
+  pre ep3 rec=0.1403 ans=0.1291 fill=0.0948 8s
+  pre ep4 rec=0.1249 ans=0.1169 fill=0.1088 8s
+LQD:mac|strict|0 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.597 sec=89
+LQD:mac|shuffle|0: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('mdagents', 'decision'), ('mdagents', 'synthesis'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3333 ans=0.2439 fill=0.6695 8s
+  pre ep1 rec=0.2090 ans=0.1363 fill=0.6428 8s
+  pre ep2 rec=0.1493 ans=0.1284 fill=0.6380 8s
+  pre ep3 rec=0.1242 ans=0.1207 fill=0.6416 9s
+  pre ep4 rec=0.1067 ans=0.1071 fill=0.6361 9s
+LQD:mac|shuffle|0 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.607 sec=87
+LQD:mac|trans|0: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2754 ans=0.1926 fill=0.2970 19s
+  pre ep1 rec=0.1624 ans=0.1340 fill=0.1215 18s
+  pre ep2 rec=0.1272 ans=0.1291 fill=0.0929 18s
+  pre ep3 rec=0.1124 ans=0.1266 fill=0.1002 20s
+  pre ep4 rec=0.1011 ans=0.1250 fill=0.0825 20s
+LQD:mac|trans|0 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.607 sec=140
+LQD:mac|scratch|1 outcome=0.632 sec=41
+LQD:mac|strict|1: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.3359 ans=0.2515 fill=0.4329 8s
+  pre ep1 rec=0.2277 ans=0.1452 fill=0.1968 8s
+  pre ep2 rec=0.1797 ans=0.1358 fill=0.1234 8s
+  pre ep3 rec=0.1450 ans=0.1289 fill=0.1011 8s
+  pre ep4 rec=0.1246 ans=0.1273 fill=0.0933 8s
+LQD:mac|strict|1 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.631 sec=82
+LQD:mac|shuffle|1: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('mdagents', 'decision'), ('mdagents', 'synthesis'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3306 ans=0.2493 fill=0.6627 8s
+  pre ep1 rec=0.2100 ans=0.1413 fill=0.6434 9s
+  pre ep2 rec=0.1585 ans=0.1398 fill=0.6367 8s
+  pre ep3 rec=0.1238 ans=0.1208 fill=0.6376 9s
+  pre ep4 rec=0.1062 ans=0.1098 fill=0.6337 9s
+LQD:mac|shuffle|1 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.656 sec=89
+LQD:mac|trans|1: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2768 ans=0.2003 fill=0.3192 19s
+  pre ep1 rec=0.1659 ans=0.1368 fill=0.1070 19s
+  pre ep2 rec=0.1300 ans=0.1292 fill=0.1041 20s
+  pre ep3 rec=0.1125 ans=0.1269 fill=0.0822 21s
+  pre ep4 rec=0.1015 ans=0.1213 fill=0.0709 21s
+LQD:mac|trans|1 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.628 sec=146
+LQD:mac|scratch|2 outcome=0.647 sec=41
+LQD:mac|strict|2: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.3265 ans=0.2431 fill=0.4842 8s
+  pre ep1 rec=0.2257 ans=0.1419 fill=0.1894 8s
+  pre ep2 rec=0.1723 ans=0.1340 fill=0.1210 8s
+  pre ep3 rec=0.1387 ans=0.1255 fill=0.0891 8s
+  pre ep4 rec=0.1225 ans=0.1272 fill=0.0993 8s
+LQD:mac|strict|2 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.620 sec=85
+LQD:mac|shuffle|2: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('mdagents', 'decision'), ('mdagents', 'synthesis'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3275 ans=0.2408 fill=0.6734 8s
+  pre ep1 rec=0.2131 ans=0.1412 fill=0.6425 8s
+  pre ep2 rec=0.1521 ans=0.1308 fill=0.6387 10s
+  pre ep3 rec=0.1192 ans=0.1202 fill=0.6422 10s
+  pre ep4 rec=0.1014 ans=0.1168 fill=0.6373 10s
+LQD:mac|shuffle|2 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.661 sec=97
+LQD:mac|trans|2: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2668 ans=0.1932 fill=0.3127 18s
+  pre ep1 rec=0.1577 ans=0.1368 fill=0.1200 18s
+  pre ep2 rec=0.1241 ans=0.1305 fill=0.0999 18s
+  pre ep3 rec=0.1062 ans=0.1314 fill=0.0835 20s
+  pre ep4 rec=0.0969 ans=0.1252 fill=0.0784 20s
+LQD:mac|trans|2 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.644 sec=147
+LQD:mdagents|scratch|0 outcome=0.597 sec=53
+LQD:mdagents|strict|0: pretrain on 5965 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('medagent', 'decision')]
+  pre ep0 rec=0.3294 ans=0.2321 fill=0.4466 9s
+  pre ep1 rec=0.2161 ans=0.1356 fill=0.1715 9s
+  pre ep2 rec=0.1614 ans=0.1324 fill=0.1183 10s
+  pre ep3 rec=0.1325 ans=0.1267 fill=0.1091 9s
+  pre ep4 rec=0.1172 ans=0.1208 fill=0.1072 9s
+LQD:mdagents|strict|0 fill_auc_test=0.497 n_fill_test=54 fill_prior_test=0.500 outcome=0.603 sec=97
+LQD:mdagents|shuffle|0: pretrain on 5965 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3204 ans=0.2271 fill=0.6695 9s
+  pre ep1 rec=0.1954 ans=0.1384 fill=0.6436 10s
+  pre ep2 rec=0.1381 ans=0.1265 fill=0.6438 10s
+  pre ep3 rec=0.1119 ans=0.1163 fill=0.6407 10s
+  pre ep4 rec=0.0957 ans=0.1089 fill=0.6374 10s
+LQD:mdagents|shuffle|0 fill_auc_test=0.568 n_fill_test=54 fill_prior_test=0.500 outcome=0.595 sec=99
+LQD:mdagents|trans|0: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2754 ans=0.1926 fill=0.2970 19s
+  pre ep1 rec=0.1624 ans=0.1340 fill=0.1215 19s
+  pre ep2 rec=0.1272 ans=0.1291 fill=0.0929 19s
+  pre ep3 rec=0.1104 ans=0.1252 fill=0.0920 20s
+  pre ep4 rec=0.0998 ans=0.1248 fill=0.0805 20s
+LQD:mdagents|trans|0 fill_auc_test=0.502 n_fill_test=54 fill_prior_test=0.833 outcome=0.620 sec=151
+LQD:mdagents|scratch|1 outcome=0.596 sec=50
+LQD:mdagents|strict|1: pretrain on 5965 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('medagent', 'decision')]
+  pre ep0 rec=0.3208 ans=0.2382 fill=0.4623 10s
+  pre ep1 rec=0.2181 ans=0.1385 fill=0.1793 12s
+  pre ep2 rec=0.1652 ans=0.1265 fill=0.1142 11s
+  pre ep3 rec=0.1355 ans=0.1223 fill=0.1063 11s
+  pre ep4 rec=0.1179 ans=0.1216 fill=0.1072 10s
+LQD:mdagents|strict|1 fill_auc_test=0.488 n_fill_test=54 fill_prior_test=0.500 outcome=0.593 sec=116
+LQD:mdagents|shuffle|1: pretrain on 5965 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3116 ans=0.2225 fill=0.6643 10s
+  pre ep1 rec=0.1994 ans=0.1427 fill=0.6457 11s
+  pre ep2 rec=0.1428 ans=0.1249 fill=0.6434 11s
+  pre ep3 rec=0.1137 ans=0.1202 fill=0.6413 12s
+  pre ep4 rec=0.0985 ans=0.1134 fill=0.6335 11s
+LQD:mdagents|shuffle|1 fill_auc_test=0.540 n_fill_test=54 fill_prior_test=0.500 outcome=0.618 sec=104
+LQD:mdagents|trans|1: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2768 ans=0.2003 fill=0.3192 19s
+  pre ep1 rec=0.1659 ans=0.1368 fill=0.1070 19s
+  pre ep2 rec=0.1300 ans=0.1292 fill=0.1041 21s
+  pre ep3 rec=0.1125 ans=0.1269 fill=0.0822 22s
+  pre ep4 rec=0.1015 ans=0.1213 fill=0.0709 22s
+LQD:mdagents|trans|1 fill_auc_test=0.481 n_fill_test=54 fill_prior_test=0.833 outcome=0.625 sec=154
+LQD:mdagents|scratch|2 outcome=0.591 sec=52
+LQD:mdagents|strict|2: pretrain on 5965 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('medagent', 'decision')]
+  pre ep0 rec=0.3167 ans=0.2318 fill=0.4490 9s
+  pre ep1 rec=0.2116 ans=0.1407 fill=0.1877 9s
+  pre ep2 rec=0.1652 ans=0.1338 fill=0.1510 9s
+  pre ep3 rec=0.1353 ans=0.1285 fill=0.1094 9s
+  pre ep4 rec=0.1137 ans=0.1207 fill=0.1006 9s
+LQD:mdagents|strict|2 fill_auc_test=0.500 n_fill_test=54 fill_prior_test=0.500 outcome=0.576 sec=95
+LQD:mdagents|shuffle|2: pretrain on 5965 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3104 ans=0.2234 fill=0.6696 10s
+  pre ep1 rec=0.1957 ans=0.1403 fill=0.6440 10s
+  pre ep2 rec=0.1347 ans=0.1294 fill=0.6437 9s
+  pre ep3 rec=0.1090 ans=0.1225 fill=0.6403 10s
+  pre ep4 rec=0.0926 ans=0.1135 fill=0.6341 12s
+LQD:mdagents|shuffle|2 fill_auc_test=0.565 n_fill_test=54 fill_prior_test=0.500 outcome=0.634 sec=105
+LQD:mdagents|trans|2: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2668 ans=0.1932 fill=0.3127 19s
+  pre ep1 rec=0.1577 ans=0.1368 fill=0.1200 19s
+  pre ep2 rec=0.1241 ans=0.1305 fill=0.0999 19s
+  pre ep3 rec=0.1062 ans=0.1314 fill=0.0835 21s
+  pre ep4 rec=0.0969 ans=0.1252 fill=0.0784 21s
+LQD:mdagents|trans|2 fill_auc_test=0.517 n_fill_test=54 fill_prior_test=0.833 outcome=0.640 sec=154
+LQD:medagent|scratch|0 outcome=0.602 sec=37
+LQD:medagent|strict|0: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis')]
+  pre ep0 rec=0.3379 ans=0.2186 fill=0.4473 7s
+  pre ep1 rec=0.2219 ans=0.1386 fill=0.1775 7s
+  pre ep2 rec=0.1717 ans=0.1281 fill=0.1372 7s
+  pre ep3 rec=0.1399 ans=0.1261 fill=0.1303 7s
+  pre ep4 rec=0.1213 ans=0.1264 fill=0.1126 7s
+LQD:medagent|strict|0 fill_auc_test=0.946 n_fill_test=5635 fill_prior_test=0.500 outcome=0.616 sec=86
+LQD:medagent|shuffle|0: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('mdagents', 'decision'), ('mdagents', 'synthesis')]
+  pre ep0 rec=0.3383 ans=0.2164 fill=0.6714 7s
+  pre ep1 rec=0.2103 ans=0.1413 fill=0.6386 8s
+  pre ep2 rec=0.1458 ans=0.1298 fill=0.6393 8s
+  pre ep3 rec=0.1150 ans=0.1273 fill=0.6358 7s
+  pre ep4 rec=0.1008 ans=0.1121 fill=0.6379 8s
+LQD:medagent|shuffle|0 fill_auc_test=0.503 n_fill_test=5635 fill_prior_test=0.500 outcome=0.610 sec=85
+LQD:medagent|trans|0: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2754 ans=0.1926 fill=0.2970 19s
+  pre ep1 rec=0.1624 ans=0.1340 fill=0.1215 18s
+  pre ep2 rec=0.1272 ans=0.1291 fill=0.0929 19s
+  pre ep3 rec=0.1104 ans=0.1252 fill=0.0920 20s
+  pre ep4 rec=0.0998 ans=0.1248 fill=0.0805 20s
+LQD:medagent|trans|0 fill_auc_test=1.000 n_fill_test=5635 fill_prior_test=0.972 outcome=0.624 sec=140
+LQD:medagent|scratch|1 outcome=0.613 sec=36
+LQD:medagent|strict|1: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis')]
+  pre ep0 rec=0.3326 ans=0.2262 fill=0.4325 7s
+  pre ep1 rec=0.2245 ans=0.1403 fill=0.1877 7s
+  pre ep2 rec=0.1777 ans=0.1316 fill=0.1453 7s
+  pre ep3 rec=0.1443 ans=0.1257 fill=0.1051 7s
+  pre ep4 rec=0.1242 ans=0.1240 fill=0.1122 7s
+LQD:medagent|strict|1 fill_auc_test=0.951 n_fill_test=5635 fill_prior_test=0.500 outcome=0.591 sec=80
+LQD:medagent|shuffle|1: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('mdagents', 'decision'), ('mdagents', 'synthesis')]
+  pre ep0 rec=0.3341 ans=0.2182 fill=0.6618 7s
+  pre ep1 rec=0.2156 ans=0.1307 fill=0.6382 7s
+  pre ep2 rec=0.1538 ans=0.1302 fill=0.6381 8s
+  pre ep3 rec=0.1204 ans=0.1296 fill=0.6361 7s
+  pre ep4 rec=0.1021 ans=0.1206 fill=0.6341 8s
+LQD:medagent|shuffle|1 fill_auc_test=0.653 n_fill_test=5635 fill_prior_test=0.500 outcome=0.612 sec=83
+LQD:medagent|trans|1: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2768 ans=0.2003 fill=0.3192 20s
+  pre ep1 rec=0.1659 ans=0.1368 fill=0.1070 20s
+  pre ep2 rec=0.1300 ans=0.1292 fill=0.1041 20s
+  pre ep3 rec=0.1125 ans=0.1269 fill=0.0822 22s
+  pre ep4 rec=0.1015 ans=0.1213 fill=0.0709 22s
+LQD:medagent|trans|1 fill_auc_test=1.000 n_fill_test=5635 fill_prior_test=0.972 outcome=0.594 sec=149
+LQD:medagent|scratch|2 outcome=0.648 sec=37
+LQD:medagent|strict|2: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis')]
+  pre ep0 rec=0.3216 ans=0.2169 fill=0.4569 7s
+  pre ep1 rec=0.2178 ans=0.1401 fill=0.1683 7s
+  pre ep2 rec=0.1630 ans=0.1273 fill=0.1291 7s
+  pre ep3 rec=0.1337 ans=0.1234 fill=0.1257 7s
+  pre ep4 rec=0.1130 ans=0.1199 fill=0.1137 7s
+LQD:medagent|strict|2 fill_auc_test=0.936 n_fill_test=5635 fill_prior_test=0.500 outcome=0.646 sec=87
+LQD:medagent|shuffle|2: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('mdagents', 'decision'), ('mdagents', 'synthesis')]
+  pre ep0 rec=0.3258 ans=0.2108 fill=0.6671 7s
+  pre ep1 rec=0.2109 ans=0.1433 fill=0.6434 7s
+  pre ep2 rec=0.1510 ans=0.1321 fill=0.6385 7s
+  pre ep3 rec=0.1175 ans=0.1249 fill=0.6422 7s
+  pre ep4 rec=0.0990 ans=0.1172 fill=0.6342 7s
+LQD:medagent|shuffle|2 fill_auc_test=0.644 n_fill_test=5635 fill_prior_test=0.500 outcome=0.648 sec=80
+LQD:medagent|trans|2: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2668 ans=0.1932 fill=0.3127 19s
+  pre ep1 rec=0.1577 ans=0.1368 fill=0.1200 20s
+  pre ep2 rec=0.1241 ans=0.1305 fill=0.0999 19s
+  pre ep3 rec=0.1062 ans=0.1314 fill=0.0835 21s
+  pre ep4 rec=0.0969 ans=0.1252 fill=0.0784 21s
+LQD:medagent|trans|2 fill_auc_test=1.000 n_fill_test=5635 fill_prior_test=0.972 outcome=0.641 sec=146
+LQD:reconcile|scratch|0 outcome=0.604 sec=44
+LQD:reconcile|strict|0: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.3367 ans=0.2440 fill=0.4507 8s
+  pre ep1 rec=0.2217 ans=0.1393 fill=0.1700 8s
+  pre ep2 rec=0.1703 ans=0.1279 fill=0.1106 8s
+  pre ep3 rec=0.1419 ans=0.1225 fill=0.1120 8s
+  pre ep4 rec=0.1219 ans=0.1214 fill=0.0979 8s
+LQD:reconcile|strict|0 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.630 sec=84
+LQD:reconcile|shuffle|0: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('mdagents', 'decision'), ('mdagents', 'synthesis'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3342 ans=0.2360 fill=0.6683 8s
+  pre ep1 rec=0.2096 ans=0.1390 fill=0.6406 8s
+  pre ep2 rec=0.1517 ans=0.1315 fill=0.6427 8s
+  pre ep3 rec=0.1217 ans=0.1189 fill=0.6397 8s
+  pre ep4 rec=0.1079 ans=0.1153 fill=0.6390 9s
+LQD:reconcile|shuffle|0 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.649 sec=84
+LQD:reconcile|trans|0: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2754 ans=0.1926 fill=0.2970 19s
+  pre ep1 rec=0.1624 ans=0.1340 fill=0.1215 18s
+  pre ep2 rec=0.1272 ans=0.1291 fill=0.0929 18s
+  pre ep3 rec=0.1104 ans=0.1252 fill=0.0920 19s
+  pre ep4 rec=0.0998 ans=0.1248 fill=0.0805 20s
+LQD:reconcile|trans|0 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.638 sec=140
+LQD:reconcile|scratch|1 outcome=0.626 sec=42
+LQD:reconcile|strict|1: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.3288 ans=0.2471 fill=0.4329 8s
+  pre ep1 rec=0.2252 ans=0.1400 fill=0.1790 8s
+  pre ep2 rec=0.1862 ans=0.1269 fill=0.1123 9s
+  pre ep3 rec=0.1503 ans=0.1234 fill=0.0854 10s
+  pre ep4 rec=0.1311 ans=0.1209 fill=0.0925 11s
+LQD:reconcile|strict|1 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.630 sec=102
+LQD:reconcile|shuffle|1: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('mdagents', 'decision'), ('mdagents', 'synthesis'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3307 ans=0.2399 fill=0.6682 8s
+  pre ep1 rec=0.2165 ans=0.1334 fill=0.6436 8s
+  pre ep2 rec=0.1601 ans=0.1301 fill=0.6422 9s
+  pre ep3 rec=0.1267 ans=0.1206 fill=0.6361 10s
+  pre ep4 rec=0.1087 ans=0.1079 fill=0.6348 9s
+LQD:reconcile|shuffle|1 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.634 sec=95
+LQD:reconcile|trans|1: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2768 ans=0.2003 fill=0.3192 19s
+  pre ep1 rec=0.1659 ans=0.1368 fill=0.1070 19s
+  pre ep2 rec=0.1300 ans=0.1292 fill=0.1041 20s
+  pre ep3 rec=0.1125 ans=0.1269 fill=0.0822 21s
+  pre ep4 rec=0.1015 ans=0.1213 fill=0.0709 22s
+LQD:reconcile|trans|1 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.636 sec=152
+LQD:reconcile|scratch|2 outcome=0.616 sec=40
+LQD:reconcile|strict|2: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.3259 ans=0.2439 fill=0.4689 8s
+  pre ep1 rec=0.2248 ans=0.1386 fill=0.1731 8s
+  pre ep2 rec=0.1755 ans=0.1280 fill=0.1078 8s
+  pre ep3 rec=0.1451 ans=0.1229 fill=0.1009 8s
+  pre ep4 rec=0.1235 ans=0.1202 fill=0.0943 8s
+LQD:reconcile|strict|2 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.621 sec=84
+LQD:reconcile|shuffle|2: pretrain on 5012 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('colacare', 'synthesis'), ('healthcareagent', 'analysis'), ('healthcareagent', 'decision'), ('healthcareagent', 'review'), ('mdagents', 'decision'), ('mdagents', 'synthesis'), ('medagent', 'decision'), ('medagent', 'synthesis')]
+  pre ep0 rec=0.3253 ans=0.2375 fill=0.6709 8s
+  pre ep1 rec=0.2111 ans=0.1422 fill=0.6451 8s
+  pre ep2 rec=0.1500 ans=0.1298 fill=0.6365 8s
+  pre ep3 rec=0.1196 ans=0.1210 fill=0.6410 8s
+  pre ep4 rec=0.1043 ans=0.1208 fill=0.6363 9s
+LQD:reconcile|shuffle|2 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.631 sec=86
+LQD:reconcile|trans|2: pretrain on 12409 runs, fill keys [('colacare', 'decision'), ('colacare', 'review'), ('healthcareagent', 'review'), ('mdagents', 'synthesis'), ('medagent', 'decision')]
+  pre ep0 rec=0.2668 ans=0.1932 fill=0.3127 19s
+  pre ep1 rec=0.1577 ans=0.1368 fill=0.1200 18s
+  pre ep2 rec=0.1241 ans=0.1305 fill=0.0999 19s
+  pre ep3 rec=0.1062 ans=0.1314 fill=0.0835 21s
+  pre ep4 rec=0.0969 ans=0.1252 fill=0.0784 21s
+LQD:reconcile|trans|2 fill_auc_test=nan n_fill_test=0 fill_prior_test=nan outcome=0.637 sec=147
+HUMAN LQD scratch  n=399 seeds=3 macro=0.655 [0.599,0.711]  diff vs scratch=+0.000 [+0.000,+0.000]
+HUMAN LQD strict   n=399 seeds=3 macro=0.643 [0.587,0.700]  diff vs scratch=-0.011 [-0.041,+0.018]
+HUMAN LQD shuffle  n=399 seeds=3 macro=0.662 [0.608,0.719]  diff vs scratch=+0.008 [-0.020,+0.038]
+HUMAN LQD trans    n=399 seeds=3 macro=0.672 [0.617,0.728]  diff vs scratch=+0.017 [-0.012,+0.050]
+LABEL-FREE strict|lf_rec|0 n=399 macro=0.474
+LABEL-FREE strict|lf_ans|0 n=399 macro=0.589
+LABEL-FREE shuffle|lf_rec|0 n=399 macro=0.443
+LABEL-FREE shuffle|lf_ans|0 n=399 macro=0.584
+LABEL-FREE trans|lf_rec|0 n=399 macro=0.538
+LABEL-FREE trans|lf_ans|0 n=399 macro=0.528
+LABEL-FREE strict|lf_rec|1 n=399 macro=0.481
+LABEL-FREE strict|lf_ans|1 n=399 macro=0.610
+LABEL-FREE shuffle|lf_rec|1 n=399 macro=0.458
+LABEL-FREE shuffle|lf_ans|1 n=399 macro=0.603
+LABEL-FREE trans|lf_rec|1 n=399 macro=0.517
+LABEL-FREE trans|lf_ans|1 n=399 macro=0.565
+LABEL-FREE strict|lf_rec|2 n=399 macro=0.471
+LABEL-FREE strict|lf_ans|2 n=399 macro=0.599
+LABEL-FREE shuffle|lf_rec|2 n=399 macro=0.468
+LABEL-FREE shuffle|lf_ans|2 n=399 macro=0.563
+LABEL-FREE trans|lf_rec|2 n=399 macro=0.513
+LABEL-FREE trans|lf_ans|2 n=399 macro=0.519
