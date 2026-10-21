@@ -503,3 +503,15 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 - 多来源步骤比例差异大:colacare 0.67、mac 0.64、reconcile 0.52、medagent 0.32、mdagents 0.17、healthcareagent 0.00。
 - 91% 的步骤有 `structured.answer`(85,585 / 93,914)→ "由来源预测答案流"可行。
 **C5 方案(待用户确认,见回复):** 掩码特征重建 + 只在 matched 边上做超边填充(负例取同阶段同角色的步骤)+ 答案流预测;严格零样本:每折预训练不含留出 MAS;两种评测(无标签异常分数 / 预训练后接第一阶段监督,配对 bootstrap)。
+
+## 第 41 轮 · 2026-10-21 11:21 · 用户:看 issue 新动静;严格版 + 直推版都跑;填充边问题去 issue 问对方
+
+**issue 新评论(对方 v9 第 29 轮,17:55Z):** sham_style(要求坚定辩护,不要求犯错)。4 家族 × 50 题,$1.45。PI 对 sham / sham_style:medagents 0.50 / 0.53、MAC 0.61 / 0.59、mdagents 0.62 / 0.57(n_pi=21)、llm_debate 0.71 / 0.79。对方问 (a) 配对负例是否可行;(b) llm_debate PI 是排除还是我方去偏;(c) 是否需要对抗过滤;另有补齐计划约 $4.5。
+**我方核对 `gate_shamstyle.txt`:** 门槛检测器只有 TF-IDF+LR;PI 对自然答错仍 FAIL(llm_debate 0.734、MAC 0.797、mdagents 0.713);sham_style 在 medagents 上对自然答错 0.716(FAIL,照抄 firmly / colleague);mdagents 只有 20/21 条 PI。门槛用的轨迹没有入库,无法复算。
+**我方第 41 轮评论(6323377441,18:23Z,全文 `MedHyperTrace-v2/docs/interfaces/issue_comment_r41.md`):**
+- (a) 可行(即第 39 轮的同槽位配对);sham_style 措辞会成为反向捷径,补齐前先改写措辞或接改写池,已生成的标 `sham_variant`;PI 只作训练信号,评测真值只用自然失败和 RC flipped;门槛加 MiniLM+LR 检测器(或把门槛 jsonl 入库由我方跑);以 CI 判读;请解释 mdagents PI 只有 20/21。
+- (b) llm_debate PI 排除出训练,作压力测试子集。
+- (c) 不做对抗过滤(循环论证 + 选择偏差,同第 38 轮)。
+- 补齐 $4.5:支持,先改措辞;预算由用户批准。
+- 请教 C5 填充边:matched 的近确定组合(colacare synthesis 0.99、medagent synthesis 0.95、mdagents / healthcareagent decision 1.00);我方计划只用 matched 且最常见模式占比 < 0.9 的组合(约 2.4 万步),负例同阶段同角色,报告"阶段 + 偏移"先验;问他们导出中 `how` 哪些来自日志;注入是否改变 `sources`;是否同意不用 protocol。
+**C5 决定(用户):** 严格零样本(预训练不含留出 MAS,主结果)与直推版(预训练含留出 MAS 的无标签轨迹)都跑,分开报告。填充边方案等对方回复;先实现掩码重建和答案流预测,填充目标做成可配置。
