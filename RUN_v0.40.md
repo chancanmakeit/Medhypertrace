@@ -491,3 +491,15 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
   - SHA256SUMS。
 - 恢复:运行 `scripts/restore_maa_emb.sh`,已实测校验通过。`prepare_maa.sh` 改为优先从缓存恢复,恢复失败才重新计算。
 - 不上传的:图缓存 pkl(单个 0.3–0.6 GB,可以从嵌入重建)和 MAA 转换后的 jsonl(295 MB,从公开仓库确定性重建)。
+
+## 第 40 轮 · 2026-10-21 10:58 · 用户:仓库已有 MAA 嵌入缓存,用 prepare_maa.sh 重建
+
+**核对:** 属实。`git pull` 后得到 `308bf9e`(`data/maa_emb_minilm/`:分卷 gzip、`index.json.gz`、SHA256SUMS;`prepare_maa.sh` 第 4 步先调用 `restore_maa_emb.sh`)。
+**重建:** 只跑 `prepare_maa.sh` 的第 1–4 步(命令完全相同;第 5、6 步是 LLM 层的编码器导出和 SFT 构造,C5 用不到),工作目录为 `/home/claude/data_maa_v2`。结果:转换 14,370 条,人工 400 例对齐(重复键 0),`emb.npy` / `index.json` 校验通过。
+**覆盖核对:** 排除 basic 后有 12,451 条运行,共需 85,913 条唯一文本,缓存 85,913 条,缺 0、多 0。训练入口再按 `question_id` 去掉锚点重复 42 条,得到 12,409 条,与第 38 轮一致。
+**为 C5 做的数据剖析(影响设计):**
+- read 来源的 `how` 只有两种:`matched` 89,963 条(由文本匹配推断)和 `protocol` 68,492 条(由框架协议推断),没有生成时记录的来源。
+- 来源类型基本由 (框架 × 阶段) 决定:20 个键中 16 个只有一种模式 → 在 protocol 边上做超边填充,只需要记住阶段就能解,学不到可迁移的东西。
+- 多来源步骤比例差异大:colacare 0.67、mac 0.64、reconcile 0.52、medagent 0.32、mdagents 0.17、healthcareagent 0.00。
+- 91% 的步骤有 `structured.answer`(85,585 / 93,914)→ "由来源预测答案流"可行。
+**C5 方案(待用户确认,见回复):** 掩码特征重建 + 只在 matched 边上做超边填充(负例取同阶段同角色的步骤)+ 答案流预测;严格零样本:每折预训练不含留出 MAS;两种评测(无标签异常分数 / 预训练后接第一阶段监督,配对 bootstrap)。
