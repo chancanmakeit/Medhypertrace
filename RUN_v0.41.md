@@ -515,3 +515,11 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 - 补齐 $4.5:支持,先改措辞;预算由用户批准。
 - 请教 C5 填充边:matched 的近确定组合(colacare synthesis 0.99、medagent synthesis 0.95、mdagents / healthcareagent decision 1.00);我方计划只用 matched 且最常见模式占比 < 0.9 的组合(约 2.4 万步),负例同阶段同角色,报告"阶段 + 偏移"先验;问他们导出中 `how` 哪些来自日志;注入是否改变 `sources`;是否同意不用 protocol。
 **C5 决定(用户):** 严格零样本(预训练不含留出 MAS,主结果)与直推版(预训练含留出 MAS 的无标签轨迹)都跑,分开报告。填充边方案等对方回复;先实现掩码重建和答案流预测,填充目标做成可配置。
+
+**第 41 轮(续):C5 实现与试跑**
+- 代码:`MedHyperTrace-v2/hgfm/ssl_v02.py`。三个自监督目标:掩码重建(GraphMAE,缩放余弦误差)、答案流预测(被掩码节点的 4 个答案标量一并清零后预测)、仅 matched 边的超边填充(目标步的整条 read 超边移除,因为指令文本写有来源数量和阶段;候选限于与真实来源同阶段的前序步)。设定:scratch / strict / shuffle(读超边尾部换成随机前序步,保持度数)/ trans。微调与 `train_v02.train` 完全相同,只是从预训练编码器初始化。另有无标签分数(逐步掩码的重建误差、答案流意外度)。
+- 泄漏检查(冒烟测试中断言):填充目标的 head 超边已不在 incidence 中;被掩码节点的答案标量为 0。
+- **更正第 41 轮 issue 评论中的数字:** 只用"最常见模式占比 < 0.9"会把"读完所有同阶段前序步"的情况算进去(healthcareagent review 占比 0.33 但没有选择余地)。加上"候选数 > 真实来源数"后,MAA 上可用的填充目标约 9,900 步:colacare review 7,119、colacare decision 1,490、medagent decision 1,246、mdagents synthesis 12。填充在 MAA 上基本只是 colacare 的目标。已在 issue 更正(评论 6323753898,18:42Z)。
+- **试跑中发现并修复的 bug:** 预训练参数名带有包装层前缀 `enc.`,按 `inp.`/`rel.`/`layers.` 筛选时为空,导致微调全部从零开始(四种设定结果完全相同)。改为去掉前缀,并断言编码器参数全部加载、缺失的只有输出头。
+- 试跑(LQD:mac,种子 0,单折 n=67,CI 约 ±0.15,不作结论):每折每种子约 6 分钟。
+- 全量:LQD 6 折 × {scratch, strict, shuffle, trans} × 种子 {0,1,2},预训练 5 个 epoch,后台运行,产物在 `/home/claude/data_maa_v2/c5_lqd/`。一致性检查:scratch 种子 0 的合并结果应复现第一阶段 v0.2 full 的 0.645。

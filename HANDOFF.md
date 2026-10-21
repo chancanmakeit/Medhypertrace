@@ -11,7 +11,7 @@
 
 > **🚀 新会话快速恢复(第 38 轮写,v2 工作用):**
 > 1. `add_repo` 以 push 权限添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`(需要时再加 `graph-based-mas-fault-attribution-papers`),然后 clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走 git 代理,不需要 token。
-> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-21T18:23:13Z,即我方第 41 轮评论)。之后每次被唤醒都先跑一次。
+> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-21T18:42:26Z,即我方第 41 轮补充评论)。之后每次被唤醒都先跑一次。
 > 3. **MAA 数据(沙箱若已重置)**:`cd MedHyperTrace-v2 && pip install -r requirements.txt --break-system-packages`,然后运行 `bash scripts/prepare_maa.sh /home/claude/data_maa_v2 QD 8000`。脚本会自动下载、转换、对齐人工标签;**嵌入直接从仓库缓存 `MedHyperTrace-v2/data/maa_emb_minilm/` 恢复**(sha256 校验,约 10 秒,省去 CPU 上约 50 分钟;也可单独运行 `bash scripts/restore_maa_emb.sh <emb_dir>`);再导出图 token、构建 SFT。脚本能跳过已有的步骤;图缓存 `graphs_*.pkl` 在首次加载时自动重建。第一阶段结果已在 `results/phase1_maa/`,不必重跑。
 > 4. **API 密钥**:从 Project doc `claude/api端点` 读取,写到 `/home/claude/.mht_api.env`。绝不进 git。调用前先试跑估算成本,再问用户。
 > 5. 阅读顺序:§0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.41.md` 第 37–41 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
@@ -92,6 +92,8 @@
 ### 0.53 第 41 轮:issue 回复 sham_style;C5 两种设定都跑
 - 我方 issue 评论 6323377441(18:23Z,全文 `MedHyperTrace-v2/docs/interfaces/issue_comment_r41.md`):(a) 同意配对,sham_style 措辞先改写;门槛加 MiniLM+LR;(b) llm_debate PI 排除出训练;(c) 不做对抗过滤;并请教 C5 填充边(matched / protocol、注入是否改变 sources)。**等对方回复。**
 - C5:严格零样本(主)+ 直推,分开报告。先做掩码重建 + 答案流预测;填充目标可配置,默认只用 matched 且最常见模式占比 < 0.9 的(框架 × 阶段)。
+- **C5 已实现**:`MedHyperTrace-v2/hgfm/ssl_v02.py`(用法见文件头)。全量 LQD × 4 设定 × 3 种子在后台跑,产物在 `/home/claude/data_maa_v2/c5_lqd/`(`preds.pkl` 支持中断续跑,`results.json`、`log.txt`)。沙箱重置后重跑:先 `prepare_maa.sh` 的第 1–4 步,再运行上述命令(约 2 小时)。
+- 更正:MAA 上可用填充目标只有约 9,900 步(72% 来自 colacare review);issue 评论 6323753898 已更正。
 
 ### 0.52 第 40 轮:MAA 数据已从缓存重建;C5 方案待确认
 - 仓库自带 MAA 嵌入缓存(`MedHyperTrace-v2/data/maa_emb_minilm/`),`prepare_maa.sh` 会自动恢复。C5 只需第 1–4 步;本沙箱已在 `/home/claude/data_maa_v2` 跑完(校验通过、覆盖 85,913/85,913),CPU torch 已装。
