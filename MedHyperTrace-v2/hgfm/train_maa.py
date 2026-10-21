@@ -73,7 +73,8 @@ def predict(m, G):
 
 
 def auc(y, s):
-    y, s = np.asarray(y), np.asarray(s)
+    y, s = np.asarray(y, dtype=float), np.asarray(s, dtype=float)
+    ok = ~(np.isnan(y) | np.isnan(s)); y, s = y[ok], s[ok]
     return roc_auc_score(y, s) if len(set(y)) == 2 else float("nan")
 
 
@@ -118,6 +119,7 @@ def main(src, emb, human, overlap, out, kinds="LOMO,QD"):
                 preds_h[(gold, layers, name.split(":")[0])] += hs
                 results[key] = {"weak": weak, "outcome": outcome, "n_train": len(tr), "n_test": len(te), "n_human": len(hs), "sec": round(time.time() - t0)}
                 print(key, f"n_tr={len(tr)} n_te={len(te)} human={len(hs)} outcome={outcome:.3f} weak-macro={np.nanmean(list(weak.values())):.3f} {time.time()-t0:.0f}s", flush=True)
+    pickle.dump(dict(preds_h), open(f"{out}/human_preds.pkl", "wb")); json.dump(results, open(f"{out}/folds.json", "w"), indent=1, default=float)
     # aggregate human-eval metrics
     summ = {}
     rng = np.random.default_rng(0)

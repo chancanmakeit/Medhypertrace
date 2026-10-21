@@ -113,6 +113,7 @@ def main(src, emb, human, overlap, out, variants="full,no_pos,no_instr,no_rel,no
             hs = human_scores(H, te, P, name, tr); preds_h[(v, name.split(":")[0])] += hs
             res[f"{v}_{name}"] = {"weak": weak, "outcome": outcome, "n_human": len(hs)}
             print(f"{v}_{name} outcome={outcome:.3f} weak-macro={np.nanmean(list(weak.values())):.3f} human={len(hs)} {time.time()-t0:.0f}s", flush=True)
+    pickle.dump(dict(preds_h), open(f"{out}/human_preds.pkl", "wb")); json.dump(res, open(f"{out}/folds.json", "w"), indent=1, default=float)
     summ = {}; rng = np.random.default_rng(0)
     for (v, split), hs in preds_h.items():
         hs = [h for h in hs if not np.isnan(h["score"])]
