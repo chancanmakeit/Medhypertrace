@@ -482,3 +482,12 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 **issue:** medical-aegis issue #1 共 44 条评论,最新一条仍是我方 17:39:01Z(sham 安慰剂注入);对方尚未回复。Medhypertrace 无对方开的 issue。`issue_last_seen.txt` 不变。
 **沙箱状态:** 已重置——没有 torch,没有 `/home/claude/data_maa*`,没有 `.mht_api.env`。需要时再按 HANDOFF 快速恢复第 3、4 步重建(MAA 嵌入在 CPU 上约 30–45 分钟)。本轮未调用任何 API。
 **待办(不变):** ① 用户服务器上跑 LLM 层三个变体(graph / text / zeroshot);② C5 自监督(可在沙箱 CPU 上做,需先重建 MAA 数据);③ C9 只用结果标签的责任分配;④ 等对方 sham 实现与新门槛结果;⑤ 等 MAFA 人类 dev 标签。
+
+## 第 38 轮补充(旧会话,与第 39 轮并行)· 2026-10-21 10:54 · 用户要求把 embedding 传到 GitHub(为新会话重建数据)
+- `MedHyperTrace-v2/data/maa_emb_minilm/` 存的内容:
+  - MiniLM 嵌入:85,913 × 384,fp16,原始 66 MB,gzip 后切成 40 MB 和 19 MB 两片,以避开 GitHub 单文件限制;
+  - `index.json.gz`(sha1(text) → 行号);
+  - 嵌入日志;
+  - SHA256SUMS。
+- 恢复:运行 `scripts/restore_maa_emb.sh`,已实测校验通过。`prepare_maa.sh` 改为优先从缓存恢复,恢复失败才重新计算。
+- 不上传的:图缓存 pkl(单个 0.3–0.6 GB,可以从嵌入重建)和 MAA 转换后的 jsonl(295 MB,从公开仓库确定性重建)。

@@ -1,0 +1,18 @@
+unique texts 85913
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8785.76it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+128/85913 0s
+6528/85913 185s
+12928/85913 293s
+19328/85913 427s
+25728/85913 573s
+32128/85913 760s
+38528/85913 960s
+44928/85913 1181s
+51328/85913 1430s
+57728/85913 1701s
+64128/85913 1993s
+70528/85913 2296s
+76928/85913 2597s
+83328/85913 2896s
+done 3013.3963947296143

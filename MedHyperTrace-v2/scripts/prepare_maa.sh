@@ -22,7 +22,8 @@ REL="$W/maa/github_release_files"
 # 2-4. conversion, human alignment, embeddings
 [ -s "$W/maa_mas_traj.jsonl" ] || python -m data_tools.maa_to_mas_traj "$REL" "$W/maa_mas_traj.jsonl"
 [ -s "$W/maa_human400.jsonl" ] || python -m data_tools.maa_human_eval "$REL" "$W/maa_human400.jsonl"
-[ -s "$W/emb/emb.npy" ] || python -m hgfm.embed_maa "$W/maa_mas_traj.jsonl" "$W/emb"
+# embeddings: restore the cache stored in the repo (data/maa_emb_minilm), else compute (~50 min CPU)
+[ -s "$W/emb/emb.npy" ] || bash scripts/restore_maa_emb.sh "$W/emb" || python -m hgfm.embed_maa "$W/maa_mas_traj.jsonl" "$W/emb"
 
 # 5. encoder per fold + graph tokens (CPU is fine: ~minutes per fold)
 python -m hgfm.llm.export_graph_emb "$W/maa_mas_traj.jsonl" "$W/emb" "$W/maa_human400.jsonl" data/anchor_overlap_qids.json "$W/llm" "$FOLDS" 0
