@@ -475,3 +475,10 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
      - medical-aegis 继续增加框架;
      - 公开的非医学 MAS 轨迹(MAST / Who&When / TRAIL 等)只用于无标签的自监督(不使用其标签,不违反体系分离规则);
      - 换不同骨干 LLM 重跑。
+
+## 第 39 轮 · 2026-10-21 10:50 · 新会话续接(用户消息)
+
+**恢复:** 按 HANDOFF 快速恢复框操作。两个仓库以 push 权限挂载并浅克隆到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`(HEAD `baf1d39`)。
+**issue:** medical-aegis issue #1 共 44 条评论,最新一条仍是我方 17:39:01Z(sham 安慰剂注入);对方尚未回复。Medhypertrace 无对方开的 issue。`issue_last_seen.txt` 不变。
+**沙箱状态:** 已重置——没有 torch,没有 `/home/claude/data_maa*`,没有 `.mht_api.env`。需要时再按 HANDOFF 快速恢复第 3、4 步重建(MAA 嵌入在 CPU 上约 30–45 分钟)。本轮未调用任何 API。
+**待办(不变):** ① 用户服务器上跑 LLM 层三个变体(graph / text / zeroshot);② C5 自监督(可在沙箱 CPU 上做,需先重建 MAA 数据);③ C9 只用结果标签的责任分配;④ 等对方 sham 实现与新门槛结果;⑤ 等 MAFA 人类 dev 标签。
