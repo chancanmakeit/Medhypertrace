@@ -1,0 +1,32 @@
+============================== A. content shortcut (single-step text, role-matched negatives)
+  medagents_mc   response_corruption  roles=['Synthesizer'] pos= 20 neg= 160  AUROC=1.000
+  medagents_mc   prompt_injection     roles=['Synthesizer'] pos= 30 neg= 160  AUROC=0.921
+  triage_agent   response_corruption  roles=['Doctor'] pos= 20 neg= 960  AUROC=1.000
+  triage_agent   prompt_injection     roles=['Doctor'] pos= 30 neg= 960  AUROC=0.950
+============================== B. topology shortcut (inject vs normal runs)
+  medagents_mc   AUROC(#steps)=0.950  AUROC(max round)=0.950  normal #steps=[(np.int64(18), 160)] inject #steps=[(np.int64(18), 5), (np.int64(27), 2), (np.int64(28), 2), (np.int64(30), 3), (np.int64(31), 2), (np.int64(32), 3), (np.int64(33), 33)]
+  triage_agent   AUROC(#steps)=0.500  AUROC(max round)=0.500  normal #steps=[(np.int64(9), 160)] inject #steps=[(np.int64(9), 50)]
+============================== C. role prior for step localisation
+  medagents_mc   inject runs=50  target (agent_id, phase) distribution={('synthesizer', 'synthesis'): 50}  -> modal-role prior hits 50/50
+  triage_agent   inject runs=50  target (agent_id, phase) distribution={('doctor_b', 'classify'): 50}  -> modal-role prior hits 50/50
+============================== D. flips vs paired normal runs
+  medagents_mc   llama-4-maverick     prompt_injection     runs=20 final wrong= 5  flip=1/14 (eligible: paired normal acc>=0.5)
+  medagents_mc   llama-4-maverick     response_corruption  runs=10 final wrong= 2  flip=0/8 (eligible: paired normal acc>=0.5)
+  medagents_mc   mercury-2.5-preview  prompt_injection     runs=10 final wrong= 3  flip=1/8 (eligible: paired normal acc>=0.5)
+  medagents_mc   mercury-2.5-preview  response_corruption  runs=10 final wrong= 1  flip=0/9 (eligible: paired normal acc>=0.5)
+  triage_agent   llama-4-maverick     prompt_injection     runs=20 final wrong= 2  flip=0/18 (eligible: paired normal acc>=0.5)
+  triage_agent   llama-4-maverick     response_corruption  runs=10 final wrong= 4  flip=3/8 (eligible: paired normal acc>=0.5)
+  triage_agent   mercury-2.5-preview  prompt_injection     runs=10 final wrong= 3  flip=2/9 (eligible: paired normal acc>=0.5)
+  triage_agent   mercury-2.5-preview  response_corruption  runs=10 final wrong= 3  flip=1/7 (eligible: paired normal acc>=0.5)
+============================== E. natural pairing among K normal runs
+  medagents_mc   llama-4-maverick     questions=20 mixed (correct & wrong among K=4)=1  semantic-field coverage of aligned steps=0.44
+      first divergence at ('decider', 'decision'): 3 pairs
+  medagents_mc   mercury-2.5-preview  questions=20 mixed (correct & wrong among K=4)=1  semantic-field coverage of aligned steps=0.44
+      first divergence at ('decider', 'decision'): 3 pairs
+  triage_agent   llama-4-maverick     questions=20 mixed (correct & wrong among K=4)=1  semantic-field coverage of aligned steps=0.78
+      first divergence at ('doctor_a', 'discuss'): 4 pairs
+  triage_agent   mercury-2.5-preview  questions=20 mixed (correct & wrong among K=4)=3  semantic-field coverage of aligned steps=0.78
+      first divergence at ('doctor_b', 'classify'): 4 pairs
+      first divergence at ('doctor_a', 'discuss'): 2 pairs
+      first divergence at ('doctor_b', 'discuss'): 2 pairs
+      first divergence at ('doctor_c', 'classify'): 1 pairs

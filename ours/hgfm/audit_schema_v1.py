@@ -8,6 +8,8 @@ Checks, per record:
                          "unlisted": a mid-body probe of an earlier output appears in the input
                          but neither it nor any listed source contains that probe
                          (excludes transitive quotation, per medical-aegis round 7)
+                         and the probe is not text from the task itself (agents quote the
+                         question/options verbatim; 83 false positives on the pilot before this)
   4. token side-channel  for response_corruption steps, completion_tokens describe the clean
                          pre-corruption call; we report |output chars / completion_tokens| for
                          corrupted vs other steps (a detectable gap = a label leak)
@@ -43,6 +45,7 @@ def audit(rec):
                 if p and p in all_text: issues["prompt_injection_text_in_steps"] += 1
             if "UPDATED INSTRUCTION" in all_text: issues["injection_marker_in_steps"] += 1
     outs = [norm(s.get("output") or "") for s in steps]
+    task_txt = norm(json.dumps(rec["task"], ensure_ascii=False))   # agents quote the question verbatim
     for i, s in enumerate(steps):
         inp = msgs_text(s.get("input_messages"))
         listed = [x if isinstance(x, str) else x["step_id"] for x in s.get("sources") or []]
@@ -55,7 +58,7 @@ def audit(rec):
         for j in range(i):
             if steps[j]["step_id"] in listed: continue
             for p in mid_probes(outs[j]):
-                if p in inp and p not in listed_txt:
+                if p in inp and p not in listed_txt and p not in task_txt:
                     issues["unlisted_read"] += 1; break
     return issues
 

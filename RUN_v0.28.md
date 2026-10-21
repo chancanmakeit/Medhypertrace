@@ -1,4 +1,4 @@
-# RUN_v0.27 — 每轮讨论记录
+# RUN_v0.28 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -348,3 +348,17 @@ triage_agent         triage              5   18.8   10.8   6.0    2.4/  4       
 **回复(issue #1 评论 6298762272):** token 修复通过;event 语义已采纳;模板文风捷径——引用我方旧数据实测(固定尾句覆盖被注入步骤 dylan 41.2% / mdagents 21.6% / ca 4.8%,ca5 上模板检测器步骤定位 0.90),试点后量化 TF-IDF+LR 篡改检测 AUROC(分 RC / PI)和模板检测器基线,并提议"改写池"折中(每个模板一次性生成数十个改写,注入时随机抽);锚点第 6–8 家族建议 macnet(按上游语义重新移植)+ mav + camel(改走共享 call_llm、限制 task specifier 不得改题干与选项、解析最终答案),autogen 不要,magnetic_one 作备选;建议 MAM 启用 `mam_text_model_name`(更忠实上游)。
 **待用户决定:** 锚点第 6–8 家族组合;多模态流程的纯文本步骤是否用文本 backbone;改写池方案(对方评估后)。
 **下一步(我方):** 试点结果出来后跑审计 + 超图构建 + 捷径量化 + 成对分歧统计。
+
+## 第 28 轮 · 2026-10-20 18:07 · medical-aegis 试点完成(v9 第 11、12 轮);我方审核 + 捷径量化
+
+**对方(`3ee4d8b` / `03ddf84`,报告 `docs/pilot_2026-10-20_report.md`):** 试点 400 条(+ PI 用 simulation 包装重跑 40 条,导出共 420 条),约 $4.5 + $0.6;mercury 拒绝 direct 覆盖式包装(403),新增 `prompt_wrapper_style: simulation`;MedAgents 对 Synthesizer 注入会自我纠正(第 1 轮全投 NO → 修订 → 第 2 轮通过),翻转约 0–1/10;triage PI 让 Doctor B 10/10 出错但多被纠正;工厂修复:MCQ 的 RC 总改成 "A" → 改为随机错误选项;有序标签改为相邻一级;改写池试点(每 backbone 约 690 条,$0.115;全量约 $0.3 待批);用户提议用 MA-RAG、MDTeamGPT 作锚点;MAM 文本模型待用户定。
+**我方审核:** 420 条泄漏 / 坏引用 / 漏记全部 0。第一次跑报 83 处漏记,全是我方误报(专家原样引用题干,题干在每步输入里),`audit_schema_v1.py` 已改为排除题干文本。
+**捷径量化(`analysis/pilot_20261020.py`,输出 `analysis/pilot_20261020_out.txt`):**
+- 内容捷径(单步输出 TF-IDF+LR,GroupKFold 按题,role-matched 负例):medagents RC 1.000 / PI 0.921;triage RC 1.000 / PI 0.950。**对照**(负例 = normal 中自然答错的 Doctor classify 步,71 个):triage PI 0.951、RC 0.991 → 识别的是"注入的签名"而非"错误本身"。RC 靠固定句式("Wait — after re-reading…"、"On reflection, however, the evidence better supports…");PI 靠高置信度笃定错答。
+- 拓扑捷径:medagents #步数 AUROC 0.950(normal 全 18 步,inject 45/50 在 27–33 步);triage 0.500。
+- 角色先验:注入目标固定,步骤定位 50/50。
+- 翻转(配对 normal 准确率 ≥ 0.5):medagents PI 1/14、1/8,RC 0/8、0/9;triage PI 0/18、2/9,RC 3/8、1/7。
+- 自然成对:20 题中 K=4 normal 有对有错的题仅 1 / 1(medagents)、1 / 3(triage);medagents 对齐步骤只有 44% 带语义字段,首个分歧只能定位到 Decider。
+- 改写池抽查:措辞打散了,但内容仍是故障的自我描述(FM-1.2"没有医学专业背景"、FM-3.2"无需核实")→ 只去掉了词面捷径;1377 条中 180 条仍带显式改口词。
+**回复(issue #1 评论 6305484990)要点:** ① 按难度筛题(normal 准确率 0.25–0.75,例如 MedXpertQA),一次解决拓扑捷径、自然成对稀少和翻转空间三件事;② 注入目标按 agent_id × phase 均匀随机;③ 标签侧加 `outcome ∈ {flipped, repaired, benign}`(对应 MAFA 的缺陷层 / 责任层);④ medagents 专家分析等补 `structured.answer`;⑤ MCQ 的 RC 改为原地替换最后声明的答案,不再追加自述句;自述类 FM 交给 PI 和 simulation;改写池留给 PI 指令侧;⑥ 把"注入步 vs 自然答错步"AUROC 作为每种注入配置的数据质量门槛(目标 0.5–0.7);⑦ 锚点组合 = 现有 5 + mav + macnet(重新移植)+ MA-RAG(单列 `retrieval_debate`,带工具步,做并入 debate 的敏感性分析),可选 MDTeamGPT(关掉 FAISS 和联网,做并入 medagents 的敏感性分析),camel 不要;⑧ MAM 文本步骤和音频步骤要用不同模型,同意对方判断。
+**待用户决定:** 锚点组合;按难度筛题与换数据集;RC 改为原地替换;改写池全量(约 $0.3)是否还需要;MAM 文本模型。
