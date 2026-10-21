@@ -1,0 +1,67 @@
+gold0_L0_LOMO:colacare n_tr=10022 n_te=2387 human=92 outcome=0.903 weak-macro=0.791 12s
+gold0_L0_LOMO:healthcareagent n_tr=10022 n_te=2387 human=70 outcome=0.820 weak-macro=0.700 12s
+gold0_L0_LOMO:mac n_tr=10022 n_te=2387 human=67 outcome=0.862 weak-macro=0.735 12s
+gold0_L0_LOMO:mdagents n_tr=11935 n_te=474 human=14 outcome=0.894 weak-macro=0.775 13s
+gold0_L0_LOMO:medagent n_tr=10022 n_te=2387 human=107 outcome=0.899 weak-macro=0.776 11s
+gold0_L0_LOMO:reconcile n_tr=10022 n_te=2387 human=49 outcome=0.896 weak-macro=0.828 11s
+gold0_L0_QD n_tr=6516 n_te=5893 human=399 outcome=0.621 weak-macro=0.741 8s
+gold0_L2_LOMO:colacare n_tr=10022 n_te=2387 human=92 outcome=0.909 weak-macro=0.819 26s
+gold0_L2_LOMO:healthcareagent n_tr=10022 n_te=2387 human=70 outcome=0.858 weak-macro=0.737 29s
+gold0_L2_LOMO:mac n_tr=10022 n_te=2387 human=67 outcome=0.892 weak-macro=0.769 33s
+gold0_L2_LOMO:mdagents n_tr=11935 n_te=474 human=14 outcome=0.889 weak-macro=0.806 57s
+gold0_L2_LOMO:medagent n_tr=10022 n_te=2387 human=107 outcome=0.901 weak-macro=0.792 48s
+gold0_L2_LOMO:reconcile n_tr=10022 n_te=2387 human=49 outcome=0.880 weak-macro=0.848 30s
+gold0_L2_QD n_tr=6516 n_te=5893 human=399 outcome=0.626 weak-macro=0.787 19s
+gold1_L0_LOMO:colacare n_tr=10022 n_te=2387 human=92 outcome=1.000 weak-macro=0.807 11s
+gold1_L0_LOMO:healthcareagent n_tr=10022 n_te=2387 human=70 outcome=1.000 weak-macro=0.762 11s
+gold1_L0_LOMO:mac n_tr=10022 n_te=2387 human=67 outcome=1.000 weak-macro=0.757 12s
+gold1_L0_LOMO:mdagents n_tr=11935 n_te=474 human=14 outcome=1.000 weak-macro=0.803 14s
+gold1_L0_LOMO:medagent n_tr=10022 n_te=2387 human=107 outcome=1.000 weak-macro=0.796 12s
+gold1_L0_LOMO:reconcile n_tr=10022 n_te=2387 human=49 outcome=1.000 weak-macro=0.840 12s
+gold1_L0_QD n_tr=6516 n_te=5893 human=399 outcome=1.000 weak-macro=0.779 9s
+gold1_L2_LOMO:colacare n_tr=10022 n_te=2387 human=92 outcome=1.000 weak-macro=0.824 30s
+gold1_L2_LOMO:healthcareagent n_tr=10022 n_te=2387 human=70 outcome=1.000 weak-macro=0.749 31s
+gold1_L2_LOMO:mac n_tr=10022 n_te=2387 human=67 outcome=1.000 weak-macro=0.781 31s
+gold1_L2_LOMO:mdagents n_tr=11935 n_te=474 human=14 outcome=1.000 weak-macro=0.833 35s
+gold1_L2_LOMO:medagent n_tr=10022 n_te=2387 human=107 outcome=1.000 weak-macro=0.815 28s
+gold1_L2_LOMO:reconcile n_tr=10022 n_te=2387 human=49 outcome=1.000 weak-macro=0.834 31s
+gold1_L2_QD n_tr=6516 n_te=5893 human=399 outcome=1.000 weak-macro=0.811 21s
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/claude/medhypertrace/MedHyperTrace-v2/hgfm/train_maa.py", line 137, in <module>
+    json.dump({"folds": results, "human": summ}, open(f"{out}/results.json", "w"), indent=1, default=float)
+    ^^^^^^^^^^^^^^^^^^^^
+  File "/home/claude/medhypertrace/MedHyperTrace-v2/hgfm/train_maa.py", line 129, in main
+    for _ in range(500):
+    
+  File "/home/claude/medhypertrace/MedHyperTrace-v2/hgfm/train_maa.py", line 76, in auc
+    y, s = np.asarray(y), np.asarray(s)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_ranking.py", line 710, in roc_auc_score
+    y_score = check_array(y_score, ensure_2d=False)
+  File "/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py", line 1090, in check_array
+    _assert_all_finite(
+    ~~~~~~~~~~~~~~~~~~^
+        array,
+        ^^^^^^
+    ...<2 lines>...
+        allow_nan=ensure_all_finite == "allow-nan",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py", line 137, in _assert_all_finite
+    _assert_all_finite_element_wise(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        X,
+        ^^
+    ...<4 lines>...
+        input_name=input_name,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py", line 186, in _assert_all_finite_element_wise
+    raise ValueError(msg_err)
+ValueError: Input contains NaN.
