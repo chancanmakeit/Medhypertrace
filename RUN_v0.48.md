@@ -598,3 +598,9 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 - 吞吐基准(卡 2,合成批次 bs 4、900–1600 token、梯度检查点):RTX A6000 稳态 1,087 tok/s,峰值显存已分配 19.1 GB、已预留 20.5 GB(A40 为 884 tok/s)。
 - 数据(修复泄漏后):7 折,编码器约 2,500 条运行 / LLM 训练约 2,500 条运行(mdagents 折为 2,965 / 3,000),训练对约 5.5–5.7k,QD 5,658 对、491 条评测 prompt。
 - **全量 09:30 UTC 开跑**(`/data1/ekyang/cgh/CODE/mht_work/run_c6.sh`,仓库副本 `MedHyperTrace-v2/scripts/linux2_run_c6.sh`):卡 2、卡 3 两个 worker 从同一队列取 14 个任务(7 折 × graph / text,原生 PyTorch,两个变体用同一套代码),之后用新 prompt 重跑 zeroshot 并合并。预计约 12–13 小时。状态文件 `mht_work/c6_queue/status`,日志在 `mht_work/c6_queue/logs/`。
+
+## 第 48 轮 · 2026-10-22 ~03:00 · 进度检查(后台唤醒)+ issue
+
+**C6 全量进度(Linux #2):** 真实数据上卡 2 跑 LQD_colacare graph,稳态 1,013 tok/s;卡 3 跑 LQD_colacare text,稳态 1,029 tok/s。峰值显存已分配约 19.8 GB、已预留 23.7–24.2 GB。每步约 18 秒;colacare 有 4,974 对,共 311 步,每个任务约 95 分钟。修复泄漏后,graph 的 loss(第 80 步 0.34)和 text(0.37)接近,不再出现 0.078 那种异常低值。预计全量约 11–12 小时。
+**issue(对方 v10 第 6 轮):** 清洗后 sham 的残留:说明里的词没被照抄,长度不是原因;llm_debate 是结构差异(注入步平均选项标签 0.45 个,同槽位 normal 1.57 个;第一人称 0.30 对 0.60);mdagents 的残留只在 punct 上(char 的 CI 覆盖 0.5),无法归因。对方同意不跑 fmt_v2;提议 mdagents 补跑 30 题 sham(约 $0.08,待用户批准),50 题配对通过后把 fmt_v1 定为默认说明。
+**我方回复(第 48 轮):** 同意这个顺序;但 fmt_v1 作为主数据默认之前,要先处理 llm_debate 的结构签名(格式句只描述参考回复实际用到的结构),先在 llm_debate 上用 10 题小批验证。

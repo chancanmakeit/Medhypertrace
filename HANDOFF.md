@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-21(第 47 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-21(第 48 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -11,10 +11,10 @@
 
 > **🚀 新会话快速恢复(第 38 轮写,v2 工作用):**
 > 1. `add_repo` 以 push 权限添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`(需要时再加 `graph-based-mas-fault-attribution-papers`),然后 clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走 git 代理,不需要 token。
-> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-22T08:33:18Z,即我方第 47 轮评论)。之后每次被唤醒都先跑一次。
+> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-22T09:57:20Z,即我方第 48 轮评论)。之后每次被唤醒都先跑一次。
 > 3. **MAA 数据(沙箱若已重置)**:`cd MedHyperTrace-v2 && pip install -r requirements.txt --break-system-packages`,然后运行 `bash scripts/prepare_maa.sh /home/claude/data_maa_v2 QD 8000`。脚本会自动下载、转换、对齐人工标签;**嵌入直接从仓库缓存 `MedHyperTrace-v2/data/maa_emb_minilm/` 恢复**(sha256 校验,约 10 秒,省去 CPU 上约 50 分钟;也可单独运行 `bash scripts/restore_maa_emb.sh <emb_dir>`);再导出图 token、构建 SFT。脚本能跳过已有的步骤;图缓存 `graphs_*.pkl` 在首次加载时自动重建。第一阶段结果已在 `results/phase1_maa/`,不必重跑。
 > 4. **API 密钥**:从 Project doc `claude/api端点` 读取,写到 `/home/claude/.mht_api.env`。绝不进 git。调用前先试跑估算成本,再问用户。
-> 5. 阅读顺序:§0.59 → §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.47.md` 第 37–47 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
+> 5. 阅读顺序:§0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.48.md` 第 37–48 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
 > 6. **每轮必做**:讨论记录 `RUN_v0.<N>.md` 用 `git mv` 改版本号并追加本轮;更新本文 §0;commit 并 push;sleep 不超过约 60 秒。
 
 ---
@@ -93,6 +93,7 @@
 - **Linux #2**(Jupyter 连接器,工具名 `mcp__Claude-connect-inqi_top__jupyter-mcp-2_linux2_*`):4×A6000,用卡 2、卡 3;sglang 环境(`/data/ekyang/anaconda3/envs/sglang/bin/python`)已补装依赖;Qwen3-8B 本地目录 `/data1/ekyang/cgh/cache/huggingface_hub/hub/models--Qwen--Qwen3-8B`(训练时 `--lm` 传这个路径);仓库 clone 到 `/data1/ekyang/cgh/CODE/Medhypertrace`(进行中);pip 和 git 走 HTTP 代理 `http://127.0.0.1:23333`。长任务用 nohup,不要依赖 Jupyter kernel 跑完。
 - **安全:** GitHub token 已在共享服务器的进程参数里暴露,建议用户撤销。以后不要再把 token 放进命令行。
 - **C6 全量正在 Linux #2 上运行(2026-10-22 09:30 UTC 开始,预计约 13 小时)**:`/data1/ekyang/cgh/CODE/mht_work/run_c6.sh`(setsid nohup;仓库副本 `MedHyperTrace-v2/scripts/linux2_run_c6.sh`)。看进度:`cat /data1/ekyang/cgh/CODE/mht_work/c6_queue/status`;队列中断后直接重跑脚本即可(已完成的 ckpt / eval 会跳过;剩余任务在 `c6_queue/jobs`,注意已被取走但没完成的任务不会自动回到队列)。结果在 `mht_work/maa/llm/<fold>/eval_models--Qwen--Qwen3-8B_{graph,text,zeroshot}.json`,合并结果在 `c6_queue/pooled.txt`;Linux #2 上没有 git,要通过 kernel 读回后在本地提交。
+- 第 48 轮检查:真实数据吞吐 1,013–1,029 tok/s;每个任务约 95 分钟;graph / text 的 loss 接近(泄漏已修好)。
 - Linux #2 网络:代理上游可能断;直连能用 GitHub API(tarball)、codeload、PyPI。连接器单次请求约 1 分钟超时,长命令用后台进程加日志文件。A6000 吞吐 1,087 tok/s。
 - medical-aegis:fmt_v1 已去掉格式签名,llm_debate / mdagents 的 sham 仍有措辞签名(清洗后 0.66–0.74);我方负责格式清洗;fmt_v2 暂缓。
 
