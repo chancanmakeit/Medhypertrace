@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-21(第 50 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-21(第 51 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -11,10 +11,10 @@
 
 > **🚀 新会话快速恢复(第 38 轮写,v2 工作用):**
 > 1. `add_repo` 以 push 权限添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`(需要时再加 `graph-based-mas-fault-attribution-papers`),然后 clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走 git 代理,不需要 token。
-> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-22T13:48:45Z,即我方第 50 轮评论)。之后每次被唤醒都先跑一次。
+> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-22T14:20:36Z,即我方第 51 轮评论)。之后每次被唤醒都先跑一次。
 > 3. **MAA 数据(沙箱若已重置)**:`cd MedHyperTrace-v2 && pip install -r requirements.txt --break-system-packages`,然后运行 `bash scripts/prepare_maa.sh /home/claude/data_maa_v2 QD 8000`。脚本会自动下载、转换、对齐人工标签;**嵌入直接从仓库缓存 `MedHyperTrace-v2/data/maa_emb_minilm/` 恢复**(sha256 校验,约 10 秒,省去 CPU 上约 50 分钟;也可单独运行 `bash scripts/restore_maa_emb.sh <emb_dir>`);再导出图 token、构建 SFT。脚本能跳过已有的步骤;图缓存 `graphs_*.pkl` 在首次加载时自动重建。第一阶段结果已在 `results/phase1_maa/`,不必重跑。
 > 4. **API 密钥**:从 Project doc `claude/api端点` 读取,写到 `/home/claude/.mht_api.env`。绝不进 git。调用前先试跑估算成本,再问用户。
-> 5. 阅读顺序:§0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.50.md` 第 37–50 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
+> 5. 阅读顺序:§0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.51.md` 第 37–51 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
 > 6. **每轮必做**:讨论记录 `RUN_v0.<N>.md` 用 `git mv` 改版本号并追加本轮;更新本文 §0;commit 并 push;sleep 不超过约 60 秒。
 
 ---
@@ -68,7 +68,7 @@
 - response_corruption(RC)的故障 = 固定模板句;prompt_injection(PI)由模型在改写的提示下生成,较接近真实故障,但 PI 步骤常为空(llm_debate 33.8%、ca5 11.8%)。
 - PI 子集上 MHT 比最强平凡基线(猜第一步 / 结构先验 / 模板 / 空输出)高:dylan +13、llm_debate +11(非空步骤)、clinical_agent +10(边缘);mdagents 无增益;ca5 不可信(整体上单靠模板检测器就有 0.90)。
 - 主表改为按策略分开 + 4 条平凡基线。
-- **第 50 轮加注:** medical-aegis 核实旧 AEGIS 的 PI 注入步输出本身带伪迹(指令泄漏、拒答、框架要求的结构丢失,同槽位 tfidf 0.76–0.91);上面 PI 子集上的增益可能部分来自这些伪迹,未剔除前不可引用。MAFA 建议:花钱重新生成注入数据前,先在 PI 子集上重跑全部基线(Who&When/med-SFT 需 GPU/API)。
+- **第 50 轮加注:** medical-aegis 核实旧 AEGIS 的 PI 注入步输出本身带伪迹(指令泄漏、拒答、框架要求的结构丢失,同槽位 tfidf 0.76–0.91);上面 PI 子集上的增益可能部分来自这些伪迹。**第 51 轮更正口径**:拒答是被注入的故障本身(FM-1.2 / FM-1.5 模板),不剔除;只按步骤剔除严格口径的指令泄漏(`instruction_strict`)。重算时按注入方式(llm_rewrite / direct_prepend)和 FM 分开报告,另给去掉泄漏步的敏感性结果,FM-1.2 / FM-1.5 单列并注明偏乐观。MAFA 建议:花钱重新生成注入数据前,先在 PI 子集上重跑全部基线(Who&When/med-SFT 需 GPU/API)。
 
 ### 0.31 预注册 dev/test 划分(第 11 轮,MAFA `3d80c11`)— 硬约束
 - `review_packages/eval_split_v1.json`:dev 120 / test 240(按轨迹,框架 × 答对/答错分层)。成员哈希 `916fee301529…`(文件本身 sha256 不同,是正常的)。**只在 dev 上开发、调参;test 只在最后评一次。** 评分加 `--subset dev`。
