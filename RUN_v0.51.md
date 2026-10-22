@@ -663,3 +663,16 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 **第 51 轮(续,08:48):用户让子 agent 去做"公开数据集 token 统计"和"MS-Swift graph 插件";用户整理了 HF 收藏夹 public-none-medical-mas-fault-attribution**
 - 收藏夹中 6 个数据集:tmpxv7/who-when-pro(Who&When Pro:15 个框架、26 个 benchmark、文本 / 图像 / 视频,13,500+ 条,`data_release.tar.gz` 3.5 GB;每条是"正确轨迹在某步注入一个错误后继续执行",注入点之前为干净前缀,同一任务的前缀可能大量重复)、Kevin355/Who_and_When(184)、TraceElephant/TraceElephant(`data.zip` 597 MB,README 为空,HF 预览误识别为图片)、mcemri/MAST-Data(1,642)、Fancylalala/AEGIS(9.5K)、PatronusAI/TRAIL(148,需申请访问)。
 - 子 agent A:下载并统计 token(改在本地沙箱进行,因为 Linux #2 下载 HF 只有约 50–90 KB/s;Who&When Pro 只算文本模态,并区分干净前缀 / 注入步 / 注入后,前缀去重)。子 agent B:在 worktree `/home/claude/mht_swift_plugin` 的分支 `swift-plugin` 上实现 MS-Swift 的 graph 插件,并与现有 GraphTokenLM 做数值等价测试,不合并进 main。
+
+**子 agent A 结果:公开 MAS 语料 token 统计**(本地沙箱统计,Qwen3 tokenizer,只算轨迹自然语言文本;产物 `MedHyperTrace-v2/analysis/public_mas_corpus/`)
+| 数据集 | 轨迹数 | 总 token | 去重后 | 每条 p50 / p90 | 说明 |
+|---|---|---|---|---|---|
+| AEGIS 公开版 | 9,533 | 57.3M | 49.1M | 5.1K / 9.9K | **全部带注入**(9,533/9,533 注入成功,主会话已复核);仅 1,397 道不同题 |
+| MAST-Data | 1,642 | 45.8M | 22.3M(段落级去重) | 2.4K / 109K | 原始框架日志(配置、pip、docker 输出);ChatDev 占 83% |
+| Who&When | 184 | 1.43M | 1.40M | 2.8K / 23.7K | GAIA / AssistantBench |
+| TraceElephant | 220 | 7.3M(按唯一消息计;原始存储 55.9M) | 6.8M | 19.8K / 78.3K | CaptainAgent、Magentic-One(GAIA / AssistantBench)、SWE-agent(SWE-bench),gpt-4o;带人工标注;176 条中有 135 条复用了 Who&When 的题目 |
+| Who&When-Pro | 11,072 个 JSON 中只有 311 条文本 + 916 条视频可读 | 0.46M(文本) | 干净前缀去重后 0.14M | — | **发布包损坏**:9,845 个是指向包外路径的符号链接(主会话已复核);可读的文本只有 alfworld |
+| TRAIL | — | 未测 | — | — | 需要申请访问 |
+- 与 MAA 的题目重叠:各数据集都是 0(既没有完全相同的题,也没有出现在轨迹正文里)。
+- 下载速度:沙箱很快(3.5 GB 用了 12 秒);Linux #2 只有 28–80 KB/s → 以后在沙箱抽好纯文本,只把文本传到 Linux #2。
+**含义:** 能用于严格主版本的干净公开语料只有约 30M token(MAST 22M + TraceElephant 7M + Who&When 1.4M),而且 MAST 以软件开发日志为主。AEGIS 公开版只能进入"加注入运行"的敏感性版本(删掉注入步,剔除命中 `instruction_strict` 的步骤)。加上医学语料,严格主版本总量约 0.04–0.06B,低于窄目标对齐的 0.07–0.1B。
