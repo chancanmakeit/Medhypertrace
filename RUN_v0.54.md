@@ -731,3 +731,27 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 - **含义:** 严格主版本可用的干净公开语料从约 30M 增加到约 75M(新增部分 ARIA 占 39M;ARIA 中位数每条只有 282 token,GSM-Plus 和 MMLU 的短轨迹很多)。加上医学语料,严格主版本约 0.08–0.1B,接近窄目标对齐的 0.07–0.1B。Who&When-Pro 和 CORRECT 的"注入前前缀"(10.0M + 6.4M)本身是干净文本,是否计入主版本需要决定(medical-aegis 的约定只针对 AEGIS 注入运行)。MAScope 的拓扑标签可以作为结构感知中训练的辅助目标。
 
 **第 53 轮末(18:05 UTC):** 用户因上下文上限要新开会话。Linux #2:LQD_reconcile graph 0.663 / text 0.629(n=49),六个 LQD 折全部完成,六折配对比较在后台(`mht_work/compare_gt_6fold.out`);QD graph / text 预计 19:15–19:30 UTC 完成,之后自动 zeroshot + 合并。交接要点见 HANDOFF §0.62。
+
+## 第 54 轮 · 2026-10-22 ~18:04 UTC · 新会话续接(第 3 个交接);六折配对比较;图 token 诊断启动
+
+**恢复:** 两仓库已重新挂载并克隆;issue #1 无新评论(最后仍是我方 14:20:36Z)。Linux #2 sglang kernel 仍为 `ffd58261-…`。
+**LoRA 微调进度(18:05 UTC):** 12/14 完成;QD graph(卡 3)第 320/≈354 步、QD text(卡 2)第 240/≈354 步,约 19 秒/步 → 训练约 18:20 / 18:45 UTC 结束,各自再评测约 1 分钟;之后 run_c6.sh 在卡 2 上依次跑 7 折 zeroshot,再 `hgfm.llm.pool`。卡 0 空闲,卡 1 被他人占用(26 GB)。
+
+**六折配对比较(LQD 全部完成;`results/c6_linux2_lora/compare_gt_6fold.out`;人工宏 AUROC,配对 bootstrap 1000 次):**
+| 折 | n | graph | text | graph − text [95% CI] |
+|---|---|---|---|---|
+| LQD_colacare | 92 | 0.778 | 0.816 | −0.039 [−0.144, +0.031] |
+| LQD_healthcareagent | 70 | 0.599 | 0.638 | −0.039 [−0.136, +0.075] |
+| LQD_mac | 67 | 0.790 | 0.821 | −0.031 [−0.088, +0.012] |
+| LQD_mdagents | 14 | — | — | 单折无法算宏 AUROC(计入合并) |
+| LQD_medagent | 107 | 0.735 | 0.769 | −0.035 [−0.137, +0.062] |
+| LQD_reconcile | 49 | 0.663 | 0.629 | **+0.035** [−0.101, +0.169] |
+| 六折合并 | 399 | 0.701 | 0.716 | **−0.014 [−0.047, +0.020]** |
+- reconcile 是第一个 graph 高于 text 的折(CI 很宽)。合并差距从三折的 −0.048(CI 不含 0)→ 五折 −0.022 → 六折 −0.014,CI 都含 0。**结论:在 LQD 上图 token 没有可测的增益,也没有可测的损害。** 第 51 轮"图 token 让结果变差"的说法是三折时的阶段性结果,不再成立。
+
+**图 token 诊断(新代码 `MedHyperTrace-v2/hgfm/llm/graph_ablation.py`;驱动 `scripts/linux2_run_ablate.sh`,卡 0 后台):** 对 graph 检查点,同一模型、同一批 prompt,只改图向量,与未改动的分数配对比较:
+- `zero_state`:HGFM 状态置 0,保留节点 / 超边类型标志;`mean_state`:换成评测集同类均值;`zero_emb`:投影器输出置 0;`shuffle_{0,1,2}`:每个 run 的图向量换成评测集里另一个 run 的(按 run 错排,3 个种子)。
+- 报告:宏 AUROC 及与 none 的配对差 CI、平均 |Δ分数|(以及相对 none 分数标准差的倍数)、与 none 的 Spearman ρ。
+- 冒烟(LQD_mac 前 6 条 prompt):none 与 eval.py 的分数逐条完全一致(最大差 0.0)。只有 5 个实例,不下结论。
+- 正式运行 18:09 UTC 开始,依次 6 个 LQD 折,QD 的 graph eval 出来后自动接上,最后输出 LQD 合并结果 `mht_work/ablate_pooled_lqd.json`。
+**另:** 配对比较扩展为三方(graph / text / zeroshot),QD 单独报告、不与 LQD 合并(两种划分覆盖同一批 400 个人工实例):`scripts/linux2_compare_c6.py`。

@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-22 18:05 UTC(第 53 轮,会话因上下文上限交接;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-22 18:20 UTC(第 54 轮,第 3 个会话开场;第 53 轮末曾因上下文上限交接) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -14,7 +14,7 @@
 > 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-22T14:20:36Z,即我方第 51 轮评论)。之后每次被唤醒都先跑一次。
 > 3. **MAA 数据(沙箱若已重置)**:`cd MedHyperTrace-v2 && pip install -r requirements.txt --break-system-packages`,然后运行 `bash scripts/prepare_maa.sh /home/claude/data_maa_v2 QD 8000`。脚本会自动下载、转换、对齐人工标签;**嵌入直接从仓库缓存 `MedHyperTrace-v2/data/maa_emb_minilm/` 恢复**(sha256 校验,约 10 秒,省去 CPU 上约 50 分钟;也可单独运行 `bash scripts/restore_maa_emb.sh <emb_dir>`);再导出图 token、构建 SFT。脚本能跳过已有的步骤;图缓存 `graphs_*.pkl` 在首次加载时自动重建。第一阶段结果已在 `results/phase1_maa/`,不必重跑。
 > 4. **API 密钥**:从 Project doc `claude/api端点` 读取,写到 `/home/claude/.mht_api.env`。绝不进 git。调用前先试跑估算成本,再问用户。
-> 5. 阅读顺序:**§0.62(交接时的在途任务,先读)** → §0.61(第 53 轮:收藏夹 15 个数据集、五折配对比较)→ §0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.53.md` 第 37–53 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
+> 5. 阅读顺序:**§0.63(第 54 轮,当前在途任务,先读)** → §0.62(第 53 轮末交接时的在途任务)→ §0.61(第 53 轮:收藏夹 15 个数据集、五折配对比较)→ §0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.54.md` 第 37–54 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
 > 6. **每轮必做**:讨论记录 `RUN_v0.<N>.md` 用 `git mv` 改版本号并追加本轮;更新本文 §0;commit 并 push;sleep 不超过约 60 秒。
 
 ---
@@ -89,6 +89,13 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.63 第 54 轮:六折配对比较;图 token 诊断在卡 0 后台(2026-10-22 18:20 UTC)
+- **六折 LQD 合并 n=399:graph 0.701 vs text 0.716,差 −0.014 [−0.047, +0.020]**(reconcile 是唯一 graph 更高的折,+0.035,CI 宽)。三折时"图 token 变差、CI 不含 0"的说法已不成立;现在的结论是图 token 无可测增益、无可测损害。产物 `MedHyperTrace-v2/results/c6_linux2_lora/compare_gt_6fold.out`。
+- **在途(Linux #2):** ① QD graph(卡 3)/ QD text(卡 2)训练预计 18:20 / 18:45 UTC 结束,之后 run_c6.sh 在卡 2 依次跑 7 折 zeroshot + `hgfm.llm.pool`(写 `c6_queue/pooled.txt`,status 末行 `ALL DONE`)。② **图 token 诊断** `mht_work/run_ablate.sh`(日志 `run_ablate.log`,卡 0,18:09 开始):每折输出 `maa/llm/<fold>/ablate_models--Qwen--Qwen3-8B_graph.json`,模式 none / zero_state / mean_state / zero_emb / shuffle_{0,1,2};QD 等其 graph eval 出来后自动接上;LQD 合并 `mht_work/ablate_pooled_lqd.json`(QD 不并入)。代码 `MedHyperTrace-v2/hgfm/llm/graph_ablation.py`(Linux #2 副本 md5 0b9c12b8…,与仓库一致);冒烟已验证 none 与 eval.py 逐条一致。
+- **都完成后要做:** 把 `scripts/linux2_compare_c6.py` 写到 Linux #2 跑三方配对(graph / text / zeroshot;QD 单列)→ 把所有 eval_*.json、ablate_*.json、pooled.txt、compare_c6.json 读回并提交到 `MedHyperTrace-v2/results/c6_linux2_lora/` → 写 README 小结。
+- §0.62 的"其他待办 / 待用户决定"仍全部有效。
+- **安全:** Project 指令里有明文 GitHub token;推送走会话 git 代理,本会话没有使用它。建议用户撤销(第 47 轮已因进程参数暴露提过一次)。
 
 ### 0.62 交接时的在途任务(2026-10-22 18:05 UTC,第 53 轮末)
 **Linux #2**(Jupyter 连接器 `mcp__Claude-connect-inqi_top__jupyter-mcp-2_linux2_execute_python`;先 `..._linux2_list_kernels` 取 kernel id,sglang kernel 曾是 `ffd58261-5022-427d-86d3-035e82bd2358`;请求约 60 秒超时 → 长任务一律后台 + 日志;工作目录 `/data1/ekyang/cgh/CODE/mht_work`):
