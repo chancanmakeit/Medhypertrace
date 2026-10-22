@@ -91,7 +91,7 @@
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
 ### 0.61 第 53 轮:HF 收藏夹扩到 15 个;五折配对比较
-- 用户收藏夹 `UUUooUUU/public-none-medical-mas-fault-attribution` 新增 9 个:microsoft/AgentRx(gated)、yifanyu/CORRECT-Error(2,226,注入)、ZBox008003/AFTraj(2,276,含 1,162 safe)、Edlison/ARIA(24,468,含 MMLU → 需剔除医学科目)、Leoxx/whowhen_pro(Who&When Pro 可用镜像,text 6.3K)、davide221/agenterrorbench(200)、mascope/mascope-bench(2.2K,含拓扑标签;MAST-clean 需与 MAST-Data 查重)、RogerYao/RAISER(50.2K 行,可能只有标签表)、AI45Research/ATBench(安全轨迹)。子 agent 在沙箱统计中,产物 `MedHyperTrace-v2/analysis/public_mas_corpus/stats_r53.md`(未提交前以子 agent 汇报为准,主会话需复核关键数字)。
+- 用户收藏夹 `UUUooUUU/public-none-medical-mas-fault-attribution` 新增 9 个:microsoft/AgentRx(gated)、yifanyu/CORRECT-Error(2,226,注入)、ZBox008003/AFTraj(2,276,含 1,162 safe)、Edlison/ARIA(24,468,含 MMLU → 需剔除医学科目)、Leoxx/whowhen_pro(Who&When Pro 可用镜像,text 6.3K)、davide221/agenterrorbench(200)、mascope/mascope-bench(2.2K,含拓扑标签;MAST-clean 需与 MAST-Data 查重)、RogerYao/RAISER(50.2K 行,可能只有标签表)、AI45Research/ATBench(安全轨迹)。统计已完成(`MedHyperTrace-v2/analysis/public_mas_corpus/stats_r53.md`):新增 77.9M token(干净/自然 45.5M、注入 32.4M),干净公开语料合计约 75M(ARIA 占 39M);MAScope MAST-clean 完全是 MAST-Data 的子集;ARIA 已去掉医学 MMLU 2,231 条;AgentRx 需要用户在 HF 接受条款;RAISER 没有轨迹文本。待定:注入集的干净前缀(W&W-Pro 10.0M、CORRECT 6.4M)是否进入主版本。
 - LoRA 微调:11/14 完成;五折合并 n=350:graph 0.699 vs text 0.721,差 −0.022 [−0.058, +0.016](详见 `RUN_v0.53.md` 第 53 轮)。剩 reconcile text、QD graph/text,然后 zeroshot + 合并 + 图 token 置零/打乱诊断。
 
 ### 0.60 第 49 轮:3 卡 LoRA 微调运行中;中训练与 MS-Swift 规划
