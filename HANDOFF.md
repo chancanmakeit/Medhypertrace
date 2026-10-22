@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-21(第 48 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-21(第 49 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -14,7 +14,7 @@
 > 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-22T09:57:20Z,即我方第 48 轮评论)。之后每次被唤醒都先跑一次。
 > 3. **MAA 数据(沙箱若已重置)**:`cd MedHyperTrace-v2 && pip install -r requirements.txt --break-system-packages`,然后运行 `bash scripts/prepare_maa.sh /home/claude/data_maa_v2 QD 8000`。脚本会自动下载、转换、对齐人工标签;**嵌入直接从仓库缓存 `MedHyperTrace-v2/data/maa_emb_minilm/` 恢复**(sha256 校验,约 10 秒,省去 CPU 上约 50 分钟;也可单独运行 `bash scripts/restore_maa_emb.sh <emb_dir>`);再导出图 token、构建 SFT。脚本能跳过已有的步骤;图缓存 `graphs_*.pkl` 在首次加载时自动重建。第一阶段结果已在 `results/phase1_maa/`,不必重跑。
 > 4. **API 密钥**:从 Project doc `claude/api端点` 读取,写到 `/home/claude/.mht_api.env`。绝不进 git。调用前先试跑估算成本,再问用户。
-> 5. 阅读顺序:§0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.48.md` 第 37–48 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
+> 5. 阅读顺序:§0.60 → §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.49.md` 第 37–49 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
 > 6. **每轮必做**:讨论记录 `RUN_v0.<N>.md` 用 `git mv` 改版本号并追加本轮;更新本文 §0;commit 并 push;sleep 不超过约 60 秒。
 
 ---
@@ -88,6 +88,11 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.60 第 49 轮:3 卡 LoRA 微调运行中;中训练与 MS-Swift 规划
+- 用户要求:称为"LoRA 微调完整跑完"(不叫"全量");用卡 0、2、3;token 不处理;加 wandb 可视化;引入中训练 / 持续预训练(参考 `mid-training-data-volume-and-selection-survey.md`);训练改用 MS-Swift(装在 conda 环境 ms-swift)。
+- 卡 0 worker:`mht_work/worker_gpu0.sh`(共用 c6_queue)。MS-Swift 安装中:`mht_work/install_swift.sh` / `install_swift.log`,环境 `/data/ekyang/anaconda3/envs/ms-swift`。
+- 中训练可用语料约 0.05–0.08B token(TAPT 量级);设计要点见 `RUN_v0.49.md` 第 49 轮。待用户确认语料和方案;wandb 需要用户自己 `wandb login`。
 
 ### 0.59 第 47 轮:Linux #2 准备中;fmt_v1 复算
 - **Linux #2**(Jupyter 连接器,工具名 `mcp__Claude-connect-inqi_top__jupyter-mcp-2_linux2_*`):4×A6000,用卡 2、卡 3;sglang 环境(`/data/ekyang/anaconda3/envs/sglang/bin/python`)已补装依赖;Qwen3-8B 本地目录 `/data1/ekyang/cgh/cache/huggingface_hub/hub/models--Qwen--Qwen3-8B`(训练时 `--lm` 传这个路径);仓库 clone 到 `/data1/ekyang/cgh/CODE/Medhypertrace`(进行中);pip 和 git 走 HTTP 代理 `http://127.0.0.1:23333`。长任务用 nohup,不要依赖 Jupyter kernel 跑完。

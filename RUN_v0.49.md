@@ -604,3 +604,18 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 **C6 全量进度(Linux #2):** 真实数据上卡 2 跑 LQD_colacare graph,稳态 1,013 tok/s;卡 3 跑 LQD_colacare text,稳态 1,029 tok/s。峰值显存已分配约 19.8 GB、已预留 23.7–24.2 GB。每步约 18 秒;colacare 有 4,974 对,共 311 步,每个任务约 95 分钟。修复泄漏后,graph 的 loss(第 80 步 0.34)和 text(0.37)接近,不再出现 0.078 那种异常低值。预计全量约 11–12 小时。
 **issue(对方 v10 第 6 轮):** 清洗后 sham 的残留:说明里的词没被照抄,长度不是原因;llm_debate 是结构差异(注入步平均选项标签 0.45 个,同槽位 normal 1.57 个;第一人称 0.30 对 0.60);mdagents 的残留只在 punct 上(char 的 CI 覆盖 0.5),无法归因。对方同意不跑 fmt_v2;提议 mdagents 补跑 30 题 sham(约 $0.08,待用户批准),50 题配对通过后把 fmt_v1 定为默认说明。
 **我方回复(第 48 轮):** 同意这个顺序;但 fmt_v1 作为主数据默认之前,要先处理 llm_debate 的结构签名(格式句只描述参考回复实际用到的结构),先在 llm_debate 上用 10 题小批验证。
+
+## 第 49 轮 · 2026-10-22 03:08 · 用户:wandb 可视化;改叫"LoRA 微调完整跑完",用卡 0/2/3;token 不处理;引入中训练 / 持续预训练;改用 MS-Swift(在 ms-swift 环境)
+
+**已做:**
+- 卡 0 加入正在运行的 LoRA 队列(`mht_work/worker_gpu0.sh`,函数照抄 run_c6.sh,共用队列和锁),10:09 UTC 起跑 LQD_healthcareagent graph。现在 3 张卡同时在跑,预计约 8–9 小时跑完(原先只用卡 2、卡 3 时估计 12 小时)。
+- conda 环境 ms-swift 已存在但是空的(Python 3.12.15);后台安装 torch 2.6.0(cu124,对应驱动 550 / CUDA 12.4)、ms-swift(PyPI 最新 4.6.0)、wandb、deepspeed(`mht_work/install_swift.sh`,日志 install_swift.log)。sglang 环境未改动。
+- 网络:代理已恢复,PyPI 和 download.pytorch.org 直连、走代理都能通;wandb 只能走代理(直连 000)。sglang 环境里没有 wandb,也没有 ~/.netrc 凭据 → 需要用户自己 `wandb login`。
+- 文献:两次检索没有找到在 MAS 故障归因上做中训练 / 持续预训练的工作(Who&When Pro、FALAT、StepFinder、VerifyMAS、Detect-Before-Attribute 等都是推理时方法或后训练);检索不全面,不能据此断言"没有"。
+**可用无标签轨迹语料(字符数 / 4 粗估 token):** MAA 只算输出约 19.6M(连同输入约 53.7M,输入重复多);medical-aegis gate7 约 9.0M + fmt_val 约 2.2M;AEGIS v1 合成数据原始文件约 155M(上界,含 JSON 结构和重复输入;另有注入模板,PI 的输入里含注入指令,需要先清洗)。合计不重复文本约 0.05–0.08B。
+**结合调研文档的判断:** 文档给出的 8B 领域 CPT 可信下限约 1B,窄目标对齐(InsCP)为 0.07–0.1B;我们的语料处在 0.05–0.08B,属于"任务自适应预训练"(TAPT,Gururangan 等 2020)的量级,做不了"学新知识"式的 CPT。C5(编码器自监督预训练)无增益,是需要警惕的先例。
+**设计要点(待用户确认):**
+1. 严格零样本:中训练语料不能包含留出 MAS 的轨迹 → 主版本只用非 MAA 语料(medical-aegis + AEGIS v1 + 公开 MAS 轨迹),所有折共用一次中训练;用 MAA(去掉测试一半题目)的版本作为直推版另行报告;语料按题目文本去重,去掉 MAA 测试一半的题目。
+2. 对照:同一套 SFT,分别从原始 Qwen3-8B 和中训练后的模型出发,配对比较;正在运行的 LoRA 微调就是"无中训练"那一组。
+3. 和超图的关系:纯文本 CPT 是常规做法;更能体现新意的是"结构感知中训练",即带图 token 的自监督对齐任务(由图 token 预测读取来源、阶段、答案流,相当于 GraphGPT 的第一阶段)。
+4. MS-Swift 负责文本 CPT(swift pt,LoRA 或全参);graph 变体的 SFT 需要软 token 注入,MS-Swift 标准流程不支持,需要写自定义插件。为保证 graph 对 text 公平,建议两个 SFT 变体继续用同一个训练器(现有代码或日后都移植到 MS-Swift)。
