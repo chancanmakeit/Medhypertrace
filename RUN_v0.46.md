@@ -575,3 +575,4 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 **试跑结束(`MedHyperTrace-v2/results/c6_runpod_pilot/README.md`):** STATUS ok,05:02 结束并自行停机。稳态 884 tok/s,峰值显存已分配 20.16 GB、已预留 23.41 GB。Zeroshot Qwen3-8B 合并 LQD 0.616 [0.557, 0.673]。与编码器配对(C5 scratch 0.655,同 399 例):−0.039 [−0.117, +0.040]。两者秩平均集成 0.688,+0.034 [−0.013, +0.081](事后探索,未调参)。zeroshot 较弱的码:2.1.2 0.38、1.2.1 0.45、2.1.1 0.48。
 **清理:** pod `l3s761kur3bb6j` 已删除(list-pods 为空)。按约 41 分钟 × $0.59 估算约 $0.40;账单记录尚未入账(当日 list-billing 为 0 条)。Runpod secret `gh_medhypertrace` 仍保留,待用户决定是否删除。
 **issue(对方 v10 第 4 轮,04:45Z):** 复算确认格式签名,并找到第二个签名(medagents consensus_vote 中 `[YES]` 变成 `YES`,同槽位方括号比例 0.00 对 0.45);门槛加了 same_slot、tfidf_punct、char 特征;生成端修复 fmt_v1(说明里写明参考回复的格式,删除"不要加……"一句,重采样加 match_format);填充目标数已更正(MAC 254–582);同意不批 A–D;验证批规模待用户定(10 题 $0.39,CI ±0.2;20 题 $0.87,CI ±0.13)。
+- 我方第 46 轮 issue 评论:建议验证批 20 题;报告中加同槽位 MiniLM 和列表行比例;fmt_v1 导出入库后由我方复算。
