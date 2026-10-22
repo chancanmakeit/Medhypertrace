@@ -560,3 +560,9 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 **GitHub token:** 作为 Runpod secret `gh_medhypertrace`(id s5zjjyam1u)注入环境变量 GH_TOKEN,只在 HTTP header 中使用。沙箱的代理会注入凭据,无法在沙箱里验证 token;pod 上 clone 成功,说明 token 有效。
 **pod 上的流程(`MedHyperTrace-v2/scripts/runpod_c6_pilot.sh`):** 装依赖 → prepare_maa.sh(全部 7 折)→ LQD_mac 上用 graph 变体、800 对做试训练(记录峰值显存和稳态 tok/s,`train.py` 已加统计)→ 用这个 checkpoint 跑一次评测(只检查流程,AUROC 无意义)→ 7 折 zeroshot 评测并合并 → 结果推到 `runpod-c6-pilot` 分支 → pod 自行 stop(失败也会推送日志)。
 **沙箱冒烟测试:** Qwen2.5-0.5B、fp32、开 `--grad_ckpt` 跑 24 步,统计正常写出,评测能读取 checkpoint。不开梯度检查点时,沙箱(7 GB 内存)会被 OOM kill,属预期。
+
+**第 45 轮(续):试跑实测与一个设计缺陷**
+- 实测(A40、Qwen3-8B、bf16、bs 4 × accum 4、开梯度检查点):第 20 步时稳态 871 tok/s(按真实 token 计),峰值显存已分配 20.2 GB、已预留 23.4 GB;每个优化步约 22.6 秒。我之前的估算是约 1,100 tok/s、23–26 GB:吞吐偏乐观了约 20%,显存估算相符。
+- **标签泄漏(graph 变体):** `export_graph_emb.py` 先在本折训练集上用审计员标签训练编码器,再导出训练 run 和测试 run 的节点向量与 step_prob。训练 run 是样本内的。LQD_mac 实测:encoder step_prob 对审计员标签的 AUROC,训练 run 0.959(n=108,083),测试 run 0.764(n=21,406)。后果:graph 变体训练时能从图 token 直接读到近似标签,训练和测试分布不一致(第 20 步 loss 0.078 与此相符);两个变体的候选步排序也用了训练 run 的样本内 step_prob。zeroshot 只用测试 run 的(样本外)分数,不受影响。
+- **修复(全量之前做):** 交叉拟合。训练 run 的图 token 和 step_prob 改为由不含该 run 的内层编码器导出(5 折,按题目划分,避免同题泄漏);测试 run 仍用全量训练集的编码器。每折多训 5 个编码器,CPU 上约 5 分钟。试跑的显存和吞吐数字不受影响,继续跑完。
+- 修正后的全量估算:每折每个变体约 7.3–8.2M token,按 871 tok/s 约 2.3–2.6 小时;14 次训练约 34 GPU 小时,1 卡计约 $20;4×A40 墙钟约 10.5 小时,约 $25(最后一轮只有 3 卡在用,但 4 卡都计费)。
