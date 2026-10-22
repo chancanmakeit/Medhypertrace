@@ -51,13 +51,31 @@ def main():
     opt = torch.optim.AdamW([{"params": [p for p in model.lm.parameters() if p.requires_grad], "lr": a.lr},
                              {"params": model.proj.parameters(), "lr": a.proj_lr}], weight_decay=0.0)
     step, t0 = 0, time.time(); model.train()
+    cuda = a.device.startswith("cuda") and torch.cuda.is_available()
+    if cuda: torch.cuda.reset_peak_memory_stats()
+    n_tok = n_slot = 0; t_steady = None; tok_steady = 0   # throughput: real tokens and padded slots; steady = after 5 optimizer steps
     for ep in range(a.epochs):
         random.shuffle(data)
         for k, (ids, att, gv, lab) in enumerate(batches(model, data, tokens, a.bs, a.max_len, a.device)):
             loss = model(ids, att, gv, lab) / a.accum; loss.backward()
+            n_tok += int(att.sum()); n_slot += att.numel()
+            if t_steady is not None: tok_steady += int(att.sum())
             if (k + 1) % a.accum == 0:
                 torch.nn.utils.clip_grad_norm_(model.trainable_parameters(), 1.0); opt.step(); opt.zero_grad(); step += 1
-                if step % 20 == 0 or step == 1: print(f"ep {ep} step {step} loss {loss.item() * a.accum:.4f} {time.time() - t0:.0f}s", flush=True)
+                if step == 5:
+                    if cuda: torch.cuda.synchronize()
+                    t_steady = time.time()
+                if step % 20 == 0 or step == 1:
+                    mem = f" peak_alloc {torch.cuda.max_memory_allocated() / 2**30:.1f}G peak_reserved {torch.cuda.max_memory_reserved() / 2**30:.1f}G" if cuda else ""
+                    rate = f" tok/s {tok_steady / (time.time() - t_steady):.0f}" if t_steady and time.time() > t_steady else ""
+                    print(f"ep {ep} step {step} loss {loss.item() * a.accum:.4f} {time.time() - t0:.0f}s{rate}{mem}", flush=True)
+    if cuda: torch.cuda.synchronize()
+    stats = {"seconds": time.time() - t0, "optimizer_steps": step, "tokens": n_tok, "padded_slots": n_slot,
+             "steady_tok_per_s": (tok_steady / (time.time() - t_steady)) if t_steady else None,
+             "peak_alloc_gb": torch.cuda.max_memory_allocated() / 2**30 if cuda else None,
+             "peak_reserved_gb": torch.cuda.max_memory_reserved() / 2**30 if cuda else None,
+             "gpu": torch.cuda.get_device_name() if cuda else None}
+    json.dump(stats, open(os.path.join(a.out, "train_stats.json"), "w"), indent=1); print("STATS", json.dumps(stats), flush=True)
     model.lm.save_pretrained(os.path.join(a.out, "lora"), save_embedding_layers=False); torch.save(model.proj.state_dict(), os.path.join(a.out, "projector.pt"))
     model.tok.save_pretrained(os.path.join(a.out, "lora"))
     json.dump(vars(a), open(os.path.join(a.out, "train_args.json"), "w"), indent=1); print("saved", a.out)
