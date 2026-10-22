@@ -14,7 +14,7 @@
 > 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-22T14:20:36Z,即我方第 51 轮评论)。之后每次被唤醒都先跑一次。
 > 3. **MAA 数据(沙箱若已重置)**:`cd MedHyperTrace-v2 && pip install -r requirements.txt --break-system-packages`,然后运行 `bash scripts/prepare_maa.sh /home/claude/data_maa_v2 QD 8000`。脚本会自动下载、转换、对齐人工标签;**嵌入直接从仓库缓存 `MedHyperTrace-v2/data/maa_emb_minilm/` 恢复**(sha256 校验,约 10 秒,省去 CPU 上约 50 分钟;也可单独运行 `bash scripts/restore_maa_emb.sh <emb_dir>`);再导出图 token、构建 SFT。脚本能跳过已有的步骤;图缓存 `graphs_*.pkl` 在首次加载时自动重建。第一阶段结果已在 `results/phase1_maa/`,不必重跑。
 > 4. **API 密钥**:从 Project doc `claude/api端点` 读取,写到 `/home/claude/.mht_api.env`。绝不进 git。调用前先试跑估算成本,再问用户。
-> 5. 阅读顺序:§0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.52.md` 第 37–52 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
+> 5. 阅读顺序:§0.61(第 53 轮:收藏夹 15 个数据集、五折配对比较)→ §0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.53.md` 第 37–52 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
 > 6. **每轮必做**:讨论记录 `RUN_v0.<N>.md` 用 `git mv` 改版本号并追加本轮;更新本文 §0;commit 并 push;sleep 不超过约 60 秒。
 
 ---
@@ -90,10 +90,14 @@
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
+### 0.61 第 53 轮:HF 收藏夹扩到 15 个;五折配对比较
+- 用户收藏夹 `UUUooUUU/public-none-medical-mas-fault-attribution` 新增 9 个:microsoft/AgentRx(gated)、yifanyu/CORRECT-Error(2,226,注入)、ZBox008003/AFTraj(2,276,含 1,162 safe)、Edlison/ARIA(24,468,含 MMLU → 需剔除医学科目)、Leoxx/whowhen_pro(Who&When Pro 可用镜像,text 6.3K)、davide221/agenterrorbench(200)、mascope/mascope-bench(2.2K,含拓扑标签;MAST-clean 需与 MAST-Data 查重)、RogerYao/RAISER(50.2K 行,可能只有标签表)、AI45Research/ATBench(安全轨迹)。子 agent 在沙箱统计中,产物 `MedHyperTrace-v2/analysis/public_mas_corpus/stats_r53.md`(未提交前以子 agent 汇报为准,主会话需复核关键数字)。
+- LoRA 微调:11/14 完成;五折合并 n=350:graph 0.699 vs text 0.721,差 −0.022 [−0.058, +0.016](详见 `RUN_v0.53.md` 第 53 轮)。剩 reconcile text、QD graph/text,然后 zeroshot + 合并 + 图 token 置零/打乱诊断。
+
 ### 0.60 第 49 轮:3 卡 LoRA 微调运行中;中训练与 MS-Swift 规划
 - 用户要求:称为"LoRA 微调完整跑完"(不叫"全量");用卡 0、2、3;token 不处理;加 wandb 可视化;引入中训练 / 持续预训练(参考 `mid-training-data-volume-and-selection-survey.md`);训练改用 MS-Swift(装在 conda 环境 ms-swift)。
 - 卡 0 worker:`mht_work/worker_gpu0.sh`(共用 c6_queue)。MS-Swift(**已装好**,ms-swift 4.6.0 + transformers 4.57.6 + deepspeed + wandb;`swift pt --help` 已验证):装在 sglang 的离线克隆 **mht-swift**(`/data/ekyang/anaconda3/envs/mht-swift`,脚本 `mht_work/install_swift2.sh`,日志 install_swift2.log);原 ms-swift 环境(Python 3.12)因 torch 下载太慢放弃,只装了一半依赖,未删除。
-- 中训练:用户希望纳入公开的非医学 MAS 数据(AEGIS 公开版 9.5K、MAST-Data 1,642、TRAIL 148、Who&When 184;只用文本不用标签),合计约 0.15–0.3B token(TAPT 量级)。语料边界和中训练方式已在 issue 征求 medical-aegis 意见(第 49 轮评论)。用户已确认 SFT 稍后全部迁到 MS-Swift。**插件已写好**:分支 `swift-plugin`(27358e9,未合并),`MedHyperTrace-v2/hgfm/llm/swift_plugin/`,数值上与 GraphTokenLM 等价(详见 `RUN_v0.52.md` 第 52 轮)。公开语料统计见 `MedHyperTrace-v2/analysis/public_mas_corpus/`(AEGIS 公开版全部带注入;Who&When-Pro 发布包损坏;干净公开语料约 30M token)。wandb 需要用户自己 `wandb login`。
+- 中训练:用户希望纳入公开的非医学 MAS 数据(AEGIS 公开版 9.5K、MAST-Data 1,642、TRAIL 148、Who&When 184;只用文本不用标签),合计约 0.15–0.3B token(TAPT 量级)。语料边界和中训练方式已在 issue 征求 medical-aegis 意见(第 49 轮评论)。用户已确认 SFT 稍后全部迁到 MS-Swift。**插件已写好**:分支 `swift-plugin`(27358e9,未合并),`MedHyperTrace-v2/hgfm/llm/swift_plugin/`,数值上与 GraphTokenLM 等价(详见 `RUN_v0.53.md` 第 52 轮)。公开语料统计见 `MedHyperTrace-v2/analysis/public_mas_corpus/`(AEGIS 公开版全部带注入;Who&When-Pro 发布包损坏;干净公开语料约 30M token)。wandb 需要用户自己 `wandb login`。
 
 ### 0.59 第 47 轮:Linux #2 准备中;fmt_v1 复算
 - **Linux #2**(Jupyter 连接器,工具名 `mcp__Claude-connect-inqi_top__jupyter-mcp-2_linux2_*`):4×A6000,用卡 2、卡 3;sglang 环境(`/data/ekyang/anaconda3/envs/sglang/bin/python`)已补装依赖;Qwen3-8B 本地目录 `/data1/ekyang/cgh/cache/huggingface_hub/hub/models--Qwen--Qwen3-8B`(训练时 `--lm` 传这个路径);仓库 clone 到 `/data1/ekyang/cgh/CODE/Medhypertrace`(进行中);pip 和 git 走 HTTP 代理 `http://127.0.0.1:23333`。长任务用 nohup,不要依赖 Jupyter kernel 跑完。

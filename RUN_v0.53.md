@@ -1,4 +1,4 @@
-# RUN_v0.37 — 每轮讨论记录
+# RUN_v0.53 — 每轮讨论记录
 
 **命名规则(2026-10-09 起,按 Project 要求带版本号):** 文件名 `RUN_v0.<轮次>.md`,每轮结束时用 `git mv` 改名到新的版本号,历史在 git 里连续。**当前最新版本号 = 最后一轮的轮次。**
 
@@ -683,3 +683,31 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 - 等价性(子 agent 报告,主会话在沙箱重跑 test_equivalence.py 复核 (a)(b)):相同权重、相同 batch 下,loss 差 graph 4.8e-7、text 1.2e-6;梯度余弦 ≥ 0.9999995(graph 148 个张量、text 144 个);51 个占位符嵌入与投影器输出的差为 0;截断后的 input_ids、labels、图向量与 train.py 逐条一致;两个变体各跑 10 步 swift sft 都能完成并保存 checkpoint;从 checkpoint 复现评测打分,差 ≤ 9.5e-6。
 - 与 train.py 不逐位相同的地方:样本顺序(swift 自己的 sampler);最后一个不完整的梯度累积窗口(HF Trainer 仍会更新一步);bf16 时 swift 用 autocast(加 `--bf16 false` 可与 train.py 一致,但只限单卡、不开 DeepSpeed);不支持 --packing / --padding_free / all-linear。
 - 注意:ms-swift 4.x 把 `--train_type` 改名为 `--tuner_type`;加载这种 checkpoint 时也必须带 `--external_plugins`。沙箱里装 ms-swift 时 transformers 被降到 5.19.0、peft 变成 0.20.0(只影响本地沙箱)。
+
+## 第 53 轮 · 2026-10-22 ~16:50 UTC · 用户:HF 收藏夹更新了(15 个数据集)
+
+**收藏夹新增 9 个**(HF 元数据,未下载前的初看):
+| 数据集 | 规模 | 内容 | 初判 |
+|---|---|---|---|
+| microsoft/AgentRx | <1K(约 160) | 失败轨迹 + 步级故障类别 + 根因步;τ-retail 等 | 需申请访问(gated) |
+| yifanyu/CORRECT-Error | 2,226 | 7 个任务 × 2 个生成模型,**注入**错误,标 mistake_agent / mistake_step | 注入集 |
+| ZBox008003/AFTraj | 1,162 safe + 1,114 unsafe | 3 个领域,unsafe 标决定性错误步 | 有干净(safe)子集,体量小(parquet 2.7 MB) |
+| Edlison/ARIA | 24,468 | AG2 / OpenManus / MetaGPT / Magentic-One × GAIA、GSM-Plus、HumanEval、**MMLU**、OlympiadBench、SWE-bench-Lite;定位 + 归因 + 修复 | 最大的新增;MMLU 可能含医学科目,需剔除 |
+| Leoxx/whowhen_pro | text 6.3K、video 916、image 3.1K、image_gui 504 | Who&When Pro 的可用镜像(trajectory 为字符串) | 可能修复原发布包的损坏;注入集 |
+| davide221/agenterrorbench | 200 | 关键失败步 + 失败类型 | 小 |
+| mascope/mascope-bench | Inject-Mix 961、LG-Ctrl 408、MAST-clean 851 | **通信拓扑标签**(4 类)+ MAST 14 类多标签 | MAST-clean 与 MAST-Data 可能重复;拓扑标签可作结构感知中训练的辅助目标 |
+| RogerYao/RAISER | 50.2K 行 | 事件级责任 + 修复;许可证 other;parquet 很小,可能只有标签表 | 待查是否有轨迹文本 |
+| AI45Research/ATBench | 1,000 + 500 | 工具型智能体的安全轨迹 | 偏安全评测,可能多为单智能体,相关性低 |
+- 派子 agent 在本地沙箱下载并统计(协议同第 51 轮:Qwen3 tokenizer、只算轨迹文本、去重、干净/注入分开、与 MAA 查重、ARIA 的医学 MMLU 科目单列、MAST-clean 与 MAST-Data 查重),产物 `analysis/public_mas_corpus/stats_r53.md`。HF 只读 token 仅用于 gated 仓库,存放在会话临时目录,不进 git。
+
+**LoRA 微调进度(Linux #2):** 已完成 11/14;在跑 LQD_reconcile text(卡 0,第 240/≈349 步)、QD graph(卡 3)、QD text(卡 2)。预计再约 2 小时(含 zeroshot 与合并)。
+**五折配对比较**(`mht_work/compare_gt.py`;mdagents 单折 n=14 无法算宏 AUROC,但计入合并):
+| 折 | n | graph | text | graph − text [95% CI] |
+|---|---|---|---|---|
+| LQD_colacare | 92 | 0.778 | 0.816 | −0.039 [−0.144, +0.031] |
+| LQD_healthcareagent | 70 | 0.599 | 0.638 | −0.039 [−0.136, +0.075] |
+| LQD_mac | 67 | 0.790 | 0.821 | −0.031 [−0.088, +0.012] |
+| LQD_medagent | 107 | 0.735 | 0.769 | −0.035 [−0.137, +0.062] |
+| 合并(含 mdagents 14 条) | 350 | 0.699 | 0.721 | **−0.022 [−0.058, +0.016]** |
+各折方向仍一致(graph 比 text 低约 0.03–0.04),但五折合并后差距缩小,CI 含 0(第 51 轮三折合并 −0.048,CI 不含 0)。结论暂定:图 token 目前没有带来增益,可能略有损害;等 reconcile 与 QD 跑完再定,并做图 token 置零 / 打乱诊断。
+**issue:** 无新评论(最后一条 14:20:36Z)。
