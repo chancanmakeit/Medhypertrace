@@ -92,7 +92,8 @@
 ### 0.59 第 47 轮:Linux #2 准备中;fmt_v1 复算
 - **Linux #2**(Jupyter 连接器,工具名 `mcp__Claude-connect-inqi_top__jupyter-mcp-2_linux2_*`):4×A6000,用卡 2、卡 3;sglang 环境(`/data/ekyang/anaconda3/envs/sglang/bin/python`)已补装依赖;Qwen3-8B 本地目录 `/data1/ekyang/cgh/cache/huggingface_hub/hub/models--Qwen--Qwen3-8B`(训练时 `--lm` 传这个路径);仓库 clone 到 `/data1/ekyang/cgh/CODE/Medhypertrace`(进行中);pip 和 git 走 HTTP 代理 `http://127.0.0.1:23333`。长任务用 nohup,不要依赖 Jupyter kernel 跑完。
 - **安全:** GitHub token 已在共享服务器的进程参数里暴露,建议用户撤销。以后不要再把 token 放进命令行。
-- 训练计划:先在卡 2 上做原生训练 vs Unsloth 的短对比,再在卡 2、卡 3 上一卡一折跑全量;graph 和 text 用同一套训练代码。全量前必须用修复后的 `export_graph_emb.py` 重新准备数据。
+- **C6 全量正在 Linux #2 上运行(2026-10-22 09:30 UTC 开始,预计约 13 小时)**:`/data1/ekyang/cgh/CODE/mht_work/run_c6.sh`(setsid nohup;仓库副本 `MedHyperTrace-v2/scripts/linux2_run_c6.sh`)。看进度:`cat /data1/ekyang/cgh/CODE/mht_work/c6_queue/status`;队列中断后直接重跑脚本即可(已完成的 ckpt / eval 会跳过;剩余任务在 `c6_queue/jobs`,注意已被取走但没完成的任务不会自动回到队列)。结果在 `mht_work/maa/llm/<fold>/eval_models--Qwen--Qwen3-8B_{graph,text,zeroshot}.json`,合并结果在 `c6_queue/pooled.txt`;Linux #2 上没有 git,要通过 kernel 读回后在本地提交。
+- Linux #2 网络:代理上游可能断;直连能用 GitHub API(tarball)、codeload、PyPI。连接器单次请求约 1 分钟超时,长命令用后台进程加日志文件。A6000 吞吐 1,087 tok/s。
 - medical-aegis:fmt_v1 已去掉格式签名,llm_debate / mdagents 的 sham 仍有措辞签名(清洗后 0.66–0.74);我方负责格式清洗;fmt_v2 暂缓。
 
 ### 0.58 第 46 轮:试跑完成;zeroshot 结果

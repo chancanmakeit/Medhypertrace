@@ -589,3 +589,12 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 **我方复算(`MedHyperTrace-v2/analysis/anchor_fmt_val/`,先清洗掉格式符号再跑同槽位词面检测器):** medagents 旧说明 sham 0.89 → 0.55(签名基本就是格式);fmt_v1 在 medagents 和 MAC 上已无签名;但 llm_debate sham(fmt_v1)清洗后仍有 0.71 / 0.66,mdagents sham 的 punct 仍有 0.74 → 残留的是措辞签名,fmt_v2 改不了这一层。
 **我方 issue 评论(08:33Z):** 词面检测器要算进验收标准,但在清洗后的文本上算;我方负责格式清洗;fmt_v2 先不跑;请对方先免费列出 llm_debate / mdagents sham 清洗后的 top n-gram;验收标准为清洗后 sham 对 normal 的 CI 覆盖 0.5,或不超过 RC 噪声上限。
 **待做(我方):** 在 HGFM 节点文本和 LLM 节选进入模型前统一做格式清洗(需要改 `build_sft` 和嵌入步骤,影响缓存,要评估代价)。
+
+**第 47 轮(续,02:00–02:30):Linux #2 开跑 C6 全量**
+- 代理上游断开(经代理访问 GitHub / HF 均为 000);直连可用的有 GitHub API、codeload、PyPI。仓库改为通过 API 下载 tarball(提交 06b49fc,没有 .git);nature-sub-record 同样用 tarball(953 MB)。第一次 clone 失败的原因:被杀掉的旧 clone 脚本重试时 rm -rf 了新 clone 的目录。
+- 本地模型:Qwen3-8B 与 MiniLM 都是平铺目录。代码新增 `MHT_MINILM` 环境变量(提交 3535135),训练时 `--lm` 传本地路径。
+- peft 0.21.2 要求 torchao ≥0.16,但 sglang 环境里是 0.9.0 → 降为 peft 0.17.1(验证可用);torch 2.6.0 和 transformers 4.54.1 未改。
+- Unsloth 预演:会改动 42 个包(torch 2.6 → 2.14.1、transformers 4.57.6、torchao 0.18……),会破坏 SGLang 0.4.6 → 不装进 sglang 环境。
+- 吞吐基准(卡 2,合成批次 bs 4、900–1600 token、梯度检查点):RTX A6000 稳态 1,087 tok/s,峰值显存已分配 19.1 GB、已预留 20.5 GB(A40 为 884 tok/s)。
+- 数据(修复泄漏后):7 折,编码器约 2,500 条运行 / LLM 训练约 2,500 条运行(mdagents 折为 2,965 / 3,000),训练对约 5.5–5.7k,QD 5,658 对、491 条评测 prompt。
+- **全量 09:30 UTC 开跑**(`/data1/ekyang/cgh/CODE/mht_work/run_c6.sh`,仓库副本 `MedHyperTrace-v2/scripts/linux2_run_c6.sh`):卡 2、卡 3 两个 worker 从同一队列取 14 个任务(7 折 × graph / text,原生 PyTorch,两个变体用同一套代码),之后用新 prompt 重跑 zeroshot 并合并。预计约 12–13 小时。状态文件 `mht_work/c6_queue/status`,日志在 `mht_work/c6_queue/logs/`。
