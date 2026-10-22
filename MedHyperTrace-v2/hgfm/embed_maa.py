@@ -24,7 +24,7 @@ def main(src, out):
     print("unique texts", len(order), flush=True)
     from sentence_transformers import SentenceTransformer
     import torch; torch.set_num_threads(2)
-    m = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2", device="cpu"); m.max_seq_length = 256
+    m = SentenceTransformer(__import__("os").environ.get("MHT_MINILM", "sentence-transformers/all-MiniLM-L6-v2"), device="cpu"); m.max_seq_length = 256
     # sort by length for efficient batching
     idx = sorted(range(len(order)), key=lambda i: len(order[i]))
     E = np.zeros((len(order), 384), dtype=np.float16); t0 = time.time()

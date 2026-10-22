@@ -61,7 +61,7 @@ class TextEmb:
     """Small cache for relation / instruction texts (MiniLM, same model as node texts)."""
     def __init__(self):
         from sentence_transformers import SentenceTransformer
-        self.m = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2", device="cpu"); self.c = {}
+        self.m = SentenceTransformer(__import__("os").environ.get("MHT_MINILM", "sentence-transformers/all-MiniLM-L6-v2"), device="cpu"); self.c = {}
 
     def __call__(self, texts):
         new = [t for t in set(texts) if t not in self.c]
