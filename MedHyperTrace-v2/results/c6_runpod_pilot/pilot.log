@@ -1,0 +1,80 @@
+[PILOT 04:21:52] stage env
+name, memory.total [MiB], driver_version
+NVIDIA A40, 46068 MiB, 595.91.07
+torch 2.8.0+cu128 cuda 12.8 transformers 5.20.2 peft 0.21.2
+[PILOT 04:22:24] stage prepare_maa (all folds)
+Cloning into '/workspace/mht/nature-sub-record'...
+Updating files:  45% (10/22)Updating files:  50% (11/22)Updating files:  54% (12/22)Updating files:  59% (13/22)Updating files:  63% (14/22)Updating files:  68% (15/22)Updating files:  72% (16/22)Updating files:  77% (17/22)Updating files:  81% (18/22)Updating files:  86% (19/22)Updating files:  90% (20/22)Updating files:  95% (21/22)Updating files: 100% (22/22)Updating files: 100% (22/22), done.
+converted 14370
+instances 400 with votes 400 dup keys 0
+emb.npy: OK
+index.json: OK
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 1129.51it/s]
+LQD:colacare train 5012 test 1194 -> /workspace/mht/llm/LQD_colacare
+LQD:healthcareagent train 5012 test 1194 -> /workspace/mht/llm/LQD_healthcareagent
+LQD:mac train 5012 test 1194 -> /workspace/mht/llm/LQD_mac
+LQD:mdagents train 5965 test 234 -> /workspace/mht/llm/LQD_mdagents
+LQD:medagent train 5012 test 1194 -> /workspace/mht/llm/LQD_medagent
+LQD:reconcile train 5012 test 1194 -> /workspace/mht/llm/LQD_reconcile
+QD train 6205 test 6204 -> /workspace/mht/llm/QD
+train pairs 6018 (codes 10), eval prompts 104 -> /workspace/mht/llm/LQD_colacare//sft_graph
+train pairs 6018 (codes 10), eval prompts 104 -> /workspace/mht/llm/LQD_colacare//sft_text
+train pairs 6476 (codes 10), eval prompts 70 -> /workspace/mht/llm/LQD_healthcareagent//sft_graph
+train pairs 6476 (codes 10), eval prompts 70 -> /workspace/mht/llm/LQD_healthcareagent//sft_text
+train pairs 6326 (codes 10), eval prompts 91 -> /workspace/mht/llm/LQD_mac//sft_graph
+train pairs 6326 (codes 10), eval prompts 91 -> /workspace/mht/llm/LQD_mac//sft_text
+train pairs 6566 (codes 10), eval prompts 14 -> /workspace/mht/llm/LQD_mdagents//sft_graph
+train pairs 6566 (codes 10), eval prompts 14 -> /workspace/mht/llm/LQD_mdagents//sft_text
+train pairs 5900 (codes 10), eval prompts 154 -> /workspace/mht/llm/LQD_medagent//sft_graph
+train pairs 5900 (codes 10), eval prompts 154 -> /workspace/mht/llm/LQD_medagent//sft_text
+train pairs 6522 (codes 10), eval prompts 58 -> /workspace/mht/llm/LQD_reconcile//sft_graph
+train pairs 6522 (codes 10), eval prompts 58 -> /workspace/mht/llm/LQD_reconcile//sft_text
+train pairs 6638 (codes 10), eval prompts 491 -> /workspace/mht/llm/QD//sft_graph
+train pairs 6638 (codes 10), eval prompts 491 -> /workspace/mht/llm/QD//sft_text
+done: /workspace/mht/llm/<fold>/{graph_tokens.pt,sft_graph,sft_text}
+LQD_colacare
+LQD_healthcareagent
+LQD_mac
+LQD_mdagents
+LQD_medagent
+LQD_reconcile
+QD
+[PILOT 04:31:53] waiting for model download
+[PILOT 04:31:53] stage pilot training: LQD_mac graph, 800 pairs
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:  22%|██▏       | 88/399 [00:00<00:00, 875.89it/s]Loading weights:  44%|████▍     | 176/399 [00:00<00:00, 757.08it/s]Loading weights:  63%|██████▎   | 253/399 [00:00<00:00, 707.99it/s]Loading weights:  83%|████████▎ | 333/399 [00:00<00:00, 728.80it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 766.08it/s]
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+ep 0 step 1 loss 12.6975 21s peak_alloc 18.7G peak_reserved 20.4G
+ep 0 step 20 loss 0.0778 451s tok/s 871 peak_alloc 20.2G peak_reserved 23.4G
+ep 0 step 40 loss 0.8245 901s tok/s 883 peak_alloc 20.2G peak_reserved 23.4G
+STATS {"seconds": 1123.9775731563568, "optimizer_steps": 50, "tokens": 995702, "padded_slots": 1209684, "steady_tok_per_s": 883.6978478532235, "peak_alloc_gb": 20.15588140487671, "peak_reserved_gb": 23.40625, "gpu": "NVIDIA A40"}
+saved /workspace/mht/llm/LQD_mac/ckpt_pilot
+[PILOT 04:51:35] stage pilot eval (pipeline check only; 800-pair checkpoint, AUROC not meaningful)
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 6070.87it/s]
+n=67 macro AUROC=0.527 [0.36016163003663004, 0.7311736111111111]
+[PILOT 04:52:37] stage zeroshot LQD_colacare
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 5127.57it/s]
+n=92 macro AUROC=0.645 [0.49016481782106786, 0.7809722222222222]
+[PILOT 04:53:47] stage zeroshot LQD_healthcareagent
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 4860.28it/s]
+n=70 macro AUROC=0.736 [0.47374801587301585, 0.8867162698412698]
+[PILOT 04:54:37] stage zeroshot LQD_mac
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 4994.56it/s]
+n=67 macro AUROC=0.647 [0.5086573322510822, 0.8838233901515152]
+[PILOT 04:55:40] stage zeroshot LQD_mdagents
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 5379.80it/s]
+n=14 macro AUROC=nan [nan, nan]
+[PILOT 04:56:18] stage zeroshot LQD_medagent
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 4672.19it/s]
+n=107 macro AUROC=0.602 [0.4886005704365079, 0.6968496267107378]
+[PILOT 04:57:42] stage zeroshot LQD_reconcile
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 7053.08it/s]
+n=49 macro AUROC=0.540 [0.3243422619047619, 0.7772916666666667]
+[PILOT 04:58:35] stage zeroshot QD
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 10713.18it/s]
+n=399 macro AUROC=0.614 [0.5538763301324398, 0.6693407318612377]
+Qwen3-8B_zeroshot LQD: n=399 macro AUROC 0.616 [0.557, 0.673]
+Qwen3-8B_zeroshot QD: n=399 macro AUROC 0.614 [0.552, 0.669]
+[PILOT 05:02:02] pilot finished
+[PILOT 05:02:02] collecting results (status=ok)

@@ -1,0 +1,127 @@
+{
+ "n": 14,
+ "macro_auroc": NaN,
+ "ci95": [
+  NaN,
+  NaN
+ ],
+ "per_code": {
+  "2.1.1": NaN,
+  "2.1.2": NaN,
+  "3.1.1": NaN,
+  "3.1.3": NaN
+ },
+ "rows": [
+  {
+   "inst": "maa|mdagents|deepseek-reasoner|MedQA|medqa_1031|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": 0.375
+  },
+  {
+   "inst": "maa|mdagents|deepseek-reasoner|MedQA|medqa_372|2.1.1",
+   "code": "2.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -2.0
+  },
+  {
+   "inst": "maa|mdagents|deepseek-reasoner|MedQA|medqa_247|2.1.1",
+   "code": "2.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -0.625
+  },
+  {
+   "inst": "maa|mdagents|qwen3-8b|MedQA|medqa_632|2.1.1",
+   "code": "2.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": 1.5
+  },
+  {
+   "inst": "maa|mdagents|deepseek-reasoner|MedXpertQA-text|medxpertqa_text_1991|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": 3.5
+  },
+  {
+   "inst": "maa|mdagents|deepseek-reasoner|MedXpertQA-text|medxpertqa_text_2204|2.1.1",
+   "code": "2.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": 1.0
+  },
+  {
+   "inst": "maa|mdagents|qwen3-8b|MedXpertQA-text|medxpertqa_text_996|2.1.1",
+   "code": "2.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -2.625
+  },
+  {
+   "inst": "maa|mdagents|gemini-3-flash-preview|PathVQA|pathvqa_002989|2.1.1",
+   "code": "2.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -7.5
+  },
+  {
+   "inst": "maa|mdagents|deepseek-reasoner|PubMedQA|pubmedqa_25614468|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 1,
+   "score": 2.625
+  },
+  {
+   "inst": "maa|mdagents|deepseek-reasoner|PubMedQA|pubmedqa_26209118|2.1.1",
+   "code": "2.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -6.125
+  },
+  {
+   "inst": "maa|mdagents|deepseek-reasoner|PubMedQA|pubmedqa_26304701|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -3.5
+  },
+  {
+   "inst": "maa|mdagents|qwen3-8b|PubMedQA|pubmedqa_9920954|2.1.2",
+   "code": "2.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -5.375
+  },
+  {
+   "inst": "maa|mdagents|glm-4.6v|VQA-RAD|vqa_rad_000114|2.1.2",
+   "code": "2.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -5.125
+  },
+  {
+   "inst": "maa|mdagents|glm-4.6v|VQA-RAD|vqa_rad_000047|3.1.3",
+   "code": "3.1.3",
+   "human": 1,
+   "auditor": 1,
+   "score": 7.125
+  }
+ ],
+ "args": {
+  "lm": "Qwen/Qwen3-8B",
+  "ckpt": "",
+  "data": "/workspace/mht/llm/LQD_mdagents//sft_text/eval_human.jsonl",
+  "tokens": "/workspace/mht/llm/LQD_mdagents//graph_tokens.pt",
+  "out": "/workspace/mht/llm/LQD_mdagents//eval_Qwen3-8B_zeroshot.json",
+  "no_graph": false,
+  "zero_shot": true,
+  "max_len": 2048,
+  "device": "cuda",
+  "dtype": "bf16",
+  "limit": 0
+ }
+}
