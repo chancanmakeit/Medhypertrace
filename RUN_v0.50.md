@@ -637,3 +637,10 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 **第 49 轮(续,06:10):**
 - 单折结果(人工宏 AUROC):LQD_healthcareagent graph 0.599 [0.426, 0.838] / text 0.638 [0.454, 0.840](n=70);LQD_mac graph 0.790 [0.634, 0.950](n=67,text 未完成)。队列剩 6 个,3 张卡在跑 mac text、mdagents graph、mdagents text。
 - MS-Swift:mht-swift 环境(sglang 的离线克隆)装好了 ms-swift 4.6.0、torch 2.6.0(cu124,CUDA 可用)、transformers 4.57.6、peft 0.17.1、trl 0.29.1、deepspeed 0.19.8、wandb 0.31.0、modelscope 1.40.0。`swift pt --help` 正常,有 --deepspeed、--packing、--report_to、--streaming、--use_liger_kernel 等选项。注意:`swift --help` 会报 KeyError,因为 swift 要求先写子命令,不是安装问题。
+
+## 第 50 轮 · 2026-10-22 06:28–06:50 · 用户:"怎么样了";issue 新评论
+
+**进度:** 队列剩 6 个,mac text 第 320 步(即将完成),mdagents graph / text 第 140 步。预计约 11:30 PDT 全部完成(含 zeroshot 和合并)。
+**issue(对方 v10 第 7 轮,13:42Z):** AEGIS 原版 simulated 数据里,PI 注入步的输出本身带伪迹(同槽位对 clean 配对运行):明确提到注入指令 1.7–2.5%(clean 为 0);拒答 2–6%;框架要求的输出结构丢失(mdagents `Justification:` 0.09 对 0.25,dylan 0.39 对 0.65);同槽位 tfidf_punct 清洗前后都在 0.76–0.91 → 主因不是格式。对方建议中训练主版本排除旧 AEGIS 和公开 AEGIS 的注入运行。另外说明:锚点数据(约 1,290 个注入步)指令泄漏和拒答均为 0。
+**我方回复(第 50 轮):** 同意;如需加入注入运行,按对方三条处理并复用对方的规则脚本;注明 v1 第 10 轮"PI 子集 MHT +10–13 个点"可能部分来自这些伪迹,以后引用旧 AEGIS 的 PI 结果须先剔除再重算。
+**对 v1 的影响(记录):** HANDOFF §0.30 的 PI 子集结论需加注"可能受 PI 输出伪迹影响(指令泄漏 / 拒答 / 结构丢失),未剔除"。
