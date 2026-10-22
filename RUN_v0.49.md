@@ -629,3 +629,7 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 - LoRA graph 0.778 [0.643, 0.885];LoRA text 0.816 [0.720, 0.912];配对差 graph − text = −0.039 [−0.144, +0.031](跨 0,单折,不下结论)。同一批实例上审计员为 0.934。参照:Runpod 试跑中同一折的 zeroshot 为 0.645(prompt 由旧编码器排序,不完全可比)。
 - 计时:colacare 两个变体都在约 95 分钟内跑完(11:04 / 11:07 UTC);队列剩 9 个,3 张卡并行。
 - MS-Swift 安装:ms-swift 环境正在直连 PyPI 下载 torch 2.6.0 的 cp312 wheel(约 11 MB/分钟);nvidia 依赖与 sglang 环境版本一致,估计 pip 缓存里已有。
+
+**第 49 轮(续,05:10):**
+- LQD_healthcareagent graph:n=70,0.599 [0.426, 0.838](text 尚未跑完)。队列剩 8 个。
+- MS-Swift 安装:Linux #2 到 PyPI CDN 的下载速度降到约 50–90 KB/s(直连和代理都实测过),torch 的 cp312 wheel 有 731 MB,pip 写入量已超过 wheel 大小,应该是断线重下过。已停掉该次安装,改为离线克隆 sglang 环境,新环境名 **mht-swift**(复用 torch 2.6.0+cu124、Python 3.10),再在克隆里安装 ms-swift / wandb / deepspeed(`mht_work/install_swift2.sh`)。sglang 环境和用户建的空 ms-swift 环境都没有动。

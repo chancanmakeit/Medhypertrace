@@ -91,7 +91,7 @@
 
 ### 0.60 第 49 轮:3 卡 LoRA 微调运行中;中训练与 MS-Swift 规划
 - 用户要求:称为"LoRA 微调完整跑完"(不叫"全量");用卡 0、2、3;token 不处理;加 wandb 可视化;引入中训练 / 持续预训练(参考 `mid-training-data-volume-and-selection-survey.md`);训练改用 MS-Swift(装在 conda 环境 ms-swift)。
-- 卡 0 worker:`mht_work/worker_gpu0.sh`(共用 c6_queue)。MS-Swift 安装中:`mht_work/install_swift.sh` / `install_swift.log`,环境 `/data/ekyang/anaconda3/envs/ms-swift`。
+- 卡 0 worker:`mht_work/worker_gpu0.sh`(共用 c6_queue)。MS-Swift:改装在 sglang 的离线克隆 **mht-swift**(`/data/ekyang/anaconda3/envs/mht-swift`,脚本 `mht_work/install_swift2.sh`,日志 install_swift2.log);原 ms-swift 环境(Python 3.12)因 torch 下载太慢放弃,只装了一半依赖,未删除。
 - 中训练:用户希望纳入公开的非医学 MAS 数据(AEGIS 公开版 9.5K、MAST-Data 1,642、TRAIL 148、Who&When 184;只用文本不用标签),合计约 0.15–0.3B token(TAPT 量级)。语料边界和中训练方式已在 issue 征求 medical-aegis 意见(第 49 轮评论)。用户已确认 SFT 稍后全部迁到 MS-Swift(graph 变体需写自定义插件)。wandb 需要用户自己 `wandb login`。
 
 ### 0.59 第 47 轮:Linux #2 准备中;fmt_v1 复算
