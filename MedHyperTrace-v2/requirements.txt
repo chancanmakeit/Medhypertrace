@@ -3,6 +3,6 @@ scikit-learn
 torch            # CPU wheel: pip install torch --index-url https://download.pytorch.org/whl/cpu
 sentence-transformers
 # LLM layer (hgfm/llm, GPU server)
-transformers>=4.56
+transformers>=4.51   # 4.51+ for Qwen3; model.py handles torch_dtype (<4.56) and dtype (>=4.56)
 peft>=0.17
 accelerate

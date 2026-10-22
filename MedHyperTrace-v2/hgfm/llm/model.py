@@ -19,7 +19,10 @@ class GraphTokenLM(nn.Module):
         if self.tok.pad_token is None: self.tok.pad_token = self.tok.eos_token
         self.tok.add_special_tokens({"additional_special_tokens": [GRAPH_TOKEN]})
         self.graph_id = self.tok.convert_tokens_to_ids(GRAPH_TOKEN)
-        lm = AutoModelForCausalLM.from_pretrained(lm_name, dtype=dtype)
+        import transformers
+        # transformers >= 4.56 renamed torch_dtype -> dtype; older versions would silently ignore `dtype` and load fp32
+        kw = {"dtype": dtype} if tuple(int(x) for x in transformers.__version__.split(".")[:2]) >= (4, 56) else {"torch_dtype": dtype}
+        lm = AutoModelForCausalLM.from_pretrained(lm_name, **kw)
         lm.resize_token_embeddings(len(self.tok))
         targets = [n for n in ("q_proj", "k_proj", "v_proj") if any(n in k for k, _ in lm.named_modules())] or ["c_attn"]
         if ckpt:   # trained adapter + projector (eval)
