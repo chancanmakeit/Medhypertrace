@@ -676,3 +676,10 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 - 与 MAA 的题目重叠:各数据集都是 0(既没有完全相同的题,也没有出现在轨迹正文里)。
 - 下载速度:沙箱很快(3.5 GB 用了 12 秒);Linux #2 只有 28–80 KB/s → 以后在沙箱抽好纯文本,只把文本传到 Linux #2。
 **含义:** 能用于严格主版本的干净公开语料只有约 30M token(MAST 22M + TraceElephant 7M + Who&When 1.4M),而且 MAST 以软件开发日志为主。AEGIS 公开版只能进入"加注入运行"的敏感性版本(删掉注入步,剔除命中 `instruction_strict` 的步骤)。加上医学语料,严格主版本总量约 0.04–0.06B,低于窄目标对齐的 0.07–0.1B。
+
+## 第 52 轮 · 2026-10-22 ~09:50 · 子 agent B 完成 MS-Swift graph 插件(分支 swift-plugin,27358e9,未合并)
+
+- 代码:`MedHyperTrace-v2/hgfm/llm/swift_plugin/`(plugin.py、prepare_data.py、eval_swift.py、README.md、tests/),通过 `--external_plugins plugin.py` 加载,基于 ms-swift 4.6.0(和 Linux #2 版本一致)。注册了四个组件:模型类型 `graph_token_lm`、模板 `graph_token`(截断逻辑和 train.py 相同,先截掉 prompt 开头,因此不会触发 swift 的"超长丢样本")、tuner `graph_lora`(LoRA + 可训练投影器,保存为 adapter + projector.pt)、optimizer `graph_token`(投影器学习率走 --aligner_lr)。text 变体走同一条代码路径,只是没有图 token。
+- 等价性(子 agent 报告,主会话在沙箱重跑 test_equivalence.py 复核 (a)(b)):相同权重、相同 batch 下,loss 差 graph 4.8e-7、text 1.2e-6;梯度余弦 ≥ 0.9999995(graph 148 个张量、text 144 个);51 个占位符嵌入与投影器输出的差为 0;截断后的 input_ids、labels、图向量与 train.py 逐条一致;两个变体各跑 10 步 swift sft 都能完成并保存 checkpoint;从 checkpoint 复现评测打分,差 ≤ 9.5e-6。
+- 与 train.py 不逐位相同的地方:样本顺序(swift 自己的 sampler);最后一个不完整的梯度累积窗口(HF Trainer 仍会更新一步);bf16 时 swift 用 autocast(加 `--bf16 false` 可与 train.py 一致,但只限单卡、不开 DeepSpeed);不支持 --packing / --padding_free / all-linear。
+- 注意:ms-swift 4.x 把 `--train_type` 改名为 `--tuner_type`;加载这种 checkpoint 时也必须带 `--external_plugins`。沙箱里装 ms-swift 时 transformers 被降到 5.19.0、peft 变成 0.20.0(只影响本地沙箱)。
