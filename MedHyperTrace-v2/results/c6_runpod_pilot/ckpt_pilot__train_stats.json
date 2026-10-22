@@ -1,0 +1,10 @@
+{
+ "seconds": 1123.9775731563568,
+ "optimizer_steps": 50,
+ "tokens": 995702,
+ "padded_slots": 1209684,
+ "steady_tok_per_s": 883.6978478532235,
+ "peak_alloc_gb": 20.15588140487671,
+ "peak_reserved_gb": 23.40625,
+ "gpu": "NVIDIA A40"
+}

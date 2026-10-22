@@ -1,0 +1,679 @@
+{
+ "n": 92,
+ "macro_auroc": 0.644890873015873,
+ "ci95": [
+  0.49016481782106786,
+  0.7809722222222222
+ ],
+ "per_code": {
+  "1.1.1": 0.8571428571428572,
+  "1.2.1": 0.546875,
+  "2.1.1": 0.5416666666666667,
+  "2.1.2": 0.0625,
+  "2.2.1": 1.0,
+  "2.2.2": 0.65,
+  "3.1.1": 1.0,
+  "3.1.2": NaN,
+  "3.1.3": 0.5833333333333334,
+  "3.2.1": 0.5625
+ },
+ "rows": [
+  {
+   "inst": "maa|colacare|deepseek-reasoner|MedQA|medqa_016|2.2.1",
+   "code": "2.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 2.5
+  },
+  {
+   "inst": "maa|colacare|deepseek-reasoner|MedQA|medqa_762|1.2.1",
+   "code": "1.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -3.125
+  },
+  {
+   "inst": "maa|colacare|deepseek-reasoner|MedQA|medqa_743|2.1.1",
+   "code": "2.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -2.625
+  },
+  {
+   "inst": "maa|colacare|deepseek-reasoner|MedQA|medqa_1151|2.1.1",
+   "code": "2.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -2.0
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|MedQA|medqa_016|2.1.2",
+   "code": "2.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -1.0
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|MedQA|medqa_1051|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -1.625
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|MedQA|medqa_794|2.1.1",
+   "code": "2.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -7.75
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|MedQA|medqa_428|2.2.1",
+   "code": "2.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 0.75
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|MedQA|medqa_824|2.2.2",
+   "code": "2.2.2",
+   "human": 1,
+   "auditor": 1,
+   "score": 0.0
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|MedQA|medqa_977|3.2.1",
+   "code": "3.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -0.625
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|MedQA|medqa_604|2.1.1",
+   "code": "2.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -4.0
+  },
+  {
+   "inst": "maa|colacare|qwen3-8b|MedQA|medqa_1122|2.2.2",
+   "code": "2.2.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -1.25
+  },
+  {
+   "inst": "maa|colacare|qwen3-8b|MedQA|medqa_050|1.2.1",
+   "code": "1.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -6.0
+  },
+  {
+   "inst": "maa|colacare|qwen3-8b|MedQA|medqa_582|3.1.3",
+   "code": "3.1.3",
+   "human": 1,
+   "auditor": 1,
+   "score": 1.375
+  },
+  {
+   "inst": "maa|colacare|deepseek-reasoner|MedXpertQA-text|medxpertqa_text_845|3.2.1",
+   "code": "3.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 1.25
+  },
+  {
+   "inst": "maa|colacare|deepseek-reasoner|MedXpertQA-text|medxpertqa_text_436|2.2.1",
+   "code": "2.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 1.375
+  },
+  {
+   "inst": "maa|colacare|deepseek-reasoner|MedXpertQA-text|medxpertqa_text_2147|3.1.1",
+   "code": "3.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 1.875
+  },
+  {
+   "inst": "maa|colacare|deepseek-reasoner|MedXpertQA-text|medxpertqa_text_801|3.2.1",
+   "code": "3.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": 2.625
+  },
+  {
+   "inst": "maa|colacare|deepseek-reasoner|MedXpertQA-text|medxpertqa_text_1581|2.1.1",
+   "code": "2.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -3.5
+  },
+  {
+   "inst": "maa|colacare|deepseek-reasoner|MedXpertQA-text|medxpertqa_text_99|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -0.875
+  },
+  {
+   "inst": "maa|colacare|deepseek-reasoner|MedXpertQA-text|medxpertqa_text_168|1.1.1",
+   "code": "1.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -4.375
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|MedXpertQA-text|medxpertqa_text_2224|2.2.2",
+   "code": "2.2.2",
+   "human": 0,
+   "auditor": 1,
+   "score": 0.25
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|MedXpertQA-text|medxpertqa_text_538|3.1.3",
+   "code": "3.1.3",
+   "human": 0,
+   "auditor": 0,
+   "score": -1.375
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|MedXpertQA-text|medxpertqa_text_1986|1.1.1",
+   "code": "1.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -4.375
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|MedXpertQA-text|medxpertqa_text_195|1.2.1",
+   "code": "1.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -5.375
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|MedXpertQA-text|medxpertqa_text_984|2.1.2",
+   "code": "2.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -1.75
+  },
+  {
+   "inst": "maa|colacare|qwen3-8b|MedXpertQA-text|medxpertqa_text_2224|3.2.1",
+   "code": "3.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 1.875
+  },
+  {
+   "inst": "maa|colacare|qwen3-8b|MedXpertQA-text|medxpertqa_text_2147|2.2.2",
+   "code": "2.2.2",
+   "human": 1,
+   "auditor": 1,
+   "score": -2.625
+  },
+  {
+   "inst": "maa|colacare|qwen3-8b|MedXpertQA-text|medxpertqa_text_2328|2.2.2",
+   "code": "2.2.2",
+   "human": 0,
+   "auditor": 1,
+   "score": -1.0
+  },
+  {
+   "inst": "maa|colacare|qwen3-8b|MedXpertQA-text|medxpertqa_text_1571|2.2.2",
+   "code": "2.2.2",
+   "human": 1,
+   "auditor": 1,
+   "score": 1.5
+  },
+  {
+   "inst": "maa|colacare|qwen3-8b|MedXpertQA-text|medxpertqa_text_1581|2.2.2",
+   "code": "2.2.2",
+   "human": 0,
+   "auditor": 1,
+   "score": 0.25
+  },
+  {
+   "inst": "maa|colacare|qwen3-8b|MedXpertQA-text|medxpertqa_text_1153|3.1.1",
+   "code": "3.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 2.0
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|PathVQA|pathvqa_000732|3.2.1",
+   "code": "3.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -1.75
+  },
+  {
+   "inst": "maa|colacare|glm-4.6v|PathVQA|pathvqa_002471|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 1,
+   "score": -8.25
+  },
+  {
+   "inst": "maa|colacare|glm-4.6v|PathVQA|pathvqa_002410|2.1.2",
+   "code": "2.1.2",
+   "human": 1,
+   "auditor": 1,
+   "score": -2.5
+  },
+  {
+   "inst": "maa|colacare|glm-4.6v|PathVQA|pathvqa_002513|2.1.1",
+   "code": "2.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -6.5
+  },
+  {
+   "inst": "maa|colacare|glm-4.6v|PathVQA|pathvqa_006304|1.2.1",
+   "code": "1.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -9.375
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|PathVQA|pathvqa_000765|2.1.1",
+   "code": "2.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -9.5
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|PathVQA|pathvqa_005003|2.1.1",
+   "code": "2.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -6.8125
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|PathVQA|pathvqa_005258|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -8.625
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|PathVQA|pathvqa_001096|1.2.1",
+   "code": "1.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -3.125
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|PathVQA|pathvqa_004306|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -2.625
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|PathVQA|pathvqa_005593|1.2.1",
+   "code": "1.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -8.4375
+  },
+  {
+   "inst": "maa|colacare|qwen3-vl-8b-thinking|PathVQA|pathvqa_003240|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -3.75
+  },
+  {
+   "inst": "maa|colacare|qwen3-vl-8b-thinking|PathVQA|pathvqa_005017|1.1.1",
+   "code": "1.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -5.0
+  },
+  {
+   "inst": "maa|colacare|qwen3-vl-8b-thinking|PathVQA|pathvqa_001549|3.2.1",
+   "code": "3.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 4.875
+  },
+  {
+   "inst": "maa|colacare|qwen3-vl-8b-thinking|PathVQA|pathvqa_000777|2.1.1",
+   "code": "2.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -5.0
+  },
+  {
+   "inst": "maa|colacare|deepseek-reasoner|PubMedQA|pubmedqa_27549226|2.1.2",
+   "code": "2.1.2",
+   "human": 1,
+   "auditor": 1,
+   "score": -4.0
+  },
+  {
+   "inst": "maa|colacare|deepseek-reasoner|PubMedQA|pubmedqa_23806388|1.2.1",
+   "code": "1.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -8.8125
+  },
+  {
+   "inst": "maa|colacare|deepseek-reasoner|PubMedQA|pubmedqa_21342862|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -5.75
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|PubMedQA|pubmedqa_18926458|1.1.1",
+   "code": "1.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -2.625
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|PubMedQA|pubmedqa_26578404|1.2.1",
+   "code": "1.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -8.4375
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|PubMedQA|pubmedqa_24245816|2.1.2",
+   "code": "2.1.2",
+   "human": 1,
+   "auditor": 1,
+   "score": -1.75
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|PubMedQA|pubmedqa_12419743|2.1.1",
+   "code": "2.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -8.0
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|PubMedQA|pubmedqa_21342862|1.1.1",
+   "code": "1.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -5.5
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|PubMedQA|pubmedqa_19130332|2.1.2",
+   "code": "2.1.2",
+   "human": 1,
+   "auditor": 1,
+   "score": -4.0
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|PubMedQA|pubmedqa_26348845|2.1.1",
+   "code": "2.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -6.5
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|PubMedQA|pubmedqa_29112560|2.1.1",
+   "code": "2.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -7.875
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|PubMedQA|pubmedqa_27615402|3.2.1",
+   "code": "3.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -1.125
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|PubMedQA|pubmedqa_23025584|1.2.1",
+   "code": "1.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -8.3125
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|PubMedQA|pubmedqa_18719011|3.1.3",
+   "code": "3.1.3",
+   "human": 0,
+   "auditor": 0,
+   "score": -4.0
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|PubMedQA|pubmedqa_24666444|3.2.1",
+   "code": "3.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -2.75
+  },
+  {
+   "inst": "maa|colacare|qwen3-8b|PubMedQA|pubmedqa_22497340|2.1.1",
+   "code": "2.1.1",
+   "human": 0,
+   "auditor": 1,
+   "score": -9.0
+  },
+  {
+   "inst": "maa|colacare|qwen3-8b|PubMedQA|pubmedqa_15041506|2.1.1",
+   "code": "2.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -3.9375
+  },
+  {
+   "inst": "maa|colacare|qwen3-8b|PubMedQA|pubmedqa_12070552|2.1.1",
+   "code": "2.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -3.5
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|SLAKE|slake_test_12029|2.1.1",
+   "code": "2.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -5.875
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|SLAKE|slake_test_12228|2.1.1",
+   "code": "2.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -3.125
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|SLAKE|slake_test_12606|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -3.5
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|SLAKE|slake_test_12555|1.2.1",
+   "code": "1.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -6.5625
+  },
+  {
+   "inst": "maa|colacare|glm-4.6v|SLAKE|slake_test_12363|3.1.3",
+   "code": "3.1.3",
+   "human": 0,
+   "auditor": 0,
+   "score": -5.25
+  },
+  {
+   "inst": "maa|colacare|glm-4.6v|SLAKE|slake_test_12038|1.1.1",
+   "code": "1.1.1",
+   "human": 0,
+   "auditor": 1,
+   "score": -1.5
+  },
+  {
+   "inst": "maa|colacare|glm-4.6v|SLAKE|slake_test_12773|1.2.1",
+   "code": "1.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -4.0
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|SLAKE|slake_test_12498|2.2.2",
+   "code": "2.2.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -7.75
+  },
+  {
+   "inst": "maa|colacare|qwen3-vl-8b-thinking|SLAKE|slake_test_12498|1.1.1",
+   "code": "1.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 0.375
+  },
+  {
+   "inst": "maa|colacare|qwen3-vl-8b-thinking|SLAKE|slake_test_12363|2.2.2",
+   "code": "2.2.2",
+   "human": 1,
+   "auditor": 1,
+   "score": -1.125
+  },
+  {
+   "inst": "maa|colacare|qwen3-vl-8b-thinking|SLAKE|slake_test_12773|3.1.3",
+   "code": "3.1.3",
+   "human": 1,
+   "auditor": 1,
+   "score": -2.0
+  },
+  {
+   "inst": "maa|colacare|qwen3-vl-8b-thinking|SLAKE|slake_test_11950|2.2.2",
+   "code": "2.2.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -8.5
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|VQA-RAD|vqa_rad_000293|2.2.1",
+   "code": "2.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -0.375
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|VQA-RAD|vqa_rad_000447|1.2.1",
+   "code": "1.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -3.875
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|VQA-RAD|vqa_rad_000061|1.1.1",
+   "code": "1.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -5.25
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|VQA-RAD|vqa_rad_000230|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -5.125
+  },
+  {
+   "inst": "maa|colacare|gemini-3-flash-preview|VQA-RAD|vqa_rad_000047|2.1.1",
+   "code": "2.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -5.75
+  },
+  {
+   "inst": "maa|colacare|glm-4.6v|VQA-RAD|vqa_rad_000200|2.2.2",
+   "code": "2.2.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -6.125
+  },
+  {
+   "inst": "maa|colacare|glm-4.6v|VQA-RAD|vqa_rad_000163|2.2.2",
+   "code": "2.2.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -3.25
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|VQA-RAD|vqa_rad_000005|1.1.1",
+   "code": "1.1.1",
+   "human": 1,
+   "auditor": 0,
+   "score": -3.25
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|VQA-RAD|vqa_rad_000068|2.2.1",
+   "code": "2.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -0.25
+  },
+  {
+   "inst": "maa|colacare|gpt-5.2|VQA-RAD|vqa_rad_000243|3.1.3",
+   "code": "3.1.3",
+   "human": 1,
+   "auditor": 1,
+   "score": -7.0
+  },
+  {
+   "inst": "maa|colacare|qwen3-vl-8b-thinking|VQA-RAD|vqa_rad_000349|3.1.3",
+   "code": "3.1.3",
+   "human": 1,
+   "auditor": 1,
+   "score": -2.625
+  },
+  {
+   "inst": "maa|colacare|qwen3-vl-8b-thinking|VQA-RAD|vqa_rad_000283|2.2.2",
+   "code": "2.2.2",
+   "human": 1,
+   "auditor": 1,
+   "score": -3.625
+  },
+  {
+   "inst": "maa|colacare|qwen3-vl-8b-thinking|VQA-RAD|vqa_rad_000356|3.2.1",
+   "code": "3.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 2.25
+  },
+  {
+   "inst": "maa|colacare|qwen3-vl-8b-thinking|VQA-RAD|vqa_rad_000265|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 1,
+   "score": -0.25
+  },
+  {
+   "inst": "maa|colacare|qwen3-vl-8b-thinking|VQA-RAD|vqa_rad_000265|3.2.1",
+   "code": "3.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 3.875
+  }
+ ],
+ "args": {
+  "lm": "Qwen/Qwen3-8B",
+  "ckpt": "",
+  "data": "/workspace/mht/llm/LQD_colacare//sft_text/eval_human.jsonl",
+  "tokens": "/workspace/mht/llm/LQD_colacare//graph_tokens.pt",
+  "out": "/workspace/mht/llm/LQD_colacare//eval_Qwen3-8B_zeroshot.json",
+  "no_graph": false,
+  "zero_shot": true,
+  "max_len": 2048,
+  "device": "cuda",
+  "dtype": "bf16",
+  "limit": 0
+ }
+}

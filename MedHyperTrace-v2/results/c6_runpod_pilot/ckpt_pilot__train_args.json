@@ -1,0 +1,18 @@
+{
+ "lm": "Qwen/Qwen3-8B",
+ "data": "/workspace/mht/llm/LQD_mac/sft_graph/train.jsonl",
+ "tokens": "/workspace/mht/llm/LQD_mac/graph_tokens.pt",
+ "out": "/workspace/mht/llm/LQD_mac/ckpt_pilot",
+ "no_graph": false,
+ "epochs": 1,
+ "bs": 4,
+ "accum": 4,
+ "lr": 0.0001,
+ "proj_lr": 0.001,
+ "max_len": 2048,
+ "limit": 800,
+ "device": "cuda",
+ "dtype": "bf16",
+ "seed": 0,
+ "grad_ckpt": true
+}

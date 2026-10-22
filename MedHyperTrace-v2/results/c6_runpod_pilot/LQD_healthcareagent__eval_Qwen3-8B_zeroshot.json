@@ -1,0 +1,523 @@
+{
+ "n": 70,
+ "macro_auroc": 0.736111111111111,
+ "ci95": [
+  0.47374801587301585,
+  0.8867162698412698
+ ],
+ "per_code": {
+  "1.1.1": 0.5,
+  "1.2.1": 0.5555555555555556,
+  "2.1.2": 1.0,
+  "2.2.1": 0.5416666666666666,
+  "2.2.2": NaN,
+  "3.1.1": 0.5555555555555556,
+  "3.1.2": 1.0,
+  "3.1.3": 1.0
+ },
+ "rows": [
+  {
+   "inst": "maa|healthcareagent|deepseek-reasoner|MedQA|medqa_428|2.2.2",
+   "code": "2.2.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -1.375
+  },
+  {
+   "inst": "maa|healthcareagent|deepseek-reasoner|MedQA|medqa_428|3.1.3",
+   "code": "3.1.3",
+   "human": 0,
+   "auditor": 0,
+   "score": -2.375
+  },
+  {
+   "inst": "maa|healthcareagent|deepseek-reasoner|MedQA|medqa_003|2.2.1",
+   "code": "2.2.1",
+   "human": 0,
+   "auditor": 1,
+   "score": -3.125
+  },
+  {
+   "inst": "maa|healthcareagent|gemini-3-flash-preview|MedQA|medqa_396|2.2.1",
+   "code": "2.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -1.875
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|MedQA|medqa_824|2.1.2",
+   "code": "2.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -4.25
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|MedQA|medqa_1051|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -4.125
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|MedQA|medqa_849|2.2.1",
+   "code": "2.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -1.625
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|MedQA|medqa_388|1.2.1",
+   "code": "1.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -6.75
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|MedQA|medqa_377|3.1.3",
+   "code": "3.1.3",
+   "human": 1,
+   "auditor": 1,
+   "score": 5.875
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|MedQA|medqa_396|3.1.3",
+   "code": "3.1.3",
+   "human": 0,
+   "auditor": 0,
+   "score": -2.125
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|MedQA|medqa_899|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -0.875
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|MedQA|medqa_079|3.1.2",
+   "code": "3.1.2",
+   "human": 1,
+   "auditor": 1,
+   "score": 2.25
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|MedQA|medqa_357|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 1,
+   "score": 2.625
+  },
+  {
+   "inst": "maa|healthcareagent|deepseek-reasoner|MedXpertQA-text|medxpertqa_text_765|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -4.0
+  },
+  {
+   "inst": "maa|healthcareagent|deepseek-reasoner|MedXpertQA-text|medxpertqa_text_2240|3.1.3",
+   "code": "3.1.3",
+   "human": 0,
+   "auditor": 0,
+   "score": 4.75
+  },
+  {
+   "inst": "maa|healthcareagent|deepseek-reasoner|MedXpertQA-text|medxpertqa_text_1581|2.1.2",
+   "code": "2.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -1.875
+  },
+  {
+   "inst": "maa|healthcareagent|gemini-3-flash-preview|MedXpertQA-text|medxpertqa_text_2422|1.1.1",
+   "code": "1.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": 0.25
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|MedXpertQA-text|medxpertqa_text_1605|3.1.3",
+   "code": "3.1.3",
+   "human": 0,
+   "auditor": 1,
+   "score": 1.375
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|MedXpertQA-text|medxpertqa_text_1622|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 1,
+   "score": 2.375
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|MedXpertQA-text|medxpertqa_text_2018|3.1.3",
+   "code": "3.1.3",
+   "human": 0,
+   "auditor": 0,
+   "score": 1.25
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|MedXpertQA-text|medxpertqa_text_1704|3.1.1",
+   "code": "3.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 5.5
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|MedXpertQA-text|medxpertqa_text_1441|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": 2.25
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|MedXpertQA-text|medxpertqa_text_580|2.2.2",
+   "code": "2.2.2",
+   "human": 0,
+   "auditor": 0,
+   "score": 2.125
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|MedXpertQA-text|medxpertqa_text_1397|2.2.1",
+   "code": "2.2.1",
+   "human": 0,
+   "auditor": 1,
+   "score": -2.125
+  },
+  {
+   "inst": "maa|healthcareagent|gemini-3-flash-preview|PathVQA|pathvqa_000564|1.2.1",
+   "code": "1.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -2.875
+  },
+  {
+   "inst": "maa|healthcareagent|gemini-3-flash-preview|PathVQA|pathvqa_003837|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -4.5
+  },
+  {
+   "inst": "maa|healthcareagent|glm-4.6v|PathVQA|pathvqa_005003|1.2.1",
+   "code": "1.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -6.25
+  },
+  {
+   "inst": "maa|healthcareagent|glm-4.6v|PathVQA|pathvqa_000865|2.2.2",
+   "code": "2.2.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -2.5
+  },
+  {
+   "inst": "maa|healthcareagent|glm-4.6v|PathVQA|pathvqa_002271|1.2.1",
+   "code": "1.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -6.75
+  },
+  {
+   "inst": "maa|healthcareagent|glm-4.6v|PathVQA|pathvqa_003873|2.1.2",
+   "code": "2.1.2",
+   "human": 1,
+   "auditor": 1,
+   "score": -0.125
+  },
+  {
+   "inst": "maa|healthcareagent|glm-4.6v|PathVQA|pathvqa_004224|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": 1.375
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|PathVQA|pathvqa_005593|1.2.1",
+   "code": "1.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -6.625
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|PathVQA|pathvqa_004224|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -0.125
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|PathVQA|pathvqa_000426|1.2.1",
+   "code": "1.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -3.0
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|PathVQA|pathvqa_006159|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 1,
+   "score": 3.75
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|PathVQA|pathvqa_000888|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -3.75
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|PathVQA|pathvqa_006510|2.1.2",
+   "code": "2.1.2",
+   "human": 0,
+   "auditor": 1,
+   "score": -1.625
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|PathVQA|pathvqa_005414|1.1.1",
+   "code": "1.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 0.625
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|PathVQA|pathvqa_003923|1.1.1",
+   "code": "1.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 0.625
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|PathVQA|pathvqa_001113|1.1.1",
+   "code": "1.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -2.75
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|PathVQA|pathvqa_006304|1.1.1",
+   "code": "1.1.1",
+   "human": 0,
+   "auditor": 1,
+   "score": 3.125
+  },
+  {
+   "inst": "maa|healthcareagent|deepseek-reasoner|PubMedQA|pubmedqa_9465206|2.2.1",
+   "code": "2.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -1.5
+  },
+  {
+   "inst": "maa|healthcareagent|deepseek-reasoner|PubMedQA|pubmedqa_26864326|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -1.5625
+  },
+  {
+   "inst": "maa|healthcareagent|deepseek-reasoner|PubMedQA|pubmedqa_12098035|2.1.2",
+   "code": "2.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -4.125
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|PubMedQA|pubmedqa_9465206|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -1.125
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|PubMedQA|pubmedqa_11867487|2.2.1",
+   "code": "2.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -6.5
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|PubMedQA|pubmedqa_22720085|1.1.1",
+   "code": "1.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -5.75
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|PubMedQA|pubmedqa_17054994|3.1.3",
+   "code": "3.1.3",
+   "human": 0,
+   "auditor": 0,
+   "score": 3.5
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|PubMedQA|pubmedqa_23025584|2.1.2",
+   "code": "2.1.2",
+   "human": 0,
+   "auditor": 1,
+   "score": -3.75
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|PubMedQA|pubmedqa_16046584|3.1.3",
+   "code": "3.1.3",
+   "human": 0,
+   "auditor": 0,
+   "score": -4.0
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-8b|PubMedQA|pubmedqa_26037986|2.1.2",
+   "code": "2.1.2",
+   "human": 0,
+   "auditor": 1,
+   "score": -4.0
+  },
+  {
+   "inst": "maa|healthcareagent|gemini-3-flash-preview|SLAKE|slake_test_12914|1.2.1",
+   "code": "1.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -3.0
+  },
+  {
+   "inst": "maa|healthcareagent|gemini-3-flash-preview|SLAKE|slake_test_12300|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -3.25
+  },
+  {
+   "inst": "maa|healthcareagent|gemini-3-flash-preview|SLAKE|slake_test_12489|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -2.625
+  },
+  {
+   "inst": "maa|healthcareagent|glm-4.6v|SLAKE|slake_test_12896|2.2.1",
+   "code": "2.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -9.0
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|SLAKE|slake_test_12784|2.2.1",
+   "code": "2.2.1",
+   "human": 0,
+   "auditor": 1,
+   "score": -10.125
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|SLAKE|slake_test_12713|2.1.2",
+   "code": "2.1.2",
+   "human": 0,
+   "auditor": 1,
+   "score": -1.875
+  },
+  {
+   "inst": "maa|healthcareagent|gemini-3-flash-preview|VQA-RAD|vqa_rad_000407|3.1.3",
+   "code": "3.1.3",
+   "human": 0,
+   "auditor": 0,
+   "score": 1.0
+  },
+  {
+   "inst": "maa|healthcareagent|glm-4.6v|VQA-RAD|vqa_rad_000340|1.2.1",
+   "code": "1.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -1.25
+  },
+  {
+   "inst": "maa|healthcareagent|glm-4.6v|VQA-RAD|vqa_rad_000365|3.1.1",
+   "code": "3.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -1.25
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|VQA-RAD|vqa_rad_000200|2.2.1",
+   "code": "2.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -9.625
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|VQA-RAD|vqa_rad_000340|2.2.1",
+   "code": "2.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -9.0
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|VQA-RAD|vqa_rad_000297|2.2.2",
+   "code": "2.2.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -2.375
+  },
+  {
+   "inst": "maa|healthcareagent|gpt-5.2|VQA-RAD|vqa_rad_000140|2.2.1",
+   "code": "2.2.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -9.0
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|VQA-RAD|vqa_rad_000068|2.1.2",
+   "code": "2.1.2",
+   "human": 0,
+   "auditor": 1,
+   "score": -0.75
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|VQA-RAD|vqa_rad_000229|1.1.1",
+   "code": "1.1.1",
+   "human": 0,
+   "auditor": 0,
+   "score": -0.5
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|VQA-RAD|vqa_rad_000084|1.1.1",
+   "code": "1.1.1",
+   "human": 1,
+   "auditor": 1,
+   "score": -5.5
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|VQA-RAD|vqa_rad_000002|3.1.2",
+   "code": "3.1.2",
+   "human": 0,
+   "auditor": 0,
+   "score": -4.75
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|VQA-RAD|vqa_rad_000271|1.2.1",
+   "code": "1.2.1",
+   "human": 1,
+   "auditor": 1,
+   "score": 0.75
+  },
+  {
+   "inst": "maa|healthcareagent|qwen3-vl-8b-thinking|VQA-RAD|vqa_rad_000265|3.1.1",
+   "code": "3.1.1",
+   "human": 0,
+   "auditor": 1,
+   "score": 3.625
+  }
+ ],
+ "args": {
+  "lm": "Qwen/Qwen3-8B",
+  "ckpt": "",
+  "data": "/workspace/mht/llm/LQD_healthcareagent//sft_text/eval_human.jsonl",
+  "tokens": "/workspace/mht/llm/LQD_healthcareagent//graph_tokens.pt",
+  "out": "/workspace/mht/llm/LQD_healthcareagent//eval_Qwen3-8B_zeroshot.json",
+  "no_graph": false,
+  "zero_shot": true,
+  "max_len": 2048,
+  "device": "cuda",
+  "dtype": "bf16",
+  "limit": 0
+ }
+}
