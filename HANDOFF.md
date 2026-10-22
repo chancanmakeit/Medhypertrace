@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-22 18:20 UTC(第 54 轮,第 3 个会话开场;第 53 轮末曾因上下文上限交接) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-22 19:20 UTC(第 55 轮;第 3 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -14,7 +14,7 @@
 > 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-22T14:20:36Z,即我方第 51 轮评论)。之后每次被唤醒都先跑一次。
 > 3. **MAA 数据(沙箱若已重置)**:`cd MedHyperTrace-v2 && pip install -r requirements.txt --break-system-packages`,然后运行 `bash scripts/prepare_maa.sh /home/claude/data_maa_v2 QD 8000`。脚本会自动下载、转换、对齐人工标签;**嵌入直接从仓库缓存 `MedHyperTrace-v2/data/maa_emb_minilm/` 恢复**(sha256 校验,约 10 秒,省去 CPU 上约 50 分钟;也可单独运行 `bash scripts/restore_maa_emb.sh <emb_dir>`);再导出图 token、构建 SFT。脚本能跳过已有的步骤;图缓存 `graphs_*.pkl` 在首次加载时自动重建。第一阶段结果已在 `results/phase1_maa/`,不必重跑。
 > 4. **API 密钥**:从 Project doc `claude/api端点` 读取,写到 `/home/claude/.mht_api.env`。绝不进 git。调用前先试跑估算成本,再问用户。
-> 5. 阅读顺序:**§0.63(第 54 轮,当前在途任务,先读)** → §0.62(第 53 轮末交接时的在途任务)→ §0.61(第 53 轮:收藏夹 15 个数据集、五折配对比较)→ §0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.54.md` 第 37–54 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
+> 5. 阅读顺序:**§0.64(第 55 轮,当前在途任务与已定事项,先读)** → §0.63(第 54 轮)→ §0.62(第 53 轮末交接)→ §0.61(第 53 轮:收藏夹 15 个数据集、五折配对比较)→ §0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.55.md` 第 37–55 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
 > 6. **每轮必做**:讨论记录 `RUN_v0.<N>.md` 用 `git mv` 改版本号并追加本轮;更新本文 §0;commit 并 push;sleep 不超过约 60 秒。
 
 ---
@@ -89,6 +89,15 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.64 第 55 轮:C6 完成;swift-plugin 已合并、SFT 迁到 MS-Swift;中训练语料口径已定(2026-10-22 19:20 UTC)
+- **C6 结果**(`MedHyperTrace-v2/results/c6_linux2_lora/`,README 有完整表格;逐实例分数 `c6_scores.csv`):n=399,LQD graph 0.701 / text 0.716 / zeroshot 0.611;QD 0.780 / 0.768 / 0.611。graph−text:LQD −0.014 [−0.047, +0.020],QD +0.011 [−0.021, +0.044];微调对 zeroshot +0.09–0.17(CI 不含 0)。**图 token 诊断**:扰动让分数变 0.2–0.4 SD,但 LQD AUROC 在任何扰动下都不降(CI 全含 0),QD 略降 0.005–0.024 → 图 token 跨 MAS 不携带归因信号。**注意:text 基线的候选步骤由该折编码器挑选,不是无结构基线**;要衡量结构的全部价值需要再加一个不用编码器挑候选步骤的 text 变体(待用户决定是否做)。
+- **已定(用户同意我方建议):** 中训练**主版本不收任何注入运行的内容(含注入前前缀)**;前缀(W&W-Pro、CORRECT、AEGIS 公开版,按前缀去重、删掉注入步及之后)只进"主版本 + 前缀"的敏感性版本。
+- **AgentRx / TRAIL**(`analysis/public_mas_corpus/stats_r55.md`):合计净增 3.37M;AgentRx magentic 的轨迹文本完全来自 Who&When Hand-Crafted(净增 0,只有标注新);**TRAIL 数据卡禁止用于训练自动化人工评估的系统 → 不进中训练,只作外部评测**,且不得在 gated / 私有仓库外转发。主版本干净公开语料仍约 75M(+AgentRx tau_retail 0.12M)。
+- **swift-plugin 已合并到 main(d4b358e)**;Linux #2 代码目录已放入 `hgfm/llm/swift_plugin/`(md5 校验)。服务器环境 mht-swift(ms-swift 4.6.0 / transformers 4.57.6 / peft 0.17.1)重跑等价性测试 (a)–(e) 全部通过(loss 差 7e-7,梯度余弦 ≥ 0.9999994,占位符嵌入差 0,打分差 ≤ 2.3e-5)。新驱动 `scripts/linux2_run_sft_swift.sh`(服务器副本 `mht_work/run_sft_swift.sh`,md5 01cf578e…),默认 bs 4×4 与 train.py 一致。swift 日志的 46.3 GB 是**预留**显存(`get_max_reserved_memory`),不是实际占用;我方曾误归因于整段 logits,已撤回。
+- **在途:** MS-Swift 整折验收,LQD_mac graph(卡 2)/ text(卡 3),19:11 UTC 开始,约 21:00 结束(`mht_work/swift_queue/status`,日志 `swift_queue/logs/LQD_mac_{graph,text}_bs4.log`)。完成后与 train.py 同折结果(0.790 / 0.821)逐实例配对比较,写 `results/c6_linux2_lora/swift_validation.md`。已设 21:05 UTC 的提醒。
+- wandb:服务器已装但**未登录**;用户在 Linux #2 上 `wandb login` 后,驱动会自动切到 wandb(否则用 tensorboard)。
+- medical-aegis 的 sham 验证:用户已在对方那边批准;我方等数据,按第 39/41 轮约定处理。issue #1 仍无新评论(最后 14:20:36Z)。
 
 ### 0.63 第 54 轮:六折配对比较;图 token 诊断在卡 0 后台(2026-10-22 18:20 UTC)
 - **六折 LQD 合并 n=399:graph 0.701 vs text 0.716,差 −0.014 [−0.047, +0.020]**(reconcile 是唯一 graph 更高的折,+0.035,CI 宽)。三折时"图 token 变差、CI 不含 0"的说法已不成立;现在的结论是图 token 无可测增益、无可测损害。产物 `MedHyperTrace-v2/results/c6_linux2_lora/compare_gt_6fold.out`。

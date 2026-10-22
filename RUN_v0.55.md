@@ -755,3 +755,52 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 - 冒烟(LQD_mac 前 6 条 prompt):none 与 eval.py 的分数逐条完全一致(最大差 0.0)。只有 5 个实例,不下结论。
 - 正式运行 18:09 UTC 开始,依次 6 个 LQD 折,QD 的 graph eval 出来后自动接上,最后输出 LQD 合并结果 `mht_work/ablate_pooled_lqd.json`。
 **另:** 配对比较扩展为三方(graph / text / zeroshot),QD 单独报告、不与 LQD 合并(两种划分覆盖同一批 400 个人工实例):`scripts/linux2_compare_c6.py`。
+
+## 第 55 轮 · 2026-10-22 ~18:40–19:20 UTC · 用户:① 前缀问题按我方建议;② AgentRx / TRAIL 已获访问;③ 合并 swift-plugin、SFT 迁到 MS-Swift;④ medical-aegis 的 sham 验证已批准
+
+**issue:** 无新评论(最后仍是我方 14:20:36Z)。sham 验证由用户在 medical-aegis 侧批准,我方无需操作;对方数据到了按第 39/41 轮约定处理(同槽位 PI / sham 配对、sham 自然答错不作负例、分开报告假阳性率)。
+
+### ① 注入集的"注入前干净前缀"(W&W-Pro 10.0M、CORRECT 6.4M)——我方建议,用户已同意按此执行
+**主版本不收任何注入运行的内容(包括注入前前缀);前缀只进"主版本 + 前缀"的敏感性版本做对照。** 理由:
+1. 一致性:第 50 轮与 medical-aegis 约定主版本排除 AEGIS 注入运行。若收 W&W-Pro / CORRECT 的前缀,按同样逻辑 AEGIS 的前缀也该收,这等于推翻已约定的口径;只收前者则界线任意。
+2. 前缀是否干净依赖各生成器的实现(注入后是否重新生成前文、注入位置是否可靠定位;W&W-Pro 只有 6,180/6,257 条能定位注入步),我们没有逐个核实过。
+3. 净增量远小于 16.4M:同一任务的前缀大量重复(第 51 轮在 W&W-Pro 原发布包上,前缀去重后只剩约 1/3),且前缀是截断的轨迹(没有结局),对结构感知中训练(图–文对齐需要完整轨迹)价值较低。
+4. 敏感性版本很便宜:同一套中训练配方多跑一个语料版本即可回答"加前缀是否有用"。
+**落实:** 中训练语料分两个版本:**主版本** = 干净 / 自然公开语料(约 75M;第 55 轮 AgentRx 只净增 0.12M,TRAIL 因许可证不进训练,见下)+ 医学语料(不含 MAA 评测题);**敏感性版本** = 主版本 + 注入运行的前缀(W&W-Pro、CORRECT、AEGIS 公开版,按前缀去重,注入步及之后全部删除)。
+
+### ③ swift-plugin 已合并到 main(d4b358e),SFT 迁到 MS-Swift
+- 插件代码传到 Linux #2(md5 校验一致),在服务器环境 mht-swift(ms-swift 4.6.0 / transformers 4.57.6 / peft 0.17.1;子 agent 在沙箱测试时是 transformers 5.19 / peft 0.20)重跑全部等价性测试,用 Qwen2.5-0.5B-Instruct:**(a) loss 差 7.2e-7(graph、text),梯度余弦 ≥ 0.9999994(148 / 144 个张量);(b) 51 个占位符嵌入与投影器输出差 0;(c) 截断与 train.py 逐条一致(Qwen2.5 与 Qwen3-8B tokenizer,max_len 512 / 300);(d) 10 步 swift sft 两个变体都完成并保存;(e) 从检查点打分与 GraphTokenLM 差 ≤ 2.3e-5。** 日志 `mht_work/swift_verify.log`,驱动 `mht_work/swift_verify.sh`。
+- 新驱动 `MedHyperTrace-v2/scripts/linux2_run_sft_swift.sh`(Linux #2 副本 `mht_work/run_sft_swift.sh`):与 run_c6.sh 同样的队列设计,超参与 train.py 一致(有效 batch 16、lr 1e-4、投影器 1e-3、1 epoch、max_len 2048、LoRA r8/α32/dropout 0.1 on q,k,v、梯度检查点);输出 `ckpt_swift_<tag>_<v>/` 与 `eval_swift_<tag>_<v>.json`(格式与 eval.py 相同)。wandb:服务器已装 wandb 0.31,但**未登录**(无 `~/.netrc`、无 `WANDB_API_KEY`),脚本自动退回 tensorboard;用户在 Linux #2 上 `wandb login` 后自动切到 wandb。
+- **Qwen3-8B 真实规模冒烟(LQD_mac graph,卡 3,各 20 步):** bs 4×4:20.4 s/步(train.py 19.1 s/步),第 20 步 loss 0.653;bs 2×8:19.25 s/步,loss 0.712。swift 日志里的 `memory(GiB)` 两种 batch 都是约 46.3 GB(A6000 共 48 GB;train.py 峰值预留 26.7 GB)。**更正:** 我一度把它归因于"swift 没用 `logits_to_keep`、整段算 logits",并把默认改成 2×8;但 2×8 的峰值并没有下降,这个解释不成立,已撤回。查 swift 源码(`trainers/patcher.py`)确认这个数字是 `get_max_reserved_memory()`,即缓存分配器的**预留**量,不是实际占用,所以它本身不能说明会 OOM。驱动默认改回与 train.py 一致的 4×4(BS/ACCUM 可配置),并加 `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` 减少碎片。
+- **整折验收(进行中):** 19:11 UTC 起在卡 2 / 卡 3 用 MS-Swift 跑 LQD_mac 的 graph / text 整折(约 1 小时 50 分),检验整轮是否 OOM,并与 train.py 同折结果(graph 0.790 / text 0.821)逐实例配对比较;输出 `maa/llm/LQD_mac/eval_swift_models--Qwen--Qwen3-8B_{graph,text}.json`,状态 `mht_work/swift_queue/status`。
+
+### C6 收尾(LoRA 微调完整跑完;结果 `MedHyperTrace-v2/results/c6_linux2_lora/`,README 有完整表格)
+Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / 各扰动)压成 `c6_scores.csv`,汇总在 `c6_summary.json`(md5 校验传回;沙箱从 CSV 独立重算的合并 AUROC 与服务器一致)。
+| 划分(n=399,MedAgentAudit 人工宏 AUROC) | graph | text | zeroshot |
+|---|---|---|---|
+| LQD(6 折合并) | 0.701 [0.650, 0.758] | 0.716 [0.665, 0.770] | 0.611 [0.552, 0.667] |
+| QD | 0.780 [0.734, 0.830] | 0.768 [0.722, 0.816] | 0.611 [0.550, 0.668] |
+配对差:LQD graph−text −0.014 [−0.047, +0.020]、graph−zeroshot +0.091 [+0.023, +0.155]、text−zeroshot +0.105 [+0.042, +0.161];QD graph−text +0.011 [−0.021, +0.044]、graph−zeroshot +0.168 [+0.100, +0.231]、text−zeroshot +0.157 [+0.090, +0.223]。healthcareagent 折上两个微调变体都低于 zeroshot(0.599 / 0.638 对 0.739,CI 宽)。
+
+**图 token 诊断**(同一 graph 检查点、同一批 prompt,只改图向量;none 与 eval.py 7 个划分上逐条完全一致):
+| 扰动 | LQD 合并 Δ AUROC | QD Δ AUROC |
+|---|---|---|
+| zero_state | −0.016 [−0.055, +0.021] | −0.005 [−0.023, +0.012] |
+| mean_state | +0.027 [−0.005, +0.059] | −0.009 [−0.031, +0.012] |
+| zero_emb | +0.010 [−0.020, +0.040] | −0.016 [−0.039, +0.005] |
+| shuffle_0 / 1 / 2 | +0.004 / +0.018 / +0.004(CI 均含 0) | −0.024 [−0.051, +0.000] / −0.009 / −0.007 |
+扰动使分数变化 0.2–0.4 个标准差(与原分数的 Spearman 0.85–0.96),但 LQD 上 AUROC 在任何扰动下都不降;QD 上各扰动都略降(0.005–0.024)。
+**结论:** ① 微调本身带来大幅提升(+0.09–0.17);② 模型会对图 token 做出反应,但这些反应在跨 MAS(LQD)时不携带归因信号,在见过的 MAS(QD)上至多有很小的贡献;与第一阶段"结构不能零样本跨框架迁移"一致;③ 第 51 轮三折时"图 token 让结果变差且 CI 不含 0"的说法在六折上不成立。
+**两点更正 / 注意:** (a) 我方第 54 轮说"zeroshot 与划分无关"不准确:`build_sft.py` 用该折编码器的打分挑候选步骤(graph 与 text 用同一组候选),所以 text 与 zeroshot 的 prompt 随划分变化,399 例中有 48 例 LQD 与 QD 的 zeroshot 分数不同(合并宏 AUROC 恰好都是 0.611)。(b) 由此,**text 基线并非不含结构信息**——graph−text 只衡量图 token 在"编码器挑选的上下文"之上的额外贡献,不是结构的全部价值。若要衡量结构的全部价值,需要再加一个候选步骤不用编码器挑选(例如按位置或按读集)的 text 变体。
+另:bf16 logits 让分数量化为 0.125 的倍数,平分多(LQD graph 只有 63 个不同值),AUROC 按平分 0.5 计。
+
+### ② AgentRx / TRAIL(子 agent 统计,`MedHyperTrace-v2/analysis/public_mas_corpus/stats_r55.md` / `.json`,脚本 `scripts/*_r55.py`;协议同第 51 / 53 轮,测量重跑一次结果逐字节一致)
+| 数据集 | 轨迹 | 总 token | 去重后 | 说明 |
+|---|---|---|---|---|
+| AgentRx magentic(Magentic-One) | 58 | 1.02M | 1.01M | 自然失败;**轨迹文本 100% 来自 Who&When Hand-Crafted**(58/58 条、2,342 段文本全部命中,主会话独立复核),净增 0,新增价值只在标注(334 个故障:步骤、类别、责任智能体 + 根因) |
+| AgentRx tau_retail | 29 | 0.20M | 0.12M | 单智能体 + 模拟用户 |
+| TRAIL GAIA | 117 | 2.54M | 2.45M | 自然运行;manager + search_agent,但 search_agent 只在 47 条里真正运行 |
+| TRAIL SWE-bench Lite | 31 | 0.87M | 0.80M | 单智能体 |
+- 与此前全部 16 个数据集去重后,两者合计净增 3.37M(全部为自然 / 干净),其中 1.01M 与 Who&When 重复被去掉;与 MAA 查重 0(阳性对照能找到)。
+- **许可证:** AgentRx CC-BY-4.0(gated)。**TRAIL MIT 但数据卡附加条款:不得用于训练"旨在自动化人工评估"的系统,只能用于评估与基准测试;且不得在 gated / 私有仓库之外转发**(主会话已读数据卡核实)。我们的模型做的正是自动化的轨迹错误标注,**TRAIL 不进中训练语料,只作外部评测集**;原始数据不进 git。
+- **对中训练语料的影响:** 主版本只净增 AgentRx tau_retail 0.12M,干净公开语料仍约 75M。AgentRx 的标注可以作为 Who&When Hand-Crafted 的补充标签(评测或分析用)。

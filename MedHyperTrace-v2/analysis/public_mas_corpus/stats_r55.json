@@ -1,0 +1,2153 @@
+{
+ "AgentRx": {
+  "overall": {
+   "n": 87,
+   "steps_total": 4057,
+   "steps_p50": 36,
+   "tokens_total": 1219616,
+   "tokens_raw_as_stored": 1219616,
+   "tokens_global_exact_dedup": 1130355,
+   "dedup_tokens_also_in_prior_sets": 1010527,
+   "dedup_tokens_in_prior_first_match": {
+    "OLD:Who&When": 1010507,
+    "ATBench/ATBench500": 12,
+    "ATBench/ATBench": 7,
+    "AFTraj": 1
+   },
+   "dedup_tokens_in_prior_any": {
+    "OLD:Who&When": 1010507,
+    "CORRECT-Error": 4,
+    "ARIA": 4,
+    "ATBench/ATBench500": 14,
+    "ATBench/ATBench": 8,
+    "AFTraj": 1
+   },
+   "p50": 8454,
+   "p90": 35135,
+   "p99": 60331,
+   "max": 73496,
+   "n_gt_8k": 45,
+   "n_gt_32k": 10,
+   "tokens_by_part": {
+    "turn": 1053755,
+    "task": 3632,
+    "system": 34916,
+    "tool_result": 122335,
+    "toolcall_arg": 4978
+   }
+  },
+  "by_class": {
+   "natural_fail": {
+    "n": 87,
+    "steps_total": 4057,
+    "steps_p50": 36,
+    "tokens_total": 1219616,
+    "tokens_raw_as_stored": 1219616,
+    "tokens_global_exact_dedup": 1130355,
+    "dedup_tokens_also_in_prior_sets": 1010527,
+    "dedup_tokens_in_prior_first_match": {
+     "OLD:Who&When": 1010507,
+     "ATBench/ATBench500": 12,
+     "ATBench/ATBench": 7,
+     "AFTraj": 1
+    },
+    "dedup_tokens_in_prior_any": {
+     "OLD:Who&When": 1010507,
+     "CORRECT-Error": 4,
+     "ARIA": 4,
+     "ATBench/ATBench500": 14,
+     "ATBench/ATBench": 8,
+     "AFTraj": 1
+    },
+    "p50": 8454,
+    "p90": 35135,
+    "p99": 60331,
+    "max": 73496,
+    "n_gt_8k": 45,
+    "n_gt_32k": 10,
+    "tokens_by_part": {
+     "turn": 1053755,
+     "task": 3632,
+     "system": 34916,
+     "tool_result": 122335,
+     "toolcall_arg": 4978
+    }
+   }
+  },
+  "by_benchmark": {
+   "magentic_one (GAIA/AssistantBench)": {
+    "n": 58,
+    "steps_total": 2993,
+    "steps_p50": 32,
+    "tokens_total": 1024211,
+    "tokens_raw_as_stored": 1024211,
+    "tokens_global_exact_dedup": 1010507,
+    "dedup_tokens_also_in_prior_sets": 1010507,
+    "dedup_tokens_in_prior_first_match": {
+     "OLD:Who&When": 1010507
+    },
+    "dedup_tokens_in_prior_any": {
+     "OLD:Who&When": 1010507,
+     "CORRECT-Error": 4,
+     "ARIA": 4
+    },
+    "p50": 10258,
+    "p90": 36695,
+    "p99": 64770,
+    "max": 73496,
+    "n_gt_8k": 37,
+    "n_gt_32k": 10,
+    "tokens_by_part": {
+     "turn": 1024211
+    }
+   },
+   "tau_retail": {
+    "n": 29,
+    "steps_total": 1064,
+    "steps_p50": 36,
+    "tokens_total": 195405,
+    "tokens_raw_as_stored": 195405,
+    "tokens_global_exact_dedup": 119848,
+    "dedup_tokens_also_in_prior_sets": 20,
+    "dedup_tokens_in_prior_first_match": {
+     "ATBench/ATBench500": 12,
+     "ATBench/ATBench": 7,
+     "AFTraj": 1
+    },
+    "dedup_tokens_in_prior_any": {
+     "ATBench/ATBench500": 14,
+     "ATBench/ATBench": 8,
+     "AFTraj": 1
+    },
+    "p50": 5869,
+    "p90": 8738,
+    "p99": 15258,
+    "max": 16867,
+    "n_gt_8k": 8,
+    "n_gt_32k": 0,
+    "tokens_by_part": {
+     "task": 3632,
+     "system": 34916,
+     "turn": 29544,
+     "tool_result": 122335,
+     "toolcall_arg": 4978
+    }
+   }
+  },
+  "by_framework": {
+   "Magentic-One": {
+    "n": 58,
+    "steps_total": 2993,
+    "steps_p50": 32,
+    "tokens_total": 1024211,
+    "tokens_raw_as_stored": 1024211,
+    "tokens_global_exact_dedup": 1010507,
+    "dedup_tokens_also_in_prior_sets": 1010507,
+    "dedup_tokens_in_prior_first_match": {
+     "OLD:Who&When": 1010507
+    },
+    "dedup_tokens_in_prior_any": {
+     "OLD:Who&When": 1010507,
+     "CORRECT-Error": 4,
+     "ARIA": 4
+    },
+    "p50": 10258,
+    "p90": 36695,
+    "p99": 64770,
+    "max": 73496,
+    "n_gt_8k": 37,
+    "n_gt_32k": 10,
+    "tokens_by_part": {
+     "turn": 1024211
+    }
+   },
+   "tau-bench retail (agent + LLM user simulator)": {
+    "n": 29,
+    "steps_total": 1064,
+    "steps_p50": 36,
+    "tokens_total": 195405,
+    "tokens_raw_as_stored": 195405,
+    "tokens_global_exact_dedup": 119848,
+    "dedup_tokens_also_in_prior_sets": 20,
+    "dedup_tokens_in_prior_first_match": {
+     "ATBench/ATBench500": 12,
+     "ATBench/ATBench": 7,
+     "AFTraj": 1
+    },
+    "dedup_tokens_in_prior_any": {
+     "ATBench/ATBench500": 14,
+     "ATBench/ATBench": 8,
+     "AFTraj": 1
+    },
+    "p50": 5869,
+    "p90": 8738,
+    "p99": 15258,
+    "max": 16867,
+    "n_gt_8k": 8,
+    "n_gt_32k": 0,
+    "tokens_by_part": {
+     "task": 3632,
+     "system": 34916,
+     "turn": 29544,
+     "tool_result": 122335,
+     "toolcall_arg": 4978
+    }
+   }
+  },
+  "by_split": {
+   "magentic": {
+    "n": 58,
+    "steps_total": 2993,
+    "steps_p50": 32,
+    "tokens_total": 1024211,
+    "tokens_raw_as_stored": 1024211,
+    "tokens_global_exact_dedup": 1010507,
+    "dedup_tokens_also_in_prior_sets": 1010507,
+    "dedup_tokens_in_prior_first_match": {
+     "OLD:Who&When": 1010507
+    },
+    "dedup_tokens_in_prior_any": {
+     "OLD:Who&When": 1010507,
+     "CORRECT-Error": 4,
+     "ARIA": 4
+    },
+    "p50": 10258,
+    "p90": 36695,
+    "p99": 64770,
+    "max": 73496,
+    "n_gt_8k": 37,
+    "n_gt_32k": 10,
+    "tokens_by_part": {
+     "turn": 1024211
+    }
+   },
+   "tau_retail": {
+    "n": 29,
+    "steps_total": 1064,
+    "steps_p50": 36,
+    "tokens_total": 195405,
+    "tokens_raw_as_stored": 195405,
+    "tokens_global_exact_dedup": 119848,
+    "dedup_tokens_also_in_prior_sets": 20,
+    "dedup_tokens_in_prior_first_match": {
+     "ATBench/ATBench500": 12,
+     "ATBench/ATBench": 7,
+     "AFTraj": 1
+    },
+    "dedup_tokens_in_prior_any": {
+     "ATBench/ATBench500": 14,
+     "ATBench/ATBench": 8,
+     "AFTraj": 1
+    },
+    "p50": 5869,
+    "p90": 8738,
+    "p99": 15258,
+    "max": 16867,
+    "n_gt_8k": 8,
+    "n_gt_32k": 0,
+    "tokens_by_part": {
+     "task": 3632,
+     "system": 34916,
+     "turn": 29544,
+     "tool_result": 122335,
+     "toolcall_arg": 4978
+    }
+   }
+  },
+  "unique_questions": 87,
+  "medical": {
+   "n": 0,
+   "tokens": 0,
+   "sources": {},
+   "examples": []
+  },
+  "labels": {
+   "magentic_traj": 58,
+   "magentic_with_label": 44,
+   "tau_traj": 29,
+   "tau_with_label": 29,
+   "failures_total": 334
+  },
+  "agents_per_split": {
+   "magentic": {
+    "Assistant": 21,
+    "Orchestrator": 58,
+    "WebSurfer": 57,
+    "human": 58,
+    "ComputerTerminal": 3,
+    "FileSurfer": 10
+   },
+   "tau_retail": {
+    "assistant": 29,
+    "system": 29,
+    "tool": 29,
+    "user": 29
+   }
+  },
+  "magentic_vs_WhoWhen_HandCrafted": {
+   "ww_hc_rows": 58,
+   "agentrx_magentic": 58,
+   "instruction_exact_in_ww_hc": 53,
+   "substeps": 2993,
+   "substeps_exact_in_ww_hc_messages": 2993,
+   "trajectories_fully_contained": 58
+  }
+ },
+ "AgentRx/magentic": {
+  "overall": {
+   "n": 58,
+   "steps_total": 2993,
+   "steps_p50": 32,
+   "tokens_total": 1024211,
+   "tokens_raw_as_stored": 1024211,
+   "tokens_global_exact_dedup": 1010507,
+   "dedup_tokens_also_in_prior_sets": 1010507,
+   "dedup_tokens_in_prior_first_match": {
+    "OLD:Who&When": 1010507
+   },
+   "dedup_tokens_in_prior_any": {
+    "OLD:Who&When": 1010507,
+    "CORRECT-Error": 4,
+    "ARIA": 4
+   },
+   "p50": 10258,
+   "p90": 36695,
+   "p99": 64770,
+   "max": 73496,
+   "n_gt_8k": 37,
+   "n_gt_32k": 10,
+   "tokens_by_part": {
+    "turn": 1024211
+   }
+  },
+  "by_class": {
+   "natural_fail": {
+    "n": 58,
+    "steps_total": 2993,
+    "steps_p50": 32,
+    "tokens_total": 1024211,
+    "tokens_raw_as_stored": 1024211,
+    "tokens_global_exact_dedup": 1010507,
+    "dedup_tokens_also_in_prior_sets": 1010507,
+    "dedup_tokens_in_prior_first_match": {
+     "OLD:Who&When": 1010507
+    },
+    "dedup_tokens_in_prior_any": {
+     "OLD:Who&When": 1010507,
+     "CORRECT-Error": 4,
+     "ARIA": 4
+    },
+    "p50": 10258,
+    "p90": 36695,
+    "p99": 64770,
+    "max": 73496,
+    "n_gt_8k": 37,
+    "n_gt_32k": 10,
+    "tokens_by_part": {
+     "turn": 1024211
+    }
+   }
+  },
+  "by_benchmark": {
+   "magentic_one (GAIA/AssistantBench)": {
+    "n": 58,
+    "steps_total": 2993,
+    "steps_p50": 32,
+    "tokens_total": 1024211,
+    "tokens_raw_as_stored": 1024211,
+    "tokens_global_exact_dedup": 1010507,
+    "dedup_tokens_also_in_prior_sets": 1010507,
+    "dedup_tokens_in_prior_first_match": {
+     "OLD:Who&When": 1010507
+    },
+    "dedup_tokens_in_prior_any": {
+     "OLD:Who&When": 1010507,
+     "CORRECT-Error": 4,
+     "ARIA": 4
+    },
+    "p50": 10258,
+    "p90": 36695,
+    "p99": 64770,
+    "max": 73496,
+    "n_gt_8k": 37,
+    "n_gt_32k": 10,
+    "tokens_by_part": {
+     "turn": 1024211
+    }
+   }
+  },
+  "by_framework": {
+   "Magentic-One": {
+    "n": 58,
+    "steps_total": 2993,
+    "steps_p50": 32,
+    "tokens_total": 1024211,
+    "tokens_raw_as_stored": 1024211,
+    "tokens_global_exact_dedup": 1010507,
+    "dedup_tokens_also_in_prior_sets": 1010507,
+    "dedup_tokens_in_prior_first_match": {
+     "OLD:Who&When": 1010507
+    },
+    "dedup_tokens_in_prior_any": {
+     "OLD:Who&When": 1010507,
+     "CORRECT-Error": 4,
+     "ARIA": 4
+    },
+    "p50": 10258,
+    "p90": 36695,
+    "p99": 64770,
+    "max": 73496,
+    "n_gt_8k": 37,
+    "n_gt_32k": 10,
+    "tokens_by_part": {
+     "turn": 1024211
+    }
+   }
+  },
+  "by_split": {
+   "magentic": {
+    "n": 58,
+    "steps_total": 2993,
+    "steps_p50": 32,
+    "tokens_total": 1024211,
+    "tokens_raw_as_stored": 1024211,
+    "tokens_global_exact_dedup": 1010507,
+    "dedup_tokens_also_in_prior_sets": 1010507,
+    "dedup_tokens_in_prior_first_match": {
+     "OLD:Who&When": 1010507
+    },
+    "dedup_tokens_in_prior_any": {
+     "OLD:Who&When": 1010507,
+     "CORRECT-Error": 4,
+     "ARIA": 4
+    },
+    "p50": 10258,
+    "p90": 36695,
+    "p99": 64770,
+    "max": 73496,
+    "n_gt_8k": 37,
+    "n_gt_32k": 10,
+    "tokens_by_part": {
+     "turn": 1024211
+    }
+   }
+  },
+  "unique_questions": 58,
+  "medical": {
+   "n": 0,
+   "tokens": 0,
+   "sources": {},
+   "examples": []
+  }
+ },
+ "AgentRx/tau_retail": {
+  "overall": {
+   "n": 29,
+   "steps_total": 1064,
+   "steps_p50": 36,
+   "tokens_total": 195405,
+   "tokens_raw_as_stored": 195405,
+   "tokens_global_exact_dedup": 119848,
+   "dedup_tokens_also_in_prior_sets": 20,
+   "dedup_tokens_in_prior_first_match": {
+    "ATBench/ATBench500": 12,
+    "ATBench/ATBench": 7,
+    "AFTraj": 1
+   },
+   "dedup_tokens_in_prior_any": {
+    "ATBench/ATBench500": 14,
+    "ATBench/ATBench": 8,
+    "AFTraj": 1
+   },
+   "p50": 5869,
+   "p90": 8738,
+   "p99": 15258,
+   "max": 16867,
+   "n_gt_8k": 8,
+   "n_gt_32k": 0,
+   "tokens_by_part": {
+    "task": 3632,
+    "system": 34916,
+    "turn": 29544,
+    "tool_result": 122335,
+    "toolcall_arg": 4978
+   }
+  },
+  "by_class": {
+   "natural_fail": {
+    "n": 29,
+    "steps_total": 1064,
+    "steps_p50": 36,
+    "tokens_total": 195405,
+    "tokens_raw_as_stored": 195405,
+    "tokens_global_exact_dedup": 119848,
+    "dedup_tokens_also_in_prior_sets": 20,
+    "dedup_tokens_in_prior_first_match": {
+     "ATBench/ATBench500": 12,
+     "ATBench/ATBench": 7,
+     "AFTraj": 1
+    },
+    "dedup_tokens_in_prior_any": {
+     "ATBench/ATBench500": 14,
+     "ATBench/ATBench": 8,
+     "AFTraj": 1
+    },
+    "p50": 5869,
+    "p90": 8738,
+    "p99": 15258,
+    "max": 16867,
+    "n_gt_8k": 8,
+    "n_gt_32k": 0,
+    "tokens_by_part": {
+     "task": 3632,
+     "system": 34916,
+     "turn": 29544,
+     "tool_result": 122335,
+     "toolcall_arg": 4978
+    }
+   }
+  },
+  "by_benchmark": {
+   "tau_retail": {
+    "n": 29,
+    "steps_total": 1064,
+    "steps_p50": 36,
+    "tokens_total": 195405,
+    "tokens_raw_as_stored": 195405,
+    "tokens_global_exact_dedup": 119848,
+    "dedup_tokens_also_in_prior_sets": 20,
+    "dedup_tokens_in_prior_first_match": {
+     "ATBench/ATBench500": 12,
+     "ATBench/ATBench": 7,
+     "AFTraj": 1
+    },
+    "dedup_tokens_in_prior_any": {
+     "ATBench/ATBench500": 14,
+     "ATBench/ATBench": 8,
+     "AFTraj": 1
+    },
+    "p50": 5869,
+    "p90": 8738,
+    "p99": 15258,
+    "max": 16867,
+    "n_gt_8k": 8,
+    "n_gt_32k": 0,
+    "tokens_by_part": {
+     "task": 3632,
+     "system": 34916,
+     "turn": 29544,
+     "tool_result": 122335,
+     "toolcall_arg": 4978
+    }
+   }
+  },
+  "by_framework": {
+   "tau-bench retail (agent + LLM user simulator)": {
+    "n": 29,
+    "steps_total": 1064,
+    "steps_p50": 36,
+    "tokens_total": 195405,
+    "tokens_raw_as_stored": 195405,
+    "tokens_global_exact_dedup": 119848,
+    "dedup_tokens_also_in_prior_sets": 20,
+    "dedup_tokens_in_prior_first_match": {
+     "ATBench/ATBench500": 12,
+     "ATBench/ATBench": 7,
+     "AFTraj": 1
+    },
+    "dedup_tokens_in_prior_any": {
+     "ATBench/ATBench500": 14,
+     "ATBench/ATBench": 8,
+     "AFTraj": 1
+    },
+    "p50": 5869,
+    "p90": 8738,
+    "p99": 15258,
+    "max": 16867,
+    "n_gt_8k": 8,
+    "n_gt_32k": 0,
+    "tokens_by_part": {
+     "task": 3632,
+     "system": 34916,
+     "turn": 29544,
+     "tool_result": 122335,
+     "toolcall_arg": 4978
+    }
+   }
+  },
+  "by_split": {
+   "tau_retail": {
+    "n": 29,
+    "steps_total": 1064,
+    "steps_p50": 36,
+    "tokens_total": 195405,
+    "tokens_raw_as_stored": 195405,
+    "tokens_global_exact_dedup": 119848,
+    "dedup_tokens_also_in_prior_sets": 20,
+    "dedup_tokens_in_prior_first_match": {
+     "ATBench/ATBench500": 12,
+     "ATBench/ATBench": 7,
+     "AFTraj": 1
+    },
+    "dedup_tokens_in_prior_any": {
+     "ATBench/ATBench500": 14,
+     "ATBench/ATBench": 8,
+     "AFTraj": 1
+    },
+    "p50": 5869,
+    "p90": 8738,
+    "p99": 15258,
+    "max": 16867,
+    "n_gt_8k": 8,
+    "n_gt_32k": 0,
+    "tokens_by_part": {
+     "task": 3632,
+     "system": 34916,
+     "turn": 29544,
+     "tool_result": 122335,
+     "toolcall_arg": 4978
+    }
+   }
+  },
+  "unique_questions": 29,
+  "medical": {
+   "n": 0,
+   "tokens": 0,
+   "sources": {},
+   "examples": []
+  }
+ },
+ "TRAIL": {
+  "overall": {
+   "n": 148,
+   "steps_total": 1268,
+   "steps_p50": 5,
+   "tokens_total": 3404072,
+   "tokens_raw_as_stored": 16707344,
+   "tokens_global_exact_dedup": 3250770,
+   "dedup_tokens_also_in_prior_sets": 153,
+   "dedup_tokens_in_prior_first_match": {
+    "ARIA": 42,
+    "WhoWhenPro-mirror (text)": 71,
+    "ATBench/ATBench500": 9,
+    "ATBench/ATBench": 2,
+    "OLD:MAST": 19,
+    "AFTraj": 10
+   },
+   "dedup_tokens_in_prior_any": {
+    "ARIA": 42,
+    "WhoWhenPro-mirror (text)": 82,
+    "ATBench/ATBench500": 9,
+    "ATBench/ATBench": 2,
+    "OLD:MAST": 19,
+    "MAScope/MAST-clean": 19,
+    "AFTraj": 10
+   },
+   "p50": 13714,
+   "p90": 50037,
+   "p99": 105653,
+   "max": 136085,
+   "n_gt_8k": 90,
+   "n_gt_32k": 39,
+   "tokens_by_part": {
+    "input_message": 5307949,
+    "system": 2471782,
+    "input_toolcall": 985901,
+    "input_tool_result": 7644485,
+    "output": 63868,
+    "tool_result": 203321,
+    "agent_output": 5219,
+    "output_toolcall": 730,
+    "tool_arg": 4529,
+    "step_output": 15816,
+    "exception_msg": 3744
+   }
+  },
+  "by_class": {
+   "natural_fail": {
+    "n": 144,
+    "steps_total": 1252,
+    "steps_p50": 5,
+    "tokens_total": 3358011,
+    "tokens_raw_as_stored": 16596667,
+    "tokens_global_exact_dedup": 3208373,
+    "dedup_tokens_also_in_prior_sets": 153,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 71,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "AFTraj": 10
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 82,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19,
+     "AFTraj": 10
+    },
+    "p50": 13714,
+    "p90": 51003,
+    "p99": 106537,
+    "max": 136085,
+    "n_gt_8k": 87,
+    "n_gt_32k": 39,
+    "tokens_by_part": {
+     "input_message": 5257449,
+     "system": 2436868,
+     "input_toolcall": 977031,
+     "input_tool_result": 7629914,
+     "output": 62763,
+     "tool_result": 203321,
+     "agent_output": 4983,
+     "output_toolcall": 730,
+     "tool_arg": 4293,
+     "step_output": 15571,
+     "exception_msg": 3744
+    }
+   },
+   "no_annotated_error": {
+    "n": 4,
+    "steps_total": 16,
+    "steps_p50": 3,
+    "tokens_total": 46061,
+    "tokens_raw_as_stored": 110677,
+    "tokens_global_exact_dedup": 46061,
+    "dedup_tokens_also_in_prior_sets": 6,
+    "dedup_tokens_in_prior_first_match": {
+     "WhoWhenPro-mirror (text)": 6
+    },
+    "dedup_tokens_in_prior_any": {
+     "WhoWhenPro-mirror (text)": 6
+    },
+    "p50": 11771,
+    "p90": 15432,
+    "p99": 15650,
+    "max": 15675,
+    "n_gt_8k": 3,
+    "n_gt_32k": 0,
+    "tokens_by_part": {
+     "input_message": 50500,
+     "system": 34914,
+     "input_toolcall": 8870,
+     "input_tool_result": 14571,
+     "output": 1105,
+     "agent_output": 236,
+     "step_output": 245,
+     "tool_arg": 236
+    }
+   }
+  },
+  "by_benchmark": {
+   "GAIA": {
+    "n": 117,
+    "steps_total": 803,
+    "steps_p50": 3,
+    "tokens_total": 2537690,
+    "tokens_raw_as_stored": 9562372,
+    "tokens_global_exact_dedup": 2452029,
+    "dedup_tokens_also_in_prior_sets": 143,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 71,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 82,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 8228,
+    "p90": 48960,
+    "p99": 112499,
+    "max": 136085,
+    "n_gt_8k": 59,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3497319,
+     "system": 1599438,
+     "input_toolcall": 114386,
+     "input_tool_result": 4109829,
+     "output": 36579,
+     "tool_result": 203321,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   },
+   "SWE-bench Lite": {
+    "n": 31,
+    "steps_total": 465,
+    "steps_p50": 14,
+    "tokens_total": 866382,
+    "tokens_raw_as_stored": 7144972,
+    "tokens_global_exact_dedup": 798741,
+    "dedup_tokens_also_in_prior_sets": 10,
+    "dedup_tokens_in_prior_first_match": {
+     "AFTraj": 10
+    },
+    "dedup_tokens_in_prior_any": {
+     "AFTraj": 10
+    },
+    "p50": 21660,
+    "p90": 55310,
+    "p99": 79819,
+    "max": 87611,
+    "n_gt_8k": 31,
+    "n_gt_32k": 8,
+    "tokens_by_part": {
+     "system": 872344,
+     "input_message": 1810630,
+     "input_toolcall": 871515,
+     "input_tool_result": 3534656,
+     "agent_output": 4489,
+     "step_output": 15816,
+     "output": 27289,
+     "tool_arg": 4489,
+     "exception_msg": 3744
+    }
+   }
+  },
+  "by_framework": {
+   "smolagents OpenDeepResearch (CodeAgent manager + search_agent)": {
+    "n": 117,
+    "steps_total": 803,
+    "steps_p50": 3,
+    "tokens_total": 2537690,
+    "tokens_raw_as_stored": 9562372,
+    "tokens_global_exact_dedup": 2452029,
+    "dedup_tokens_also_in_prior_sets": 143,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 71,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 82,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 8228,
+    "p90": 48960,
+    "p99": 112499,
+    "max": 136085,
+    "n_gt_8k": 59,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3497319,
+     "system": 1599438,
+     "input_toolcall": 114386,
+     "input_tool_result": 4109829,
+     "output": 36579,
+     "tool_result": 203321,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   },
+   "smolagents CodeAgent (single agent)": {
+    "n": 31,
+    "steps_total": 465,
+    "steps_p50": 14,
+    "tokens_total": 866382,
+    "tokens_raw_as_stored": 7144972,
+    "tokens_global_exact_dedup": 798741,
+    "dedup_tokens_also_in_prior_sets": 10,
+    "dedup_tokens_in_prior_first_match": {
+     "AFTraj": 10
+    },
+    "dedup_tokens_in_prior_any": {
+     "AFTraj": 10
+    },
+    "p50": 21660,
+    "p90": 55310,
+    "p99": 79819,
+    "max": 87611,
+    "n_gt_8k": 31,
+    "n_gt_32k": 8,
+    "tokens_by_part": {
+     "system": 872344,
+     "input_message": 1810630,
+     "input_toolcall": 871515,
+     "input_tool_result": 3534656,
+     "agent_output": 4489,
+     "step_output": 15816,
+     "output": 27289,
+     "tool_arg": 4489,
+     "exception_msg": 3744
+    }
+   }
+  },
+  "by_split": {
+   "gaia": {
+    "n": 117,
+    "steps_total": 803,
+    "steps_p50": 3,
+    "tokens_total": 2537690,
+    "tokens_raw_as_stored": 9562372,
+    "tokens_global_exact_dedup": 2452029,
+    "dedup_tokens_also_in_prior_sets": 143,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 71,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 82,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 8228,
+    "p90": 48960,
+    "p99": 112499,
+    "max": 136085,
+    "n_gt_8k": 59,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3497319,
+     "system": 1599438,
+     "input_toolcall": 114386,
+     "input_tool_result": 4109829,
+     "output": 36579,
+     "tool_result": 203321,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   },
+   "swe_bench": {
+    "n": 31,
+    "steps_total": 465,
+    "steps_p50": 14,
+    "tokens_total": 866382,
+    "tokens_raw_as_stored": 7144972,
+    "tokens_global_exact_dedup": 798741,
+    "dedup_tokens_also_in_prior_sets": 10,
+    "dedup_tokens_in_prior_first_match": {
+     "AFTraj": 10
+    },
+    "dedup_tokens_in_prior_any": {
+     "AFTraj": 10
+    },
+    "p50": 21660,
+    "p90": 55310,
+    "p99": 79819,
+    "max": 87611,
+    "n_gt_8k": 31,
+    "n_gt_32k": 8,
+    "tokens_by_part": {
+     "system": 872344,
+     "input_message": 1810630,
+     "input_toolcall": 871515,
+     "input_tool_result": 3534656,
+     "agent_output": 4489,
+     "step_output": 15816,
+     "output": 27289,
+     "tool_arg": 4489,
+     "exception_msg": 3744
+    }
+   }
+  },
+  "by_model": {
+   "o3-mini-2025-01-31": {
+    "n": 117,
+    "steps_total": 803,
+    "steps_p50": 3,
+    "tokens_total": 2537690,
+    "tokens_raw_as_stored": 9562372,
+    "tokens_global_exact_dedup": 2452029,
+    "dedup_tokens_also_in_prior_sets": 143,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 71,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 82,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 8228,
+    "p90": 48960,
+    "p99": 112499,
+    "max": 136085,
+    "n_gt_8k": 59,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3497319,
+     "system": 1599438,
+     "input_toolcall": 114386,
+     "input_tool_result": 4109829,
+     "output": 36579,
+     "tool_result": 203321,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   },
+   "claude-3-7-sonnet-20250219": {
+    "n": 31,
+    "steps_total": 465,
+    "steps_p50": 14,
+    "tokens_total": 866382,
+    "tokens_raw_as_stored": 7144972,
+    "tokens_global_exact_dedup": 798741,
+    "dedup_tokens_also_in_prior_sets": 10,
+    "dedup_tokens_in_prior_first_match": {
+     "AFTraj": 10
+    },
+    "dedup_tokens_in_prior_any": {
+     "AFTraj": 10
+    },
+    "p50": 21660,
+    "p90": 55310,
+    "p99": 79819,
+    "max": 87611,
+    "n_gt_8k": 31,
+    "n_gt_32k": 8,
+    "tokens_by_part": {
+     "system": 872344,
+     "input_message": 1810630,
+     "input_toolcall": 871515,
+     "input_tool_result": 3534656,
+     "agent_output": 4489,
+     "step_output": 15816,
+     "output": 27289,
+     "tool_arg": 4489,
+     "exception_msg": 3744
+    }
+   }
+  },
+  "unique_questions": 138,
+  "medical": {
+   "n": 0,
+   "tokens": 0,
+   "sources": {},
+   "examples": []
+  },
+  "parse_stats": {
+   "output_segments_contained_in_inputs": 4047,
+   "output_segments_kept": 554
+  },
+  "labels": {
+   "errors_total": 841,
+   "traces_with_errors": 144,
+   "impacts": {
+    "HIGH": 304,
+    "MEDIUM": 363,
+    "LOW": 174
+   },
+   "top_categories": {
+    "Formatting Errors": 196,
+    "Instruction Non-compliance": 153,
+    "Goal Deviation": 64,
+    "Resource Abuse": 57,
+    "Tool-related": 53,
+    "Language-only": 50,
+    "Task Orchestration": 46,
+    "Tool Selection Errors": 44,
+    "Context Handling Failures": 42,
+    "Poor Information Retrieval": 40,
+    "Incorrect Problem Identification": 27,
+    "Tool Output Misinterpretation": 17
+   },
+   "gaia_traces_where_search_agent_ran": 47,
+   "llm_calls_total": 1974
+  }
+ },
+ "TRAIL/gaia": {
+  "overall": {
+   "n": 117,
+   "steps_total": 803,
+   "steps_p50": 3,
+   "tokens_total": 2537690,
+   "tokens_raw_as_stored": 9562372,
+   "tokens_global_exact_dedup": 2452029,
+   "dedup_tokens_also_in_prior_sets": 143,
+   "dedup_tokens_in_prior_first_match": {
+    "ARIA": 42,
+    "WhoWhenPro-mirror (text)": 71,
+    "ATBench/ATBench500": 9,
+    "ATBench/ATBench": 2,
+    "OLD:MAST": 19
+   },
+   "dedup_tokens_in_prior_any": {
+    "ARIA": 42,
+    "WhoWhenPro-mirror (text)": 82,
+    "ATBench/ATBench500": 9,
+    "ATBench/ATBench": 2,
+    "OLD:MAST": 19,
+    "MAScope/MAST-clean": 19
+   },
+   "p50": 8228,
+   "p90": 48960,
+   "p99": 112499,
+   "max": 136085,
+   "n_gt_8k": 59,
+   "n_gt_32k": 31,
+   "tokens_by_part": {
+    "input_message": 3497319,
+    "system": 1599438,
+    "input_toolcall": 114386,
+    "input_tool_result": 4109829,
+    "output": 36579,
+    "tool_result": 203321,
+    "agent_output": 730,
+    "output_toolcall": 730,
+    "tool_arg": 40
+   }
+  },
+  "by_class": {
+   "natural_fail": {
+    "n": 114,
+    "steps_total": 796,
+    "steps_p50": 3,
+    "tokens_total": 2507304,
+    "tokens_raw_as_stored": 9516907,
+    "tokens_global_exact_dedup": 2423283,
+    "dedup_tokens_also_in_prior_sets": 143,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 71,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 82,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 8207,
+    "p90": 49136,
+    "p99": 113161,
+    "max": 136085,
+    "n_gt_8k": 57,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3472738,
+     "system": 1582740,
+     "input_toolcall": 114065,
+     "input_tool_result": 4106620,
+     "output": 35923,
+     "tool_result": 203321,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   },
+   "no_annotated_error": {
+    "n": 3,
+    "steps_total": 7,
+    "steps_p50": 2,
+    "tokens_total": 30386,
+    "tokens_raw_as_stored": 45465,
+    "tokens_global_exact_dedup": 30386,
+    "dedup_tokens_also_in_prior_sets": 6,
+    "dedup_tokens_in_prior_first_match": {
+     "WhoWhenPro-mirror (text)": 6
+    },
+    "dedup_tokens_in_prior_any": {
+     "WhoWhenPro-mirror (text)": 6
+    },
+    "p50": 8674,
+    "p90": 13629,
+    "p99": 14744,
+    "max": 14868,
+    "n_gt_8k": 2,
+    "n_gt_32k": 0,
+    "tokens_by_part": {
+     "input_message": 24581,
+     "system": 16698,
+     "input_toolcall": 321,
+     "input_tool_result": 3209,
+     "output": 656
+    }
+   }
+  },
+  "by_benchmark": {
+   "GAIA": {
+    "n": 117,
+    "steps_total": 803,
+    "steps_p50": 3,
+    "tokens_total": 2537690,
+    "tokens_raw_as_stored": 9562372,
+    "tokens_global_exact_dedup": 2452029,
+    "dedup_tokens_also_in_prior_sets": 143,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 71,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 82,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 8228,
+    "p90": 48960,
+    "p99": 112499,
+    "max": 136085,
+    "n_gt_8k": 59,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3497319,
+     "system": 1599438,
+     "input_toolcall": 114386,
+     "input_tool_result": 4109829,
+     "output": 36579,
+     "tool_result": 203321,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   }
+  },
+  "by_framework": {
+   "smolagents OpenDeepResearch (CodeAgent manager + search_agent)": {
+    "n": 117,
+    "steps_total": 803,
+    "steps_p50": 3,
+    "tokens_total": 2537690,
+    "tokens_raw_as_stored": 9562372,
+    "tokens_global_exact_dedup": 2452029,
+    "dedup_tokens_also_in_prior_sets": 143,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 71,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 82,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 8228,
+    "p90": 48960,
+    "p99": 112499,
+    "max": 136085,
+    "n_gt_8k": 59,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3497319,
+     "system": 1599438,
+     "input_toolcall": 114386,
+     "input_tool_result": 4109829,
+     "output": 36579,
+     "tool_result": 203321,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   }
+  },
+  "by_split": {
+   "gaia": {
+    "n": 117,
+    "steps_total": 803,
+    "steps_p50": 3,
+    "tokens_total": 2537690,
+    "tokens_raw_as_stored": 9562372,
+    "tokens_global_exact_dedup": 2452029,
+    "dedup_tokens_also_in_prior_sets": 143,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 71,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 82,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 8228,
+    "p90": 48960,
+    "p99": 112499,
+    "max": 136085,
+    "n_gt_8k": 59,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3497319,
+     "system": 1599438,
+     "input_toolcall": 114386,
+     "input_tool_result": 4109829,
+     "output": 36579,
+     "tool_result": 203321,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   }
+  },
+  "by_model": {
+   "o3-mini-2025-01-31": {
+    "n": 117,
+    "steps_total": 803,
+    "steps_p50": 3,
+    "tokens_total": 2537690,
+    "tokens_raw_as_stored": 9562372,
+    "tokens_global_exact_dedup": 2452029,
+    "dedup_tokens_also_in_prior_sets": 143,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 71,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 82,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 8228,
+    "p90": 48960,
+    "p99": 112499,
+    "max": 136085,
+    "n_gt_8k": 59,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3497319,
+     "system": 1599438,
+     "input_toolcall": 114386,
+     "input_tool_result": 4109829,
+     "output": 36579,
+     "tool_result": 203321,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   }
+  },
+  "unique_questions": 116,
+  "medical": {
+   "n": 0,
+   "tokens": 0,
+   "sources": {},
+   "examples": []
+  }
+ },
+ "TRAIL/swe_bench": {
+  "overall": {
+   "n": 31,
+   "steps_total": 465,
+   "steps_p50": 14,
+   "tokens_total": 866382,
+   "tokens_raw_as_stored": 7144972,
+   "tokens_global_exact_dedup": 798741,
+   "dedup_tokens_also_in_prior_sets": 10,
+   "dedup_tokens_in_prior_first_match": {
+    "AFTraj": 10
+   },
+   "dedup_tokens_in_prior_any": {
+    "AFTraj": 10
+   },
+   "p50": 21660,
+   "p90": 55310,
+   "p99": 79819,
+   "max": 87611,
+   "n_gt_8k": 31,
+   "n_gt_32k": 8,
+   "tokens_by_part": {
+    "system": 872344,
+    "input_message": 1810630,
+    "input_toolcall": 871515,
+    "input_tool_result": 3534656,
+    "agent_output": 4489,
+    "step_output": 15816,
+    "output": 27289,
+    "tool_arg": 4489,
+    "exception_msg": 3744
+   }
+  },
+  "by_class": {
+   "natural_fail": {
+    "n": 30,
+    "steps_total": 456,
+    "steps_p50": 14,
+    "tokens_total": 850707,
+    "tokens_raw_as_stored": 7079760,
+    "tokens_global_exact_dedup": 785090,
+    "dedup_tokens_also_in_prior_sets": 10,
+    "dedup_tokens_in_prior_first_match": {
+     "AFTraj": 10
+    },
+    "dedup_tokens_in_prior_any": {
+     "AFTraj": 10
+    },
+    "p50": 21713,
+    "p90": 55503,
+    "p99": 80079,
+    "max": 87611,
+    "n_gt_8k": 30,
+    "n_gt_32k": 8,
+    "tokens_by_part": {
+     "system": 854128,
+     "input_message": 1784711,
+     "input_toolcall": 862966,
+     "input_tool_result": 3523294,
+     "agent_output": 4253,
+     "step_output": 15571,
+     "output": 26840,
+     "tool_arg": 4253,
+     "exception_msg": 3744
+    }
+   },
+   "no_annotated_error": {
+    "n": 1,
+    "steps_total": 9,
+    "steps_p50": 9,
+    "tokens_total": 15675,
+    "tokens_raw_as_stored": 65212,
+    "tokens_global_exact_dedup": 15675,
+    "dedup_tokens_also_in_prior_sets": 0,
+    "dedup_tokens_in_prior_first_match": {},
+    "dedup_tokens_in_prior_any": {},
+    "p50": 15675,
+    "p90": 15675,
+    "p99": 15675,
+    "max": 15675,
+    "n_gt_8k": 1,
+    "n_gt_32k": 0,
+    "tokens_by_part": {
+     "system": 18216,
+     "input_message": 25919,
+     "input_toolcall": 8549,
+     "input_tool_result": 11362,
+     "agent_output": 236,
+     "step_output": 245,
+     "output": 449,
+     "tool_arg": 236
+    }
+   }
+  },
+  "by_benchmark": {
+   "SWE-bench Lite": {
+    "n": 31,
+    "steps_total": 465,
+    "steps_p50": 14,
+    "tokens_total": 866382,
+    "tokens_raw_as_stored": 7144972,
+    "tokens_global_exact_dedup": 798741,
+    "dedup_tokens_also_in_prior_sets": 10,
+    "dedup_tokens_in_prior_first_match": {
+     "AFTraj": 10
+    },
+    "dedup_tokens_in_prior_any": {
+     "AFTraj": 10
+    },
+    "p50": 21660,
+    "p90": 55310,
+    "p99": 79819,
+    "max": 87611,
+    "n_gt_8k": 31,
+    "n_gt_32k": 8,
+    "tokens_by_part": {
+     "system": 872344,
+     "input_message": 1810630,
+     "input_toolcall": 871515,
+     "input_tool_result": 3534656,
+     "agent_output": 4489,
+     "step_output": 15816,
+     "output": 27289,
+     "tool_arg": 4489,
+     "exception_msg": 3744
+    }
+   }
+  },
+  "by_framework": {
+   "smolagents CodeAgent (single agent)": {
+    "n": 31,
+    "steps_total": 465,
+    "steps_p50": 14,
+    "tokens_total": 866382,
+    "tokens_raw_as_stored": 7144972,
+    "tokens_global_exact_dedup": 798741,
+    "dedup_tokens_also_in_prior_sets": 10,
+    "dedup_tokens_in_prior_first_match": {
+     "AFTraj": 10
+    },
+    "dedup_tokens_in_prior_any": {
+     "AFTraj": 10
+    },
+    "p50": 21660,
+    "p90": 55310,
+    "p99": 79819,
+    "max": 87611,
+    "n_gt_8k": 31,
+    "n_gt_32k": 8,
+    "tokens_by_part": {
+     "system": 872344,
+     "input_message": 1810630,
+     "input_toolcall": 871515,
+     "input_tool_result": 3534656,
+     "agent_output": 4489,
+     "step_output": 15816,
+     "output": 27289,
+     "tool_arg": 4489,
+     "exception_msg": 3744
+    }
+   }
+  },
+  "by_split": {
+   "swe_bench": {
+    "n": 31,
+    "steps_total": 465,
+    "steps_p50": 14,
+    "tokens_total": 866382,
+    "tokens_raw_as_stored": 7144972,
+    "tokens_global_exact_dedup": 798741,
+    "dedup_tokens_also_in_prior_sets": 10,
+    "dedup_tokens_in_prior_first_match": {
+     "AFTraj": 10
+    },
+    "dedup_tokens_in_prior_any": {
+     "AFTraj": 10
+    },
+    "p50": 21660,
+    "p90": 55310,
+    "p99": 79819,
+    "max": 87611,
+    "n_gt_8k": 31,
+    "n_gt_32k": 8,
+    "tokens_by_part": {
+     "system": 872344,
+     "input_message": 1810630,
+     "input_toolcall": 871515,
+     "input_tool_result": 3534656,
+     "agent_output": 4489,
+     "step_output": 15816,
+     "output": 27289,
+     "tool_arg": 4489,
+     "exception_msg": 3744
+    }
+   }
+  },
+  "by_model": {
+   "claude-3-7-sonnet-20250219": {
+    "n": 31,
+    "steps_total": 465,
+    "steps_p50": 14,
+    "tokens_total": 866382,
+    "tokens_raw_as_stored": 7144972,
+    "tokens_global_exact_dedup": 798741,
+    "dedup_tokens_also_in_prior_sets": 10,
+    "dedup_tokens_in_prior_first_match": {
+     "AFTraj": 10
+    },
+    "dedup_tokens_in_prior_any": {
+     "AFTraj": 10
+    },
+    "p50": 21660,
+    "p90": 55310,
+    "p99": 79819,
+    "max": 87611,
+    "n_gt_8k": 31,
+    "n_gt_32k": 8,
+    "tokens_by_part": {
+     "system": 872344,
+     "input_message": 1810630,
+     "input_toolcall": 871515,
+     "input_tool_result": 3534656,
+     "agent_output": 4489,
+     "step_output": 15816,
+     "output": 27289,
+     "tool_arg": 4489,
+     "exception_msg": 3744
+    }
+   }
+  },
+  "unique_questions": 22,
+  "medical": {
+   "n": 0,
+   "tokens": 0,
+   "sources": {},
+   "examples": []
+  }
+ },
+ "TRAIL/gaia (search_agent ran)": {
+  "overall": {
+   "n": 47,
+   "steps_total": 671,
+   "steps_p50": 11,
+   "tokens_total": 2016364,
+   "tokens_raw_as_stored": 8707551,
+   "tokens_global_exact_dedup": 1932686,
+   "dedup_tokens_also_in_prior_sets": 125,
+   "dedup_tokens_in_prior_first_match": {
+    "ARIA": 42,
+    "WhoWhenPro-mirror (text)": 53,
+    "ATBench/ATBench500": 9,
+    "ATBench/ATBench": 2,
+    "OLD:MAST": 19
+   },
+   "dedup_tokens_in_prior_any": {
+    "ARIA": 42,
+    "WhoWhenPro-mirror (text)": 64,
+    "ATBench/ATBench500": 9,
+    "ATBench/ATBench": 2,
+    "OLD:MAST": 19,
+    "MAScope/MAST-clean": 19
+   },
+   "p50": 37918,
+   "p90": 83691,
+   "p99": 126860,
+   "max": 136085,
+   "n_gt_8k": 47,
+   "n_gt_32k": 31,
+   "tokens_by_part": {
+    "input_message": 3067151,
+    "system": 1243937,
+    "input_toolcall": 88616,
+    "input_tool_result": 4085569,
+    "tool_result": 203321,
+    "output": 17457,
+    "agent_output": 730,
+    "output_toolcall": 730,
+    "tool_arg": 40
+   }
+  },
+  "by_class": {
+   "natural_fail": {
+    "n": 46,
+    "steps_total": 667,
+    "steps_p50": 11,
+    "tokens_total": 2001496,
+    "tokens_raw_as_stored": 8683727,
+    "tokens_global_exact_dedup": 1919391,
+    "dedup_tokens_also_in_prior_sets": 125,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 53,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 64,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 38123,
+    "p90": 83882,
+    "p99": 127061,
+    "max": 136085,
+    "n_gt_8k": 46,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3055390,
+     "system": 1235502,
+     "input_toolcall": 88499,
+     "input_tool_result": 4082382,
+     "tool_result": 203321,
+     "output": 17133,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   },
+   "no_annotated_error": {
+    "n": 1,
+    "steps_total": 4,
+    "steps_p50": 4,
+    "tokens_total": 14868,
+    "tokens_raw_as_stored": 23824,
+    "tokens_global_exact_dedup": 14868,
+    "dedup_tokens_also_in_prior_sets": 0,
+    "dedup_tokens_in_prior_first_match": {},
+    "dedup_tokens_in_prior_any": {},
+    "p50": 14868,
+    "p90": 14868,
+    "p99": 14868,
+    "max": 14868,
+    "n_gt_8k": 1,
+    "n_gt_32k": 0,
+    "tokens_by_part": {
+     "input_message": 11761,
+     "system": 8435,
+     "input_toolcall": 117,
+     "input_tool_result": 3187,
+     "output": 324
+    }
+   }
+  },
+  "by_benchmark": {
+   "GAIA": {
+    "n": 47,
+    "steps_total": 671,
+    "steps_p50": 11,
+    "tokens_total": 2016364,
+    "tokens_raw_as_stored": 8707551,
+    "tokens_global_exact_dedup": 1932686,
+    "dedup_tokens_also_in_prior_sets": 125,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 53,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 64,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 37918,
+    "p90": 83691,
+    "p99": 126860,
+    "max": 136085,
+    "n_gt_8k": 47,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3067151,
+     "system": 1243937,
+     "input_toolcall": 88616,
+     "input_tool_result": 4085569,
+     "tool_result": 203321,
+     "output": 17457,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   }
+  },
+  "by_framework": {
+   "smolagents OpenDeepResearch (CodeAgent manager + search_agent)": {
+    "n": 47,
+    "steps_total": 671,
+    "steps_p50": 11,
+    "tokens_total": 2016364,
+    "tokens_raw_as_stored": 8707551,
+    "tokens_global_exact_dedup": 1932686,
+    "dedup_tokens_also_in_prior_sets": 125,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 53,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 64,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 37918,
+    "p90": 83691,
+    "p99": 126860,
+    "max": 136085,
+    "n_gt_8k": 47,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3067151,
+     "system": 1243937,
+     "input_toolcall": 88616,
+     "input_tool_result": 4085569,
+     "tool_result": 203321,
+     "output": 17457,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   }
+  },
+  "by_split": {
+   "gaia": {
+    "n": 47,
+    "steps_total": 671,
+    "steps_p50": 11,
+    "tokens_total": 2016364,
+    "tokens_raw_as_stored": 8707551,
+    "tokens_global_exact_dedup": 1932686,
+    "dedup_tokens_also_in_prior_sets": 125,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 53,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 64,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 37918,
+    "p90": 83691,
+    "p99": 126860,
+    "max": 136085,
+    "n_gt_8k": 47,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3067151,
+     "system": 1243937,
+     "input_toolcall": 88616,
+     "input_tool_result": 4085569,
+     "tool_result": 203321,
+     "output": 17457,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   }
+  },
+  "by_model": {
+   "o3-mini-2025-01-31": {
+    "n": 47,
+    "steps_total": 671,
+    "steps_p50": 11,
+    "tokens_total": 2016364,
+    "tokens_raw_as_stored": 8707551,
+    "tokens_global_exact_dedup": 1932686,
+    "dedup_tokens_also_in_prior_sets": 125,
+    "dedup_tokens_in_prior_first_match": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 53,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19
+    },
+    "dedup_tokens_in_prior_any": {
+     "ARIA": 42,
+     "WhoWhenPro-mirror (text)": 64,
+     "ATBench/ATBench500": 9,
+     "ATBench/ATBench": 2,
+     "OLD:MAST": 19,
+     "MAScope/MAST-clean": 19
+    },
+    "p50": 37918,
+    "p90": 83691,
+    "p99": 126860,
+    "max": 136085,
+    "n_gt_8k": 47,
+    "n_gt_32k": 31,
+    "tokens_by_part": {
+     "input_message": 3067151,
+     "system": 1243937,
+     "input_toolcall": 88616,
+     "input_tool_result": 4085569,
+     "tool_result": 203321,
+     "output": 17457,
+     "agent_output": 730,
+     "output_toolcall": 730,
+     "tool_arg": 40
+    }
+   }
+  },
+  "unique_questions": 47,
+  "medical": {
+   "n": 0,
+   "tokens": 0,
+   "sources": {},
+   "examples": []
+  }
+ },
+ "cross_dataset_question_overlap": {
+  "method": "normalized task question (>=20 chars): exact equality and equality of first 60 normalized chars; OLD:* = r51 sets, others = r53 sets",
+  "per_dataset": {
+   "AgentRx/magentic": {
+    "n_questions": 58,
+    "overlaps": {
+     "OLD:Who&When": {
+      "exact": 55,
+      "first60": 57
+     },
+     "OLD:TraceElephant": {
+      "exact": 43,
+      "first60": 44
+     },
+     "ARIA": {
+      "exact": 26,
+      "first60": 29
+     },
+     "AFTraj": {
+      "exact": 26,
+      "first60": 28
+     },
+     "TRAIL/gaia": {
+      "exact": 23,
+      "first60": 26
+     },
+     "WhoWhenPro-mirror (text)": {
+      "exact": 0,
+      "first60": 7
+     },
+     "AgentErrorBench": {
+      "exact": 5,
+      "first60": 6
+     },
+     "OLD:AEGIS": {
+      "exact": 4,
+      "first60": 4
+     },
+     "CORRECT-Error": {
+      "exact": 3,
+      "first60": 3
+     }
+    }
+   },
+   "AgentRx/tau_retail": {
+    "n_questions": 29,
+    "overlaps": {}
+   },
+   "TRAIL/gaia": {
+    "n_questions": 116,
+    "overlaps": {
+     "AFTraj": {
+      "exact": 104,
+      "first60": 112
+     },
+     "ARIA": {
+      "exact": 105,
+      "first60": 112
+     },
+     "OLD:TraceElephant": {
+      "exact": 77,
+      "first60": 82
+     },
+     "OLD:Who&When": {
+      "exact": 75,
+      "first60": 79
+     },
+     "OLD:AEGIS": {
+      "exact": 45,
+      "first60": 48
+     },
+     "WhoWhenPro-mirror (text)": {
+      "exact": 0,
+      "first60": 38
+     },
+     "AgentRx/magentic": {
+      "exact": 23,
+      "first60": 26
+     },
+     "CORRECT-Error": {
+      "exact": 16,
+      "first60": 18
+     },
+     "AgentErrorBench": {
+      "exact": 11,
+      "first60": 13
+     }
+    }
+   },
+   "TRAIL/swe_bench": {
+    "n_questions": 22,
+    "overlaps": {}
+   }
+  }
+ },
+ "grand_total_new": {
+  "rule": "union over AgentRx + TRAIL (all trajectory text), exact segment dedup between them, segments already present in ANY previously measured set removed (old 5 from r51: AEGIS, MAST-Data, Who&When, TraceElephant, Who&When-Pro tmpxv7 real files; all r53 sets: CORRECT-Error, AFTraj, ARIA, Who&When-Pro mirror text+video, AgentErrorBench, MAScope MAST-clean/LG-Ctrl/Inject-Mix, ATBench, ATBench500; segmentation identical to r53), trajectories flagged medical removed (keyword heuristic >=2 distinct medical terms in the task question); a segment shared by a natural/clean and an injected trajectory is credited to natural/clean",
+  "prior_sets_deduped_against": [
+   "OLD:Who&When",
+   "OLD:TraceElephant",
+   "OLD:MAST",
+   "OLD:AEGIS",
+   "OLD:Who&When-Pro(tmpxv7)",
+   "CORRECT-Error",
+   "AFTraj",
+   "ARIA",
+   "WhoWhenPro-mirror (text)",
+   "WhoWhenPro-mirror (video)",
+   "AgentErrorBench",
+   "MAScope/MAST-clean",
+   "MAScope/LG-Ctrl",
+   "MAScope/Inject-Mix",
+   "ATBench/ATBench",
+   "ATBench/ATBench500"
+  ],
+  "prior_hashes": 551102,
+  "all": {
+   "natural_or_clean": 3370445,
+   "injected": 0,
+   "total": 3370445,
+   "excluded_as_prior_dup": 1010680,
+   "excluded_by_prior_set_first_match": {
+    "OLD:Who&When": 1010507,
+    "ATBench/ATBench500": 21,
+    "ATBench/ATBench": 9,
+    "AFTraj": 11,
+    "ARIA": 42,
+    "WhoWhenPro-mirror (text)": 71,
+    "OLD:MAST": 19
+   },
+   "per_dataset": {
+    "AgentRx/tau_retail": {
+     "natural_or_clean": 119828,
+     "injected": 0
+    },
+    "TRAIL/gaia": {
+     "natural_or_clean": 2451886,
+     "injected": 0
+    },
+    "TRAIL/swe_bench": {
+     "natural_or_clean": 798731,
+     "injected": 0
+    }
+   }
+  },
+  "mas_only": {
+   "natural_or_clean": 2451886,
+   "injected": 0,
+   "total": 2451886,
+   "excluded_as_prior_dup": 1010650,
+   "excluded_by_prior_set_first_match": {
+    "OLD:Who&When": 1010507,
+    "ARIA": 42,
+    "WhoWhenPro-mirror (text)": 71,
+    "ATBench/ATBench500": 9,
+    "ATBench/ATBench": 2,
+    "OLD:MAST": 19
+   },
+   "per_dataset": {
+    "TRAIL/gaia": {
+     "natural_or_clean": 2451886,
+     "injected": 0
+    }
+   }
+  },
+  "mas_only_strict": {
+   "natural_or_clean": 1932561,
+   "injected": 0,
+   "total": 1932561,
+   "excluded_as_prior_dup": 1010632,
+   "excluded_by_prior_set_first_match": {
+    "OLD:Who&When": 1010507,
+    "ARIA": 42,
+    "WhoWhenPro-mirror (text)": 53,
+    "ATBench/ATBench500": 9,
+    "ATBench/ATBench": 2,
+    "OLD:MAST": 19
+   },
+   "per_dataset": {
+    "TRAIL/gaia (search_agent ran)": {
+     "natural_or_clean": 1932561,
+     "injected": 0
+    }
+   }
+  },
+  "mas_only_strict_definition": "as mas_only, but TRAIL/gaia restricted to the traces in which the manager actually delegated to search_agent (ToolCallingAgent.run span present)",
+  "mas_only_definition": "AgentRx/magentic (Magentic-One) + TRAIL/gaia (manager CodeAgent + search_agent); drops AgentRx/tau_retail (single agent + LLM user simulator) and TRAIL/swe_bench (single CodeAgent)",
+  "medical_excluded_trajectories": {
+   "AgentRx/magentic": {
+    "n": 0,
+    "tokens": 0
+   },
+   "AgentRx/tau_retail": {
+    "n": 0,
+    "tokens": 0
+   },
+   "TRAIL/gaia": {
+    "n": 0,
+    "tokens": 0
+   },
+   "TRAIL/swe_bench": {
+    "n": 0,
+    "tokens": 0
+   }
+  }
+ },
+ "tokenizer": "Qwen/Qwen3-8B (HF), add_special_tokens=False, per-segment counts summed",
+ "overlap_vs_MAA": {
+  "maa_unique_queries": 559,
+  "probes": 554,
+  "per_dataset": {
+   "AgentRx": {
+    "rows_questions_checked": 87,
+    "exact_question_matches": 0,
+    "probes": 554,
+    "probe_hits": 0,
+    "hit_examples": [],
+    "chars_searched": 4055485,
+    "planted_control_found": true,
+    "sec": 2.3
+   },
+   "TRAIL": {
+    "rows_questions_checked": 147,
+    "exact_question_matches": 0,
+    "probes": 554,
+    "probe_hits": 0,
+    "hit_examples": [],
+    "chars_searched": 139091547,
+    "planted_control_found": true,
+    "sec": 81.5
+   }
+  }
+ },
+ "download_log_summary": {
+  "files_ok": 304,
+  "mb": 246.3,
+  "failed": [],
+  "per_repo": {
+   "PatronusAI/TRAIL": {
+    "files": 299,
+    "mb": 241.1
+   },
+   "microsoft/AgentRx": {
+    "files": 5,
+    "mb": 5.2
+   }
+  }
+ },
+ "licenses": {
+  "microsoft/AgentRx": "cc-by-4.0 (card + README); gated=auto",
+  "PatronusAI/TRAIL": "mit (card); gated=auto with extra terms: do not reshare outside a gated or private HF repo; card 'Out-of-Scope Use': must not be used for training systems intended to automate human evaluation, evaluation/benchmarking only"
+ }
+}
