@@ -576,3 +576,16 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 **清理:** pod `l3s761kur3bb6j` 已删除(list-pods 为空)。按约 41 分钟 × $0.59 估算约 $0.40;账单记录尚未入账(当日 list-billing 为 0 条)。Runpod secret `gh_medhypertrace` 仍保留,待用户决定是否删除。
 **issue(对方 v10 第 4 轮,04:45Z):** 复算确认格式签名,并找到第二个签名(medagents consensus_vote 中 `[YES]` 变成 `YES`,同槽位方括号比例 0.00 对 0.45);门槛加了 same_slot、tfidf_punct、char 特征;生成端修复 fmt_v1(说明里写明参考回复的格式,删除"不要加……"一句,重采样加 match_format);填充目标数已更正(MAC 254–582);同意不批 A–D;验证批规模待用户定(10 题 $0.39,CI ±0.2;20 题 $0.87,CI ±0.13)。
 - 我方第 46 轮 issue 评论:建议验证批 20 题;报告中加同槽位 MiniLM 和列表行比例;fmt_v1 导出入库后由我方复算。
+
+## 第 47 轮 · 2026-10-21 23:04–01:30 · 用户:"全量"指什么;为何用 Qwen3-8B;方法的区别、动机与审稿人;Linux #2
+
+**"全量"的含义:** LoRA(q/k/v r=8)+ 投影器的指令微调,7 折 × {graph, text},每次 1 个 epoch;Qwen3-8B 冻结。不包括 LLM 预训练,也不包括编码器预训练。缺口:没有 GraphGPT 第一阶段(只训投影器的图–文对齐)。
+**Qwen3-8B 的问题(已核对):** 它本身生成了 MAA 12,451 条运行中的 1,657 条,以及 399 例人工中的 61 例(另有 qwen3-vl-8b-thinking 73 例)→ 有自评重叠。建议加一个其他家族的骨干,并按"去掉 Qwen 生成的运行"分层报告。
+**方法定位(诚实评估):** MAA 轨迹中位数 7 步、约 1,400 token,所以"LLM 读不了长轨迹"这个动机在 MAA 上站不住;第一阶段和 C5 都没有显示结构有增益。照现有证据,审稿人大概率不会接受"基础模型"的说法。graph 对 text 的 LoRA 对照是决定性实验。
+**Linux #2(Jupyter 连接器):** 4×RTX A6000。卡 0 被用户自己的 sglang 服务占用 45.6 GB;卡 1 被 wyx 的任务占用 26.4 GB;卡 2、卡 3 空闲。sglang 环境:torch 2.6.0+cu124,transformers 4.54.1。代理 127.0.0.1:23333 同时提供 SOCKS5 和 HTTP;pip 只能走 HTTP(pip 自带的 urllib3 走 SOCKS 时报 key_proxy_ssl_context 错误)。已装 peft 0.21.2、accelerate 1.15.0、sentence-transformers 5.7.0、scikit-learn 1.7.2,torch 和 transformers 版本没动。Qwen3-8B 在 `/data1/ekyang/cgh/cache/huggingface_hub/hub/models--Qwen--Qwen3-8B/`(平铺目录,5 个分片);工作目录 `/data1/ekyang/cgh/CODE/`;clone 进行中,代理很慢(约 3 MB/分钟)。`model.py` 已兼容 transformers <4.56(用 torch_dtype)。
+**安全:** git clone 时 token 以 base64 形式出现在 http.extraheader 命令行参数里,共享服务器上其他用户用 ps 就能看到,而且已经出现在本次对话的工具输出里 → 已建议用户撤销该 token。以后改用权限 600 的凭据文件。
+**引擎(用户建议 sglang / unsloth / deepspeed / torchtitan / ms-swift):** 推理不是瓶颈;graph 变体的软 token 在 SGLang 上需要专门适配,不值得。14 次训练彼此独立,一卡一折已经是线性扩展;DeepSpeed / TorchTitan 不会更快。可能真正提速的:Unsloth(需先验证能否处理自定义的输入 embedding)和序列打包(试跑中 padding 占 18%)。graph 和 text 两个变体必须用同一套训练代码。
+**issue(对方 v10 第 5 轮):** fmt_v1 验证批 20 题,$1.14;MiniLM 同槽位 AUROC 已基本降到 0.5 附近,但 tfidf_punct 仍然偏高;对方问词面检测器要不要算进验收标准,以及是否跑 fmt_v2($1.1)。
+**我方复算(`MedHyperTrace-v2/analysis/anchor_fmt_val/`,先清洗掉格式符号再跑同槽位词面检测器):** medagents 旧说明 sham 0.89 → 0.55(签名基本就是格式);fmt_v1 在 medagents 和 MAC 上已无签名;但 llm_debate sham(fmt_v1)清洗后仍有 0.71 / 0.66,mdagents sham 的 punct 仍有 0.74 → 残留的是措辞签名,fmt_v2 改不了这一层。
+**我方 issue 评论(08:33Z):** 词面检测器要算进验收标准,但在清洗后的文本上算;我方负责格式清洗;fmt_v2 先不跑;请对方先免费列出 llm_debate / mdagents sham 清洗后的 top n-gram;验收标准为清洗后 sham 对 normal 的 CI 覆盖 0.5,或不超过 RC 噪声上限。
+**待做(我方):** 在 HGFM 节点文本和 LLM 节选进入模型前统一做格式清洗(需要改 `build_sft` 和嵌入步骤,影响缓存,要评估代价)。
