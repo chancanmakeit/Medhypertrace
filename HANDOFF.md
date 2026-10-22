@@ -97,7 +97,7 @@
 - **swift-plugin 已合并到 main(d4b358e)**;Linux #2 代码目录已放入 `hgfm/llm/swift_plugin/`(md5 校验)。服务器环境 mht-swift(ms-swift 4.6.0 / transformers 4.57.6 / peft 0.17.1)重跑等价性测试 (a)–(e) 全部通过(loss 差 7e-7,梯度余弦 ≥ 0.9999994,占位符嵌入差 0,打分差 ≤ 2.3e-5)。新驱动 `scripts/linux2_run_sft_swift.sh`(服务器副本 `mht_work/run_sft_swift.sh`,md5 01cf578e…),默认 bs 4×4 与 train.py 一致。swift 日志的 46.3 GB 是**预留**显存(`get_max_reserved_memory`),不是实际占用;我方曾误归因于整段 logits,已撤回。
 - **在途:** MS-Swift 整折验收,LQD_mac graph(卡 2)/ text(卡 3),19:11 UTC 开始,约 21:00 结束(`mht_work/swift_queue/status`,日志 `swift_queue/logs/LQD_mac_{graph,text}_bs4.log`)。完成后与 train.py 同折结果(0.790 / 0.821)逐实例配对比较,写 `results/c6_linux2_lora/swift_validation.md`。已设 21:05 UTC 的提醒。
 - wandb:服务器已装但**未登录**;用户在 Linux #2 上 `wandb login` 后,驱动会自动切到 wandb(否则用 tensorboard)。
-- medical-aegis 的 sham 验证:用户已在对方那边批准;我方等数据,按第 39/41 轮约定处理。issue #1 仍无新评论(最后 14:20:36Z)。
+- medical-aegis:sham 验证用户已在对方那边批准。**issue 新评论(18:47Z)已回复(评论 6349178898,19:15:37Z,`docs/interfaces/issue_comment_r55.md`)**:用户决定中训练第 49 轮第 1–3 问由我方做 → **新待办:** ① 核旧 AEGIS 医学合成数据与 MAA 的题目重叠(锚点与 MAA 已核:重叠 2 题 medxpertqa_text_1499 / 1939,这两题的锚点运行不进任何训练);② 自写公开数据集 → mas-traj/1 转换器(字段以 medical-aegis `scripts/export_schema_v1.py`、`docs/requests/` 为准),报告"读取集被槽位唯一确定"比例;③ 中训练先做纯文本 TAPT 基线,再做结构感知中训练。对方待用户决定的花费:llm_debate fmt_v1_1 扩到 20 题($0.09,我方建议做)、mdagents 50 题 sham 复验($0.14,我方建议做)。
 
 ### 0.63 第 54 轮:六折配对比较;图 token 诊断在卡 0 后台(2026-10-22 18:20 UTC)
 - **六折 LQD 合并 n=399:graph 0.701 vs text 0.716,差 −0.014 [−0.047, +0.020]**(reconcile 是唯一 graph 更高的折,+0.035,CI 宽)。三折时"图 token 变差、CI 不含 0"的说法已不成立;现在的结论是图 token 无可测增益、无可测损害。产物 `MedHyperTrace-v2/results/c6_linux2_lora/compare_gt_6fold.out`。
