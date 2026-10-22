@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-21(第 52 轮;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-22 18:05 UTC(第 53 轮,会话因上下文上限交接;此前 2026-10-09 第 2 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -14,7 +14,7 @@
 > 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-22T14:20:36Z,即我方第 51 轮评论)。之后每次被唤醒都先跑一次。
 > 3. **MAA 数据(沙箱若已重置)**:`cd MedHyperTrace-v2 && pip install -r requirements.txt --break-system-packages`,然后运行 `bash scripts/prepare_maa.sh /home/claude/data_maa_v2 QD 8000`。脚本会自动下载、转换、对齐人工标签;**嵌入直接从仓库缓存 `MedHyperTrace-v2/data/maa_emb_minilm/` 恢复**(sha256 校验,约 10 秒,省去 CPU 上约 50 分钟;也可单独运行 `bash scripts/restore_maa_emb.sh <emb_dir>`);再导出图 token、构建 SFT。脚本能跳过已有的步骤;图缓存 `graphs_*.pkl` 在首次加载时自动重建。第一阶段结果已在 `results/phase1_maa/`,不必重跑。
 > 4. **API 密钥**:从 Project doc `claude/api端点` 读取,写到 `/home/claude/.mht_api.env`。绝不进 git。调用前先试跑估算成本,再问用户。
-> 5. 阅读顺序:§0.61(第 53 轮:收藏夹 15 个数据集、五折配对比较)→ §0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.53.md` 第 37–52 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
+> 5. 阅读顺序:**§0.62(交接时的在途任务,先读)** → §0.61(第 53 轮:收藏夹 15 个数据集、五折配对比较)→ §0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.53.md` 第 37–53 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
 > 6. **每轮必做**:讨论记录 `RUN_v0.<N>.md` 用 `git mv` 改版本号并追加本轮;更新本文 §0;commit 并 push;sleep 不超过约 60 秒。
 
 ---
@@ -89,6 +89,17 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.62 交接时的在途任务(2026-10-22 18:05 UTC,第 53 轮末)
+**Linux #2**(Jupyter 连接器 `mcp__Claude-connect-inqi_top__jupyter-mcp-2_linux2_execute_python`;先 `..._linux2_list_kernels` 取 kernel id,sglang kernel 曾是 `ffd58261-5022-427d-86d3-035e82bd2358`;请求约 60 秒超时 → 长任务一律后台 + 日志;工作目录 `/data1/ekyang/cgh/CODE/mht_work`):
+1. **LoRA 微调完整跑完(不叫"全量")**:队列 `mht_work/c6_queue/`(status、logs/),主脚本 `run_c6.sh`(日志 run_c6.log)。14 个任务中 12 个已完成;**QD graph(卡 3,18:03 时第 300/≈354 步)与 QD text(卡 2,第 240 步)还在跑**,预计 19:15–19:30 UTC 结束,随后 run_c6.sh 自动跑 zeroshot + `hgfm.llm.pool`。卡 0 worker 已退出。
+2. **六折配对比较**已在后台启动:`compare_gt.py` → `mht_work/compare_gt_6fold.out`(LQD_reconcile:graph 0.663 / text 0.629,n=49)。五折结果见 §0.61。读回后填进 RUN 新一轮。
+3. QD 跑完后要做:QD 的 graph-vs-text 配对;zeroshot 合并;**图 token 诊断**(对 graph 检查点评测时把图 token 置零 / 样本间打乱,看是否真被使用);把 eval json 和 compare 输出拷回仓库(Linux #2 上的代码目录无 .git,结果需经 kernel 读出后在沙箱里提交,目录建议 `MedHyperTrace-v2/results/c6_linux2_lora/`)。
+**其他待办 / 待用户决定:**
+- 中训练语料:注入集的干净前缀(W&W-Pro 10.0M、CORRECT 6.4M)是否进主版本;ARIA、AgentErrorBench 未声明许可证;AgentRx 需用户在 HF 接受条款(TRAIL 同);可向 medical-aegis 征求意见。设计优先结构感知中训练(图–文对齐),MAScope 拓扑标签可做辅助目标;中训练文本需在沙箱抽好后再传到 Linux #2(Linux #2 直连 HF 只有约 75 KB/s)。
+- 合并分支 `swift-plugin`(27358e9)→ SFT 迁到 MS-Swift(环境 `mht-swift`,`/data/ekyang/anaconda3/envs/mht-swift`);训练加 `--report_to wandb`(用户需自己 `wandb login`)。
+- medical-aegis issue #1:我方第 49 轮的中训练问题仍待对方回复;mdagents 30 题 sham(约 $0.08)和 fmt_v1 推广待用户批准。
+- HF 只读 token 在 Project doc `UUUooUUU-huggingface-access-token`;用时写到会话临时目录(mode 600),不进 git、不打印。
 
 ### 0.61 第 53 轮:HF 收藏夹扩到 15 个;五折配对比较
 - 用户收藏夹 `UUUooUUU/public-none-medical-mas-fault-attribution` 新增 9 个:microsoft/AgentRx(gated)、yifanyu/CORRECT-Error(2,226,注入)、ZBox008003/AFTraj(2,276,含 1,162 safe)、Edlison/ARIA(24,468,含 MMLU → 需剔除医学科目)、Leoxx/whowhen_pro(Who&When Pro 可用镜像,text 6.3K)、davide221/agenterrorbench(200)、mascope/mascope-bench(2.2K,含拓扑标签;MAST-clean 需与 MAST-Data 查重)、RogerYao/RAISER(50.2K 行,可能只有标签表)、AI45Research/ATBench(安全轨迹)。统计已完成(`MedHyperTrace-v2/analysis/public_mas_corpus/stats_r53.md`):新增 77.9M token(干净/自然 45.5M、注入 32.4M),干净公开语料合计约 75M(ARIA 占 39M);MAScope MAST-clean 完全是 MAST-Data 的子集;ARIA 已去掉医学 MMLU 2,231 条;AgentRx 需要用户在 HF 接受条款;RAISER 没有轨迹文本。待定:注入集的干净前缀(W&W-Pro 10.0M、CORRECT 6.4M)是否进入主版本。
