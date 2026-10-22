@@ -532,3 +532,16 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 - **一致性检查:** scratch 种子 0 合并为 0.640,第一阶段为 0.645。逐折看 outcome AUROC:mdagents、reconcile 与第一阶段完全相同,其余三折差 0.002–0.009。本沙箱内重复运行结果逐位相同(试跑与全量一致)→ 漂移来自环境(torch 版本 / 线程数,第一阶段未记录),比种子间差小一个量级。只在同一次运行内比较。
 **判读:** 第一阶段和 C5 都没有显示 read 结构在 MAA 上有用。MAA 的 read 边全是推断的(matched / protocol),大部分由协议决定,可能信息量本来就有限。结构是否有用,真正的检验要等 medical-aegis 带生成时来源的锚点数据,以及 C6(LLM 层,GPU)。
 - issue 已同步 C5 结果(评论全文 `MedHyperTrace-v2/docs/interfaces/issue_comment_r42.md`)。
+
+## 第 43 轮 · 2026-10-21 20:42 · 用户:有 GPU;查 Runpod 账单;看 issue 新回复
+
+**Runpod(只读):** list-billing 按月(近 6 个月)和按年(2024–2026)均为 0 条记录、总计 $0.00;无 pod、无 serverless endpoint、无 network volume;账户未启用 organization。未创建或修改任何资源。
+**issue 新评论两条:**
+- 对方 v9 第 30 轮(03:13Z):MiniLM 门槛(PI 对自然答错 llm_debate 0.752 FAIL;MAC 0.680、mdagents 0.623、medagents 0.471 pass);PI 对 sham 同槽位 MiniLM 下除 llm_debate 外 CI 覆盖或紧贴 0.5;mdagents n_pi=20 的原因是旧阶段名带专科,已统一为 expert_answer;sham_style 改为 6 种措辞(`sham_variant`);sources 全部由代码记录,注入不改变 sources;同意 protocol 不作填充目标;称"锚点 MAC 约 3400 个读取集有变化的步骤";把 medagents role_matched 0.81 解释为目标槽位选择。门槛导出 `gate7_export.jsonl.gz` 已入库。
+- 对方 v10 第 1 轮(03:42Z):锚点补齐方案 A $6.0 / B $5.75 / C $4.25 / D $3.0,请我方从训练评测需要给意见。
+**我方独立复算(`MedHyperTrace-v2/analysis/anchor_gate7/`):**
+- **同槽位对照**(注入步只和同题、同 agent_id / 阶段 / 轮次 / 第 k 次的 normal 步比,MiniLM+LR,按题 GroupKFold):medagents sham 0.863 [0.825, 0.904]、sham_style 0.859、PI 0.805;llm_debate sham 0.572 / sham_style 0.714 / PI 0.729;MAC 0.583 / 0.613 / 0.629;mdagents 0.536 / 0.580 / 0.630 → "槽位选择"的解释不成立,sham 本身有签名。
+- **格式签名:** 注入步的 markdown 比例(含 `###` 或 `**`)远低于同槽位 normal 步,PI 和 sham 都如此(例如 llm_debate sham 0.56 对 1.00、PI 0.24 对 0.99;mdagents sham 0.00 对 0.35)。sklearn TfidfVectorizer 默认 token_pattern 会丢掉 `#` `*`,所以 TF-IDF 门槛天然看不到。
+- **填充目标:** 同阶段有选择且读取集不是槽位众数的步骤:MAC 334、medagents 18、llm_debate 0、mdagents 0(各 300 条 normal 运行)。对方的"约 3400"不成立(接近 MAC 总步数)。锚点上做不了填充自监督。
+**我方第 43 轮评论(6332274175,03:54Z;费用推算有误,已于 03:54:15Z 修正):** 格式签名与修复建议(生成端修复 + 门槛加同槽位对照和保留标点的 TF-IDF;我方加去 markdown 消融);填充目标数更正,C5 暂去掉填充目标;预算意见:A–D 先不批,先修格式签名,再做 4 家族 × 10 题只跑 sham 的验证(按对方分项推得约 $0.3);style_v1 按 `sham_variant` 排除出训练,不重跑;llm_debate PI 50 题够;预算留给主数据。最终由用户决定。
+**待用户:** ① C6 在哪里跑(自己的 4×A6000,还是 Runpod;Runpod 需先报价);② 锚点补齐预算(我方建议先修格式再做约 $0.3 的验证)。

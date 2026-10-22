@@ -1,0 +1,14 @@
+fill targets (same-phase choice): {'llm_debate': 900, 'mac_groupchat': 1636, 'medagents_mc': 4534}
+  ... and not the slot-modal read set: {'llm_debate': 0, 'mac_groupchat': 334, 'medagents_mc': 18}
+llm_debate     sham       markdown rate: injected 0.56 (n=50)  same-slot normal 1.00 (n=150)
+llm_debate     sham_style markdown rate: injected 0.60 (n=50)  same-slot normal 0.99 (n=150)
+llm_debate     PI         markdown rate: injected 0.24 (n=50)  same-slot normal 0.99 (n=150)
+mac_groupchat  sham       markdown rate: injected 0.57 (n=44)  same-slot normal 0.81 (n=118)
+mac_groupchat  sham_style markdown rate: injected 0.29 (n=42)  same-slot normal 0.71 (n=122)
+mac_groupchat  PI         markdown rate: injected 0.45 (n=44)  same-slot normal 0.67 (n=115)
+mdagents       sham       markdown rate: injected 0.00 (n=50)  same-slot normal 0.35 (n=150)
+mdagents       sham_style markdown rate: injected 0.04 (n=50)  same-slot normal 0.36 (n=150)
+mdagents       PI         markdown rate: injected 0.00 (n=50)  same-slot normal 0.30 (n=150)
+medagents_mc   sham       markdown rate: injected 0.22 (n=50)  same-slot normal 0.39 (n=150)
+medagents_mc   sham_style markdown rate: injected 0.40 (n=50)  same-slot normal 0.55 (n=150)
+medagents_mc   PI         markdown rate: injected 0.14 (n=50)  same-slot normal 0.39 (n=150)

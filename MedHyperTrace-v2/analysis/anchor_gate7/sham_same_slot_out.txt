@@ -1,0 +1,13 @@
+# python -I sham_same_slot.py gate7_export.jsonl.gz   (MiniLM + LR, GroupKFold(5) by question, bootstrap by question)
+llm_debate     sham       vs SAME-SLOT normal  AUROC 0.572 [0.538, 0.605]  n_pos=50 n_neg=150
+llm_debate     sham_style vs SAME-SLOT normal  AUROC 0.714 [0.679, 0.755]  n_pos=50 n_neg=150
+llm_debate     PI         vs SAME-SLOT normal  AUROC 0.729 [0.694, 0.766]  n_pos=50 n_neg=150
+mac_groupchat  sham       vs SAME-SLOT normal  AUROC 0.583 [0.553, 0.618]  n_pos=44 n_neg=118
+mac_groupchat  sham_style vs SAME-SLOT normal  AUROC 0.613 [0.568, 0.657]  n_pos=42 n_neg=122
+mac_groupchat  PI         vs SAME-SLOT normal  AUROC 0.629 [0.601, 0.666]  n_pos=44 n_neg=115
+mdagents       sham       vs SAME-SLOT normal  AUROC 0.536 [0.494, 0.580]  n_pos=50 n_neg=150
+mdagents       sham_style vs SAME-SLOT normal  AUROC 0.580 [0.546, 0.613]  n_pos=50 n_neg=150
+mdagents       PI         vs SAME-SLOT normal  AUROC 0.630 [0.588, 0.678]  n_pos=50 n_neg=150
+medagents_mc   sham       vs SAME-SLOT normal  AUROC 0.863 [0.825, 0.904]  n_pos=50 n_neg=150
+medagents_mc   sham_style vs SAME-SLOT normal  AUROC 0.859 [0.811, 0.900]  n_pos=50 n_neg=150
+medagents_mc   PI         vs SAME-SLOT normal  AUROC 0.805 [0.755, 0.861]  n_pos=50 n_neg=150
