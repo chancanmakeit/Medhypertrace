@@ -553,3 +553,10 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 **估算**:显存约 23–26 GB(bf16 权重 16.4 GB + 梯度检查点下的激活)。结论:48 GB 卡有余量,24 GB 卡装不下;不开梯度检查点则需要约 45 GB 激活。14 次训练(7 折 × graph / text)的计算费:A40 约 $19(约 32 GPU 小时)、L40S 约 $15、A100 SXM 约 $25、H100 SXM 约 $20。前提假设 MFU 35–40%,还没有在 GPU 上实测。
 **建议**:A40 48GB Secure,$0.59/GPU·h,1 卡和 4 卡库存均为 HIGH。先开 1 卡试跑约 1 小时,实测显存和吞吐;再开 4 卡跑全量。
 **待用户**:批准报价;决定代码和结果如何进出 pod(MCP 不能 SSH 或传文件。方案是 pod 启动脚本自动 clone 私有仓库、运行、把结果 push 回来,需要把 GitHub token 作为 Runpod secret 放进 pod)。
+
+## 第 45 轮 · 2026-10-21 21:09 · 用户:先开 1×A40 试跑,实测显存和吞吐,并跑完 zeroshot;中途间隔汇报进度
+
+**pod:** `l3s761kur3bb6j`(名称 mht-c6-pilot),1×A40,Secure,CA-MTL-1,主机 CUDA 13.2,$0.59/h,04:21:45Z 创建。镜像 `runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404`,来自官方模板 runpod-torch-v280(list-public-templates 读到)。持久盘 /workspace 100 GB,容器盘 40 GB。下单前读到的库存:A40 Secure 整体 HIGH(EU-SE-1 HIGH,CA-MTL-1 MEDIUM)。
+**GitHub token:** 作为 Runpod secret `gh_medhypertrace`(id s5zjjyam1u)注入环境变量 GH_TOKEN,只在 HTTP header 中使用。沙箱的代理会注入凭据,无法在沙箱里验证 token;pod 上 clone 成功,说明 token 有效。
+**pod 上的流程(`MedHyperTrace-v2/scripts/runpod_c6_pilot.sh`):** 装依赖 → prepare_maa.sh(全部 7 折)→ LQD_mac 上用 graph 变体、800 对做试训练(记录峰值显存和稳态 tok/s,`train.py` 已加统计)→ 用这个 checkpoint 跑一次评测(只检查流程,AUROC 无意义)→ 7 折 zeroshot 评测并合并 → 结果推到 `runpod-c6-pilot` 分支 → pod 自行 stop(失败也会推送日志)。
+**沙箱冒烟测试:** Qwen2.5-0.5B、fp32、开 `--grad_ckpt` 跑 24 步,统计正常写出,评测能读取 checkpoint。不开梯度检查点时,沙箱(7 GB 内存)会被 OOM kill,属预期。
