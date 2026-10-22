@@ -619,3 +619,8 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 2. 对照:同一套 SFT,分别从原始 Qwen3-8B 和中训练后的模型出发,配对比较;正在运行的 LoRA 微调就是"无中训练"那一组。
 3. 和超图的关系:纯文本 CPT 是常规做法;更能体现新意的是"结构感知中训练",即带图 token 的自监督对齐任务(由图 token 预测读取来源、阶段、答案流,相当于 GraphGPT 的第一阶段)。
 4. MS-Swift 负责文本 CPT(swift pt,LoRA 或全参);graph 变体的 SFT 需要软 token 注入,MS-Swift 标准流程不支持,需要写自定义插件。为保证 graph 对 text 公平,建议两个 SFT 变体继续用同一个训练器(现有代码或日后都移植到 MS-Swift)。
+
+**第 49 轮(续,03:25):用户建议纳入公开的非医学 MAS 故障归因数据做中训练;确认 SFT 稍后全部迁到 MS-Swift;语料和中训练方式两件事请 medical-aegis 给意见**
+- 公开数据(HF 实读):AEGIS 公开版 `Fancylalala/AEGIS` 9.5K 条(train 7.1K / val 1.8K / test 600,parquet 约 70 MB,是注入合成数据);`mcemri/MAST-Data` 1,642 条(7 个 MAS、8 个 benchmark、5 个 LLM,parquet 约 191 MB,带 MAST 标注);`PatronusAI/TRAIL` 148 条(需申请访问,约 55 MB,GAIA / SWE-bench);`Kevin355/Who_and_When` 184 条(约 2 MB)。AgenTracer 的 TracerTraj(4,655 条整理过的轨迹,其中 2,476 条有标注)论文没写是否公开。只用轨迹文本、不用标签,不违反 §0.33 的体系分离规则。
+- 估计合计 0.15–0.3B token(加上医学语料);仍低于 1B 的领域 CPT 下限,定位为 TAPT。注意事项:非医学轨迹(代码、工具日志)往往很长,要限制单条长度并控制配比;以后如果在 Who&When 等数据上做评测,必须把它们排除出中训练语料;AEGIS 的注入模板要先清洗。
+- 已在 issue 征求对方意见(评论全文 `MedHyperTrace-v2/docs/interfaces/issue_comment_r49.md`):零样本边界与泄漏途径、先做 TAPT 还是结构感知中训练、是否由对方把公开数据集转成 mas-traj/1、注入伪迹如何处理。

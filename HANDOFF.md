@@ -11,7 +11,7 @@
 
 > **🚀 新会话快速恢复(第 38 轮写,v2 工作用):**
 > 1. `add_repo` 以 push 权限添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`(需要时再加 `graph-based-mas-fault-attribution-papers`),然后 clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走 git 代理,不需要 token。
-> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-22T09:57:20Z,即我方第 48 轮评论)。之后每次被唤醒都先跑一次。
+> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-22T10:26:38Z,即我方第 49 轮评论)。之后每次被唤醒都先跑一次。
 > 3. **MAA 数据(沙箱若已重置)**:`cd MedHyperTrace-v2 && pip install -r requirements.txt --break-system-packages`,然后运行 `bash scripts/prepare_maa.sh /home/claude/data_maa_v2 QD 8000`。脚本会自动下载、转换、对齐人工标签;**嵌入直接从仓库缓存 `MedHyperTrace-v2/data/maa_emb_minilm/` 恢复**(sha256 校验,约 10 秒,省去 CPU 上约 50 分钟;也可单独运行 `bash scripts/restore_maa_emb.sh <emb_dir>`);再导出图 token、构建 SFT。脚本能跳过已有的步骤;图缓存 `graphs_*.pkl` 在首次加载时自动重建。第一阶段结果已在 `results/phase1_maa/`,不必重跑。
 > 4. **API 密钥**:从 Project doc `claude/api端点` 读取,写到 `/home/claude/.mht_api.env`。绝不进 git。调用前先试跑估算成本,再问用户。
 > 5. 阅读顺序:§0.60 → §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.49.md` 第 37–49 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
@@ -92,7 +92,7 @@
 ### 0.60 第 49 轮:3 卡 LoRA 微调运行中;中训练与 MS-Swift 规划
 - 用户要求:称为"LoRA 微调完整跑完"(不叫"全量");用卡 0、2、3;token 不处理;加 wandb 可视化;引入中训练 / 持续预训练(参考 `mid-training-data-volume-and-selection-survey.md`);训练改用 MS-Swift(装在 conda 环境 ms-swift)。
 - 卡 0 worker:`mht_work/worker_gpu0.sh`(共用 c6_queue)。MS-Swift 安装中:`mht_work/install_swift.sh` / `install_swift.log`,环境 `/data/ekyang/anaconda3/envs/ms-swift`。
-- 中训练可用语料约 0.05–0.08B token(TAPT 量级);设计要点见 `RUN_v0.49.md` 第 49 轮。待用户确认语料和方案;wandb 需要用户自己 `wandb login`。
+- 中训练:用户希望纳入公开的非医学 MAS 数据(AEGIS 公开版 9.5K、MAST-Data 1,642、TRAIL 148、Who&When 184;只用文本不用标签),合计约 0.15–0.3B token(TAPT 量级)。语料边界和中训练方式已在 issue 征求 medical-aegis 意见(第 49 轮评论)。用户已确认 SFT 稍后全部迁到 MS-Swift(graph 变体需写自定义插件)。wandb 需要用户自己 `wandb login`。
 
 ### 0.59 第 47 轮:Linux #2 准备中;fmt_v1 复算
 - **Linux #2**(Jupyter 连接器,工具名 `mcp__Claude-connect-inqi_top__jupyter-mcp-2_linux2_*`):4×A6000,用卡 2、卡 3;sglang 环境(`/data/ekyang/anaconda3/envs/sglang/bin/python`)已补装依赖;Qwen3-8B 本地目录 `/data1/ekyang/cgh/cache/huggingface_hub/hub/models--Qwen--Qwen3-8B`(训练时 `--lm` 传这个路径);仓库 clone 到 `/data1/ekyang/cgh/CODE/Medhypertrace`(进行中);pip 和 git 走 HTTP 代理 `http://127.0.0.1:23333`。长任务用 nohup,不要依赖 Jupyter kernel 跑完。
