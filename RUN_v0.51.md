@@ -659,3 +659,7 @@ v0 降级为结构基线 `HGNN-baseline`,第一阶段照常跑完作对照。`Me
 | LQD_mac | 67 | 0.790 | 0.821 | −0.031 [−0.088, +0.012] |
 | 三折合并 | 229 | 0.686 | 0.734 | **−0.048 [−0.091, −0.008]** |
 三折方向一致,合并后 CI 不含 0:到目前为止,图 token 让结果变差。可能原因(都未验证):① 没有图–文对齐阶段,投影器输出对 LLM 来说可能只是噪声;② 编码器只用一半数据训练,本身较弱(LQD_mac 上 0.632);③ 每个 prompt 多出 10–14 个软 token,占用注意力。全部跑完后的诊断(GPU 空出来再做):把 graph 检查点的图 token 置零或在样本间打乱后重新评测,看模型是否真的在用这些 token,以及怎么用。
+
+**第 51 轮(续,08:48):用户让子 agent 去做"公开数据集 token 统计"和"MS-Swift graph 插件";用户整理了 HF 收藏夹 public-none-medical-mas-fault-attribution**
+- 收藏夹中 6 个数据集:tmpxv7/who-when-pro(Who&When Pro:15 个框架、26 个 benchmark、文本 / 图像 / 视频,13,500+ 条,`data_release.tar.gz` 3.5 GB;每条是"正确轨迹在某步注入一个错误后继续执行",注入点之前为干净前缀,同一任务的前缀可能大量重复)、Kevin355/Who_and_When(184)、TraceElephant/TraceElephant(`data.zip` 597 MB,README 为空,HF 预览误识别为图片)、mcemri/MAST-Data(1,642)、Fancylalala/AEGIS(9.5K)、PatronusAI/TRAIL(148,需申请访问)。
+- 子 agent A:下载并统计 token(改在本地沙箱进行,因为 Linux #2 下载 HF 只有约 50–90 KB/s;Who&When Pro 只算文本模态,并区分干净前缀 / 注入步 / 注入后,前缀去重)。子 agent B:在 worktree `/home/claude/mht_swift_plugin` 的分支 `swift-plugin` 上实现 MS-Swift 的 graph 插件,并与现有 GraphTokenLM 做数值等价测试,不合并进 main。
