@@ -818,3 +818,18 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - **同一折上 graph − text 的符号在两次训练间翻转**:swift +0.048 [−0.005, +0.138],train.py −0.031 [−0.088, +0.012]。
 **判断:** 迁移在全规模上可用。两个引擎产生不同的模型(数据顺序、autocast 与纯 bf16、最后一个不完整累积窗口不同),差异在 n=67 上不显著。**单折上训练的随机波动和我们想测的 graph−text 效应同量级**;C6 是每折一次训练,所以 graph 与 text 的结论需要每折多个种子才能下。一折一次无法判断 swift 是否对 graph 系统性更好。
 **建议(待用户决定,只用 Linux #2 的 GPU,不花钱):** 在 MS-Swift 上补种子,先 LQD_mac 与 QD 各 {graph, text} × 再 2 个种子(`--seed / --data_seed` 1、2),3 张卡约 6–7 小时;再决定是否全部 7 折补齐。
+
+## 第 57 轮 · 2026-10-23 ~02:02 UTC · 用户:① 补种子;② 中训练三件事的分工,我方怎么看
+**issue:** 无新评论(最后是我方 19:15:37Z)。
+
+### ① MS-Swift 种子实验已启动(Linux #2 卡 0 / 2 / 3,队列 `mht_work/swift_seeds/`,02:03 UTC 开始)
+- 驱动 `scripts/linux2_run_sft_swift.sh` 加了 `SEEDS`:每个种子一个任务,`--seed` 与 `--data_seed` 都设为该种子;种子 0 沿用原命名(`eval_swift_<tag>_<v>.json`),其他种子标签为 `swift_s<seed>_<tag>`(与 hgfm.llm.pool 兼容)。服务器副本 md5 b1162b21…,与仓库一致;日志里核对过 seed / data_seed / run_name 正确传入。
+- 10 个任务:QD × {graph, text} × 种子 {0, 1, 2}(MS-Swift 上还没跑过 QD),LQD_mac × {graph, text} × 种子 {1, 2}(种子 0 即第 56 轮的整折验收)。每个约 2 小时(QD 354 步、约 20 s/步),3 张卡 4 轮,预计约 10:15 UTC 完成;已设 10:20 UTC 提醒。
+- 完成后要报告:每折每种子的 graph−text 配对差;按种子求均值与种子间标准差;种子间波动与 graph−text 效应的大小对比;QD 上与 train.py 单次结果对照。
+
+### ② 中训练三件事的分工(我方意见,待用户确认后再发 issue)
+总体同意由我方牵头,但三件事各有一部分更适合对方做:
+1. **泄漏边界:** 评测边界(MAA 零样本)是我方的责任,排除清单由我方维护(MAA 的题目 ID 与规范化题干,带版本哈希;外加锚点中重叠的 2 题)。剩下的旧 AEGIS 医学合成数据与 MAA 的核对也由我方做(数据在我方仓库)。**但对方在不断生成新数据**,而 MAA 的六个题库(MedQA、PubMedQA、MedXpertQA、PathVQA、SLAKE、VQA-RAD 各 100 题)正是对方会抽题的来源 → 应由对方在生成 / 导出时执行这份清单(不抽这些题,或在 labels 里标记),否则每批新数据都要事后再查。
+2. **先做哪种中训练:** 方法设计,由我方决定:先纯文本 TAPT 作基线,再结构感知中训练。纯文本 TAPT 不需要 mas-traj/1,用已抽好的轨迹文本即可先做;结构感知中训练才需要转换和 `sources`。对方能提供的是**记录在案的 sources**:公开数据集只能推断 sources,对方数据有生成时的记录 → 用对方现有数据(不花钱)当验证集,测我方 sources 推断的准确率。这一步我方来做,只需对方确认字段语义。
+3. **格式转换:** 由我方写转换器。我方已有全部 16 个公开数据集的解析代码(token 统计时写的),沙箱下载快,产物也是我方自用。为避免 schema 漂移,**直接调用对方的 `export_schema_v1.check()` 校验每条记录**(不自己重写),用 `check_trajectory_sources.py` 核对 sources,用 `sources_provenance_analysis.py` 算"读取集被槽位唯一确定"比例(与第 41 轮同一口径)。请对方:(a) 每个数据集抽查 20 条转换结果;(b) 说明公开数据没有的字段怎么填(`question_id`、`run_index`、自然失败的 `run_mode`、非医学框架的 `framework_family` 等)。注入类公开数据只用于敏感性版本,其清洗复用对方的 `aegis_simulated_signature_check.py`。
+- 对方不做的:转换本身(不占对方排期);对方的独特价值在生成(API 运行、sham、格式门槛)。
