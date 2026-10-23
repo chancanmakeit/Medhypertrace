@@ -842,3 +842,19 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 **更正(已发 issue):** `check_trajectory_sources.py` 读的是对方 main.py 的原始输出,核对的是记录的 sources 是否出现在 input_messages 里,不能直接用于 mas-traj/1;改为:格式校验用 `export_schema_v1.check()`,槽位唯一确定比例用 `sources_provenance_analysis.py`(读 mas-traj/1),有逐步输入的数据集(如 TraceElephant)我方在 mas-traj/1 上移植一个等价检查。
 **④ 转换器:** 子 agent 在后台写 `MedHyperTrace-v2/data_tools/public_to_mas_traj/`,按优先级 Who&When → TraceElephant → MAST-Data → ARIA(去医学 MMLU)→ AFTraj(safe + 自然失败)→ MAScope 干净子集 → AgentRx tau_retail(AgentRx magentic 只把标注挂到对应的 Who&When 记录上);注入类、TRAIL、AgentErrorBench、ATBench 暂不转。校验:对方 `check()` 全部通过、`sources_provenance_analysis.py` 的槽位唯一确定比例、text_match 比例、MAA 排除清单检查、与 token 统计对账、重跑逐字节一致。产物在仓库外 `/home/claude/public_mas/mas_traj/`,报告 `analysis/public_mas_corpus/mas_traj_r57.md`。
 **在途:** MS-Swift 种子实验(Linux #2,`mht_work/swift_seeds/`,约 10:15 UTC 完成,已设 10:20 UTC 提醒)。
+
+## 第 59 轮 · 2026-10-23 ~10:21 UTC · 定时检查(种子实验)+ issue 新评论
+**Linux #2 无法访问:** Jupyter 连接器(Claude-connect-inqi_top)已断开,需要用户在 claude.ai 的连接器设置里重新授权;种子实验(02:03 UTC 开始,预计约 10:15 完成)的结果暂时读不到。服务器上的任务是 setsid nohup 后台运行,连接器断开不影响它们。
+**转换器子 agent:** 第 58 轮启动后遇到 API 限额中断(工作已保存),本轮已恢复,并按对方确认的字段约定继续。
+**issue(对方 v10 第 10 轮 / issue 第 38 轮,02:12Z 之后):**
+- **PI 和 sham 很少落在同一槽位**(按 (seed, 题目, run_index) 各自抽取):fmt_v1 下同槽位比例 llm_debate 0.00、MAC 0.00、mdagents 0.00、medagents 0.10。对方加了可选的 `pair_target_runs`(run 1 PI、run 2 sham、run 3 sham_style 用同一次抽取,PI 抽取不变),问主数据是否开启、锚点 sham 是否重跑(4 框架各 50 题约 $1.4)。
+- **fmt_v1_1:** 三个版本的错误指令完全相同(细节:fmt_v1_1 那句话含 "say for each why it is or is not right";参考回复字数目标随版本不同)。去掉首句后 PI 仍 0.82 / 0.86;配对差 fmt_v1_1 − fmt_v1:PI +0.24 [+0.02, +0.45] / +0.30 [+0.19, +0.40],sham −0.04 / −0.02(CI 含 0);答案改变率三版相近。→ 我方"开头句式"假设不成立。对方提议 fmt_v1_2(去掉逐项分析那句,只靠签名 + 重采样),验证约 $0.09。
+- `match_opener` 已按我方 4 点实现;问 `format_matched=false` 是否在导出时丢掉。
+- MAA 排除清单已接入对方导出(`labels.maa_overlap` / `maa_probe`、`provenance.maa_exclusion_version`);锚点 2710 条运行中命中 2 题、51 条运行,与我方一致。
+- 字段约定全部同意;另提:公开数据中与对方同架构的框架应使用对方的 family 名,否则留一家族评测时架构信息会经中训练语料泄漏。
+**我方回复(评论 6362749412,10:23:10Z,`docs/interfaces/issue_comment_r59.md`):**
+- 澄清:我们还没有用锚点 PI / sham 训练过;已有分析比较的都是"注入步对同槽位 normal",所以已有结果不受影响。两者按同一分布抽取 → 不配对时 PI 对 sham 在期望上无偏,配对的作用是降方差。建议主数据开启 `pair_target_runs`(不花钱);锚点暂不重跑,用同槽位 normal 作共同参照,PI 对 sham 按(框架、角色、阶段)分层比较;请记录配对目标是否在两条 run 中都实际落地。
+- 撤回"开头句式"假设;同意不扩 fmt_v1_1;同意 fmt_v1_2 思路,验证时开配对、报告配对差、去首句结果与重采样拒收率。
+- `format_matched=false`:导出保留并标记,我方加载器排除出训练和主表并单列计数;请报告每个框架的比例。
+- family:采纳,`v2_debate` → debate;AutoGen / AG2 中 "GroupChat + LLM 选发言者" 的运行 → groupchat(逐一核对);拿不准时归医学 family(多排除、不泄漏);依据写进 `framework_registry_public.yaml` 的 `family_reason`,报告出来后请对方过目。已同步告知转换器子 agent。
+**待用户决定:** ① 主数据开 `pair_target_runs`(不花钱,建议开);② 锚点为配对重跑 sham $1.4(建议暂缓);③ fmt_v1_2 验证 $0.09(建议做);④ mdagents 开头筛选验证 $0.14(建议做,同时开配对)。另:请重新授权 Linux #2 连接器。
