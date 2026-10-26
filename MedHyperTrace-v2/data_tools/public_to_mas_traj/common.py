@@ -186,6 +186,34 @@ def make_step(order, kind, agent_id, agent_role, output, *, agent_label=None, ph
     return st
 
 
+PARTNER_PHASE_CANONICAL = "/home/claude/medical-aegis/scripts/phase_canonical.py"
+# agreed in issue round 62 (user adopted phase_canonical); applied here until medical-aegis bumps its table
+PHASE_CANONICAL_OVERRIDES = {("magentic_one", "instruction"): "plan"}
+_PC = {}
+
+
+def _phase_canonical_module():
+    """medical-aegis scripts/phase_canonical.py, imported from their file (never copied), table loaded once."""
+    if "mod" not in _PC:
+        spec = importlib.util.spec_from_file_location("mag_phase_canonical", PARTNER_PHASE_CANONICAL)
+        mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+        t = mod.load()
+        for (fw, ph), c in PHASE_CANONICAL_OVERRIDES.items():
+            t.setdefault("frameworks", {}).setdefault(fw, {})[ph] = c
+        _PC["mod"], _PC["table"] = mod, t
+        _PC["version"] = os.path.basename(mod.DEFAULT) + (" + MHT overrides " + ", ".join(f"{a}.{b}->{c}" for (a, b), c in
+                                                          PHASE_CANONICAL_OVERRIDES.items()) if PHASE_CANONICAL_OVERRIDES else "")
+    return _PC["mod"], _PC["table"]
+
+
+def add_phase_canonical(rec):
+    """step["phase_canonical"] via the partner's annotate() (table value + peer rule on sources)."""
+    mod, t = _phase_canonical_module()
+    mod.annotate(t, rec)
+    rec["provenance"]["phase_canonical_table"] = _PC["version"]
+    return rec
+
+
 def flag_environment_labels(rec):
     """medical-aegis schema note rule 1: a dataset label pointing at an environment step stays in labels.external and
     is flagged (label_on_environment), never moved. Scans every key ending in step_id / step_ids in labels.external."""
@@ -257,7 +285,7 @@ def make_record(*, dataset, benchmark, framework, model, qid, query, steps, labe
             "sources_recorded": False, "history_alignment_ok": None, "reasoning_exported": False,
             "output_tokenizer": TOKENIZER, "converter": "data_tools.public_to_mas_traj (MHT r57)"}
     prov.update(provenance)
-    return flag_environment_labels({
+    return add_phase_canonical(flag_environment_labels({
         "schema_version": SCHEMA,
         "run_id": None, "question_id": qid, "run_mode": run_mode, "run_index": None, "seed": None,
         "framework": framework, "framework_family": meta["family"],
@@ -270,7 +298,7 @@ def make_record(*, dataset, benchmark, framework, model, qid, query, steps, labe
                   "source_step_ids": list(final_source_step_ids or [])},
         "labels": lab,
         "provenance": prov,
-    })
+    }))
 
 
 # ------------------------------------------------------------------ text-match source inference

@@ -1,0 +1,108 @@
+{
+ "datasets": {
+  "aftraj": {
+   "runs_in": 1548,
+   "excluded_family": 137,
+   "tokens": 1077114,
+   "chunks": 1421,
+   "runs_kept": 1411
+  },
+  "agentrx_tau": {
+   "runs_in": 29,
+   "tokens": 162899,
+   "chunks": 54,
+   "runs_kept": 29
+  },
+  "aria": {
+   "runs_in": 22237,
+   "excluded_family": 2369,
+   "tokens": 10000852,
+   "chunks": 10040,
+   "runs_kept": 9024,
+   "steps_cut": 27,
+   "dropped_by_cap": 10844
+  },
+  "mascope": {
+   "runs_in": 260,
+   "excluded_family": 55,
+   "tokens": 830581,
+   "chunks": 327,
+   "runs_kept": 205
+  },
+  "mast_data": {
+   "runs_in": 1630,
+   "excluded_family": 351,
+   "tokens": 8009615,
+   "chunks": 2977,
+   "runs_kept": 1279,
+   "steps_cut": 9
+  },
+  "traceelephant": {
+   "runs_in": 220,
+   "excluded_family": 176,
+   "tokens": 677378,
+   "chunks": 192,
+   "runs_kept": 44
+  },
+  "who_and_when": {
+   "runs_in": 184,
+   "excluded_family": 184
+  },
+  "anchor_llm_debate": {
+   "runs_in": 300,
+   "excluded_maa": 6,
+   "tokens": 980691,
+   "chunks": 329,
+   "runs_kept": 294,
+   "steps_cut": 1
+  },
+  "anchor_mac_groupchat": {
+   "runs_in": 300,
+   "excluded_family": 300
+  },
+  "anchor_mdagents": {
+   "runs_in": 300,
+   "excluded_maa": 6,
+   "tokens": 598186,
+   "chunks": 296,
+   "runs_kept": 294
+  },
+  "anchor_medagents_mc": {
+   "runs_in": 300,
+   "excluded_maa": 6,
+   "tokens": 2119617,
+   "chunks": 635,
+   "runs_kept": 294
+  }
+ },
+ "total": {
+  "runs_in": 27308,
+  "excluded_family": 3572,
+  "tokens": 24456933,
+  "chunks": 16271,
+  "runs_kept": 12874,
+  "steps_cut": 37,
+  "dropped_by_cap": 10844,
+  "excluded_maa": 18
+ },
+ "args": {
+  "public_dir": "/home/claude/public_mas/mas_traj",
+  "anchor": [
+   "/home/claude/medical-aegis/docs/requests/samples/anchor_2026-10-21/anchor_export_4fw.jsonl.gz",
+   "/home/claude/medical-aegis/docs/requests/samples/anchor_gate_2026-10-21/gate7_export.jsonl.gz",
+   "/home/claude/medical-aegis/docs/requests/samples/anchor_fmt_val_2026-10-21/fmt_val_export.jsonl.gz"
+  ],
+  "out": "/tmp/claude-0/-home-claude/9b735e89-5a87-5eae-b05f-ab9afe1203be/scratchpad/tapt_pilot_v1.jsonl",
+  "stats": "/tmp/claude-0/-home-claude/9b735e89-5a87-5eae-b05f-ab9afe1203be/scratchpad/tapt_pilot_v1_stats.json",
+  "exclude_families": [
+   "groupchat"
+  ],
+  "cap": [
+   "aria=10"
+  ],
+  "max_tokens": 4096,
+  "env_chars": 2000,
+  "maa_exclusion": "/home/claude/medhypertrace/MedHyperTrace-v2/hgfm/midtrain/../../docs/interfaces/maa_exclusion_v1.json",
+  "tokenizer": "Qwen/Qwen3-8B"
+ }
+}

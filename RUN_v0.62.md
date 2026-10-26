@@ -903,3 +903,12 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - MAST AG2 群聊按 r53 医学规则去掉 12 条 → 共 26,108 条运行。对方最新 `check()` 全过,MAA 精确 0 / 探针 0。旧输出备份在 `/home/claude/public_mas/mas_traj_r57_backup/`。
 - **回复(评论 6424155324,2026-10-26T18:29:42Z,`docs/interfaces/issue_comment_r61.md`):** 同意 1 分叉 + 1 对照,但:标签单向(未翻转记"未判定",不作负例);第 t 步重采样用原温度,只有下游温度 0;下游混合记录 / 贪心两种来源但两边相同;温度 0 确定性我方未测过,建议记录 `system_fingerprint`。`phase_canonical` 审阅:magentic_one `instruction` 建议改为 `plan`,其余同意;建议用户采用该词表。训练输入只用各来源都有的字段,中训练试点报告数据来源可识别度。
 **待用户决定:** 采用 `phase_canonical`(建议采用);分叉试点放在我方中训练试点之后;fmt_v1_2 / mdagents 开头筛选验证;**中训练试点是否开始**(不花 API 费用,Linux #2 空闲)。
+
+## 第 62 轮 · 2026-10-26 ~18:35–19:15 UTC · 用户:开始中训练试点;采用 phase_canonical;分叉试点排在中训练后;fmt_v1_2 与 mdagents 开头筛选可以做
+**issue:** 评论 6424293259(18:36Z,`docs/interfaces/issue_comment_r62.md`):转达用户决定——采用 phase_canonical(含我方 magentic_one instruction → plan,请对方升 v1、导出器默认写入);分叉试点排在我方中训练试点之后;**请对方执行** fmt_v1_2 验证(开 `pair_target_runs`,报告配对差、去首句、拒收率)和 mdagents 开头筛选验证(开配对,报告同槽位 AUROC、format_matched=false 比例、重试分布、配对落地率),实测超出估算先停下问用户。
+**phase_canonical:** 转换器在 `make_record` 中直接调用对方 `scripts/phase_canonical.py` 的 `annotate()`(表 + peer rule),本地覆盖 magentic_one instruction → plan,`provenance.phase_canonical_table` 记录版本。7 个数据集重跑,169,299 步全部有值,other = 0;对方最新 `check()` 全过。
+**中训练试点 v1(纯文本 TAPT)已启动**(`results/midtrain_pilot/README.md`):
+- 语料(`hgfm/midtrain/build_corpus.py`):24.46M token、16,271 段、12,874 条运行;ARIA 封顶 10M,MAST 8.0M,锚点 normal 3.7M(去 MAA 重叠 18 条),其余小。**不含 MAA**;**排除 groupchat family**(含锚点 MAC),这样 LQD_mac 在架构层面也是零样本。序列化只用各来源共有字段(task、agent_role、phase_canonical、output;环境 / 工具输出统一截到 2000 字符)。
+- 传输:私有 HF 数据集 `UUUooUUU/mht-midtrain-pilot`(沙箱用写 token 上传;Linux #2 用读 token 下载,token 存在 `~/.mht_secrets/`(700 / 600),不进命令行;md5 一致;Linux #2 现在直连 HF 约 1 MB/s)。
+- TAPT(`scripts/linux2_run_tapt.sh`,MS-Swift `swift pt`):LoRA r64 all-linear、lr 1e-4 cosine、1 epoch、4 卡 × 1 × 8、max_len 4096、sdpa(服务器没装 flash-attn,不能 packing;batch 1 无需填充)。冒烟 14.7 s/步、31 GB;正式 19:07 UTC 开始,约 508 步 ≈ 2 小时,之后合并 LoRA。踩坑:Qwen3 需显式 `--model_type qwen3 --template qwen3`。
+- 自动接续(`scripts/linux2_midtrain_chain_sft.sh`):合并完成后在 4 卡上跑 SFT,QD + LQD_mac × {graph, text} × 种子 {0, 1}(8 个任务,约 4 小时),与基座模型的 3 种子结果对比。
