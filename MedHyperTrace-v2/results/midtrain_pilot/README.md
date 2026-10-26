@@ -1,4 +1,4 @@
-# Mid-training pilot v1: text TAPT (round 62) — IN PROGRESS
+# Mid-training pilot v1: text TAPT (round 62) — TAPT done, SFT evaluation running
 
 **Question:** does continued pre-training (task-adaptive, LoRA) of Qwen3-8B on unlabelled multi-agent trajectories improve
 MedAgentAudit (MAA) defect-layer attribution after the usual SFT? (Taxonomy: MedAgentAudit only for the evaluation.)
@@ -22,3 +22,11 @@ batch 1 means no padding), 0.5% held-out for eval loss. Smoke: 14.7 s/step, 31 G
 
 **Evaluation** (`scripts/linux2_midtrain_chain_sft.sh`): the standard MS-Swift graph / text SFT on the merged model, QD and
 LQD_mac, seeds 0 and 1; compared with the base-model MS-Swift seed study (`../c6_linux2_lora/seed_study.md`, 3 seeds).
+
+## TAPT run (2026-10-26 19:07–21:11 UTC)
+506 optimizer steps, 7,324 s (14.5 s/step), 4 × A6000, no failures; LoRA merged into `Qwen3-8B-tapt_pilot_v1` (16 GB).
+Train loss (mean over logged steps): steps 1–50 0.762, 51–150 0.568, 151–300 0.517, 301–506 0.489 (first logged 0.971).
+Held-out (0.5% of chunks, 21 eval batches) at the end: loss 0.477, token accuracy 0.867. No held-out loss of the base model
+was logged before training, so the drop on held-out text is not measured directly; the first training batches (0.97)
+are only an indication.
+SFT queue on the merged model started 21:12 UTC (`mht_work/midtrain/sft_queue/`), 8 jobs on 4 GPUs, ~2 h each.

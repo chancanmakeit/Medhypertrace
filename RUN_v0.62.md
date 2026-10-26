@@ -912,3 +912,8 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - 传输:私有 HF 数据集 `UUUooUUU/mht-midtrain-pilot`(沙箱用写 token 上传;Linux #2 用读 token 下载,token 存在 `~/.mht_secrets/`(700 / 600),不进命令行;md5 一致;Linux #2 现在直连 HF 约 1 MB/s)。
 - TAPT(`scripts/linux2_run_tapt.sh`,MS-Swift `swift pt`):LoRA r64 all-linear、lr 1e-4 cosine、1 epoch、4 卡 × 1 × 8、max_len 4096、sdpa(服务器没装 flash-attn,不能 packing;batch 1 无需填充)。冒烟 14.7 s/步、31 GB;正式 19:07 UTC 开始,约 508 步 ≈ 2 小时,之后合并 LoRA。踩坑:Qwen3 需显式 `--model_type qwen3 --template qwen3`。
 - 自动接续(`scripts/linux2_midtrain_chain_sft.sh`):合并完成后在 4 卡上跑 SFT,QD + LQD_mac × {graph, text} × 种子 {0, 1}(8 个任务,约 4 小时),与基座模型的 3 种子结果对比。
+
+### 第 62 轮(续,21:31 UTC 定时检查)
+- issue 无新评论。
+- **TAPT 完成**(19:07–21:11 UTC,506 步,14.5 s/步,无失败),LoRA 已合并为 `Qwen3-8B-tapt_pilot_v1`(16 GB)。训练 loss 分段均值:1–50 步 0.762 → 51–150 0.568 → 151–300 0.517 → 301–506 0.489;留出集(0.5%)最终 loss 0.477、token 准确率 0.867。没有记录基座模型在留出集上的 loss,所以留出集上的降幅没有直接测量。
+- SFT 队列 21:12 UTC 自动开始(4 卡并行,QD 种子 0/1 先跑,约 2 小时一轮,预计约 01:15 UTC 全部完成;01:45 UTC 提醒)。
