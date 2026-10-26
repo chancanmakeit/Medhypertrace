@@ -1,4 +1,299 @@
 {
+ "traceelephant": {
+  "a_check": {
+   "duplicate_run_ids": 0,
+   "examples": [],
+   "fail": 0,
+   "pass": 220,
+   "records": 220
+  },
+  "b_sources_provenance": {
+   "mode_share": {
+    "captainagent|captain": {
+     "choice_steps": 32,
+     "mode_share": 0.46,
+     "patterns": 13,
+     "steps": 98
+    },
+    "captainagent|chat_summary": {
+     "choice_steps": 44,
+     "mode_share": 0.07,
+     "patterns": 56,
+     "steps": 85
+    },
+    "captainagent|expert_turn": {
+     "choice_steps": 648,
+     "mode_share": 0.1,
+     "patterns": 279,
+     "steps": 745
+    },
+    "captainagent|role_matching": {
+     "choice_steps": 0,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 85
+    },
+    "captainagent|speaker_selection": {
+     "choice_steps": 0,
+     "mode_share": 0.1,
+     "patterns": 277,
+     "steps": 733
+    },
+    "magentic_one|agent_response": {
+     "choice_steps": 17,
+     "mode_share": 0.16,
+     "patterns": 17,
+     "steps": 19
+    },
+    "magentic_one|browser_action": {
+     "choice_steps": 632,
+     "mode_share": 0.11,
+     "patterns": 114,
+     "steps": 799
+    },
+    "magentic_one|coder_response": {
+     "choice_steps": 71,
+     "mode_share": 0.08,
+     "patterns": 65,
+     "steps": 98
+    },
+    "magentic_one|facts": {
+     "choice_steps": 0,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 91
+    },
+    "magentic_one|file_action": {
+     "choice_steps": 24,
+     "mode_share": 0.29,
+     "patterns": 20,
+     "steps": 42
+    },
+    "magentic_one|final_answer": {
+     "choice_steps": 85,
+     "mode_share": 0.05,
+     "patterns": 70,
+     "steps": 91
+    },
+    "magentic_one|plan": {
+     "choice_steps": 0,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 91
+    },
+    "magentic_one|progress_ledger": {
+     "choice_steps": 893,
+     "mode_share": 0.12,
+     "patterns": 214,
+     "steps": 1237
+    },
+    "magentic_one|replan": {
+     "choice_steps": 79,
+     "mode_share": 0.05,
+     "patterns": 64,
+     "steps": 82
+    },
+    "magentic_one|summarize_page": {
+     "choice_steps": 6,
+     "mode_share": 0.77,
+     "patterns": 3,
+     "steps": 31
+    },
+    "magentic_one|update_facts": {
+     "choice_steps": 79,
+     "mode_share": 0.05,
+     "patterns": 64,
+     "steps": 82
+    },
+    "swe_agent|agent_step": {
+     "choice_steps": 1437,
+     "mode_share": 0.07,
+     "patterns": 77,
+     "steps": 1551
+    }
+   },
+   "returncode": 0,
+   "slot_determined": {
+    "captainagent|captain": {
+     "slot_determined": 0.46,
+     "steps": 98
+    },
+    "captainagent|chat_summary": {
+     "slot_determined": 0.04,
+     "steps": 85
+    },
+    "captainagent|expert_turn": {
+     "slot_determined": 0.11,
+     "steps": 745
+    },
+    "captainagent|role_matching": {
+     "slot_determined": 1.0,
+     "steps": 85
+    },
+    "captainagent|speaker_selection": {
+     "slot_determined": 0.1,
+     "steps": 733
+    },
+    "magentic_one|agent_response": {
+     "slot_determined": 0.16,
+     "steps": 19
+    },
+    "magentic_one|browser_action": {
+     "slot_determined": 0.09,
+     "steps": 799
+    },
+    "magentic_one|coder_response": {
+     "slot_determined": 0.07,
+     "steps": 98
+    },
+    "magentic_one|facts": {
+     "slot_determined": 1.0,
+     "steps": 91
+    },
+    "magentic_one|file_action": {
+     "slot_determined": 0.29,
+     "steps": 42
+    },
+    "magentic_one|final_answer": {
+     "slot_determined": 0.03,
+     "steps": 91
+    },
+    "magentic_one|plan": {
+     "slot_determined": 1.0,
+     "steps": 91
+    },
+    "magentic_one|progress_ledger": {
+     "slot_determined": 0.12,
+     "steps": 1237
+    },
+    "magentic_one|replan": {
+     "slot_determined": 0.01,
+     "steps": 82
+    },
+    "magentic_one|summarize_page": {
+     "slot_determined": 0.77,
+     "steps": 31
+    },
+    "magentic_one|update_facts": {
+     "slot_determined": 0.01,
+     "steps": 82
+    },
+    "swe_agent|agent_step": {
+     "slot_determined": 0.03,
+     "steps": 1551
+    }
+   },
+   "stderr_tail": ""
+  },
+  "bytes": 35901944,
+  "c_text_match": {
+   "captainagent": {
+    "share_sources_text_match": 0.947,
+    "share_steps_zero_sources": 0.0624,
+    "sources_total": 13843,
+    "steps_with_inputs": 1746
+   },
+   "magentic_one": {
+    "share_sources_text_match": 1.0,
+    "share_steps_zero_sources": 0.0432,
+    "sources_total": 12941,
+    "steps_with_inputs": 2663
+   },
+   "swe_agent": {
+    "share_sources_text_match": 0.9794,
+    "share_steps_zero_sources": 0.0284,
+    "sources_total": 52388,
+    "steps_with_inputs": 1551
+   }
+  },
+  "convert_report": {
+   "text_match": {
+    "dropped_transitive": 1319,
+    "steps_with_inputs": 5960,
+    "steps_zero_sources": 339
+   },
+   "traces": 220
+  },
+  "d_maa_exclusion": {
+   "distinct_queries": 174,
+   "exact": 0,
+   "probe": 0,
+   "returncode": 0,
+   "stderr_tail": "",
+   "stdout": "/tmp/claude-0/-home-claude/9b735e89-5a87-5eae-b05f-ab9afe1203be/scratchpad/val/traceelephant.jsonl: 174 distinct queries; exact matches 0; probe candidates 0"
+  },
+  "e_tokens": {
+   "llm_output_o200k": 563231,
+   "query_plus_step_outputs_qwen3_8b": 1471108,
+   "tool_output_o200k": 781544
+  },
+  "f_determinism": {
+   "identical": true,
+   "rerun_returncode": 0
+  },
+  "file": "/home/claude/public_mas/mas_traj/traceelephant.jsonl.gz",
+  "frameworks": {
+   "captainagent": {
+    "family": "groupchat",
+    "records": 85
+   },
+   "magentic_one": {
+    "family": "groupchat",
+    "records": 91
+   },
+   "swe_agent": {
+    "family": "swe_agent",
+    "records": 44
+   }
+  },
+  "how_inferred": {
+   "captainagent|control|protocol": 733,
+   "captainagent|excerpt|text_match": 1443,
+   "captainagent|verbatim|text_match": 11667,
+   "magentic_one|excerpt|text_match": 7643,
+   "magentic_one|verbatim|text_match": 5298,
+   "swe_agent|excerpt|text_match": 1062,
+   "swe_agent|structured_field|protocol": 1081,
+   "swe_agent|verbatim|text_match": 50245
+  },
+  "is_correct": {
+   "False": 220
+  },
+  "per_framework": {
+   "captainagent": {
+    "records": 85,
+    "src_protocol": 733,
+    "src_text_match": 13110,
+    "steps_llm": 1746,
+    "steps_sources_empty": 109,
+    "steps_with_inputs": 1746,
+    "steps_with_inputs_zero_sources": 109,
+    "tok_llm_output_o200k": 170292
+   },
+   "magentic_one": {
+    "records": 91,
+    "src_text_match": 12941,
+    "steps_llm": 2663,
+    "steps_sources_empty": 115,
+    "steps_with_inputs": 2663,
+    "steps_with_inputs_zero_sources": 115,
+    "tok_llm_output_o200k": 383904
+   },
+   "swe_agent": {
+    "records": 44,
+    "src_protocol": 1081,
+    "src_text_match": 51307,
+    "steps_llm": 1551,
+    "steps_sources_empty": 44,
+    "steps_tool": 1081,
+    "steps_with_inputs": 1551,
+    "steps_with_inputs_zero_sources": 44,
+    "tok_llm_output_o200k": 9035,
+    "tok_tool_output_o200k": 781544
+   }
+  },
+  "sha256": "28d6998072a7725a17e831eba4ccb1c1444885b7fbb6395327c4035e7e7743ca"
+ },
  "who_and_when": {
   "a_check": {
    "duplicate_run_ids": 0,
