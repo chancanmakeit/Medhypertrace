@@ -1,0 +1,434 @@
+[
+ {
+  "schema_version": "mas-traj/1",
+  "run_id": "mascope|langgraph_layered|glm|mascope_planning/A_hard_02_normal|normal|r0",
+  "question_id": "mascope_planning/A_hard_02_normal",
+  "run_mode": "normal",
+  "run_index": 0,
+  "seed": null,
+  "framework": "langgraph_layered",
+  "framework_family": "langgraph_layered",
+  "framework_description": "LangGraph, layered topology (MAScope LG-Ctrl): agents A-D(E) are arranged in layers; each agent refines the plan produced by the previous layer over several iterations.",
+  "model": {
+   "name": "glm"
+  },
+  "task": {
+   "dataset": "mascope_planning",
+   "query": "Develop a new feature for an existing web application that allows users to customize their dashboards. The feature must include drag-and-drop functionality, saving user preferences, and responsive design. Deliverables include a functional prototype, user documentation, and a test plan. Success crite...[+72 chars]",
+   "images": [],
+   "observations": []
+  },
+  "steps": [
+   {
+    "step_id": "s0",
+    "order": 0,
+    "kind": "llm",
+    "agent_id": "agent_a",
+    "agent_role": "agent_A",
+    "agent_label": null,
+    "phase": "agent_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [],
+    "output": "As agent_A, here is the initial plan for developing the customizable dashboard feature:\n\n**Initial Plan: Customizable Dashboard Feature**\n\n1. **Requirements & Scope Definition**: Identify the specific widgets available for the dashboard, define the grid layout constraints, and establish the data str...[+2291 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 487
+   },
+   {
+    "step_id": "s1",
+    "order": 1,
+    "kind": "llm",
+    "agent_id": "agent_b",
+    "agent_role": "agent_B",
+    "agent_label": null,
+    "phase": "agent_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "As agent_B, I have reviewed the initial plan provided by agent_A. While it establishes a solid foundation, the plan was cut off prematurely and needs refinement to explicitly address all deliverables (prototype, documentation, test plan) and the specific success criteria (UAT with >80% positive feed...[+3967 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 918
+   },
+   {
+    "step_id": "s2",
+    "order": 2,
+    "kind": "llm",
+    "agent_id": "agent_c",
+    "agent_role": "agent_C",
+    "agent_label": null,
+    "phase": "agent_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "As agent_C, I have reviewed the refined plan from agent_B. The plan was cut off during Phase 2, and while it addresses the technical setup well, it needs to explicitly map to all deliverables (functional prototype, user documentation, test plan) and the specific success criteria (UAT with >80% posit...[+2377 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 579
+   },
+   {
+    "step_id": "s3",
+    "order": 3,
+    "kind": "llm",
+    "agent_id": "agent_d",
+    "agent_role": "agent_D",
+    "agent_label": null,
+    "phase": "agent_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "# Agent_D: Plan Verification and Extension\n\n## Verification Summary\n\nAgent_C's plan is solid through Phase 1 and the beginning of Phase 2. The technical foundation—drag-and-drop library selection, backend API design, and widget modularization—is well-considered. However, the plan was truncated mid-P...[+5626 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 1309
+   },
+   {
+    "step_id": "s4",
+    "order": 4,
+    "kind": "llm",
+    "agent_id": "agent_e",
+    "agent_role": "agent_E",
+    "agent_label": null,
+    "phase": "agent_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "# Agent_E: Final Plan Consolidation\n\n## Consolidation Note\n\nAgent_D verified Agent_C's plan through Phase 1 and the start of Phase 2, then extended it through the remainder of Phase 2 and into Phase 3, where the output was truncated mid-sentence in item 9. As agent_E, I am finalizing the plan by:\n1....[+3776 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 924
+   }
+  ],
+  "final": {
+   "answer": null,
+   "response": null,
+   "source_step_ids": [
+    "s4"
+   ]
+  },
+  "labels": {
+   "gold": null,
+   "acceptable_answers": null,
+   "is_correct": null,
+   "is_valid": null,
+   "status": null,
+   "verification_path": null,
+   "execution_successful": null,
+   "injection": [],
+   "injection_targets": [],
+   "llm_meta": {},
+   "paired_normal_run_ids": [],
+   "external": {
+    "dataset": "MAScope",
+    "taxonomy": "MAST-14 (synthetic, anomaly-injection derived)",
+    "corpus": "LG-Ctrl",
+    "codes": {
+     "1.1": 0,
+     "1.2": 0,
+     "1.3": 0,
+     "1.4": 0,
+     "1.5": 0,
+     "2.1": 0,
+     "2.2": 0,
+     "2.3": 0,
+     "2.4": 0,
+     "2.5": 0,
+     "2.6": 0,
+     "3.1": 0,
+     "3.2": 0,
+     "3.3": 0
+    },
+    "anomaly_type": null,
+    "anomaly_injected": false,
+    "guo_topology": "Layered",
+    "note": "synthetic anomaly-injection labels; 1.1-1.5 always 0"
+   }
+  },
+  "provenance": {
+   "source_dataset": "mascope",
+   "source_record_id": "ee9a0a4f-0eb2-5c65-9fbf-c36df9383b25",
+   "wrapper_contract": "public_dataset",
+   "input_messages_clean": null,
+   "sources_recorded": false,
+   "history_alignment_ok": null,
+   "reasoning_exported": false,
+   "output_tokenizer": "tiktoken:o200k_base",
+   "converter": "data_tools.public_to_mas_traj (MHT r57)",
+   "corpus": "LG-Ctrl",
+   "task_id": "A_hard_02_normal"
+  }
+ },
+ {
+  "schema_version": "mas-traj/1",
+  "run_id": "mascope|langgraph_centralized|gpt|mascope_planning/A_hard_01_normal|normal|r0",
+  "question_id": "mascope_planning/A_hard_01_normal",
+  "run_mode": "normal",
+  "run_index": 0,
+  "seed": null,
+  "framework": "langgraph_centralized",
+  "framework_family": "langgraph_centralized",
+  "framework_description": "LangGraph, centralized topology (MAScope LG-Ctrl): a hub agent distributes the task to spoke agents and integrates their contributions over several iterations.",
+  "model": {
+   "name": "gpt"
+  },
+  "task": {
+   "dataset": "mascope_planning",
+   "query": "Create an API integration for a third-party payment processor in an e-commerce platform. The integration should handle payment processing, refunds, and transaction history. Deliverables include API documentation, codebase updates, and test cases. Success is defined by passing all test cases and succ...[+55 chars]",
+   "images": [],
+   "observations": []
+  },
+  "steps": [
+   {
+    "step_id": "s0",
+    "order": 0,
+    "kind": "llm",
+    "agent_id": "agent_a",
+    "agent_role": "agent_A",
+    "agent_label": null,
+    "phase": "hub",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [],
+    "output": "{\"next_worker\":\"agent_B\",\"task\":\"Analyze the payment processor integration requirements and propose a technical implementation plan for the e-commerce platform, covering payment processing, refunds, transaction history, key API endpoints, data flows, error handling, security/compliance consideration...[+34 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 57
+   },
+   {
+    "step_id": "s1",
+    "order": 1,
+    "kind": "llm",
+    "agent_id": "agent_b",
+    "agent_role": "agent_B",
+    "agent_label": null,
+    "phase": "agent_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Technical implementation plan for third-party payment processor integration\n\n1. Scope and objectives\n- Add payment processor integration to support:\n  - Payment authorization and/or capture\n  - Refund creation and refund status tracking\n  - Transaction history retrieval and display\n- Deliver:\n  - Co...[+2599 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 597
+   },
+   {
+    "step_id": "s2",
+    "order": 2,
+    "kind": "llm",
+    "agent_id": "agent_a",
+    "agent_role": "agent_A",
+    "agent_label": null,
+    "phase": "hub",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "{\"next_worker\":\"agent_C\",\"task\":\"Provide API documentation outline and endpoint contract recommendations for the payment processor integration, covering payment processing, refunds, transaction history, authentication, error handling, idempotency, webhooks/callbacks if applicable, and staging valida...[+16 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 55
+   },
+   {
+    "step_id": "s3",
+    "order": 3,
+    "kind": "llm",
+    "agent_id": "agent_c",
+    "agent_role": "agent_C",
+    "agent_label": null,
+    "phase": "agent_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s2",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Below is a practical API documentation outline plus endpoint contract recommendations for the payment processor integration.\n\n---\n\n# Payment Processor Integration: API Documentation Outline and Endpoint Contract Recommendations\n\n## 1. Purpose and Scope\nDocument the internal integration layer between...[+2728 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 597
+   },
+   {
+    "step_id": "s4",
+    "order": 4,
+    "kind": "llm",
+    "agent_id": "agent_a",
+    "agent_role": "agent_A",
+    "agent_label": null,
+    "phase": "hub",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "{\"aggregate\":\"1. Final integration plan\\n\\n1. Requirements and assumptions\\n- Integrate a third-party payment processor into the e-commerce platform for:\\n  - Payment processing (authorize/capture or sale, depending on processor capability)\\n  - Refunds (full and partial if supported)\\n  - Transacti...[+2015 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 497
+   },
+   {
+    "step_id": "s5",
+    "order": 5,
+    "kind": "llm",
+    "agent_id": "agent_d",
+    "agent_role": "agent_D",
+    "agent_label": null,
+    "phase": "agent_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s4",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Verified and extended integration plan for the payment processor API:\n\n1. Scope confirmation\n- Required capabilities:\n  - Payment processing\n  - Refund handling\n  - Transaction history retrieval\n- Required deliverables:\n  - API documentation\n  - Codebase updates\n  - Test cases\n- Success criteria:\n  ...[+2387 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 597
+   }
+  ],
+  "final": {
+   "answer": null,
+   "response": null,
+   "source_step_ids": [
+    "s5"
+   ]
+  },
+  "labels": {
+   "gold": null,
+   "acceptable_answers": null,
+   "is_correct": null,
+   "is_valid": null,
+   "status": null,
+   "verification_path": null,
+   "execution_successful": null,
+   "injection": [],
+   "injection_targets": [],
+   "llm_meta": {},
+   "paired_normal_run_ids": [],
+   "external": {
+    "dataset": "MAScope",
+    "taxonomy": "MAST-14 (synthetic, anomaly-injection derived)",
+    "corpus": "LG-Ctrl",
+    "codes": {
+     "1.1": 0,
+     "1.2": 0,
+     "1.3": 0,
+     "1.4": 0,
+     "1.5": 0,
+     "2.1": 0,
+     "2.2": 0,
+     "2.3": 0,
+     "2.4": 0,
+     "2.5": 0,
+     "2.6": 0,
+     "3.1": 0,
+     "3.2": 0,
+     "3.3": 0
+    },
+    "anomaly_type": null,
+    "anomaly_injected": false,
+    "guo_topology": "Centralized",
+    "note": "synthetic anomaly-injection labels; 1.1-1.5 always 0"
+   }
+  },
+  "provenance": {
+   "source_dataset": "mascope",
+   "source_record_id": "63881e53-98c2-546e-a2ce-89539d7ecf33",
+   "wrapper_contract": "public_dataset",
+   "input_messages_clean": null,
+   "sources_recorded": false,
+   "history_alignment_ok": null,
+   "reasoning_exported": false,
+   "output_tokenizer": "tiktoken:o200k_base",
+   "converter": "data_tools.public_to_mas_traj (MHT r57)",
+   "corpus": "LG-Ctrl",
+   "task_id": "A_hard_01_normal"
+  }
+ }
+]

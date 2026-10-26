@@ -1,0 +1,754 @@
+[
+ {
+  "schema_version": "mas-traj/1",
+  "run_id": "mast_data|chatdev|GPT-4o|ProgramDev/q_7a16a1a80e41|normal|r0",
+  "question_id": "ProgramDev/q_7a16a1a80e41",
+  "run_mode": "normal",
+  "run_index": 0,
+  "seed": null,
+  "framework": "chatdev",
+  "framework_family": "chatdev",
+  "framework_description": "ChatDev: a chat chain of phases (DemandAnalysis, LanguageChoose, Coding, CodeComplete, CodeReview comment/modification cycles, Test, Manual...). Each phase is a role-play between an instructor and an assistant role for up to N turns; phase prompts are filled with placeholders (task, modality, langua...[+80 chars]",
+  "model": {
+   "name": "GPT-4o"
+  },
+  "task": {
+   "dataset": "ProgramDev",
+   "query": "Develop a Checkers (Draughts) game. Use an 8x8 board, alternate turns between two players, and apply standard capture and kinging rules. Prompt for moves in notation (e.g., from-to positions) and update the board state accordingly.",
+   "images": [],
+   "observations": []
+  },
+  "steps": [
+   {
+    "step_id": "s0",
+    "order": 0,
+    "kind": "llm",
+    "agent_id": "chief_product_officer",
+    "agent_role": "Chief Product Officer",
+    "agent_label": null,
+    "phase": "DemandAnalysis",
+    "round": null,
+    "event_ids": [
+     "DemandAnalysis#1"
+    ],
+    "input_messages": null,
+    "sources": [],
+    "output": "Considering the customer's requirement for an interactive Checkers (Draughts) game with real-time move updates and standard gameplay mechanics, the most suitable modality would be an Application, as it allows for interactive gameplay, real-time state updates, and visual representation of the game bo...[+76 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 68
+   },
+   {
+    "step_id": "s1",
+    "order": 1,
+    "kind": "llm",
+    "agent_id": "chief_executive_officer",
+    "agent_role": "Chief Executive Officer",
+    "agent_label": null,
+    "phase": "DemandAnalysis",
+    "round": null,
+    "event_ids": [
+     "DemandAnalysis#1"
+    ],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "I fully agree with your assessment. An Application modality is indeed the most suitable choice, as it provides interactive gameplay, real-time updates, visual representation, and a user-friendly interface, perfectly aligning with the customer's requirements.\n\n<INFO> Application",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 47
+   },
+   {
+    "step_id": "s2",
+    "order": 2,
+    "kind": "llm",
+    "agent_id": "chief_technology_officer",
+    "agent_role": "Chief Technology Officer",
+    "agent_label": null,
+    "phase": "LanguageChoose",
+    "round": null,
+    "event_ids": [
+     "LanguageChoose#2"
+    ],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "<INFO> Python",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 4
+   },
+   {
+    "step_id": "s3",
+    "order": 3,
+    "kind": "llm",
+    "agent_id": "programmer",
+    "agent_role": "Programmer",
+    "agent_label": null,
+    "phase": "Coding",
+    "round": null,
+    "event_ids": [
+     "Coding#3"
+    ],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "### Step 1: Architecture and Classes\n\nTo implement the Checkers game, we will use the following Python files and classes:\n\n- **main.py**: Entry point of the application. Handles user interaction and game loop.\n- **board.py**: Contains the `Board` class to represent the game board, manage pieces, and...[+5962 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 1583
+   },
+   {
+    "step_id": "s4",
+    "order": 4,
+    "kind": "llm",
+    "agent_id": "code_reviewer",
+    "agent_role": "Code Reviewer",
+    "agent_label": null,
+    "phase": "CodeReviewComment",
+    "round": null,
+    "event_ids": [
+     "CodeReviewComment#4"
+    ],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Highest Priority Comment:\nThe provided code lacks a main executable script (`main.py`) that implements the game loop, handles user input, alternates turns between players, validates moves, updates the board state, and checks for a winner. The current `main.py` file only contains the command `python ...[+1900 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 497
+   },
+   {
+    "step_id": "s5",
+    "order": 5,
+    "kind": "llm",
+    "agent_id": "programmer",
+    "agent_role": "Programmer",
+    "agent_label": null,
+    "phase": "CodeReviewModification",
+    "round": null,
+    "event_ids": [
+     "CodeReviewModification#5"
+    ],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s4",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "piece.py\n```python\n'''\nDefines the Piece class representing individual checker pieces.\n'''\nclass Piece:\n    def __init__(self, color, king=False):\n        self.color = color  # 'W' for white, 'B' for black\n        self.king = king\n\n    def make_king(self):\n        self.king = True\n\n    def __repr__(...[+4471 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 1203
+   },
+   {
+    "step_id": "s6",
+    "order": 6,
+    "kind": "llm",
+    "agent_id": "code_reviewer",
+    "agent_role": "Code Reviewer",
+    "agent_label": null,
+    "phase": "CodeReviewComment",
+    "round": null,
+    "event_ids": [
+     "CodeReviewComment#6"
+    ],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s4",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s5",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Highest Priority Comment:\n\nThe current implementation of the `valid_move` method in `board.py` does not fully handle the movement logic for king pieces correctly. Specifically, the condition `(tr - fr) // 2 in directions` is insufficient for king pieces, as kings should be allowed to move and captur...[+1404 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 400
+   },
+   {
+    "step_id": "s7",
+    "order": 7,
+    "kind": "llm",
+    "agent_id": "programmer",
+    "agent_role": "Programmer",
+    "agent_label": null,
+    "phase": "CodeReviewModification",
+    "round": null,
+    "event_ids": [
+     "CodeReviewModification#7"
+    ],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s5",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s6",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "piece.py\n```python\n'''\nDefines the Piece class representing individual checker pieces.\n'''\nclass Piece:\n    def __init__(self, color, king=False):\n        self.color = color  # 'W' for white, 'B' for black\n        self.king = king\n\n    def make_king(self):\n        self.king = True\n\n    def __repr__(...[+4927 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 1298
+   },
+   {
+    "step_id": "s8",
+    "order": 8,
+    "kind": "llm",
+    "agent_id": "code_reviewer",
+    "agent_role": "Code Reviewer",
+    "agent_label": null,
+    "phase": "CodeReviewComment",
+    "round": null,
+    "event_ids": [
+     "CodeReviewComment#8"
+    ],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s6",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s7",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Highest Priority Comment:\n\nThe current implementation lacks the logic to handle multiple sequential captures (mandatory in standard checkers rules). According to standard rules, if a player makes a capture and another capture is immediately available from the new position, the player must continue c...[+1825 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 504
+   },
+   {
+    "step_id": "s9",
+    "order": 9,
+    "kind": "llm",
+    "agent_id": "programmer",
+    "agent_role": "Programmer",
+    "agent_label": null,
+    "phase": "CodeReviewModification",
+    "round": null,
+    "event_ids": [
+     "CodeReviewModification#9"
+    ],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s7",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s8",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "piece.py\n```python\n'''\nDefines the Piece class representing individual checker pieces.\n'''\nclass Piece:\n    def __init__(self, color, king=False):\n        self.color = color  # 'W' for white, 'B' for black\n        self.king = king\n\n    def make_king(self):\n        self.king = True\n\n    def __repr__(...[+6637 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 1717
+   },
+   {
+    "step_id": "s10",
+    "order": 10,
+    "kind": "llm",
+    "agent_id": "programmer",
+    "agent_role": "Programmer",
+    "agent_label": null,
+    "phase": "EnvironmentDoc",
+    "round": null,
+    "event_ids": [
+     "EnvironmentDoc#10"
+    ],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s8",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s9",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "requirements.txt\n```\n# No external dependencies required for this project.\n```",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 15
+   },
+   {
+    "step_id": "s11",
+    "order": 11,
+    "kind": "llm",
+    "agent_id": "chief_executive_officer",
+    "agent_role": "Chief Executive Officer",
+    "agent_label": null,
+    "phase": "Reflection",
+    "round": null,
+    "event_ids": [
+     "Reflection#11"
+    ],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s8",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s9",
+      "how": "structured_field",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s10",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "requirements.txt\n```\n# No external dependencies required for this project.\n```",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 15
+   },
+   "...[+1 items]"
+  ],
+  "final": {
+   "answer": null,
+   "response": null,
+   "source_step_ids": [
+    "s12"
+   ]
+  },
+  "labels": {
+   "gold": null,
+   "acceptable_answers": null,
+   "is_correct": null,
+   "is_valid": null,
+   "status": null,
+   "verification_path": null,
+   "execution_successful": null,
+   "injection": [],
+   "injection_targets": [],
+   "llm_meta": {},
+   "paired_normal_run_ids": [],
+   "external": {
+    "dataset": "MAST-Data",
+    "taxonomy": "MAST-14",
+    "codes": {
+     "1.1": 0,
+     "1.2": 0,
+     "1.3": 0,
+     "1.4": 0,
+     "1.5": 0,
+     "2.1": 0,
+     "2.2": 0,
+     "2.3": 0,
+     "2.4": 0,
+     "2.5": 0,
+     "2.6": 0,
+     "3.1": 0,
+     "3.2": 0,
+     "3.3": 0
+    },
+    "any_failure": false,
+    "mas_name": "ChatDev",
+    "trace_id": 0
+   },
+   "is_correct_source": "not recorded"
+  },
+  "provenance": {
+   "source_dataset": "mast_data",
+   "source_record_id": "ChatDev_ProgramDev_GPT4o/0",
+   "wrapper_contract": "public_dataset",
+   "input_messages_clean": null,
+   "sources_recorded": false,
+   "history_alignment_ok": null,
+   "reasoning_exported": false,
+   "output_tokenizer": "tiktoken:o200k_base",
+   "converter": "data_tools.public_to_mas_traj (MHT r57)",
+   "log_format": "chatdev"
+  }
+ },
+ {
+  "schema_version": "mas-traj/1",
+  "run_id": "mast_data|metagpt|GPT-4o|ProgramDev/q_7a16a1a80e41|normal|r0",
+  "question_id": "ProgramDev/q_7a16a1a80e41",
+  "run_mode": "normal",
+  "run_index": 0,
+  "seed": null,
+  "framework": "metagpt",
+  "framework_family": "metagpt",
+  "framework_description": "MetaGPT: roles publish messages to a shared environment and act on the messages of the actions they watch. MAST-Data runs use the customised SimpleCoder (watches the user requirement), SimpleTester (watches the coder's code and the reviewer's comments) and SimpleReviewer (watches the tests). ARIA ru...[+183 chars]",
+  "model": {
+   "name": "GPT-4o"
+  },
+  "task": {
+   "dataset": "ProgramDev",
+   "query": "Develop a Checkers (Draughts) game. Use an 8x8 board, alternate turns between two players, and apply standard capture and kinging rules. Prompt for moves in notation (e.g., from-to positions) and update the board state accordingly.",
+   "images": [],
+   "observations": []
+  },
+  "steps": [
+   {
+    "step_id": "s0",
+    "order": 0,
+    "kind": "llm",
+    "agent_id": "simplecoder",
+    "agent_role": "SimpleCoder",
+    "agent_label": null,
+    "phase": "SimpleCoder",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [],
+    "output": "def print_board(board):\n    print(\"  a b c d e f g h\")\n    print(\" +-----------------+\")\n    row_number = 8\n    for row in board:\n        print(f\"{row_number}| {' '.join(row)} |\")\n        row_number -= 1\n    print(\" +-----------------+\")\n\ndef initialize_board():\n    board = []\n    for i in range(8):...[+2293 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 745
+   },
+   {
+    "step_id": "s1",
+    "order": 1,
+    "kind": "llm",
+    "agent_id": "simpletester",
+    "agent_role": "SimpleTester",
+    "agent_label": null,
+    "phase": "SimpleTester",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "import pytest\nfrom SimpleCoder import initialize_board, convert_notation, is_valid_move, make_move, print_board\n\ndef test_initialize_board():\n    board = initialize_board()\n    assert len(board) == 8\n    assert all(len(row) == 8 for row in board)\n    assert board[0][1] == 'b'\n    assert board[7][0] ...[+904 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 403
+   },
+   {
+    "step_id": "s2",
+    "order": 2,
+    "kind": "llm",
+    "agent_id": "simplereviewer",
+    "agent_role": "SimpleReviewer",
+    "agent_label": null,
+    "phase": "SimpleReviewer",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "One critical comment on the provided test cases is that there is a lack of test coverage for capturing moves, which are a fundamental aspect of Checkers (Draughts). The test cases include checks for initializing the board, converting notation, validating simple moves, making a move, and kinging a pi...[+451 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 144
+   },
+   {
+    "step_id": "s3",
+    "order": 3,
+    "kind": "llm",
+    "agent_id": "simpletester",
+    "agent_role": "SimpleTester",
+    "agent_label": null,
+    "phase": "SimpleTester",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "def test_capture_move_valid():\n    board = initialize_board()\n    # Manually setting up a capture scenario\n    board[5][2] = 'b'  # Black piece in position to capture\n    board[4][3] = 'w'  # White piece to be captured\n    assert is_valid_move(board, 5, 2, 3, 4, 'b') == True  # Valid capture move\n\nd...[+1313 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 516
+   },
+   {
+    "step_id": "s4",
+    "order": 4,
+    "kind": "llm",
+    "agent_id": "simplereviewer",
+    "agent_role": "SimpleReviewer",
+    "agent_label": null,
+    "phase": "SimpleReviewer",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "One critical observation regarding the test cases provided is the absence of tests for edge cases and error handling, particularly for invalid input scenarios and moves that do not conform to the rules of Checkers. While the tests effectively cover basic move validation, capturing, and kinging, they...[+429 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 124
+   }
+  ],
+  "final": {
+   "answer": null,
+   "response": null,
+   "source_step_ids": [
+    "s4"
+   ]
+  },
+  "labels": {
+   "gold": null,
+   "acceptable_answers": null,
+   "is_correct": null,
+   "is_valid": null,
+   "status": null,
+   "verification_path": null,
+   "execution_successful": null,
+   "injection": [],
+   "injection_targets": [],
+   "llm_meta": {},
+   "paired_normal_run_ids": [],
+   "external": {
+    "dataset": "MAST-Data",
+    "taxonomy": "MAST-14",
+    "codes": {
+     "1.1": 0,
+     "1.2": 0,
+     "1.3": 0,
+     "1.4": 0,
+     "1.5": 0,
+     "2.1": 0,
+     "2.2": 0,
+     "2.3": 0,
+     "2.4": 0,
+     "2.5": 0,
+     "2.6": 0,
+     "3.1": 0,
+     "3.2": 1,
+     "3.3": 0
+    },
+    "any_failure": true,
+    "mas_name": "MetaGPT",
+    "trace_id": 0
+   },
+   "is_correct_source": "not recorded"
+  },
+  "provenance": {
+   "source_dataset": "mast_data",
+   "source_record_id": "MetaGPT_ProgramDev_GPT4o/0",
+   "wrapper_contract": "public_dataset",
+   "input_messages_clean": null,
+   "sources_recorded": false,
+   "history_alignment_ok": null,
+   "reasoning_exported": false,
+   "output_tokenizer": "tiktoken:o200k_base",
+   "converter": "data_tools.public_to_mas_traj (MHT r57)",
+   "log_format": "metagpt"
+  }
+ }
+]

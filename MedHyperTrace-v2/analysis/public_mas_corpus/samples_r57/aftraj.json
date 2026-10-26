@@ -1,0 +1,754 @@
+[
+ {
+  "schema_version": "mas-traj/1",
+  "run_id": "aftraj|agents_handoff|unknown-model|MATH/q_ecad6dd04e6f|normal|r0",
+  "question_id": "MATH/q_ecad6dd04e6f",
+  "run_mode": "normal",
+  "run_index": 0,
+  "seed": null,
+  "framework": "agents_handoff",
+  "framework_family": "agents_handoff",
+  "framework_description": "Handoff pipeline (AFTraj): a solver agent (MathSolver / CodeWriter) works with tools (compute, run_tests) and hands the shared conversation over with a transfer_to_<agent> call to a checker (Verifier / CodeTester), which re-checks with the same tools and gives the final answer.",
+  "model": {
+   "name": "unknown-model"
+  },
+  "task": {
+   "dataset": "MATH",
+   "query": "Convert the point $(0,3)$ in rectangular coordinates to polar coordinates.  Enter your answer in the form $(r,\\theta),$ where $r > 0$ and $0 \\le \\theta < 2 \\pi.$",
+   "images": [],
+   "observations": []
+  },
+  "steps": [
+   {
+    "step_id": "s0",
+    "order": 0,
+    "kind": "llm",
+    "agent_id": "mathsolver",
+    "agent_role": "MathSolver",
+    "agent_label": null,
+    "phase": "mathsolver_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [],
+    "output": "",
+    "structured": null,
+    "tool_calls": [
+     {
+      "name": "compute",
+      "arguments": {
+       "expression": "sqrt(0**2+3**2)"
+      },
+      "result": null,
+      "error": null,
+      "id": "call_0000"
+     }
+    ],
+    "finish_reason": null,
+    "output_tokens_est": 0
+   },
+   {
+    "step_id": "s1",
+    "order": 1,
+    "kind": "tool",
+    "agent_id": "tool:environment",
+    "agent_role": "environment",
+    "agent_label": null,
+    "phase": "tool_result",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "[{\"name\": \"compute\", \"result\": \"3\", \"call_id\": \"call_0000\"}]",
+    "structured": null,
+    "tool_calls": [
+     {
+      "name": "environment",
+      "arguments": null,
+      "result": "[{\"name\": \"compute\", \"result\": \"3\", \"call_id\": \"call_0000\"}]",
+      "error": null
+     }
+    ],
+    "finish_reason": null,
+    "output_tokens_est": null
+   },
+   {
+    "step_id": "s2",
+    "order": 2,
+    "kind": "llm",
+    "agent_id": "mathsolver",
+    "agent_role": "MathSolver",
+    "agent_label": null,
+    "phase": "mathsolver_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "3",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 1
+   },
+   {
+    "step_id": "s3",
+    "order": 3,
+    "kind": "llm",
+    "agent_id": "mathsolver",
+    "agent_role": "MathSolver",
+    "agent_label": null,
+    "phase": "mathsolver_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "",
+    "structured": null,
+    "tool_calls": [
+     {
+      "name": "compute",
+      "arguments": {
+       "expression": "atan2(3,0)"
+      },
+      "result": null,
+      "error": null,
+      "id": "call_0001"
+     }
+    ],
+    "finish_reason": null,
+    "output_tokens_est": 0
+   },
+   {
+    "step_id": "s4",
+    "order": 4,
+    "kind": "tool",
+    "agent_id": "tool:environment",
+    "agent_role": "environment",
+    "agent_label": null,
+    "phase": "tool_result",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s3",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "[{\"name\": \"compute\", \"result\": \"pi/2\", \"call_id\": \"call_0001\"}]",
+    "structured": null,
+    "tool_calls": [
+     {
+      "name": "environment",
+      "arguments": null,
+      "result": "[{\"name\": \"compute\", \"result\": \"pi/2\", \"call_id\": \"call_0001\"}]",
+      "error": null
+     }
+    ],
+    "finish_reason": null,
+    "output_tokens_est": null
+   },
+   {
+    "step_id": "s5",
+    "order": 5,
+    "kind": "llm",
+    "agent_id": "mathsolver",
+    "agent_role": "MathSolver",
+    "agent_label": null,
+    "phase": "mathsolver_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s4",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "pi/2",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 3
+   },
+   {
+    "step_id": "s6",
+    "order": 6,
+    "kind": "llm",
+    "agent_id": "mathsolver",
+    "agent_role": "MathSolver",
+    "agent_label": null,
+    "phase": "mathsolver_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s4",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s5",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "",
+    "structured": null,
+    "tool_calls": [
+     {
+      "name": "transfer_to_verifier",
+      "arguments": {},
+      "result": null,
+      "error": null,
+      "id": "call_0002"
+     }
+    ],
+    "finish_reason": null,
+    "output_tokens_est": 0
+   },
+   {
+    "step_id": "s7",
+    "order": 7,
+    "kind": "tool",
+    "agent_id": "tool:environment",
+    "agent_role": "environment",
+    "agent_label": null,
+    "phase": "tool_result",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s6",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "[{\"name\": \"transfer_to_verifier\", \"result\": \"Transferred to Verifier, adopting the role of Verifier immediately.\", \"call_id\": \"call_0002\"}]",
+    "structured": null,
+    "tool_calls": [
+     {
+      "name": "environment",
+      "arguments": null,
+      "result": "[{\"name\": \"transfer_to_verifier\", \"result\": \"Transferred to Verifier, adopting the role of Verifier immediately.\", \"call_id\": \"call_0002\"}]",
+      "error": null
+     }
+    ],
+    "finish_reason": null,
+    "output_tokens_est": null
+   },
+   {
+    "step_id": "s8",
+    "order": 8,
+    "kind": "llm",
+    "agent_id": "mathsolver",
+    "agent_role": "MathSolver",
+    "agent_label": null,
+    "phase": "mathsolver_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s4",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s5",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s6",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s7",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Transferred to Verifier, adopting the role of Verifier immediately.",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 13
+   },
+   {
+    "step_id": "s9",
+    "order": 9,
+    "kind": "llm",
+    "agent_id": "verifier",
+    "agent_role": "Verifier",
+    "agent_label": null,
+    "phase": "verifier_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s4",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s5",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s6",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s7",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s8",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "",
+    "structured": null,
+    "tool_calls": [
+     {
+      "name": "compute",
+      "arguments": {
+       "expression": "sqrt(0**2 + 3**2)"
+      },
+      "result": null,
+      "error": null,
+      "id": "call_0003"
+     },
+     {
+      "name": "compute",
+      "arguments": {
+       "expression": "atan2(3, 0)"
+      },
+      "result": null,
+      "error": null,
+      "id": "call_0004"
+     },
+     {
+      "name": "verify_answer",
+      "arguments": {
+       "expected": "(3, pi/2)",
+       "computed": "(3, pi/2)"
+      },
+      "result": null,
+      "error": null,
+      "id": "call_0005"
+     }
+    ],
+    "finish_reason": null,
+    "output_tokens_est": 0
+   },
+   {
+    "step_id": "s10",
+    "order": 10,
+    "kind": "tool",
+    "agent_id": "tool:environment",
+    "agent_role": "environment",
+    "agent_label": null,
+    "phase": "tool_result",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s9",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "[{\"name\": \"compute\", \"result\": \"3\", \"call_id\": \"call_0003\"}, {\"name\": \"compute\", \"result\": \"pi/2\", \"call_id\": \"call_0004\"}, {\"name\": \"verify_answer\", \"result\": \"VERIFIED_CORRECT: exact string match\", \"call_id\": \"call_0005\"}]",
+    "structured": null,
+    "tool_calls": [
+     {
+      "name": "environment",
+      "arguments": null,
+      "result": "[{\"name\": \"compute\", \"result\": \"3\", \"call_id\": \"call_0003\"}, {\"name\": \"compute\", \"result\": \"pi/2\", \"call_id\": \"call_0004\"}, {\"name\": \"verify_answer\", \"result\": \"VERIFIED_CORRECT: exact string match\", \"call_id\": \"call_0005\"}]",
+      "error": null
+     }
+    ],
+    "finish_reason": null,
+    "output_tokens_est": null
+   },
+   {
+    "step_id": "s11",
+    "order": 11,
+    "kind": "llm",
+    "agent_id": "verifier",
+    "agent_role": "Verifier",
+    "agent_label": null,
+    "phase": "verifier_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s4",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s5",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s6",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s7",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s8",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s9",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s10",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "3\npi/2\nVERIFIED_CORRECT: exact string match",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 14
+   },
+   "...[+1 items]"
+  ],
+  "final": {
+   "answer": null,
+   "response": null,
+   "source_step_ids": [
+    "s12"
+   ]
+  },
+  "labels": {
+   "gold": "\\left( 3, \\frac{\\pi}{2} \\right)",
+   "acceptable_answers": null,
+   "is_correct": true,
+   "is_valid": null,
+   "status": null,
+   "verification_path": null,
+   "execution_successful": null,
+   "injection": [],
+   "injection_targets": [],
+   "llm_meta": {},
+   "paired_normal_run_ids": [],
+   "external": {
+    "dataset": "AFTraj",
+    "taxonomy": "AFTraj decisive error (k*, a*)",
+    "split": "safe",
+    "conv_id": "math_0000_safe",
+    "domain": "math"
+   },
+   "is_correct_source": "AFTraj split (safe = verified safe run; unsafe/diagnosed = natural failure)"
+  },
+  "provenance": {
+   "source_dataset": "aftraj",
+   "source_record_id": "math_0000_safe",
+   "wrapper_contract": "public_dataset",
+   "input_messages_clean": null,
+   "sources_recorded": false,
+   "history_alignment_ok": null,
+   "reasoning_exported": false,
+   "output_tokenizer": "tiktoken:o200k_base",
+   "converter": "data_tools.public_to_mas_traj (MHT r57)",
+   "tools_available": [
+    {
+     "description": "Evaluate a mathematical expression symbolically or numerically",
+     "name": "compute"
+    },
+    {
+     "description": "Verify whether a proposed answer matches the expected result",
+     "name": "verify_answer"
+    }
+   ]
+  }
+ },
+ {
+  "schema_version": "mas-traj/1",
+  "run_id": "aftraj|smolagents|unknown-model|HotpotQA/q_9684ed209d6a|normal|r0",
+  "question_id": "HotpotQA/q_9684ed209d6a",
+  "run_mode": "normal",
+  "run_index": 0,
+  "seed": null,
+  "framework": "smolagents",
+  "framework_family": "smolagents",
+  "framework_description": "smolagents: a manager CodeAgent reasons and writes Python code, delegating retrieval to a managed search_agent and finishing with final_answer(); each manager step reads its whole memory.",
+  "model": {
+   "name": "unknown-model"
+  },
+  "task": {
+   "dataset": "HotpotQA",
+   "query": "Were Scott Derrickson and Ed Wood of the same nationality?",
+   "images": [],
+   "observations": []
+  },
+  "steps": [
+   {
+    "step_id": "s0",
+    "order": 0,
+    "kind": "llm",
+    "agent_id": "manager",
+    "agent_role": "Manager",
+    "agent_label": null,
+    "phase": "manager_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [],
+    "output": "I’ll identify the nationalities of Scott Derrickson and Ed Wood, then compare them.",
+    "structured": null,
+    "tool_calls": [
+     {
+      "name": "python_interpreter",
+      "arguments": "# Scott Derrickson and Ed Wood are both American filmmakers.\nfinal_answer(\"Yes\")",
+      "result": null,
+      "error": null,
+      "id": null
+     }
+    ],
+    "finish_reason": null,
+    "output_tokens_est": 18
+   },
+   {
+    "step_id": "s1",
+    "order": 1,
+    "kind": "tool",
+    "agent_id": "tool:environment",
+    "agent_role": "environment",
+    "agent_label": null,
+    "phase": "tool_result",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Execution logs:\nLast output from code snippet:\nYes",
+    "structured": null,
+    "tool_calls": [
+     {
+      "name": "environment",
+      "arguments": null,
+      "result": "Execution logs:\nLast output from code snippet:\nYes",
+      "error": null
+     }
+    ],
+    "finish_reason": null,
+    "output_tokens_est": null
+   }
+  ],
+  "final": {
+   "answer": null,
+   "response": null,
+   "source_step_ids": [
+    "s1"
+   ]
+  },
+  "labels": {
+   "gold": "yes",
+   "acceptable_answers": null,
+   "is_correct": true,
+   "is_valid": null,
+   "status": null,
+   "verification_path": null,
+   "execution_successful": null,
+   "injection": [],
+   "injection_targets": [],
+   "llm_meta": {},
+   "paired_normal_run_ids": [],
+   "external": {
+    "dataset": "AFTraj",
+    "taxonomy": "AFTraj decisive error (k*, a*)",
+    "split": "safe",
+    "conv_id": "hotpotqa_0000_safe",
+    "domain": "agentic"
+   },
+   "is_correct_source": "AFTraj split (safe = verified safe run; unsafe/diagnosed = natural failure)"
+  },
+  "provenance": {
+   "source_dataset": "aftraj",
+   "source_record_id": "hotpotqa_0000_safe",
+   "wrapper_contract": "public_dataset",
+   "input_messages_clean": null,
+   "sources_recorded": false,
+   "history_alignment_ok": null,
+   "reasoning_exported": false,
+   "output_tokenizer": "tiktoken:o200k_base",
+   "converter": "data_tools.public_to_mas_traj (MHT r57)",
+   "tools_available": [
+    {
+     "description": "Execute Python code in a sandboxed environment",
+     "name": "python_interpreter"
+    },
+    {
+     "description": "Delegate web search and Wikipedia lookup to a specialized search agent",
+     "name": "search_agent"
+    }
+   ]
+  }
+ }
+]

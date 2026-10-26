@@ -1,4 +1,1286 @@
 {
+ "aftraj": {
+  "a_check": {
+   "duplicate_run_ids": 0,
+   "examples": [],
+   "fail": 0,
+   "pass": 1548,
+   "records": 1548
+  },
+  "b_sources_provenance": {
+   "mode_share": {
+    "aftraj_expert_team|geography_expert_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.39,
+     "patterns": 38,
+     "steps": 102
+    },
+    "aftraj_expert_team|manager_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.31,
+     "patterns": 107,
+     "steps": 436
+    },
+    "aftraj_expert_team|movie_expert_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.38,
+     "patterns": 12,
+     "steps": 84
+    },
+    "aftraj_expert_team|research_expert_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.37,
+     "patterns": 19,
+     "steps": 78
+    },
+    "aftraj_expert_team|sports_expert_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.75,
+     "patterns": 4,
+     "steps": 16
+    },
+    "aftraj_expert_team|statistics_expert_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.24,
+     "patterns": 24,
+     "steps": 101
+    },
+    "aftraj_expert_team|verification_expert_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.07,
+     "patterns": 86,
+     "steps": 382
+    },
+    "agents_handoff|codetester_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.33,
+     "patterns": 6,
+     "steps": 1083
+    },
+    "agents_handoff|codewriter_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.25,
+     "patterns": 5,
+     "steps": 1445
+    },
+    "agents_handoff|mathsolver_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.13,
+     "patterns": 76,
+     "steps": 3592
+    },
+    "agents_handoff|verifier_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.05,
+     "patterns": 303,
+     "steps": 2202
+    },
+    "single_tool_agent|tasksolver_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.08,
+     "patterns": 27,
+     "steps": 771
+    },
+    "smolagents|manager_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.27,
+     "patterns": 26,
+     "steps": 1923
+    },
+    "smolagents|search_agent_turn": {
+     "choice_steps": 397,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 458
+    }
+   },
+   "returncode": 0,
+   "slot_determined": {
+    "aftraj_expert_team|geography_expert_turn": {
+     "slot_determined": 0.39,
+     "steps": 102
+    },
+    "aftraj_expert_team|manager_turn": {
+     "slot_determined": 0.31,
+     "steps": 436
+    },
+    "aftraj_expert_team|movie_expert_turn": {
+     "slot_determined": 0.38,
+     "steps": 84
+    },
+    "aftraj_expert_team|research_expert_turn": {
+     "slot_determined": 0.37,
+     "steps": 78
+    },
+    "aftraj_expert_team|sports_expert_turn": {
+     "slot_determined": 0.75,
+     "steps": 16
+    },
+    "aftraj_expert_team|statistics_expert_turn": {
+     "slot_determined": 0.24,
+     "steps": 101
+    },
+    "aftraj_expert_team|verification_expert_turn": {
+     "slot_determined": 0.05,
+     "steps": 382
+    },
+    "agents_handoff|codetester_turn": {
+     "slot_determined": 0.33,
+     "steps": 1083
+    },
+    "agents_handoff|codewriter_turn": {
+     "slot_determined": 0.25,
+     "steps": 1445
+    },
+    "agents_handoff|mathsolver_turn": {
+     "slot_determined": 0.13,
+     "steps": 3592
+    },
+    "agents_handoff|verifier_turn": {
+     "slot_determined": 0.05,
+     "steps": 2202
+    },
+    "single_tool_agent|tasksolver_turn": {
+     "slot_determined": 0.08,
+     "steps": 771
+    },
+    "smolagents|manager_turn": {
+     "slot_determined": 0.27,
+     "steps": 1923
+    },
+    "smolagents|search_agent_turn": {
+     "slot_determined": 0.72,
+     "steps": 458
+    }
+   },
+   "stderr_tail": ""
+  },
+  "bytes": 1489271,
+  "c_text_match": {},
+  "convert_report": {
+   "kept/safe/aftraj_expert_team": 85,
+   "kept/safe/agents_handoff": 757,
+   "kept/safe/single_tool_agent": 19,
+   "kept/safe/smolagents": 301,
+   "kept/unsafe/aftraj_expert_team": 52,
+   "kept/unsafe/agents_handoff": 64,
+   "kept/unsafe/single_tool_agent": 43,
+   "kept/unsafe/smolagents": 227,
+   "skipped_injected": 728
+  },
+  "d_maa_exclusion": {
+   "distinct_queries": 1381,
+   "exact": 0,
+   "probe": 0,
+   "returncode": 0,
+   "stderr_tail": "",
+   "stdout": "/tmp/claude-0/-home-claude/9b735e89-5a87-5eae-b05f-ab9afe1203be/scratchpad/val/aftraj.jsonl: 1381 distinct queries; exact matches 0; probe candidates 0"
+  },
+  "e_tokens": {
+   "llm_output_o200k": 355030,
+   "query_plus_step_outputs_qwen3_8b": 998584,
+   "tool_output_o200k": 478764
+  },
+  "f_determinism": {
+   "identical": true,
+   "rerun_returncode": 0
+  },
+  "file": "/home/claude/public_mas/mas_traj/aftraj.jsonl.gz",
+  "frameworks": {
+   "aftraj_expert_team": {
+    "family": "groupchat",
+    "records": 137
+   },
+   "agents_handoff": {
+    "family": "agents_handoff",
+    "records": 821
+   },
+   "single_tool_agent": {
+    "family": "single_tool_agent",
+    "records": 62
+   },
+   "smolagents": {
+    "family": "smolagents",
+    "records": 528
+   }
+  },
+  "how_inferred": {
+   "aftraj_expert_team|excerpt|protocol": 115,
+   "aftraj_expert_team|structured_field|protocol": 348,
+   "aftraj_expert_team|verbatim|protocol": 8322,
+   "agents_handoff|structured_field|protocol": 3527,
+   "agents_handoff|verbatim|protocol": 75726,
+   "single_tool_agent|structured_field|protocol": 426,
+   "single_tool_agent|verbatim|protocol": 8111,
+   "smolagents|structured_field|protocol": 992,
+   "smolagents|verbatim|protocol": 4070
+  },
+  "is_correct": {
+   "False": 386,
+   "True": 1162
+  },
+  "per_framework": {
+   "aftraj_expert_team": {
+    "records": 137,
+    "src_protocol": 8785,
+    "steps_llm": 1199,
+    "steps_sources_empty": 137,
+    "steps_tool": 463,
+    "tok_llm_output_o200k": 108378,
+    "tok_tool_output_o200k": 241376
+   },
+   "agents_handoff": {
+    "records": 821,
+    "src_protocol": 79253,
+    "steps_llm": 8322,
+    "steps_sources_empty": 821,
+    "steps_tool": 3527,
+    "tok_llm_output_o200k": 130443,
+    "tok_tool_output_o200k": 151039
+   },
+   "single_tool_agent": {
+    "records": 62,
+    "src_protocol": 8537,
+    "steps_llm": 771,
+    "steps_sources_empty": 62,
+    "steps_tool": 426,
+    "tok_llm_output_o200k": 29617,
+    "tok_tool_output_o200k": 78086
+   },
+   "smolagents": {
+    "records": 528,
+    "src_protocol": 5062,
+    "steps_llm": 2381,
+    "steps_sources_empty": 528,
+    "steps_tool": 534,
+    "tok_llm_output_o200k": 86592,
+    "tok_tool_output_o200k": 8263
+   }
+  },
+  "sha256": "097e58010531d3123fd1db25f5010d2ab40c66e55be7812bce896b8c5f9b9c7c"
+ },
+ "agentrx_tau": {
+  "a_check": {
+   "duplicate_run_ids": 0,
+   "examples": [],
+   "fail": 0,
+   "pass": 29,
+   "records": 29
+  },
+  "b_sources_provenance": {
+   "mode_share": {
+    "tau_bench_agent|agent_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.06,
+     "patterns": 114,
+     "steps": 503
+    },
+    "tau_bench_agent|user_turn": {
+     "choice_steps": 188,
+     "mode_share": 0.12,
+     "patterns": 29,
+     "steps": 248
+    }
+   },
+   "returncode": 0,
+   "slot_determined": {
+    "tau_bench_agent|agent_turn": {
+     "slot_determined": 0.06,
+     "steps": 503
+    },
+    "tau_bench_agent|user_turn": {
+     "slot_determined": 0.12,
+     "steps": 248
+    }
+   },
+   "stderr_tail": ""
+  },
+  "bytes": 229498,
+  "c_text_match": {},
+  "convert_report": {
+   "kept": 29,
+   "labeled": 29
+  },
+  "d_maa_exclusion": {
+   "distinct_queries": 29,
+   "exact": 0,
+   "probe": 0,
+   "returncode": 0,
+   "stderr_tail": "",
+   "stdout": "/tmp/claude-0/-home-claude/9b735e89-5a87-5eae-b05f-ab9afe1203be/scratchpad/val/agentrx_tau.jsonl: 29 distinct queries; exact matches 0; probe candidates 0"
+  },
+  "e_tokens": {
+   "llm_output_o200k": 27188,
+   "query_plus_step_outputs_qwen3_8b": 155511,
+   "tool_output_o200k": 100447
+  },
+  "f_determinism": {
+   "identical": true,
+   "rerun_returncode": 0
+  },
+  "file": "/home/claude/public_mas/mas_traj/agentrx_tau.jsonl.gz",
+  "frameworks": {
+   "tau_bench_agent": {
+    "family": "tau_bench_agent",
+    "records": 29
+   }
+  },
+  "how_inferred": {
+   "tau_bench_agent|structured_field|protocol": 284,
+   "tau_bench_agent|verbatim|protocol": 12116
+  },
+  "is_correct": {
+   "False": 29
+  },
+  "per_framework": {
+   "tau_bench_agent": {
+    "records": 29,
+    "src_protocol": 12400,
+    "steps_llm": 751,
+    "steps_sources_empty": 29,
+    "steps_tool": 284,
+    "tok_llm_output_o200k": 27188,
+    "tok_tool_output_o200k": 100447
+   }
+  },
+  "sha256": "a478a73d227370546e6bebafe29b5c4d1cc004d0fd8d3496aea08c29c14f0ed4"
+ },
+ "aria": {
+  "a_check": {
+   "duplicate_run_ids": 0,
+   "examples": [],
+   "fail": 0,
+   "pass": 22237,
+   "records": 22237
+  },
+  "b_sources_provenance": {
+   "mode_share": {
+    "ag2_student_verifier|student_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.67,
+     "patterns": 4,
+     "steps": 3843
+    },
+    "ag2_student_verifier|verifier_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.72,
+     "patterns": 4,
+     "steps": 3541
+    },
+    "magentic_one|agent_response": {
+     "choice_steps": 4095,
+     "mode_share": 0.39,
+     "patterns": 223,
+     "steps": 6707
+    },
+    "magentic_one|final_answer": {
+     "choice_steps": 258,
+     "mode_share": 0.25,
+     "patterns": 108,
+     "steps": 2235
+    },
+    "magentic_one|instruction": {
+     "choice_steps": 630,
+     "mode_share": 0.39,
+     "patterns": 231,
+     "steps": 6746
+    },
+    "magentic_one|speaker_selection": {
+     "choice_steps": 4254,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 6612
+    },
+    "magentic_one|task_ledger": {
+     "choice_steps": 213,
+     "mode_share": 0.81,
+     "patterns": 65,
+     "steps": 2907
+    },
+    "metagpt|architect": {
+     "choice_steps": 0,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 3809
+    },
+    "metagpt|engineer": {
+     "choice_steps": 0,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 3809
+    },
+    "metagpt|product_manager": {
+     "choice_steps": 0,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 3809
+    },
+    "metagpt|qa_engineer": {
+     "choice_steps": 0,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 3809
+    },
+    "openmanus|think": {
+     "choice_steps": 0,
+     "mode_share": 0.64,
+     "patterns": 16,
+     "steps": 21143
+    }
+   },
+   "returncode": 0,
+   "slot_determined": {
+    "ag2_student_verifier|student_turn": {
+     "slot_determined": 0.66,
+     "steps": 3843
+    },
+    "ag2_student_verifier|verifier_turn": {
+     "slot_determined": 0.52,
+     "steps": 3541
+    },
+    "magentic_one|agent_response": {
+     "slot_determined": 0.36,
+     "steps": 6707
+    },
+    "magentic_one|final_answer": {
+     "slot_determined": 0.22,
+     "steps": 2235
+    },
+    "magentic_one|instruction": {
+     "slot_determined": 0.35,
+     "steps": 6746
+    },
+    "magentic_one|speaker_selection": {
+     "slot_determined": 0.36,
+     "steps": 6612
+    },
+    "magentic_one|task_ledger": {
+     "slot_determined": 0.81,
+     "steps": 2907
+    },
+    "metagpt|architect": {
+     "slot_determined": 1.0,
+     "steps": 3809
+    },
+    "metagpt|engineer": {
+     "slot_determined": 1.0,
+     "steps": 3809
+    },
+    "metagpt|product_manager": {
+     "slot_determined": 1.0,
+     "steps": 3809
+    },
+    "metagpt|qa_engineer": {
+     "slot_determined": 1.0,
+     "steps": 3809
+    },
+    "openmanus|think": {
+     "slot_determined": 0.64,
+     "steps": 21143
+    }
+   },
+   "stderr_tail": ""
+  },
+  "bytes": 40857195,
+  "c_text_match": {},
+  "convert_report": {
+   "dropped_medical_mmlu/test": 456,
+   "dropped_medical_mmlu/train": 1328,
+   "dropped_medical_mmlu/validation": 447,
+   "kept/ag2": 2558,
+   "kept/magentic-one": 2369,
+   "kept/metagpt": 3809,
+   "kept/openmanus": 13501,
+   "openmanus_rollups_dropped": 1402
+  },
+  "d_maa_exclusion": {
+   "distinct_queries": 15703,
+   "exact": 0,
+   "probe": 0,
+   "returncode": 0,
+   "stderr_tail": "",
+   "stdout": "/tmp/claude-0/-home-claude/9b735e89-5a87-5eae-b05f-ab9afe1203be/scratchpad/val/aria.jsonl: 15703 distinct queries; exact matches 0; probe candidates 0"
+  },
+  "e_tokens": {
+   "llm_output_o200k": 27325533,
+   "query_plus_step_outputs_qwen3_8b": 42125404,
+   "tool_output_o200k": 10206292
+  },
+  "f_determinism": {
+   "identical": true,
+   "rerun_returncode": 0
+  },
+  "file": "/home/claude/public_mas/mas_traj/aria.jsonl.gz",
+  "frameworks": {
+   "ag2_student_verifier": {
+    "family": "ag2_student_verifier",
+    "records": 2558
+   },
+   "magentic_one": {
+    "family": "groupchat",
+    "records": 2369
+   },
+   "metagpt": {
+    "family": "metagpt",
+    "records": 3809
+   },
+   "openmanus": {
+    "family": "openmanus",
+    "records": 13501
+   }
+  },
+  "how_inferred": {
+   "ag2_student_verifier|excerpt|protocol": 2412,
+   "ag2_student_verifier|verbatim|protocol": 16175,
+   "magentic_one|control|protocol": 6707,
+   "magentic_one|excerpt|protocol": 524,
+   "magentic_one|structured_field|protocol": 6612,
+   "magentic_one|verbatim|protocol": 71933,
+   "metagpt|excerpt|protocol": 233,
+   "metagpt|verbatim|protocol": 19045,
+   "openmanus|excerpt|protocol": 46,
+   "openmanus|structured_field|protocol": 21172,
+   "openmanus|summary|protocol": 38808,
+   "openmanus|verbatim|protocol": 117942
+  },
+  "is_correct": {
+   "False": 18653,
+   "True": 3584
+  },
+  "per_framework": {
+   "ag2_student_verifier": {
+    "records": 2558,
+    "src_protocol": 18587,
+    "steps_llm": 7384,
+    "steps_sources_empty": 2566,
+    "steps_tool": 5003,
+    "tok_llm_output_o200k": 3140143,
+    "tok_tool_output_o200k": 3612088
+   },
+   "magentic_one": {
+    "records": 2369,
+    "src_protocol": 85776,
+    "steps_llm": 25207,
+    "steps_sources_empty": 2369,
+    "steps_tool": 524,
+    "tok_llm_output_o200k": 15447280,
+    "tok_tool_output_o200k": 205147
+   },
+   "metagpt": {
+    "records": 3809,
+    "src_protocol": 19278,
+    "steps_llm": 15236,
+    "steps_sources_empty": 3809,
+    "steps_tool": 233,
+    "tok_llm_output_o200k": 5683376,
+    "tok_tool_output_o200k": 17790
+   },
+   "openmanus": {
+    "records": 13501,
+    "src_protocol": 177968,
+    "steps_llm": 21143,
+    "steps_sources_empty": 13501,
+    "steps_tool": 33317,
+    "tok_llm_output_o200k": 3054734,
+    "tok_tool_output_o200k": 6371267
+   }
+  },
+  "sha256": "99db3b5676f3af779460fed641b03aa3525712be948663c9d3c7199fd641852a"
+ },
+ "mascope": {
+  "a_check": {
+   "duplicate_run_ids": 0,
+   "examples": [],
+   "fail": 0,
+   "pass": 260,
+   "records": 260
+  },
+  "b_sources_provenance": {
+   "mode_share": {
+    "langgraph_centralized|agent_turn": {
+     "choice_steps": 41,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 64
+    },
+    "langgraph_centralized|hub": {
+     "choice_steps": 0,
+     "mode_share": 0.33,
+     "patterns": 4,
+     "steps": 69
+    },
+    "langgraph_decentralized|agent_turn": {
+     "choice_steps": 72,
+     "mode_share": 0.75,
+     "patterns": 2,
+     "steps": 108
+    },
+    "langgraph_layered|agent_turn": {
+     "choice_steps": 69,
+     "mode_share": 0.2,
+     "patterns": 5,
+     "steps": 115
+    },
+    "langgraph_shared_pool|agent_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.08,
+     "patterns": 12,
+     "steps": 300
+    },
+    "mascope_autogen|agent_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.15,
+     "patterns": 37,
+     "steps": 363
+    },
+    "mascope_autogen|manager": {
+     "choice_steps": 0,
+     "mode_share": 0.14,
+     "patterns": 39,
+     "steps": 380
+    },
+    "mascope_crewai|agent_turn": {
+     "choice_steps": 37,
+     "mode_share": 0.47,
+     "patterns": 14,
+     "steps": 115
+    },
+    "mascope_crewai|leader_plan": {
+     "choice_steps": 0,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 31
+    },
+    "mascope_debate|agent_turn": {
+     "choice_steps": 470,
+     "mode_share": 0.67,
+     "patterns": 2,
+     "steps": 846
+    }
+   },
+   "returncode": 0,
+   "slot_determined": {
+    "langgraph_centralized|agent_turn": {
+     "slot_determined": 0.95,
+     "steps": 64
+    },
+    "langgraph_centralized|hub": {
+     "slot_determined": 0.33,
+     "steps": 69
+    },
+    "langgraph_decentralized|agent_turn": {
+     "slot_determined": 1.0,
+     "steps": 108
+    },
+    "langgraph_layered|agent_turn": {
+     "slot_determined": 1.0,
+     "steps": 115
+    },
+    "langgraph_shared_pool|agent_turn": {
+     "slot_determined": 0.33,
+     "steps": 300
+    },
+    "mascope_autogen|agent_turn": {
+     "slot_determined": 0.17,
+     "steps": 363
+    },
+    "mascope_autogen|manager": {
+     "slot_determined": 0.14,
+     "steps": 380
+    },
+    "mascope_crewai|agent_turn": {
+     "slot_determined": 0.57,
+     "steps": 115
+    },
+    "mascope_crewai|leader_plan": {
+     "slot_determined": 1.0,
+     "steps": 31
+    },
+    "mascope_debate|agent_turn": {
+     "slot_determined": 1.0,
+     "steps": 846
+    }
+   },
+   "stderr_tail": ""
+  },
+  "bytes": 1329678,
+  "c_text_match": {},
+  "convert_report": {
+   "kept/Inject-Mix/mascope_autogen": 55,
+   "kept/Inject-Mix/mascope_crewai": 31,
+   "kept/Inject-Mix/mascope_debate": 94,
+   "kept/LG-Ctrl/langgraph_centralized": 23,
+   "kept/LG-Ctrl/langgraph_decentralized": 9,
+   "kept/LG-Ctrl/langgraph_layered": 23,
+   "kept/LG-Ctrl/langgraph_shared_pool": 25,
+   "skipped_injected/Inject-Mix": 781,
+   "skipped_injected/LG-Ctrl": 328,
+   "system_blocks_dropped": 260
+  },
+  "d_maa_exclusion": {
+   "distinct_queries": 165,
+   "exact": 0,
+   "probe": 0,
+   "returncode": 0,
+   "stderr_tail": "",
+   "stdout": "/tmp/claude-0/-home-claude/9b735e89-5a87-5eae-b05f-ab9afe1203be/scratchpad/val/mascope.jsonl: 165 distinct queries; exact matches 0; probe candidates 0"
+  },
+  "e_tokens": {
+   "llm_output_o200k": 961825,
+   "query_plus_step_outputs_qwen3_8b": 999244,
+   "tool_output_o200k": 0
+  },
+  "f_determinism": {
+   "identical": true,
+   "rerun_returncode": 0
+  },
+  "file": "/home/claude/public_mas/mas_traj/mascope.jsonl.gz",
+  "frameworks": {
+   "langgraph_centralized": {
+    "family": "langgraph_centralized",
+    "records": 23
+   },
+   "langgraph_decentralized": {
+    "family": "debate",
+    "records": 9
+   },
+   "langgraph_layered": {
+    "family": "langgraph_layered",
+    "records": 23
+   },
+   "langgraph_shared_pool": {
+    "family": "langgraph_shared_pool",
+    "records": 25
+   },
+   "mascope_autogen": {
+    "family": "groupchat",
+    "records": 55
+   },
+   "mascope_crewai": {
+    "family": "crewai",
+    "records": 31
+   },
+   "mascope_debate": {
+    "family": "debate",
+    "records": 94
+   }
+  },
+  "how_inferred": {
+   "langgraph_centralized|structured_field|protocol": 44,
+   "langgraph_centralized|verbatim|protocol": 158,
+   "langgraph_decentralized|verbatim|protocol": 243,
+   "langgraph_layered|verbatim|protocol": 92,
+   "langgraph_shared_pool|verbatim|protocol": 1650,
+   "mascope_autogen|verbatim|protocol": 5157,
+   "mascope_crewai|structured_field|protocol": 115,
+   "mascope_crewai|verbatim|protocol": 72,
+   "mascope_debate|verbatim|protocol": 1692
+  },
+  "is_correct": {
+   "None": 260
+  },
+  "per_framework": {
+   "langgraph_centralized": {
+    "records": 23,
+    "src_protocol": 202,
+    "steps_llm": 133,
+    "steps_sources_empty": 23,
+    "tok_llm_output_o200k": 46228
+   },
+   "langgraph_decentralized": {
+    "records": 9,
+    "src_protocol": 243,
+    "steps_llm": 108,
+    "steps_sources_empty": 27,
+    "tok_llm_output_o200k": 86826
+   },
+   "langgraph_layered": {
+    "records": 23,
+    "src_protocol": 92,
+    "steps_llm": 115,
+    "steps_sources_empty": 23,
+    "tok_llm_output_o200k": 69848
+   },
+   "langgraph_shared_pool": {
+    "records": 25,
+    "src_protocol": 1650,
+    "steps_llm": 300,
+    "steps_sources_empty": 25,
+    "tok_llm_output_o200k": 156030
+   },
+   "mascope_autogen": {
+    "records": 55,
+    "src_protocol": 5157,
+    "steps_llm": 743,
+    "steps_sources_empty": 55,
+    "tok_llm_output_o200k": 186000
+   },
+   "mascope_crewai": {
+    "records": 31,
+    "src_protocol": 187,
+    "steps_llm": 146,
+    "steps_sources_empty": 31,
+    "tok_llm_output_o200k": 58644
+   },
+   "mascope_debate": {
+    "records": 94,
+    "src_protocol": 1692,
+    "steps_llm": 846,
+    "steps_sources_empty": 282,
+    "tok_llm_output_o200k": 358249
+   }
+  },
+  "sha256": "f99e7950f4b278013e42963152c5c599edd277ff36bf313fba77d5b62f27d015"
+ },
+ "mast_data": {
+  "a_check": {
+   "duplicate_run_ids": 0,
+   "examples": [],
+   "fail": 0,
+   "pass": 1642,
+   "records": 1642
+  },
+  "b_sources_provenance": {
+   "mode_share": {
+    "ag2_groupchat|agent_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.29,
+     "patterns": 20,
+     "steps": 585
+    },
+    "ag2_mathchat|assistant_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.42,
+     "patterns": 14,
+     "steps": 1012
+    },
+    "appworld_mas|agent_code": {
+     "choice_steps": 759,
+     "mode_share": 0.25,
+     "patterns": 97,
+     "steps": 1028
+    },
+    "chatdev|CodeComplete": {
+     "choice_steps": 40,
+     "mode_share": 0.45,
+     "patterns": 6,
+     "steps": 40
+    },
+    "chatdev|CodeReviewComment": {
+     "choice_steps": 996,
+     "mode_share": 0.38,
+     "patterns": 16,
+     "steps": 996
+    },
+    "chatdev|CodeReviewModification": {
+     "choice_steps": 996,
+     "mode_share": 0.38,
+     "patterns": 16,
+     "steps": 996
+    },
+    "chatdev|Coding": {
+     "choice_steps": 332,
+     "mode_share": 0.6,
+     "patterns": 5,
+     "steps": 332
+    },
+    "chatdev|DemandAnalysis": {
+     "choice_steps": 0,
+     "mode_share": 0.08,
+     "patterns": 20,
+     "steps": 4272
+    },
+    "chatdev|EnvironmentDoc": {
+     "choice_steps": 332,
+     "mode_share": 0.39,
+     "patterns": 18,
+     "steps": 332
+    },
+    "chatdev|LanguageChoose": {
+     "choice_steps": 4190,
+     "mode_share": 0.05,
+     "patterns": 26,
+     "steps": 4190
+    },
+    "chatdev|Manual": {
+     "choice_steps": 332,
+     "mode_share": 0.51,
+     "patterns": 13,
+     "steps": 332
+    },
+    "chatdev|Reflection": {
+     "choice_steps": 732,
+     "mode_share": 0.27,
+     "patterns": 20,
+     "steps": 732
+    },
+    "chatdev|TestErrorSummary": {
+     "choice_steps": 129,
+     "mode_share": 0.5,
+     "patterns": 11,
+     "steps": 129
+    },
+    "chatdev|TestModification": {
+     "choice_steps": 180,
+     "mode_share": 0.38,
+     "patterns": 17,
+     "steps": 180
+    },
+    "hyperagent|inner_step": {
+     "choice_steps": 1649,
+     "mode_share": 0.19,
+     "patterns": 55,
+     "steps": 1764
+    },
+    "hyperagent|planner": {
+     "choice_steps": 0,
+     "mode_share": 0.05,
+     "patterns": 418,
+     "steps": 555
+    },
+    "hyperagent|report_to_planner": {
+     "choice_steps": 450,
+     "mode_share": 0.08,
+     "patterns": 36,
+     "steps": 481
+    },
+    "magentic_one|agent_response": {
+     "choice_steps": 806,
+     "mode_share": 0.2,
+     "patterns": 146,
+     "steps": 1884
+    },
+    "magentic_one|final_answer": {
+     "choice_steps": 75,
+     "mode_share": 0.09,
+     "patterns": 59,
+     "steps": 176
+    },
+    "magentic_one|instruction": {
+     "choice_steps": 874,
+     "mode_share": 0.19,
+     "patterns": 188,
+     "steps": 2035
+    },
+    "magentic_one|task_ledger": {
+     "choice_steps": 138,
+     "mode_share": 0.46,
+     "patterns": 56,
+     "steps": 427
+    },
+    "metagpt|SimpleCoder": {
+     "choice_steps": 0,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 430
+    },
+    "metagpt|SimpleReviewer": {
+     "choice_steps": 0,
+     "mode_share": 0.5,
+     "patterns": 2,
+     "steps": 857
+    },
+    "metagpt|SimpleTester": {
+     "choice_steps": 0,
+     "mode_share": 0.5,
+     "patterns": 2,
+     "steps": 857
+    },
+    "openmanus|plan": {
+     "choice_steps": 0,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 27
+    },
+    "openmanus|think": {
+     "choice_steps": 0,
+     "mode_share": 0.03,
+     "patterns": 114,
+     "steps": 857
+    }
+   },
+   "returncode": 0,
+   "slot_determined": {
+    "ag2_groupchat|agent_turn": {
+     "slot_determined": 0.47,
+     "steps": 585
+    },
+    "ag2_mathchat|assistant_turn": {
+     "slot_determined": 0.42,
+     "steps": 1012
+    },
+    "appworld_mas|agent_code": {
+     "slot_determined": 0.05,
+     "steps": 1028
+    },
+    "chatdev|CodeComplete": {
+     "slot_determined": 0.23,
+     "steps": 40
+    },
+    "chatdev|CodeReviewComment": {
+     "slot_determined": 0.19,
+     "steps": 996
+    },
+    "chatdev|CodeReviewModification": {
+     "slot_determined": 0.19,
+     "steps": 996
+    },
+    "chatdev|Coding": {
+     "slot_determined": 0.6,
+     "steps": 332
+    },
+    "chatdev|DemandAnalysis": {
+     "slot_determined": 0.16,
+     "steps": 4272
+    },
+    "chatdev|EnvironmentDoc": {
+     "slot_determined": 0.39,
+     "steps": 332
+    },
+    "chatdev|LanguageChoose": {
+     "slot_determined": 0.1,
+     "steps": 4190
+    },
+    "chatdev|Manual": {
+     "slot_determined": 0.39,
+     "steps": 332
+    },
+    "chatdev|Reflection": {
+     "slot_determined": 0.27,
+     "steps": 732
+    },
+    "chatdev|TestErrorSummary": {
+     "slot_determined": 0.33,
+     "steps": 129
+    },
+    "chatdev|TestModification": {
+     "slot_determined": 0.23,
+     "steps": 180
+    },
+    "hyperagent|inner_step": {
+     "slot_determined": 0.03,
+     "steps": 1764
+    },
+    "hyperagent|planner": {
+     "slot_determined": 0.05,
+     "steps": 555
+    },
+    "hyperagent|report_to_planner": {
+     "slot_determined": 0.1,
+     "steps": 481
+    },
+    "magentic_one|agent_response": {
+     "slot_determined": 0.1,
+     "steps": 1884
+    },
+    "magentic_one|final_answer": {
+     "slot_determined": 0.06,
+     "steps": 176
+    },
+    "magentic_one|instruction": {
+     "slot_determined": 0.09,
+     "steps": 2035
+    },
+    "magentic_one|task_ledger": {
+     "slot_determined": 0.46,
+     "steps": 427
+    },
+    "metagpt|SimpleCoder": {
+     "slot_determined": 1.0,
+     "steps": 430
+    },
+    "metagpt|SimpleReviewer": {
+     "slot_determined": 0.5,
+     "steps": 857
+    },
+    "metagpt|SimpleTester": {
+     "slot_determined": 0.5,
+     "steps": 857
+    },
+    "openmanus|plan": {
+     "slot_determined": 1.0,
+     "steps": 27
+    },
+    "openmanus|think": {
+     "slot_determined": 0.03,
+     "steps": 857
+    }
+   },
+   "stderr_tail": ""
+  },
+  "bytes": 7220221,
+  "c_text_match": {},
+  "convert_report": {
+   "empty_steps": 304,
+   "formats": {
+    "ag2_dict": 567,
+    "ag2_yaml": 30,
+    "appworld": 30,
+    "chatdev": 332,
+    "hyperagent": 28,
+    "magentic": 195,
+    "metagpt": 430,
+    "openmanus": 30
+   },
+   "mas_name_vs_format": {
+    "AG2->ag2_dict": 567,
+    "AG2->ag2_yaml": 30,
+    "AppWorld->appworld": 30,
+    "ChatDev->chatdev": 330,
+    "HyperAgent->chatdev": 2,
+    "HyperAgent->hyperagent": 28,
+    "Magentic->magentic": 195,
+    "MetaGPT->metagpt": 430,
+    "OpenManus->openmanus": 30
+   },
+   "skipped": []
+  },
+  "d_maa_exclusion": {
+   "distinct_queries": 953,
+   "exact": 0,
+   "probe": 0,
+   "returncode": 0,
+   "stderr_tail": "",
+   "stdout": "/tmp/claude-0/-home-claude/9b735e89-5a87-5eae-b05f-ab9afe1203be/scratchpad/val/mast_data.jsonl: 953 distinct queries; exact matches 0; probe candidates 0"
+  },
+  "e_tokens": {
+   "llm_output_o200k": 9350827,
+   "query_plus_step_outputs_qwen3_8b": 10074807,
+   "tool_output_o200k": 354834
+  },
+  "f_determinism": {
+   "identical": true,
+   "rerun_returncode": 0
+  },
+  "file": "/home/claude/public_mas/mas_traj/mast_data.jsonl.gz",
+  "frameworks": {
+   "ag2_groupchat": {
+    "family": "groupchat",
+    "records": 168
+   },
+   "ag2_mathchat": {
+    "family": "ag2_mathchat",
+    "records": 429
+   },
+   "appworld_mas": {
+    "family": "appworld_mas",
+    "records": 30
+   },
+   "chatdev": {
+    "family": "chatdev",
+    "records": 332
+   },
+   "hyperagent": {
+    "family": "hyperagent",
+    "records": 28
+   },
+   "magentic_one": {
+    "family": "groupchat",
+    "records": 195
+   },
+   "metagpt": {
+    "family": "metagpt",
+    "records": 430
+   },
+   "openmanus": {
+    "family": "openmanus",
+    "records": 30
+   }
+  },
+  "how_inferred": {
+   "ag2_groupchat|excerpt|protocol": 163,
+   "ag2_groupchat|verbatim|protocol": 1553,
+   "ag2_mathchat|excerpt|protocol": 583,
+   "ag2_mathchat|verbatim|protocol": 2176,
+   "appworld_mas|excerpt|protocol": 229,
+   "appworld_mas|structured_field|protocol": 1631,
+   "appworld_mas|verbatim|protocol": 18479,
+   "chatdev|structured_field|protocol": 29334,
+   "chatdev|verbatim|protocol": 76219,
+   "hyperagent|excerpt|protocol": 1764,
+   "hyperagent|summary|protocol": 3439,
+   "hyperagent|verbatim|protocol": 32245,
+   "magentic_one|excerpt|protocol": 136,
+   "magentic_one|verbatim|protocol": 33481,
+   "metagpt|verbatim|protocol": 3426,
+   "openmanus|structured_field|protocol": 1175,
+   "openmanus|verbatim|protocol": 21318
+  },
+  "is_correct": {
+   "False": 26,
+   "None": 1612,
+   "True": 4
+  },
+  "per_framework": {
+   "ag2_groupchat": {
+    "records": 168,
+    "src_protocol": 1716,
+    "steps_llm": 585,
+    "steps_sources_empty": 168,
+    "steps_tool": 331,
+    "tok_llm_output_o200k": 118147,
+    "tok_tool_output_o200k": 27410
+   },
+   "ag2_mathchat": {
+    "records": 429,
+    "src_protocol": 2759,
+    "steps_llm": 1012,
+    "steps_sources_empty": 429,
+    "steps_tool": 583,
+    "tok_llm_output_o200k": 335508,
+    "tok_tool_output_o200k": 24330
+   },
+   "appworld_mas": {
+    "records": 30,
+    "src_protocol": 20339,
+    "steps_llm": 1028,
+    "steps_sources_empty": 30,
+    "steps_tool": 1860,
+    "tok_llm_output_o200k": 112566,
+    "tok_tool_output_o200k": 243079
+   },
+   "chatdev": {
+    "records": 332,
+    "src_protocol": 105553,
+    "steps_llm": 12531,
+    "steps_sources_empty": 332,
+    "tok_llm_output_o200k": 4658369
+   },
+   "hyperagent": {
+    "records": 28,
+    "src_protocol": 37448,
+    "steps_llm": 2800,
+    "steps_sources_empty": 31,
+    "tok_llm_output_o200k": 763140
+   },
+   "magentic_one": {
+    "records": 195,
+    "src_protocol": 33617,
+    "steps_llm": 4522,
+    "steps_sources_empty": 195,
+    "steps_tool": 136,
+    "tok_llm_output_o200k": 2109051,
+    "tok_tool_output_o200k": 20490
+   },
+   "metagpt": {
+    "records": 430,
+    "src_protocol": 3426,
+    "steps_llm": 2144,
+    "steps_sources_empty": 430,
+    "tok_llm_output_o200k": 1116733
+   },
+   "openmanus": {
+    "records": 30,
+    "src_protocol": 22493,
+    "steps_llm": 884,
+    "steps_sources_empty": 30,
+    "steps_tool": 417,
+    "tok_llm_output_o200k": 137313,
+    "tok_tool_output_o200k": 39525
+   }
+  },
+  "sha256": "264de99d108644d6b6071cd3e319bdc57a73ea376afe4c895f8bcdd570872116"
+ },
  "traceelephant": {
   "a_check": {
    "duplicate_run_ids": 0,

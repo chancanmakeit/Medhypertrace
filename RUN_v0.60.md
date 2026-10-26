@@ -880,3 +880,11 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - 方案意见:每个分叉点 2 次重放不足以给单步定标签(需约 8–16 次),试点只用于估总体翻转率、基线、位置分布;规模化只在规则召回的候选点上做;请核真实运行的回放命中率(并行框架可能打乱哈希);自然重采样正例也要做"决定性原步骤对其重采样"的同槽位 AUROC。
 - 试点建议排在我方中训练试点之后;由用户决定。
 **MAA 排除清单:** `data_tools/maa_exclusion.py` 新增 `recall` 子命令(TF-IDF 1–2 gram 余弦与 5-gram Jaccard 各取前 k,只出候选对、不设阈值)。阳性对照:10 道 MAA 题干删 1/6 的词 + 同义替换,TF-IDF 前 1 名 10/10 找回(余弦 0.76–0.85;5-gram Jaccard 仅 0.09–0.11,对删词改写不敏感)。旧 AEGIS 445 题对 MAA 最高 TF-IDF 余弦 0.257(人工看过是不同题)。清单版本不变(v1)。
+
+### 第 60 轮(续,~08:10 UTC):公开数据集 → mas-traj/1 完成(子 agent),主会话已复核
+- 7 个数据集共 26,120 条运行,全部 normal:Who&When 184、TraceElephant 220、MAST-Data 1,642、ARIA 22,237(去医学 MMLU 2,231 条,与 r53 一致)、AFTraj 1,548(safe 1,162 + 自然失败 386;跳过注入 728)、MAScope 260(干净子集;跳过注入 1,109,MAST-clean 是 MAST-Data 子集)、AgentRx tau_retail 29(AgentRx magentic 的标注挂到 44 条 Who&When 上)。Qwen3 token(题干 + 步骤输出)合计约 57.2M,其中 ARIA 42.1M(74%)。
+- **主会话独立复核:** 对方 `check()` 26,120/26,120 通过;run_id 无重复;MAA 排除精确 0 / 探针 0;`sources_recorded` 全为 false;步骤字段中没有标签泄漏(含 "mistake" 的命中都是自然文本,如 "ordered by mistake");Who&When 转换器重跑逐字节一致;AgentRx 标注 44 条属实。
+- **sources:** 只有 TraceElephant 有逐步输入,text_match 推断 77K 个来源;其余全是协议推断 → 结构感知中训练在公开数据上主要学的是"协议",真实读集只有 TraceElephant 和对方的锚点数据。
+- **family:** Magentic-One、CaptainAgent、MAST AG2 群聊、AFTraj 专家团队、MAScope AutoGen → groupchat;MAScope 辩论与 LangGraph 去中心化 → debate;ARIA AG2(固定顺序)保留自己的名字。Magentic-One 归 groupchat 是保守选择,已请对方确认。
+- **待定小事:** MAST AG2 群聊 168 条含医学 MMLU 题、无学科字段 → 我方倾向按 r53 关键词规则过滤(与 ARIA 一致);Who&When 有 3 条 mistake_step 越界、6 条 agent 不一致;schema 只有 llm / tool 两种 kind(已在 issue 提议加 system)。
+- issue 评论 `docs/interfaces/issue_comment_r60b.md`(请对方抽查 20 条 / 数据集、确认 family、考虑 `kind: system`)。
