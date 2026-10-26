@@ -93,6 +93,7 @@
 ### 0.71 第 62 轮:中训练试点 v1 运行中(2026-10-26 19:15 UTC)
 - **用户决定:** 开始中训练试点;采用 phase_canonical;分叉试点排在中训练试点之后;fmt_v1_2 与 mdagents 开头筛选验证批准(已在 issue 6424293259 请对方执行)。
 - **在途(Linux #2,4 卡):** TAPT `mht_work/midtrain/tapt_pilot_v1/`(status、tapt.log;19:07 UTC 开始,约 2 小时,之后合并为 `Qwen3-8B-tapt_pilot_v1/`)→ 自动接续 SFT 队列 `mht_work/midtrain/sft_queue/`(QD + LQD_mac × graph/text × 种子 0/1,约 4 小时;结果 `maa/llm/<fold>/eval_swift[_s1]_Qwen3-8B-tapt_pilot_v1_<v>.json`)。完成后与 `results/c6_linux2_lora/seed_study.md` 的基座 3 种子比较,写 `results/midtrain_pilot/`。
+- **21:31 UTC 检查:** TAPT 已完成并合并(506 步,留出集 loss 0.477);SFT 队列 21:12 开始,预计约 01:15 UTC 完成。
 - 语料与设计见 `results/midtrain_pilot/README.md`;构建 `hgfm/midtrain/build_corpus.py`(沙箱;需要 `/home/claude/public_mas/mas_traj/` 与 medical-aegis 锚点导出);语料在私有 HF 数据集 `UUUooUUU/mht-midtrain-pilot`。HF 读 token 在 Linux #2 `~/.mht_secrets/hf_read.token`(600)。
 - 转换器已写入 `phase_canonical`(调用对方脚本;本地覆盖 magentic_one instruction → plan)。
 - 下一步(试点结果出来后):若 TAPT 有提升 → 结构感知中训练(图–文对齐);若无 → 先看结构感知中训练再决定是否规模化。之后通知 medical-aegis 启动分叉试点。
