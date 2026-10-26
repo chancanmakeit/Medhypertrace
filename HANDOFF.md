@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-23 10:30 UTC(第 59 轮;第 3 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-26 08:00 UTC(第 60 轮;第 3 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -11,10 +11,10 @@
 
 > **🚀 新会话快速恢复(第 38 轮写,v2 工作用):**
 > 1. `add_repo` 以 push 权限添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`(需要时再加 `graph-based-mas-fault-attribution-papers`),然后 clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走 git 代理,不需要 token。
-> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-23T10:23:10Z,即我方第 59 轮评论)。之后每次被唤醒都先跑一次。
+> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-26T07:56:52Z,即我方第 60 轮评论)。之后每次被唤醒都先跑一次。
 > 3. **MAA 数据(沙箱若已重置)**:`cd MedHyperTrace-v2 && pip install -r requirements.txt --break-system-packages`,然后运行 `bash scripts/prepare_maa.sh /home/claude/data_maa_v2 QD 8000`。脚本会自动下载、转换、对齐人工标签;**嵌入直接从仓库缓存 `MedHyperTrace-v2/data/maa_emb_minilm/` 恢复**(sha256 校验,约 10 秒,省去 CPU 上约 50 分钟;也可单独运行 `bash scripts/restore_maa_emb.sh <emb_dir>`);再导出图 token、构建 SFT。脚本能跳过已有的步骤;图缓存 `graphs_*.pkl` 在首次加载时自动重建。第一阶段结果已在 `results/phase1_maa/`,不必重跑。
 > 4. **API 密钥**:从 Project doc `claude/api端点` 读取,写到 `/home/claude/.mht_api.env`。绝不进 git。调用前先试跑估算成本,再问用户。
-> 5. 阅读顺序:**§0.68(第 59 轮,先读)** → §0.67(第 58 轮)→ §0.66(第 57 轮)→ §0.65(第 56 轮)→ §0.64(第 55 轮:已定事项与新待办)→ §0.63(第 54 轮)→ §0.62(第 53 轮末交接)→ §0.61(第 53 轮:收藏夹 15 个数据集、五折配对比较)→ §0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.59.md` 第 37–59 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
+> 5. 阅读顺序:**§0.69(第 60 轮,先读)** → §0.68(第 59 轮)→ §0.67(第 58 轮)→ §0.66(第 57 轮)→ §0.65(第 56 轮)→ §0.64(第 55 轮:已定事项与新待办)→ §0.63(第 54 轮)→ §0.62(第 53 轮末交接)→ §0.61(第 53 轮:收藏夹 15 个数据集、五折配对比较)→ §0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.60.md` 第 37–60 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
 > 6. **每轮必做**:讨论记录 `RUN_v0.<N>.md` 用 `git mv` 改版本号并追加本轮;更新本文 §0;commit 并 push;sleep 不超过约 60 秒。
 
 ---
@@ -89,6 +89,13 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.69 第 60 轮:种子实验完成;issue 第 39–41 轮已回复(2026-10-26 08:00 UTC)
+- **种子实验结论**(`results/c6_linux2_lora/seed_study.md`):MS-Swift 3 种子,graph − text QD +0.002 ± 0.012、LQD_mac +0.018 ± 0.030,CI 全含 0;graph 变体种子间波动更大。→ 当前 SFT 方式下 LLM 没用上图 token;下一步应换训练信号(图–文对齐 / 结构感知中训练),不是再加种子。Linux #2 现在 4 张卡都空闲。
+- **issue:** 对方(用户发起)提议规模化合成轨迹,主线"在真实轨迹上分叉";我方回复 6411029845(07:56Z):两层标签都要、主评测是缺陷层;**先做免费的中训练试点,有提升再花钱规模化**;分析器不给标准答案;每分叉点 2 次重放不够定单步标签;试点排在我方中训练试点之后。fmt_v1_2 与 mdagents 开头筛选验证被用户暂停。
+- **转换器子 agent:** 两次被 API 限额中断,已恢复;完成 Who&When(184 条,`check()` 0 问题),在做 TraceElephant → MAST-Data → ARIA → AFTraj → MAScope → AgentRx tau_retail。完成后主会话复核再提交。
+- **MAA 排除:** `maa_exclusion.py recall`(TF-IDF / 5-gram Jaccard 召回候选,人工复核);阳性对照 10/10。
+- **下一步(建议,待用户确认):** 中训练试点——语料 = 公开干净语料(转换完成后)+ MAA 输出(按折排除测试题)+ 锚点;先纯文本 TAPT,再结构感知;评测 MAA LQD 6 折 + QD,每设置 ≥ 2 种子。
 
 ### 0.68 第 59 轮:Linux #2 连接器断开;issue 第 38 轮已回复(2026-10-23 10:30 UTC)
 - **Linux #2 Jupyter 连接器断开**,需用户在 claude.ai 连接器设置里重新授权。种子实验(`mht_work/swift_seeds/`,10 个任务,02:03 UTC 开始)在服务器上是后台运行,不受影响;授权后读 status 并按 §0.66 的计划分析(写 `results/c6_linux2_lora/seed_study.md`)。

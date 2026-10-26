@@ -1,0 +1,208 @@
+{
+ "who_and_when": {
+  "a_check": {
+   "duplicate_run_ids": 0,
+   "examples": [],
+   "fail": 0,
+   "pass": 184,
+   "records": 184
+  },
+  "b_sources_provenance": {
+   "mode_share": {
+    "captainagent|expert_turn": {
+     "choice_steps": 0,
+     "mode_share": 0.01,
+     "patterns": 614,
+     "steps": 670
+    },
+    "captainagent|task_assignment": {
+     "choice_steps": 0,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 126
+    },
+    "magentic_one|agent_response": {
+     "choice_steps": 585,
+     "mode_share": 0.09,
+     "patterns": 116,
+     "steps": 642
+    },
+    "magentic_one|instruction": {
+     "choice_steps": 632,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 689
+    },
+    "magentic_one|next_speaker": {
+     "choice_steps": 629,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 631
+    },
+    "magentic_one|plan": {
+     "choice_steps": 0,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 58
+    },
+    "magentic_one|progress_ledger": {
+     "choice_steps": 303,
+     "mode_share": 0.08,
+     "patterns": 157,
+     "steps": 758
+    },
+    "magentic_one|replan": {
+     "choice_steps": 22,
+     "mode_share": 0.06,
+     "patterns": 40,
+     "steps": 47
+    },
+    "magentic_one|replan_limit": {
+     "choice_steps": 3,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 3
+    },
+    "magentic_one|request_satisfied": {
+     "choice_steps": 17,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 18
+    },
+    "magentic_one|stalled": {
+     "choice_steps": 48,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 48
+    },
+    "magentic_one|termination": {
+     "choice_steps": 30,
+     "mode_share": 1.0,
+     "patterns": 1,
+     "steps": 31
+    }
+   },
+   "returncode": 0,
+   "slot_determined": {
+    "captainagent|expert_turn": {
+     "slot_determined": 0.28,
+     "steps": 670
+    },
+    "captainagent|task_assignment": {
+     "slot_determined": 1.0,
+     "steps": 126
+    },
+    "magentic_one|agent_response": {
+     "slot_determined": 0.09,
+     "steps": 642
+    },
+    "magentic_one|instruction": {
+     "slot_determined": 0.08,
+     "steps": 689
+    },
+    "magentic_one|next_speaker": {
+     "slot_determined": 0.09,
+     "steps": 631
+    },
+    "magentic_one|plan": {
+     "slot_determined": 1.0,
+     "steps": 58
+    },
+    "magentic_one|progress_ledger": {
+     "slot_determined": 0.08,
+     "steps": 758
+    },
+    "magentic_one|replan": {
+     "slot_determined": 0.04,
+     "steps": 47
+    },
+    "magentic_one|replan_limit": {
+     "slot_determined": 0.33,
+     "steps": 3
+    },
+    "magentic_one|request_satisfied": {
+     "slot_determined": 0.22,
+     "steps": 18
+    },
+    "magentic_one|stalled": {
+     "slot_determined": 0.1,
+     "steps": 48
+    },
+    "magentic_one|termination": {
+     "slot_determined": 0.16,
+     "steps": 31
+    }
+   },
+   "stderr_tail": ""
+  },
+  "bytes": 1443980,
+  "c_text_match": {},
+  "convert_report": {
+   "agentrx_attached": 44,
+   "agentrx_magentic_total": 58,
+   "agentrx_text_mismatch": [],
+   "agentrx_trajectory_without_label": 14,
+   "skipped": 0
+  },
+  "d_maa_exclusion": {
+   "distinct_queries": 142,
+   "exact": 0,
+   "probe": 0,
+   "returncode": 0,
+   "stderr_tail": "",
+   "stdout": "/tmp/claude-0/-home-claude/9b735e89-5a87-5eae-b05f-ab9afe1203be/scratchpad/val/who_and_when.jsonl: 142 distinct queries; exact matches 0; probe candidates 0"
+  },
+  "e_tokens": {
+   "llm_output_o200k": 1174468,
+   "query_plus_step_outputs_qwen3_8b": 1420681,
+   "tool_output_o200k": 132952
+  },
+  "f_determinism": {
+   "identical": true,
+   "rerun_returncode": 0
+  },
+  "file": "/home/claude/public_mas/mas_traj/who_and_when.jsonl.gz",
+  "frameworks": {
+   "captainagent": {
+    "family": "groupchat",
+    "records": 126
+   },
+   "magentic_one": {
+    "family": "groupchat",
+    "records": 58
+   }
+  },
+  "how_inferred": {
+   "captainagent|excerpt|protocol": 303,
+   "captainagent|verbatim|protocol": 3094,
+   "magentic_one|control|protocol": 642,
+   "magentic_one|excerpt|protocol": 10,
+   "magentic_one|structured_field|protocol": 1420,
+   "magentic_one|verbatim|protocol": 13525
+  },
+  "is_correct": {
+   "False": 184
+  },
+  "per_framework": {
+   "captainagent": {
+    "records": 126,
+    "src_protocol": 3397,
+    "steps_llm": 796,
+    "steps_sources_empty": 126,
+    "steps_tool": 303,
+    "tok_llm_output_o200k": 238524,
+    "tok_tool_output_o200k": 130544
+   },
+   "magentic_one": {
+    "records": 58,
+    "src_protocol": 15597,
+    "steps_llm": 2925,
+    "steps_sources_empty": 58,
+    "steps_tool": 10,
+    "tok_llm_output_o200k": 935944,
+    "tok_tool_output_o200k": 2408
+   }
+  },
+  "sha256": "bded799eb8515e8e772d95d1c7e49316eda88b7008d7499b2acaac8552a90187"
+ }
+}

@@ -1,0 +1,774 @@
+[
+ {
+  "schema_version": "mas-traj/1",
+  "run_id": "who_and_when|magentic_one|gpt-4o|GAIA/5f982798-16b9-4051-ab57-cfc7ebdb2a91|normal|r0",
+  "question_id": "GAIA/5f982798-16b9-4051-ab57-cfc7ebdb2a91",
+  "run_mode": "normal",
+  "run_index": 0,
+  "seed": null,
+  "framework": "magentic_one",
+  "framework_family": "groupchat",
+  "framework_description": "Magentic-One: an Orchestrator writes a task ledger (facts and plan), then loops: an LLM progress ledger decides whether the request is satisfied, whether progress stalls, which agent speaks next and what instruction it gets; the instruction is broadcast and the selected agent (WebSurfer, FileSurfer,...[+289 chars]",
+  "model": {
+   "name": "gpt-4o"
+  },
+  "task": {
+   "dataset": "GAIA",
+   "query": "I read a paper about multiwavelength observations of fast radio bursts back in March 2021 on Arxiv, and it had a fascinating diagram of an X-ray time profile. There was a similar burst-1 diagram in another paper from one of the same authors about fast radio bursts back in July 2020, but I can't reca...[+140 chars]",
+   "images": [],
+   "observations": []
+  },
+  "steps": [
+   {
+    "step_id": "s0",
+    "order": 0,
+    "kind": "llm",
+    "agent_id": "orchestrator",
+    "agent_role": "Orchestrator (thought)",
+    "agent_label": null,
+    "phase": "plan",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [],
+    "output": "Initial plan:\n\nWe are working to address the following user request:\n\nI read a paper about multiwavelength observations of fast radio bursts back in March 2021 on Arxiv, and it had a fascinating diagram of an X-ray time profile. There was a similar burst-1 diagram in another paper from one of the sa...[+3023 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 749
+   },
+   {
+    "step_id": "s1",
+    "order": 1,
+    "kind": "llm",
+    "agent_id": "orchestrator",
+    "agent_role": "Orchestrator (thought)",
+    "agent_label": null,
+    "phase": "progress_ledger",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Updated Ledger:\n{\n  \"is_request_satisfied\": {\n    \"reason\": \"The original request for the difference in seconds has not been completed yet.\",\n    \"answer\": false\n  },\n  \"is_in_loop\": {\n    \"reason\": \"We have just started working on the request and are not yet repeating the same actions.\",\n    \"answe...[+705 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 241
+   },
+   {
+    "step_id": "s2",
+    "order": 2,
+    "kind": "llm",
+    "agent_id": "orchestrator",
+    "agent_role": "Orchestrator (-> WebSurfer)",
+    "agent_label": null,
+    "phase": "instruction",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Please search for the paper titled 'multiwavelength observations of fast radio bursts' on Arxiv published in March 2021 and retrieve the specific details of the measurement time span in seconds for the X-ray time profile diagram.",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 45
+   },
+   {
+    "step_id": "s3",
+    "order": 3,
+    "kind": "llm",
+    "agent_id": "websurfer",
+    "agent_role": "WebSurfer",
+    "agent_label": null,
+    "phase": "agent_response",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "control",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "I typed 'multiwavelength observations of fast radio bursts site:arxiv.org' into '0 characters out of 2000'.\n\nHere is a screenshot of [multiwavelength observations of fast radio bursts site:arxiv.org - Search](https://www.bing.com/search?q=multiwavelength+observations+of+fast+radio+bursts+site%3Aarxi...[+3625 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 1169
+   },
+   {
+    "step_id": "s4",
+    "order": 4,
+    "kind": "llm",
+    "agent_id": "orchestrator",
+    "agent_role": "Orchestrator (thought)",
+    "agent_label": null,
+    "phase": "progress_ledger",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Updated Ledger:\n{\n  \"is_request_satisfied\": {\n    \"reason\": \"We have found the title and details of the March 2021 paper on Arxiv, but we need to retrieve specific details of the measurement time span in seconds for the X-ray time profile diagram.\",\n    \"answer\": false\n  },\n  \"is_in_loop\": {\n    \"re...[+889 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 279
+   },
+   {
+    "step_id": "s5",
+    "order": 5,
+    "kind": "llm",
+    "agent_id": "orchestrator",
+    "agent_role": "Orchestrator (-> WebSurfer)",
+    "agent_label": null,
+    "phase": "instruction",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s4",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Please open the full text of the identified March 2021 Arxiv paper (arxiv:2103.07786) titled 'Multiwavelength observations of Fast Radio Bursts' and locate the X-ray time profile diagram. Extract the specific measurement time span in seconds from this diagram.",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 58
+   },
+   {
+    "step_id": "s6",
+    "order": 6,
+    "kind": "llm",
+    "agent_id": "orchestrator",
+    "agent_role": "Orchestrator (thought)",
+    "agent_label": null,
+    "phase": "next_speaker",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s4",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Next speaker WebSurfer",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 5
+   },
+   {
+    "step_id": "s7",
+    "order": 7,
+    "kind": "llm",
+    "agent_id": "websurfer",
+    "agent_role": "WebSurfer",
+    "agent_label": null,
+    "phase": "agent_response",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s4",
+      "how": "control",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s5",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "I clicked '[2103.07786] Multiwavelength observations of Fast Radio Bursts'.\n\nHere is a screenshot of [[2103.07786] Multiwavelength observations of Fast Radio Bursts](http://export.arxiv.org/abs/2103.07786). The viewport shows 76% of the webpage, and is positioned at the top of the page.\nThe followin...[+3573 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 944
+   },
+   {
+    "step_id": "s8",
+    "order": 8,
+    "kind": "llm",
+    "agent_id": "orchestrator",
+    "agent_role": "Orchestrator (thought)",
+    "agent_label": null,
+    "phase": "progress_ledger",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s5",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s7",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Updated Ledger:\n{\n  \"is_request_satisfied\": {\n    \"reason\": \"We have identified the paper and are now ready to retrieve it, but we still need the specific measurement time span in seconds from the diagram within the paper.\",\n    \"answer\": false\n  },\n  \"is_in_loop\": {\n    \"reason\": \"We are not in a l...[+959 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 295
+   },
+   {
+    "step_id": "s9",
+    "order": 9,
+    "kind": "llm",
+    "agent_id": "orchestrator",
+    "agent_role": "Orchestrator (-> WebSurfer)",
+    "agent_label": null,
+    "phase": "instruction",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s8",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Please open the PDF version of the identified March 2021 Arxiv paper (arxiv:2103.07786) titled 'Multiwavelength observations of Fast Radio Bursts' and locate the X-ray time profile diagram. Extract the specific measurement time span in seconds from this diagram.",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 58
+   },
+   {
+    "step_id": "s10",
+    "order": 10,
+    "kind": "llm",
+    "agent_id": "orchestrator",
+    "agent_role": "Orchestrator (thought)",
+    "agent_label": null,
+    "phase": "next_speaker",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s8",
+      "how": "structured_field",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Next speaker WebSurfer",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 5
+   },
+   {
+    "step_id": "s11",
+    "order": 11,
+    "kind": "llm",
+    "agent_id": "websurfer",
+    "agent_role": "WebSurfer",
+    "agent_label": null,
+    "phase": "agent_response",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s5",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s7",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s8",
+      "how": "control",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s9",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "I clicked 'PDF'.\n\nHere is a screenshot of [](http://export.arxiv.org/pdf/2103.07786). The viewport shows 100% of the webpage, and is positioned at the top of the page.\nThe following metadata was extracted from the webpage:\n\n{}\n\nAutomatic OCR of the page screenshot has detected the following text:\n\nS...[+59 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 86
+   },
+   "...[+54 items]"
+  ],
+  "final": {
+   "answer": "31",
+   "response": null,
+   "source_step_ids": [
+    "s65"
+   ]
+  },
+  "labels": {
+   "gold": "0.2",
+   "acceptable_answers": null,
+   "is_correct": false,
+   "is_valid": null,
+   "status": null,
+   "verification_path": null,
+   "execution_successful": null,
+   "injection": [],
+   "injection_targets": [],
+   "llm_meta": {},
+   "paired_normal_run_ids": [],
+   "external": {
+    "dataset": "Who&When",
+    "taxonomy": "who_when_mistake",
+    "subset": "Hand-Crafted",
+    "mistake_agent": "WebSurfer",
+    "mistake_step": "3",
+    "mistake_step_index_base": "index into the dataset's history list (history[0] = human task message, not a step)",
+    "mistake_step_id": "s2",
+    "mistake_reason": "WebSurfer's inability to reliably access the requested documents resulted in the overall task failure, as the necessary time span data could not be extracted or compared. This underscores the need for enhanced fallback mechanisms and more robust search strategies.",
+    "mistake_type": null,
+    "is_corrected": false,
+    "agentrx": {
+     "taxonomy": "AgentRx failure categories",
+     "failure_summary": "The agent could not download and read the specified PDF file due to a hallucination by the FileSurfer agent.",
+     "failures": [
+      {
+       "failure_id": "1",
+       "step_number": 13,
+       "step_reason": "Websurfer could not  download a PDF file and search throught it which was an instruction given by Orchestrator.",
+       "failure_category": "Instruction/Plan Adherence Failure",
+       "category_reason": "Instruction not followed, the agent did not download and search through the PDF file as instructed",
+       "failed_agent": "Websurfer",
+       "step_id": "s11"
+      },
+      {
+       "failure_id": "2",
+       "step_number": 17,
+       "step_reason": "Websurfer could not  download a PDF file and search throught it which was an instruction given by Orchestrator",
+       "failure_category": "Instruction/Plan Adherence Failure",
+       "category_reason": "Websurfer could not  download a PDF file and search throught it which was an instruction given by Orchestrator",
+       "failed_agent": "Websurfer",
+       "step_id": "s15"
+      },
+      {
+       "failure_id": "3",
+       "step_number": 33,
+       "step_reason": "FileSurfer hallucinated. It downloaded the file at '/workspace/workspace/http:/export.arxiv.org/pdf/2007.xx' but later attempted to read a non-existent file 'file:///workspace/path_to_july_2020_paper.pdf'.",
+       "failure_category": "Invention of new information",
+       "category_reason": "FileSurfer hallucinated. It downloaded the file at '/workspace/workspace/http:/export.arxiv.org/pdf/2007.xx' but later attempted to read a non-existent file 'file:///workspace/path_to_july_2020_paper.pdf'.",
+       "failed_agent": "FileSurfer",
+       "step_id": "s31"
+      }
+     ],
+     "root_cause_failure_id": "3",
+     "root_cause_reason": "The Orchestrator could tried to recover from earlier errors but the FileSurfer hallucination was a critical failure that prevented further progress.",
+     "step_number_base": "AgentRx steps[].index (1-based over the same history list)"
+    }
+   },
+   "is_correct_source": "dataset: every trajectory is a failed run with a mistake annotation"
+  },
+  "provenance": {
+   "source_dataset": "who_and_when",
+   "source_record_id": "Hand-Crafted/5f982798-16b9-4051-ab57-cfc7ebdb2a91",
+   "wrapper_contract": "public_dataset",
+   "input_messages_clean": null,
+   "sources_recorded": false,
+   "history_alignment_ok": null,
+   "reasoning_exported": false,
+   "output_tokenizer": "tiktoken:o200k_base",
+   "converter": "data_tools.public_to_mas_traj (MHT r57)",
+   "model_source": "log lines name gpt-4o-2024-08-06 (resolved 2024-05-13)"
+  }
+ },
+ {
+  "schema_version": "mas-traj/1",
+  "run_id": "who_and_when|captainagent|unknown-model|AssistantBench/4dbedc5e1a0205e14b7ff3ba89bce3060dab15d0ada3b7e1351a6f2aa8287aec|normal|r0",
+  "question_id": "AssistantBench/4dbedc5e1a0205e14b7ff3ba89bce3060dab15d0ada3b7e1351a6f2aa8287aec",
+  "run_mode": "normal",
+  "run_index": 0,
+  "seed": null,
+  "framework": "captainagent",
+  "framework_family": "groupchat",
+  "framework_description": "CaptainAgent: a captain (manager) LLM plans and calls seek_agent_help, which builds a team of experts (role matching by LLM) and starts a nested AutoGen GroupChat; the chat manager selects the next expert by an LLM call over the shared thread, experts reply with reasoning or code, a Computer_termina...[+113 chars]",
+  "model": {
+   "name": "unknown-model"
+  },
+  "task": {
+   "dataset": "AssistantBench",
+   "query": "How much did I save by purchasing a season pass instead of daily tickets for California's Great America in San Jose, if I planned to visit once a month in June, July, August, and September during the summer of 2024?",
+   "images": [],
+   "observations": []
+  },
+  "steps": [
+   {
+    "step_id": "s0",
+    "order": 0,
+    "kind": "llm",
+    "agent_id": "problemsolving_expert",
+    "agent_role": "ProblemSolving_Expert",
+    "agent_label": null,
+    "phase": "task_assignment",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [],
+    "output": "You are given: (1) a task and advises from your manager with a specific plan and (2) a general task.\nCollect information from the general task, follow the suggestions from manager to solve the task.\n\n# General Task\nHow much did I save by purchasing a season pass instead of daily tickets for Californ...[+882 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 275
+   },
+   {
+    "step_id": "s1",
+    "order": 1,
+    "kind": "llm",
+    "agent_id": "verification_expert",
+    "agent_role": "Verification_Expert",
+    "agent_label": null,
+    "phase": "expert_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "To solve the task and verify the provided costs for a daily ticket and a season pass for California's Great America in San Jose for the summer of 2024, I will follow the steps mentioned in the plan:\n\n1. Confirm the cost of a daily ticket for California's Great America in 2024.\n2. Confirm the cost of...[+2168 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 560
+   },
+   {
+    "step_id": "s2",
+    "order": 2,
+    "kind": "tool",
+    "agent_id": "tool:computer_terminal",
+    "agent_role": "Computer_terminal",
+    "agent_label": null,
+    "phase": "code_execution",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s1",
+      "how": "excerpt",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "There is no code from the last 1 message for me to execute. Group chat manager should let other participants to continue the conversation. If the group chat manager want to end the conversation, you should let other participant reply me only with \"TERMINATE\"",
+    "structured": null,
+    "tool_calls": [
+     {
+      "name": "execute_code",
+      "arguments": null,
+      "result": "There is no code from the last 1 message for me to execute. Group chat manager should let other participants to continue the conversation. If the group chat manager want to end the conversation, you should let other participant reply me only with \"TERMINATE\"",
+      "error": null
+     }
+    ],
+    "finish_reason": null,
+    "output_tokens_est": null
+   },
+   {
+    "step_id": "s3",
+    "order": 3,
+    "kind": "llm",
+    "agent_id": "arithmeticprogressions_expert",
+    "agent_role": "ArithmeticProgressions_Expert",
+    "agent_label": null,
+    "phase": "expert_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "Thank you for the thorough verification, Verification_Expert.\n\nGiven the verified costs:\n- Daily ticket: $60\n- Season pass: $120\n\nAnd the calculation of savings:\n- Total cost for 4 visits with daily tickets: $240\n- Cost with a season pass: $120\n- Amount saved: $120\n\nThe arithmetic calculations are s...[+230 chars]",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 116
+   },
+   {
+    "step_id": "s4",
+    "order": 4,
+    "kind": "tool",
+    "agent_id": "tool:computer_terminal",
+    "agent_role": "Computer_terminal",
+    "agent_label": null,
+    "phase": "code_execution",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s3",
+      "how": "excerpt",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "There is no code from the last 1 message for me to execute. Group chat manager should let other participants to continue the conversation. If the group chat manager want to end the conversation, you should let other participant reply me only with \"TERMINATE\"",
+    "structured": null,
+    "tool_calls": [
+     {
+      "name": "execute_code",
+      "arguments": null,
+      "result": "There is no code from the last 1 message for me to execute. Group chat manager should let other participants to continue the conversation. If the group chat manager want to end the conversation, you should let other participant reply me only with \"TERMINATE\"",
+      "error": null
+     }
+    ],
+    "finish_reason": null,
+    "output_tokens_est": null
+   },
+   {
+    "step_id": "s5",
+    "order": 5,
+    "kind": "llm",
+    "agent_id": "verification_expert",
+    "agent_role": "Verification_Expert",
+    "agent_label": null,
+    "phase": "expert_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s4",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "It appears that all the steps have been verified and agreed upon by all experts involved. \n\nTERMINATE",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 21
+   },
+   {
+    "step_id": "s6",
+    "order": 6,
+    "kind": "llm",
+    "agent_id": "verification_expert",
+    "agent_role": "Verification_Expert",
+    "agent_label": null,
+    "phase": "expert_turn",
+    "round": null,
+    "event_ids": [],
+    "input_messages": null,
+    "sources": [
+     {
+      "step_id": "s0",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s1",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s2",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s3",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s4",
+      "how": "verbatim",
+      "inferred": "protocol"
+     },
+     {
+      "step_id": "s5",
+      "how": "verbatim",
+      "inferred": "protocol"
+     }
+    ],
+    "output": "TERMINATE",
+    "structured": null,
+    "tool_calls": [],
+    "finish_reason": null,
+    "output_tokens_est": 3
+   }
+  ],
+  "final": {
+   "answer": null,
+   "response": null,
+   "source_step_ids": [
+    "s6"
+   ]
+  },
+  "labels": {
+   "gold": "$55",
+   "acceptable_answers": null,
+   "is_correct": false,
+   "is_valid": null,
+   "status": null,
+   "verification_path": null,
+   "execution_successful": null,
+   "injection": [],
+   "injection_targets": [],
+   "llm_meta": {},
+   "paired_normal_run_ids": [],
+   "external": {
+    "dataset": "Who&When",
+    "taxonomy": "who_when_mistake",
+    "subset": "Algorithm-Generated",
+    "mistake_agent": "Verification_Expert",
+    "mistake_step": "1",
+    "mistake_step_index_base": "index into the dataset's history list",
+    "mistake_step_id": "s1",
+    "mistake_reason": "The agent fails to collect price data for the daily tickets and season passes for California's Great America in 2024."
+   },
+   "is_correct_source": "dataset: every trajectory is a failed run with a mistake annotation (is_correct field = False)"
+  },
+  "provenance": {
+   "source_dataset": "who_and_when",
+   "source_record_id": "Algorithm-Generated/4dbedc5e1a0205e14b7ff3ba89bce3060dab15d0ada3b7e1351a6f2aa8287aec",
+   "wrapper_contract": "public_dataset",
+   "input_messages_clean": null,
+   "sources_recorded": false,
+   "history_alignment_ok": null,
+   "reasoning_exported": false,
+   "output_tokenizer": "tiktoken:o200k_base",
+   "converter": "data_tools.public_to_mas_traj (MHT r57)",
+   "model_source": "not stored in the dataset"
+  }
+ }
+]

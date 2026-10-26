@@ -1,0 +1,303 @@
+# Framework metadata for the public (non-medical) datasets converted to mas-traj/1 (MHT round 57).
+# Kept apart from medical-aegis configs/framework_registry.yaml (never edited by us).
+#
+# family        : leave-one-FAMILY-out evaluation unit. Agreed with medical-aegis (reply to our r57):
+#                 a public framework with the SAME ARCHITECTURE as one of their medical families takes THAT
+#                 family name (agentverse, clinical_agent, cmas, debate, dylan, groupchat, kamac, mam,
+#                 mdagents, medagents, modality_fusion, triage), so holding out the family also removes the
+#                 public data of that architecture from (mid-)training. When in doubt -> map to the medical
+#                 family (conservative). Otherwise family = lowercase framework/architecture name.
+# family_reason : evidence for the family decision.
+# own_family    : the architecture name we would use if the framework were NOT folded into a medical
+#                 family (lets an analysis regroup without re-converting).
+# multi_agent   : false for single-agent systems (kept for completeness, flagged in the report).
+# source_rule   : how steps[].sources are inferred (details + references in README.md).
+# description   : 2-5 sentences on roles, who reads whose output, rounds, aggregation.
+
+frameworks:
+  magentic_one:
+    family: groupchat
+    own_family: magentic_one
+    multi_agent: true
+    family_reason: >-
+      Magentic-One (Fourney et al. 2024) runs on AutoGen as a group chat (AutoGen 0.4 class
+      MagenticOneGroupChat; the 0.2-era LedgerOrchestrator broadcasts every message to all agents): all
+      agents share one broadcast thread and an LLM orchestrator selects the next speaker, which is the
+      architecture of the partner's `groupchat` family (MAC = AutoGen GroupChat with LLM speaker selection
+      and a supervisor). The extra task/progress ledgers make it differ in detail, so this is an in-doubt
+      case and mapped to groupchat by the conservative rule. own_family keeps magentic_one.
+    source_rule: "protocol (broadcast thread since the last (re)plan; ledger-derived steps read the ledger)"
+    description: >-
+      Magentic-One: an Orchestrator writes a task ledger (facts and plan), then loops: an LLM progress
+      ledger decides whether the request is satisfied, whether progress stalls, which agent speaks next and
+      what instruction it gets; the instruction is broadcast and the selected agent (WebSurfer, FileSurfer,
+      Coder/Assistant, ComputerTerminal) acts and broadcasts its answer. All agents see the broadcast
+      thread; ledger calls are internal to the Orchestrator. On stalls the Orchestrator updates the facts,
+      replans, resets the agents and broadcasts the new plan. A final LLM call states the answer.
+
+  captainagent:
+    family: groupchat
+    own_family: captainagent
+    multi_agent: true
+    family_reason: >-
+      CaptainAgent (Song et al. 2024, AG2) solves a task by seeking help from nested AutoGen GroupChats of
+      built experts; TraceElephant logs the chat manager's speaker-selection LLM calls ("Read the above
+      conversation. Then select the next role from [...]"), i.e. a GroupChat with LLM-selected speakers =
+      partner family groupchat.
+    source_rule: "protocol (shared group-chat thread: every earlier message) / text_match where per-step inputs exist"
+    description: >-
+      CaptainAgent: a captain (manager) LLM plans and calls seek_agent_help, which builds a team of experts
+      (role matching by LLM) and starts a nested AutoGen GroupChat; the chat manager selects the next expert
+      by an LLM call over the shared thread, experts reply with reasoning or code, a Computer_terminal
+      executes code blocks. The nested chat is summarised and returned to the captain, which states the
+      final answer.
+
+  swe_agent:
+    family: swe_agent
+    own_family: swe_agent
+    multi_agent: false
+    family_reason: "single agent (one LLM with editor / bash / submit tools); no medical family has this architecture."
+    source_rule: "text_match on per-step inputs; tool steps read their issuing call (protocol)"
+    description: >-
+      SWE-agent: a single LLM agent edits a repository through tool calls (str_replace_editor, bash,
+      submit); every call re-reads the full history of its earlier tool calls and observations. Single
+      agent, included for completeness.
+
+  ag2_mathchat:
+    family: ag2_mathchat
+    own_family: ag2_mathchat
+    multi_agent: true
+    family_reason: >-
+      AG2 MathChat (Wu et al. 2023): a fixed two-agent conversation (MathUserProxyAgent executes code and
+      returns results, an assistant LLM reasons); no speaker selection, no group chat, no debate -> no
+      medical family has this architecture.
+    source_rule: "protocol (two-agent conversation: every earlier message)"
+    description: >-
+      AG2 MathChat: a math user-proxy agent poses the problem with a fixed prompt and runs the Python code
+      the assistant writes, returning the output; the assistant LLM reasons, writes code, reads the
+      results and puts the final answer in \boxed{}. Both agents see the whole two-agent conversation.
+
+  ag2_groupchat:
+    family: groupchat
+    own_family: ag2_groupchat
+    multi_agent: true
+    family_reason: >-
+      MAST-Data AG2 on MMLU is an AG2 GroupChat (chat_manager introduction "We have assembled a great team
+      today", agents Agent_Problem_Solver / Agent_Code_Executor / Agent_Verifier speaking in data-dependent
+      order, auto = LLM speaker selection) = partner family groupchat.
+    source_rule: "protocol (shared group-chat thread)"
+    description: >-
+      AG2 GroupChat: a chat manager introduces a problem solver, a code executor and a verifier; the
+      manager selects who speaks next, every agent reads the whole shared thread, code is executed and the
+      output posted to the thread; the verifier synthesises the final answer.
+
+  ag2_student_verifier:
+    family: ag2_student_verifier
+    own_family: ag2_student_verifier
+    multi_agent: true
+    family_reason: >-
+      ARIA's AG2 system is two sequential two-agent chats (Student <-> Python Assistant, then a templated
+      "Review and finalize" message opens Verifier <-> Python Assistant); the speaker order is fixed
+      (checked on all train episodes: Py,(St,Py)*,PA*,Ve(,Py,Ve)*), no LLM speaker selection -> not the
+      groupchat architecture; no other medical family matches.
+    source_rule: "protocol (each two-agent chat: every earlier message of that chat; the review request embeds the first chat's transcript)"
+    description: >-
+      ARIA AG2: a Student LLM solves the task in a two-agent chat with a code-executing Python Assistant;
+      the transcript is then passed in a templated review request to a Verifier LLM, which continues with
+      the Python Assistant and states the final answer.
+
+  chatdev:
+    family: chatdev
+    own_family: chatdev
+    multi_agent: true
+    family_reason: >-
+      ChatDev (Qian et al. 2024): a waterfall chat chain of two-agent role-play phases (CEO/CPO/CTO/
+      Programmer/Reviewer/Tester); no medical family uses chained dual-agent phases.
+    source_rule: "protocol (within a phase: every earlier utterance of that phase; first utterance of a phase: conclusions of earlier phases as structured fields)"
+    description: >-
+      ChatDev: a chat chain of phases (DemandAnalysis, LanguageChoose, Coding, CodeComplete, CodeReview
+      comment/modification cycles, Test, Manual...). Each phase is a role-play between an instructor and an
+      assistant role for up to N turns; phase prompts are filled with placeholders (task, modality,
+      language, current code, review comments) taken from the conclusions of earlier phases.
+
+  metagpt:
+    family: metagpt
+    own_family: metagpt
+    multi_agent: true
+    family_reason: "MetaGPT (Hong et al. 2024) SOP / publish-subscribe message pool; no medical family matches."
+    source_rule: "protocol (role subscriptions; see README)"
+    description: >-
+      MetaGPT: roles publish messages to a shared environment and act on the messages of the actions they
+      watch. MAST-Data runs use the customised SimpleCoder (watches the user requirement), SimpleTester
+      (watches the coder's code and the reviewer's comments) and SimpleReviewer (watches the tests).
+      ARIA runs use a product manager (acceptance contract), an architect (solution strategy), an engineer
+      (solution) and a QA / verifier role that checks the solution and states the final answer.
+
+  hyperagent:
+    family: hyperagent
+    own_family: hyperagent
+    multi_agent: true
+    family_reason: "HyperAgent (Phan et al. 2024) planner + specialised interns; no medical family matches."
+    source_rule: "protocol (planner reads its own history and the interns' reports; an intern reads the planner's subgoal and its own inner loop)"
+    description: >-
+      HyperAgent: a Planner decomposes a software-engineering issue into subgoals and delegates each to an
+      intern (Codebase Navigator, Editor, Executor); the intern runs an inner ReAct loop with tools and
+      returns a report to the Planner, which continues until it submits a patch.
+
+  openmanus:
+    family: openmanus
+    own_family: openmanus
+    multi_agent: false
+    family_reason: >-
+      OpenManus PlanningFlow: an LLM planning step plus one tool-calling Manus agent that executes the plan
+      steps (ARIA logs its think/act halves as "Planner"/"Executor"); essentially single-agent with a
+      planner, no medical family matches.
+    source_rule: "protocol (agent memory: every earlier think/act step; tool step reads its issuing call)"
+    description: >-
+      OpenManus: a planning call writes a step plan; the Manus ToolCall agent then loops think -> act: each
+      think call reads its whole memory (earlier thoughts and tool results) and selects tools, each act
+      executes them (browser, python, editor, search, terminate) and appends the result to memory.
+
+  appworld_mas:
+    family: appworld_mas
+    own_family: appworld_mas
+    multi_agent: true
+    family_reason: "MAST-Data AppWorld system (supervisor agent + one agent per app, message passing via a send_message API); no medical family matches."
+    source_rule: "protocol (each agent's message loop: every earlier step of the same loop)"
+    description: >-
+      AppWorld multi-agent system: a supervisor agent writes code that calls send_message(app_name, ...) to
+      app-specific agents (e.g. Spotify); each app agent runs its own ReAct loop writing code against the
+      app's API and replies to the supervisor, which continues until the task is completed.
+
+  smolagents:
+    family: smolagents
+    own_family: smolagents
+    multi_agent: true
+    family_reason: "smolagents CodeAgent manager with a managed search agent (hierarchical delegation); no medical family matches."
+    source_rule: "protocol (manager memory: every earlier step; managed agent reads the delegated task)"
+    description: >-
+      smolagents: a manager CodeAgent reasons and writes Python code, delegating retrieval to a managed
+      search_agent and finishing with final_answer(); each manager step reads its whole memory.
+
+  agents_handoff:
+    family: agents_handoff
+    own_family: agents_handoff
+    multi_agent: true
+    family_reason: "AFTraj math / coding systems pass control with transfer_to_<agent> tool calls (OpenAI Swarm / Agents-SDK style handoff over one shared conversation); no medical family matches."
+    source_rule: "protocol (shared conversation: every earlier step; tool result reads its call)"
+    description: >-
+      Handoff pipeline (AFTraj): a solver agent (MathSolver / CodeWriter) works with tools (compute,
+      run_tests) and hands the shared conversation over with a transfer_to_<agent> call to a checker
+      (Verifier / CodeTester), which re-checks with the same tools and gives the final answer.
+
+  aftraj_expert_team:
+    family: groupchat
+    own_family: autogen_selector_groupchat
+    multi_agent: true
+    family_reason: >-
+      AFTraj expert-team episodes are AutoGen agentchat group chats (ThoughtEvent markers, a
+      Computer_terminal code executor, Manager + domain experts + Verification_Expert speaking in
+      data-dependent order) -> GroupChat with selected speakers = partner family groupchat (conservative).
+    source_rule: "protocol (shared group-chat thread)"
+    description: >-
+      Expert team (AFTraj): a Manager plans, domain experts and a Verification_Expert search the web and
+      compute in a shared group chat, a Computer_terminal executes code blocks, and the Manager gives the
+      final answer.
+
+  single_tool_agent:
+    family: single_tool_agent
+    own_family: single_tool_agent
+    multi_agent: false
+    family_reason: "single AutoGen AssistantAgent with tools (AFTraj TaskSolver episodes); not multi-agent."
+    source_rule: "protocol (agent memory: every earlier step)"
+    description: >-
+      Single tool-using agent (AFTraj workflow episodes): one TaskSolver LLM alternates thoughts and tool
+      calls (record lookup, database query, calculator, ...) over its whole history. Single agent.
+
+  langgraph_layered:
+    family: langgraph_layered
+    own_family: langgraph_layered
+    multi_agent: true
+    family_reason: "MAScope LG-Ctrl layered (pipeline) LangGraph topology; no medical family matches."
+    source_rule: "protocol (see README, MAScope)"
+    description: >-
+      LangGraph, layered topology (MAScope LG-Ctrl): agents A-D(E) are arranged in layers; each agent
+      refines the plan produced by the previous layer over several iterations.
+
+  langgraph_centralized:
+    family: langgraph_centralized
+    own_family: langgraph_centralized
+    multi_agent: true
+    family_reason: "MAScope LG-Ctrl centralized LangGraph topology (a hub agent coordinates spokes); no medical family matches."
+    source_rule: "protocol (see README, MAScope)"
+    description: >-
+      LangGraph, centralized topology (MAScope LG-Ctrl): a hub agent distributes the task to spoke agents
+      and integrates their contributions over several iterations.
+
+  langgraph_decentralized:
+    family: debate
+    own_family: langgraph_decentralized
+    multi_agent: true
+    family_reason: >-
+      MAScope LG-Ctrl decentralized topology: peer agents exchange and revise proposals over iterations
+      without a coordinator, i.e. the peer-revision pattern of the partner's debate family; in doubt ->
+      debate (conservative).
+    source_rule: "protocol (see README, MAScope)"
+    description: >-
+      LangGraph, decentralized topology (MAScope LG-Ctrl): peer agents read each other's latest proposals
+      and revise their own over several iterations.
+
+  langgraph_shared_pool:
+    family: langgraph_shared_pool
+    own_family: langgraph_shared_pool
+    multi_agent: true
+    family_reason: "MAScope LG-Ctrl shared-message-pool topology; no medical family matches."
+    source_rule: "protocol (see README, MAScope)"
+    description: >-
+      LangGraph, shared message pool topology (MAScope LG-Ctrl): agents post to and read from one shared
+      pool over several iterations.
+
+  mascope_debate:
+    family: debate
+    own_family: debate
+    multi_agent: true
+    family_reason: >-
+      MAScope Inject-Mix v2_debate: 3 debaters (analytical / creative / critical) for 3 rounds, each round
+      refining after reading the peers -> multi-agent debate = partner family debate.
+    source_rule: "protocol (round r reads all debaters' round r-1 turns)"
+    description: >-
+      Multi-agent debate (MAScope v2_debate): three debaters with different styles answer, then for further
+      rounds each reads the other debaters' previous answers and refines its own.
+
+  mascope_autogen:
+    family: groupchat
+    own_family: autogen_groupchat
+    multi_agent: true
+    family_reason: >-
+      MAScope Inject-Mix v2_autogen: a manager LLM emits {"action": "delegate", "next_speaker": ...} turns
+      over a shared AutoGen session -> GroupChat with LLM speaker selection = partner family groupchat.
+    source_rule: "protocol (shared thread)"
+    description: >-
+      AutoGen group chat (MAScope v2_autogen): a manager delegates sub-tasks by naming the next speaker
+      (coder, reviewer, verifier) and keeps a running summary; all agents work on the shared thread.
+
+  mascope_crewai:
+    family: crewai
+    own_family: crewai
+    multi_agent: true
+    family_reason: "MAScope Inject-Mix v2_crewai: a leader writes a task list with assignees and depends_on; agents execute tasks in dependency order (CrewAI hierarchical process); no medical family matches."
+    source_rule: "protocol (leader plan + outputs of the tasks a task depends on)"
+    description: >-
+      CrewAI crew (MAScope v2_crewai): a leader decomposes the task into assigned sub-tasks with
+      dependencies; each role executes its sub-task reading the leader's plan and the outputs it depends on.
+
+  tau_bench_agent:
+    family: tau_bench_agent
+    own_family: tau_bench_agent
+    multi_agent: false
+    family_reason: "tau-bench retail: one tool-calling customer-service agent talking to an LLM user simulator; single agent."
+    source_rule: "protocol (one conversation: every earlier turn)"
+    description: >-
+      tau-bench retail (AgentRx): a single customer-service LLM agent follows a written policy, talks to an
+      LLM-simulated user and calls retail tools (lookup, order modification, returns); every turn reads the
+      whole conversation. Single agent + user simulator.
