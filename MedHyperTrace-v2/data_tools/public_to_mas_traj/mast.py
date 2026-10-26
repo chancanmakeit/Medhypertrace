@@ -23,7 +23,7 @@ from collections import Counter
 
 import pandas as pd
 
-from .common import cli, make_record, make_step, merge_sources, proto, question_id, slug, src, tool_call
+from .common import cli, make_record, make_step, med_heuristic, merge_sources, nws, proto, question_id, slug, src, tool_call
 
 DATASET = "mast_data"
 
@@ -505,7 +505,16 @@ def convert(raw):
             if fw == "hyperagent":
                 return "planner" if m["phase"] == "planner" else slug(m["intern"])
             return {"magenticoneorchestrator": "orchestrator"}.get(slug(m["speaker"]), slug(m["speaker"]))
+        if fw == "ag2_groupchat" and med_heuristic(task):     # round 61: same medical rule as r53 / ARIA keyword fallback
+            rep["dropped_medical_ag2_groupchat"] = rep.get("dropped_medical_ag2_groupchat", 0) + 1
+            continue
         steps = build_steps(msgs, srcs, agent_of)
+        if fw == "chatdev":   # round 61 (spot check item E): a Reflection that repeats the previous step verbatim
+            for i in range(1, len(steps)):  # forwards that phase's conclusion -> environment/template
+                st, pv = steps[i], steps[i - 1]
+                if st["phase"] == "Reflection" and st["kind"] == "llm" and nws(st["output"]) and nws(st["output"]) == nws(pv["output"]):
+                    st.update(kind="environment", env_type="template", input_messages=None, tool_calls=[])
+                    rep["chatdev_reflection_forwards"] = rep.get("chatdev_reflection_forwards", 0) + 1
         rep["empty_steps"] += sum(1 for st in steps if not (st["output"] or "").strip())
         bench = r["benchmark_name"]
         fa, fsrc = None, []

@@ -139,3 +139,17 @@ agent messages), so those calls stay on the llm step.
   ("...", `provenance.task_query_truncated`). 4 MetaGPT logs have an empty requirement.
 * **ARIA**: event ids -> step ids in `labels.external.event_step_map`; first-bad events that are the task
   message or a dropped roll-up have no step (`null` in `first_bad_step_ids`).
+
+## Round 61 additions (agreed with medical-aegis, issue rounds 42–43)
+* `kind: "environment"` with `env_type` in {template, tool_output, web_page, scaffold_prompt, user_simulator}: text no
+  agent wrote in the run. Set centrally in `common.make_step` via `ENV_PHASES` (phase -> env_type) and, for ChatDev,
+  for `Reflection` steps that forward the previous step verbatim. Environment steps are never attribution candidates,
+  carry no `tool_calls` (forwarded calls go to `structured.forwarded_tool_calls`) and have `input_messages: null`.
+* `common.flag_environment_labels`: any `*step_id` / `*step_ids` in `labels.external` that points at an environment step is
+  listed in `labels.external.label_on_environment` (label kept, not moved).
+* TraceElephant: calls from `tool_logs` when `message.tool_calls` is empty (`provenance.llm_steps_tool_calls_from_tool_logs`).
+* Who&When / TraceElephant: `labels.external.mistake_agent_id` (converted agent_id of the labelled step); Who&When
+  `mistake_step_unmapped` when the index is out of range.
+* ARIA: `labels.external.first_bad_unmapped_event_ids`, `first_bad_on_task`.
+* MAST AG2 group chat: `common.med_heuristic` (= measure_r53) drops medical MMLU questions.
+* Not yet written: `phase_canonical` (vocabulary under discussion, medical-aegis `configs/phase_canonical_v0.yaml`).

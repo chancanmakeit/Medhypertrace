@@ -144,13 +144,30 @@ def merge_sources(*lists):
 
 
 # ------------------------------------------------------------------ steps / records
+ENV_TYPES = {"template", "tool_output", "web_page", "scaffold_prompt", "user_simulator"}
+# phases that are text no agent wrote in the run -> kind "environment" (medical-aegis schema notes, issue round 43)
+ENV_PHASES = {"groupchat_introduction": "template", "review_request": "template", "run_summary": "template",
+              "message_delivery": "template", "reply_to_supervisor": "template", "workspace_artifact": "tool_output",
+              "user_turn": "user_simulator"}
+
+
 def make_step(order, kind, agent_id, agent_role, output, *, agent_label=None, phase="unknown", round_=None,
               event_ids=None, input_messages=None, sources=None, structured=None, tool_calls=None,
-              finish_reason=None):
-    """Field order and semantics as export_schema_v1.convert(). step_id = s<order>."""
-    assert kind in ("llm", "tool")
+              finish_reason=None, env_type=None):
+    """Field order and semantics as export_schema_v1.convert(). step_id = s<order>.
+    Round 61: steps in ENV_PHASES become kind "environment" with env_type (never attribution candidates; their
+    tool_calls, if any, move to structured.forwarded_tool_calls since environment steps may not carry tool_calls)."""
+    if env_type is None and phase in ENV_PHASES:
+        env_type = ENV_PHASES[phase]
+    if env_type is not None:
+        assert env_type in ENV_TYPES, env_type
+        kind = "environment"
+        if tool_calls:
+            structured = dict(structured or {}, forwarded_tool_calls=list(tool_calls))
+            tool_calls = []
+    assert kind in ("llm", "tool", "environment")
     output = output if output is not None else ""
-    return {
+    st = {
         "step_id": f"s{order}", "order": order, "kind": kind,
         "agent_id": agent_id, "agent_role": agent_role, "agent_label": agent_label,
         "phase": phase or "unknown", "round": round_,
@@ -161,8 +178,53 @@ def make_step(order, kind, agent_id, agent_role, output, *, agent_label=None, ph
         "structured": structured,
         "tool_calls": list(tool_calls or []),
         "finish_reason": finish_reason,
-        "output_tokens_est": count_tokens(output) if kind == "llm" else None,
+        "output_tokens_est": count_tokens(output) if kind in ("llm", "environment") else None,
     }
+    if kind == "environment":
+        st["env_type"] = env_type
+        st["input_messages"] = None
+    return st
+
+
+def flag_environment_labels(rec):
+    """medical-aegis schema note rule 1: a dataset label pointing at an environment step stays in labels.external and
+    is flagged (label_on_environment), never moved. Scans every key ending in step_id / step_ids in labels.external."""
+    env = {s["step_id"] for s in rec["steps"] if s["kind"] == "environment"}
+    ext = rec["labels"].get("external")
+    if not env or not isinstance(ext, dict):
+        return rec
+    hits = set()
+
+    def walk(x):
+        if isinstance(x, dict):
+            for k, v in x.items():
+                if k.endswith("step_id") and isinstance(v, str) and v in env:
+                    hits.add(v)
+                elif k.endswith("step_ids") and isinstance(v, list):
+                    hits.update(i for i in v if isinstance(i, str) and i in env)
+                elif k != "event_step_map":
+                    walk(v)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v)
+    walk(ext)
+    if hits:
+        ext["label_on_environment"] = sorted(hits, key=lambda i: int(i[1:]))
+    return rec
+
+
+MED_RE = re.compile(r"\b(patients?|clinical(?:ly)?|clinic|diagnos\w*|physicians?|medications?|medicines?|medical(?:ly)?|pharmac\w*|symptoms?|"
+                    r"diseases?|syndromes?|hospital\w*|surg(?:ery|ical|eon)\w*|therap(?:y|ies|eutic)\w*|tumou?rs?|cancers?|carcinoma\w*|infections?|"
+                    r"antibiotics?|vaccin\w*|nurs(?:e|es|ing)|dosages?|prescri\w*|pathogens?|patholog\w*|epidemiolog\w*|physiolog\w*|anatom\w*|"
+                    r"health\s?care|disorders?|chronic|acute|mg/kg|blood pressure|insulin|diabet\w*|cardiac|renal|hepatic|neurolog\w*|"
+                    r"oncolog\w*|psychiatr\w*|biops\w*|pregnan\w*|fetal|placebo|dementia|alzheimer\w*)\b", re.I)
+
+
+def med_heuristic(q):
+    """= analysis/public_mas_corpus/scripts/measure_r53.med_heuristic: >= 2 distinct medical terms in the question."""
+    if not isinstance(q, str):
+        return False
+    return len({m.group(1).lower() for m in MED_RE.finditer(q)}) >= 2
 
 
 def tool_call(name, arguments=None, result=None, error=None):
@@ -195,7 +257,7 @@ def make_record(*, dataset, benchmark, framework, model, qid, query, steps, labe
             "sources_recorded": False, "history_alignment_ok": None, "reasoning_exported": False,
             "output_tokenizer": TOKENIZER, "converter": "data_tools.public_to_mas_traj (MHT r57)"}
     prov.update(provenance)
-    return {
+    return flag_environment_labels({
         "schema_version": SCHEMA,
         "run_id": None, "question_id": qid, "run_mode": run_mode, "run_index": None, "seed": None,
         "framework": framework, "framework_family": meta["family"],
@@ -208,7 +270,7 @@ def make_record(*, dataset, benchmark, framework, model, qid, query, steps, labe
                   "source_step_ids": list(final_source_step_ids or [])},
         "labels": lab,
         "provenance": prov,
-    }
+    })
 
 
 # ------------------------------------------------------------------ text-match source inference

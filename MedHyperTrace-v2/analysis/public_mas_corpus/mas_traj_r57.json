@@ -1781,5 +1781,114 @@
    }
   },
   "sha256": "bded799eb8515e8e772d95d1c7e49316eda88b7008d7499b2acaac8552a90187"
+ },
+ "round61_revision": {
+  "aftraj": {
+   "n": 1548,
+   "check_bad": 0,
+   "kinds": {
+    "llm": 12673,
+    "tool": 4950
+   },
+   "env_types": {},
+   "label_on_environment": 0,
+   "first_bad_on_task": 0,
+   "first_bad_unmapped": 0,
+   "maa_exact": 0,
+   "maa_probe": 0
+  },
+  "agentrx_tau": {
+   "n": 29,
+   "check_bad": 0,
+   "kinds": {
+    "environment": 248,
+    "llm": 503,
+    "tool": 284
+   },
+   "env_types": {
+    "user_simulator": 248
+   },
+   "label_on_environment": 11,
+   "first_bad_on_task": 0,
+   "first_bad_unmapped": 0,
+   "maa_exact": 0,
+   "maa_probe": 0
+  },
+  "aria": {
+   "n": 22237,
+   "check_bad": 0,
+   "kinds": {
+    "llm": 68970,
+    "tool": 24018,
+    "environment": 15059
+   },
+   "env_types": {
+    "template": 14657,
+    "tool_output": 402
+   },
+   "label_on_environment": 52,
+   "first_bad_on_task": 254,
+   "first_bad_unmapped": 394,
+   "maa_exact": 0,
+   "maa_probe": 0
+  },
+  "mascope": {
+   "n": 260,
+   "check_bad": 0,
+   "kinds": {
+    "llm": 2391
+   },
+   "env_types": {},
+   "label_on_environment": 0,
+   "first_bad_on_task": 0,
+   "first_bad_unmapped": 0,
+   "maa_exact": 0,
+   "maa_probe": 0
+  },
+  "mast_data": {
+   "n": 1630,
+   "check_bad": 0,
+   "kinds": {
+    "llm": 25359,
+    "environment": 1482,
+    "tool": 1921
+   },
+   "env_types": {
+    "template": 1482
+   },
+   "label_on_environment": 0,
+   "first_bad_on_task": 0,
+   "first_bad_unmapped": 0,
+   "maa_exact": 0,
+   "maa_probe": 0
+  },
+  "traceelephant": {
+   "n": 220,
+   "check_bad": 0,
+   "kinds": {
+    "llm": 5960,
+    "tool": 1447
+   },
+   "env_types": {},
+   "label_on_environment": 0,
+   "first_bad_on_task": 0,
+   "first_bad_unmapped": 0,
+   "maa_exact": 0,
+   "maa_probe": 0
+  },
+  "who_and_when": {
+   "n": 184,
+   "check_bad": 0,
+   "kinds": {
+    "llm": 3721,
+    "tool": 313
+   },
+   "env_types": {},
+   "label_on_environment": 0,
+   "first_bad_on_task": 0,
+   "first_bad_unmapped": 0,
+   "maa_exact": 0,
+   "maa_probe": 0
+  }
  }
 }

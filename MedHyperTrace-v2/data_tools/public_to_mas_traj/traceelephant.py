@@ -141,7 +141,7 @@ def convert_trace(z, path):
     recs = json.loads(z.read(path))
     fw, bench = FW[system], BENCH[bench_raw]
     # ---- pass 1: llm steps (+ the tool messages that answer them)
-    llm, n_img = [], 0
+    llm, n_img, n_from_logs = [], 0, 0
     for r in recs:
         msgs = [clean_msg(m) for m in r["input"].get("messages") or []]
         n_img += sum(1 for m in msgs if isinstance(m.get("content"), list)
@@ -149,10 +149,18 @@ def convert_trace(z, path):
         ch = (r["output"].get("choices") or [{}])[0]
         om = ch.get("message") or {}
         aid, phase = classify(system, msgs, om, r["agent_name"])
+        # round 61 (medical-aegis spot check, issue round 43, item A): some records keep the model's calls only in
+        # tool_logs (message.tool_calls empty) -> fall back to tool_logs, same {id, function{name, arguments}} layout
+        raw_calls = om.get("tool_calls") or [t for t in (r.get("tool_logs") or []) if isinstance(t, dict) and t.get("function")]
+        from_logs = bool(raw_calls) and not om.get("tool_calls")
         tcs = [dict(tool_call((t.get("function") or {}).get("name"), jarg((t.get("function") or {}).get("arguments"))),
-                    id=t.get("id")) for t in om.get("tool_calls") or []]
+                    id=t.get("id")) for t in raw_calls]
+        if from_logs:
+            n_from_logs += 1
+            if aid == "swe_agent" or (system == "magentic" and phase == "agent_response"):
+                aid, phase = classify(system, msgs, {"tool_calls": raw_calls}, r["agent_name"])
         llm.append(dict(native=str(r["step_id"]), te_agent=r["agent_name"], msgs=msgs, out=om.get("content") or "",
-                        aid=aid, phase=phase, tcs=tcs, finish=ch.get("finish_reason"),
+                        aid=aid, phase=phase, tcs=tcs, finish=ch.get("finish_reason"), from_logs=from_logs,
                         model=(r["output"] or {}).get("model")))
     # tool messages: first occurrence of each tool_call_id(s) group in any input
     tool_msgs = {}
@@ -218,6 +226,11 @@ def convert_trace(z, path):
            "mistake_step_base": "TraceElephant step_records[].step_id (1-based over llm calls)",
            "mistake_reason": meta.get("mistake_reason"),
            "step_agent_names": {native2sid[L["native"]]: L["te_agent"] for L in llm}}
+    msid = ext["mistake_step_id"]
+    ext["mistake_agent_id"] = next((s["agent_id"] for s in steps if s["step_id"] == msid), None)   # converted naming
+    ext["mistake_agent_naming_note"] = ("mistake_agent uses TraceElephant agent_name (for Magentic-One orchestrator "
+                                        "calls the directed agent, for SWE-agent the tool name); mistake_agent_id is the "
+                                        "converted agent_id of the labelled step")
     if meta.get("tests_status") is not None:
         ext["tests_status"] = meta["tests_status"]
     model = Counter(L["model"] for L in llm if L["model"]).most_common(1)
@@ -229,6 +242,7 @@ def convert_trace(z, path):
                 "is_correct_source": "dataset: every trace is a failed run with a mistake annotation"
                                      + ("; SWE-bench tests_status has failures" if system == "swe-agent" else "")},
         provenance={"source_record_id": path.rsplit("/", 1)[0], "n_input_images": n_img,
+                    "llm_steps_tool_calls_from_tool_logs": n_from_logs,
                     "images_note": "screenshots referenced in input_messages ({'type':'image','image_file':...}) live in data.zip and are not exported"})
     return rec, stats
 

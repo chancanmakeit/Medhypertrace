@@ -162,6 +162,10 @@ def convert(raw):
                         rep["agentrx_trajectory_without_label"] += 1
             else:
                 gold = r["ground_truth"]
+            msid = ext["mistake_step_id"]
+            ext["mistake_agent_id"] = next((s["agent_id"] for s in steps if s["step_id"] == msid), None)   # converted naming
+            if ms is not None and msid is None:
+                ext["mistake_step_unmapped"] = f"mistake_step {ms} outside the history ({len(hist)} entries)"
             fa, fsrc = final_answer(steps)
             if not fsrc and steps:
                 fsrc = [steps[-1]["step_id"]]

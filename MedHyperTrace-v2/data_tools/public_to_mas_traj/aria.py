@@ -267,6 +267,13 @@ def convert(raw):
                                                   "cut_step_id": ev2sid.get(rp.get("cut_event_id")),
                                                   "replacement_events_exported": False},
                    "event_step_map": ev2sid, "aria_id": r.id, "mmlu_subject": subj}
+            # round 61 (spot check item D): first-bad events with no exported step (task message / start event,
+            # or a dropped roll-up event) -> flagged; such labels are excluded from step-level evaluation
+            fb_ev = loc.get("first_bad_event_ids") or []
+            unmapped = [e for e in fb_ev if ev2sid.get(e) is None]
+            if unmapped:
+                ext["first_bad_unmapped_event_ids"] = unmapped
+                ext["first_bad_on_task"] = all(ev2sid.get(e) is None for e in fb_ev)
             nid, variant = native_id(bench, r.task_id, r.host_model)
             fa, fsrc = None, []
             for st in reversed(steps):

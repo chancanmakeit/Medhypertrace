@@ -108,3 +108,41 @@ Transitive matches dropped (a later listed source quotes the candidate): 1319. N
 ## Left undone
 
 - Nothing of the requested list; all 7 datasets converted and validated. Not done (out of scope): injected datasets, TRAIL, AgentErrorBench, ATBench, RAISER; validation of text-match inference against the partner's recorded sources (planned with their data).
+
+## Round 61 revision (after medical-aegis spot check, issue round 43)
+
+The partner re-ran our converters, spot-checked 140 records against the raw data (every non-empty output found verbatim;
+no annotation text leaked into steps or task), and reported items A–E. Changes (all converters re-run; old outputs kept
+in `/home/claude/public_mas/mas_traj_r57_backup/`):
+
+- **`kind: "environment"` + `env_type`** (partner schema note `docs/mas_traj_schema_notes.md` in medical-aegis; their
+  `check()` validates it): template messages formerly forced into `tool` are now `environment/template`
+  (AG2 group-chat introduction, ARIA review request and OpenManus run summaries, AppWorld message forwarding);
+  ARIA workspace artifacts are `environment/tool_output`; the tau-bench simulated user is `environment/user_simulator`.
+  Environment steps are never attribution candidates; a dataset label that points at one is kept and flagged
+  (`labels.external.label_on_environment`).
+- **A, TraceElephant tool calls:** when `message.tool_calls` is empty the calls are taken from `tool_logs`
+  (359 SWE-agent and 51 CaptainAgent llm steps); labelled SWE-agent steps that were empty: 18 -> 1; tool steps 1,081 -> 1,447.
+- **B, agent naming in labels:** Who&When and TraceElephant labels now carry `mistake_agent_id` (the converted `agent_id`
+  of the labelled step) next to the dataset's `mistake_agent`; Who&When's 3 out-of-range `mistake_step`s are flagged
+  `mistake_step_unmapped`.
+- **C, AgentRx tau:** the retail policy was not dropped: it is `task.observations[obs:policy]` and every agent step cites
+  it as a source (kept there, as the spec intends for observations). Simulated-user turns are now
+  `environment/user_simulator` (248 steps); **11 of the 29 runs have at least one AgentRx failure label on a
+  simulated-user step** (flagged).
+- **D, ARIA first-bad events without a step:** `first_bad_unmapped_event_ids` (394 runs) and `first_bad_on_task`
+  (254 runs: the first bad event is the task message / start event); exclude these from step-level evaluation.
+- **E, ChatDev Reflection forwards:** a `Reflection` step whose output equals the previous step's (whitespace-normalised)
+  is `environment/template` (99 steps, the partner's count).
+- **MAST AG2 group chat (MMLU):** the r53 medical keyword rule (>= 2 distinct medical terms in the question) now applies;
+  12 runs dropped (1,642 -> 1,630).
+
+| dataset | records | check() problems | kinds | environment types | label_on_environment | first_bad_on_task | MAA exact / probe |
+|---|---|---|---|---|---|---|---|
+| aftraj | 1548 | 0 | {'llm': 12673, 'tool': 4950} | - | 0 | 0 | 0 / 0 |
+| agentrx_tau | 29 | 0 | {'environment': 248, 'llm': 503, 'tool': 284} | {'user_simulator': 248} | 11 | 0 | 0 / 0 |
+| aria | 22237 | 0 | {'llm': 68970, 'tool': 24018, 'environment': 15059} | {'template': 14657, 'tool_output': 402} | 52 | 254 | 0 / 0 |
+| mascope | 260 | 0 | {'llm': 2391} | - | 0 | 0 | 0 / 0 |
+| mast_data | 1630 | 0 | {'llm': 25359, 'environment': 1482, 'tool': 1921} | {'template': 1482} | 0 | 0 | 0 / 0 |
+| traceelephant | 220 | 0 | {'llm': 5960, 'tool': 1447} | - | 0 | 0 | 0 / 0 |
+| who_and_when | 184 | 0 | {'llm': 3721, 'tool': 313} | - | 0 | 0 | 0 / 0 |

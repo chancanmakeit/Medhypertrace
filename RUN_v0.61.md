@@ -888,3 +888,18 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - **family:** Magentic-One、CaptainAgent、MAST AG2 群聊、AFTraj 专家团队、MAScope AutoGen → groupchat;MAScope 辩论与 LangGraph 去中心化 → debate;ARIA AG2(固定顺序)保留自己的名字。Magentic-One 归 groupchat 是保守选择,已请对方确认。
 - **待定小事:** MAST AG2 群聊 168 条含医学 MMLU 题、无学科字段 → 我方倾向按 r53 关键词规则过滤(与 ARIA 一致);Who&When 有 3 条 mistake_step 越界、6 条 agent 不一致;schema 只有 llm / tool 两种 kind(已在 issue 提议加 system)。
 - issue 评论 `docs/interfaces/issue_comment_r60b.md`(请对方抽查 20 条 / 数据集、确认 family、考虑 `kind: system`)。
+
+## 第 61 轮 · 2026-10-26 ~18:20 UTC · 用户:issue 那边 medical-aegis 回复了
+**issue(对方 v10 第 14–15 轮 / issue 第 42–43 轮):**
+- 第 42 轮:同意第 60 轮(先不规模化、分析器不给标准答案、试点报告内容)。读 MATE 全文后的建议:(A) 规范阶段词表 `phase_canonical`;(B) `kind: "environment"` + `env_type`(只压缩环境、不改写 llm 步);(C) 各数据源对称处理并报告"数据来源可识别度";(D) 不用 LLM 改写 agent 发言;人工标签永不用我们的流程重标。
+- 第 43 轮:**用户不采纳每分叉点 8–16 次重放**,改为 1 分叉 + 1 对照、下游温度 0(llm_debate 每候选点约 $0.0043,1000 条失败轨迹约 $13)。**回放命中率真实运行 100%**(13,379 次请求、1,200 条运行,含并行框架,离线不花钱);模拟分叉下 28–74% 的下游步骤可从记录返回。对我方转换做了 140 条逐条抽查(非空输出全部逐字可找到,无标注文本泄漏),提出 A(TraceElephant tool_logs 丢动作)、B(标签 agent 命名)、C(AgentRx 政策提示与模拟用户)、D(ARIA 标签落在题目上)、E(ChatDev Reflection 转发);给出 `phase_canonical` v0 词表与映射(194,183 步无一落入 other)和 schema 说明,`check()` 已支持。
+**我方本轮:**
+- **转换器修复并重跑**(`data_tools/public_to_mas_traj/`,报告 `analysis/public_mas_corpus/mas_traj_r57.md` 的 "Round 61 revision"):
+  - environment:模板消息 → `environment/template`(AG2 开场白、ARIA 审阅请求、OpenManus 运行总结、AppWorld 转发、ChatDev 转发型 Reflection 99 个);ARIA workspace 产物 → `environment/tool_output`;tau 模拟用户 → `environment/user_simulator`(248 步)。落在 environment 步上的标签保留并标 `label_on_environment`(AgentRx 29 条中 11 条、ARIA 52 条)。
+  - A:从 `tool_logs` 取调用(SWE-agent 359 步、CaptainAgent 51 步);带标注的空 SWE-agent 步 18 → 1(剩下的 1 步原始数据里就是空的,已核);tool 步 1,081 → 1,447。
+  - B:`mistake_agent_id`;Who&When 3 条越界标 `mistake_step_unmapped`。
+  - C:政策提示其实在 `task.observations[obs:policy]` 且被每个 agent 步引用,未丢。
+  - D:`first_bad_on_task` 254、`first_bad_unmapped_event_ids` 394。
+  - MAST AG2 群聊按 r53 医学规则去掉 12 条 → 共 26,108 条运行。对方最新 `check()` 全过,MAA 精确 0 / 探针 0。旧输出备份在 `/home/claude/public_mas/mas_traj_r57_backup/`。
+- **回复(评论 6424155324,2026-10-26T18:29:42Z,`docs/interfaces/issue_comment_r61.md`):** 同意 1 分叉 + 1 对照,但:标签单向(未翻转记"未判定",不作负例);第 t 步重采样用原温度,只有下游温度 0;下游混合记录 / 贪心两种来源但两边相同;温度 0 确定性我方未测过,建议记录 `system_fingerprint`。`phase_canonical` 审阅:magentic_one `instruction` 建议改为 `plan`,其余同意;建议用户采用该词表。训练输入只用各来源都有的字段,中训练试点报告数据来源可识别度。
+**待用户决定:** 采用 `phase_canonical`(建议采用);分叉试点放在我方中训练试点之后;fmt_v1_2 / mdagents 开头筛选验证;**中训练试点是否开始**(不花 API 费用,Linux #2 空闲)。
