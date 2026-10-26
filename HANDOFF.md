@@ -93,7 +93,7 @@
 ### 0.69 第 60 轮:种子实验完成;issue 第 39–41 轮已回复(2026-10-26 08:00 UTC)
 - **种子实验结论**(`results/c6_linux2_lora/seed_study.md`):MS-Swift 3 种子,graph − text QD +0.002 ± 0.012、LQD_mac +0.018 ± 0.030,CI 全含 0;graph 变体种子间波动更大。→ 当前 SFT 方式下 LLM 没用上图 token;下一步应换训练信号(图–文对齐 / 结构感知中训练),不是再加种子。Linux #2 现在 4 张卡都空闲。
 - **issue:** 对方(用户发起)提议规模化合成轨迹,主线"在真实轨迹上分叉";我方回复 6411029845(07:56Z):两层标签都要、主评测是缺陷层;**先做免费的中训练试点,有提升再花钱规模化**;分析器不给标准答案;每分叉点 2 次重放不够定单步标签;试点排在我方中训练试点之后。fmt_v1_2 与 mdagents 开头筛选验证被用户暂停。
-- **转换器子 agent:** 两次被 API 限额中断,已恢复;完成 Who&When(184 条,`check()` 0 问题),在做 TraceElephant → MAST-Data → ARIA → AFTraj → MAScope → AgentRx tau_retail。完成后主会话复核再提交。
+- **转换器子 agent:** 两次被 API 限额中断,已恢复;完成 Who&When(184 条,`check()` 0 问题),在做 TraceElephant → MAST-Data → ARIA → AFTraj → MAScope → AgentRx tau_retail。完成后主会话复核再提交(aff1bb9 已顺带收进进行中的代码与中间报告,未复核,视为草稿)。
 - **MAA 排除:** `maa_exclusion.py recall`(TF-IDF / 5-gram Jaccard 召回候选,人工复核);阳性对照 10/10。
 - **下一步(建议,待用户确认):** 中训练试点——语料 = 公开干净语料(转换完成后)+ MAA 输出(按折排除测试题)+ 锚点;先纯文本 TAPT,再结构感知;评测 MAA LQD 6 折 + QD,每设置 ≥ 2 种子。
 

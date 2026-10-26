@@ -868,7 +868,7 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 | LQD_mac(n=67) | 0.826 ± 0.061 | 0.809 ± 0.032 | +0.018 ± 0.030 | +0.008 [−0.022, +0.039] |
 逐种子 graph − text:QD −0.007 / +0.015 / −0.002,LQD_mac +0.048 / +0.017 / −0.012,CI 全含 0。
 **结论:** 图 token 没有可测出的作用;graph 变体在种子间的波动更大(QD SD 0.013 对 0.002,LQD_mac 0.061 对 0.032),实例排序的跨种子一致性也更低 → 投影器只靠 yes/no SFT 信号训练,多出来的可训练输入主要带来噪声。QD 上 3 种子集成排除了大于约 +0.04 的增益。连同第 54 轮的扰动诊断:在当前训练方式下 LLM 没有用上图 token;要改变这一点,需要给图 token 不同的训练信号(图–文对齐 / 结构感知中训练),而不是在同一 SFT 上加种子。
-### ② 转换器子 agent:两次被 API 限额中断(会话限额、周限额),已完成 Who&When(184 条,对方 `check()` 0 问题),本轮已恢复继续 TraceElephant 等。
+### ② 转换器子 agent:两次被 API 限额中断(会话限额、周限额),已完成 Who&When(184 条,对方 `check()` 0 问题),本轮已恢复继续 TraceElephant 等。**注意:** 本轮提交(aff1bb9)顺带收进了子 agent 尚未完成、主会话尚未复核的转换器代码与中间报告(`data_tools/public_to_mas_traj/`、`analysis/public_mas_corpus/mas_traj_r57.json`、`samples_r57/`),视为进行中,复核后再定稿。
 ### ③ issue(对方 v10 第 11–13 轮 / issue 第 39–41 轮)
 - 用户在对方那边发起讨论:借鉴 TraceDance、MATE、TerminalHorizon、AgenTracer,规模化合成多智能体轨迹用于预训练;fmt_v1_2 与 mdagents 开头筛选两项付费验证暂停。
 - 对方主张:不用 MATE 式整条 LLM 写轨迹;主线是"在真实轨迹上分叉"——回放服务器按输入哈希重放前缀(mock 日志 318/318 逐字节一致),在第 t 步 (a) 自然重采样 / (b) AgenTracer 式修正,外加"只重采样之后步骤"的对照来估计碰巧翻转率;注入只作补充。成本:0.1B token 约 $150–350,1B 约 $1.5K–3.5K;试点约 $2–3.5。第 40–41 轮读到原文后更正(TerminalHorizon 不只保留成功轨迹)并补充(TraceDance 评审团与人工 κ=0.40 → 用结局翻转定标签优于评审模型;TerminalHorizon 去污染:n-gram / TF-IDF 只召回候选、再人工 / 语义复核)。
