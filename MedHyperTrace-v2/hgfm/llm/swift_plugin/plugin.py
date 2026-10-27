@@ -24,6 +24,7 @@ have no <graph> placeholders and no graph_refs, so the collator adds no graph te
 Environment variables (read lazily, so they also reach dataloader workers):
   MHT_GRAPH_TOKENS   path of graph_tokens.pt (required only when a row has graph_refs)
   MHT_D_GRAPH        encoder width d_graph (default 192; projector input = d_graph + 2)
+  MHT_PROJ_INIT      optional projector.pt to initialise graph_proj (round 64, SAMT); unset = random init as before
 Data: convert build_sft output with swift_plugin/prepare_data.py (messages + run_id + graph_refs as a JSON string).
 """
 import json
@@ -95,6 +96,10 @@ class GraphTokenLoader(ModelLoader):
         proj = build_projector(d_graph() + 2, hid, emb.weight.dtype)
         if emb.weight.device.type != 'meta':
             proj = proj.to(emb.weight.device)
+        init = os.environ.get('MHT_PROJ_INIT')   # round 64: start from a SAMT-aligned projector (projector.pt)
+        if init:
+            proj.load_state_dict(torch.load(init, map_location='cpu'))
+            logger.info(f'graph_proj initialised from {init}')
         model.add_module(PROJ_NAME, proj)
         model.graph_token_id = tok.convert_tokens_to_ids(GRAPH_TOKEN)
         return model

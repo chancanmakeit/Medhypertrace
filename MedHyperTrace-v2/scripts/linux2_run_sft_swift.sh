@@ -18,7 +18,10 @@ set -u
 ENV=/data/ekyang/anaconda3/envs/mht-swift
 export PATH=$ENV/bin:$PATH HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false USE_HF=1 WANDB_PROJECT=${WANDB_PROJECT:-medhypertrace} PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 unset all_proxy ALL_PROXY http_proxy https_proxy
-LM=${LM:-/data1/ekyang/cgh/cache/huggingface_hub/hub/models--Qwen--Qwen3-8B}; TAG=$(basename $LM)
+LM=${LM:-/data1/ekyang/cgh/cache/huggingface_hub/hub/models--Qwen--Qwen3-8B}; TAG=${TAG:-$(basename $LM)}
+# round 64 (SAMT), all optional: GTOK = one graph-token file for every fold (default <fold>/graph_tokens.pt);
+# PROJ_LR = projector lr (default 1e-3); MHT_PROJ_INIT (exported by the caller) = projector.pt to start from.
+GTOK=${GTOK:-}; PROJ_LR=${PROJ_LR:-1e-3}
 L=${L:-/data1/ekyang/cgh/CODE/mht_work/maa/llm}; Q=${Q:-/data1/ekyang/cgh/CODE/mht_work/swift_queue}
 V2=/data1/ekyang/cgh/CODE/Medhypertrace/MedHyperTrace-v2; P=$V2/hgfm/llm/swift_plugin
 GPUS=${GPUS:-"2 3"}; FOLDS=${FOLDS:-"LQD_colacare LQD_healthcareagent LQD_mac LQD_mdagents LQD_medagent LQD_reconcile QD"}
@@ -33,10 +36,10 @@ job() {  # $1 gpu, $2 fold, $3 variant, $4 seed
   out=$d/ckpt_${tagp}_$v; [ "$MAX_STEPS" -gt 0 ] && { out=${out}_smoke${MAX_STEPS}_bs$BS; extra="--max_steps $MAX_STEPS --save_strategy no"; }
   [ -s $d/sft_$v/swift_train.jsonl ] || python $P/prepare_data.py $d/sft_$v/train.jsonl $d/sft_$v/swift_train.jsonl || return 1
   if ! ls -d $out/checkpoint-* >/dev/null 2>&1 || [ "$MAX_STEPS" -gt 0 ]; then
-    CUDA_VISIBLE_DEVICES=$g MHT_GRAPH_TOKENS=$d/graph_tokens.pt swift sft --external_plugins $P/plugin.py \
+    CUDA_VISIBLE_DEVICES=$g MHT_GRAPH_TOKENS=${GTOK:-$d/graph_tokens.pt} swift sft --external_plugins $P/plugin.py \
       --model $LM --model_type graph_token_lm --template graph_token --torch_dtype bfloat16 \
       --tuner_type graph_lora --lora_rank 8 --lora_alpha 32 --lora_dropout 0.1 --target_modules q_proj k_proj v_proj \
-      --optimizer graph_token --learning_rate 1e-4 --aligner_lr 1e-3 --weight_decay 0 \
+      --optimizer graph_token --learning_rate 1e-4 --aligner_lr $PROJ_LR --weight_decay 0 \
       --lr_scheduler_type constant --warmup_ratio 0 --max_grad_norm 1.0 \
       --per_device_train_batch_size $BS --gradient_accumulation_steps $ACCUM --num_train_epochs 1 \
       --max_length 2048 --gradient_checkpointing true \
@@ -46,7 +49,7 @@ job() {  # $1 gpu, $2 fold, $3 variant, $4 seed
   fi
   [ "$MAX_STEPS" -gt 0 ] && return 0
   ck=$(ls -d $out/checkpoint-* | sort -V | tail -1)
-  [ -s $d/eval_${tagp}_$v.json ] || CUDA_VISIBLE_DEVICES=$g MHT_GRAPH_TOKENS=$d/graph_tokens.pt python $P/eval_swift.py \
+  [ -s $d/eval_${tagp}_$v.json ] || CUDA_VISIBLE_DEVICES=$g MHT_GRAPH_TOKENS=${GTOK:-$d/graph_tokens.pt} python $P/eval_swift.py \
       --lm $LM --ckpt $ck --data $d/sft_$v/eval_human.jsonl --out $d/eval_${tagp}_$v.json
 }
 worker() {  # $1 gpu

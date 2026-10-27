@@ -18,14 +18,16 @@ C1 + C3 + C4 entity encoder, per layer:
    read hyperedges are added in both directions (tail->head, head->tails) as separate relations.
 Heads as in v0 (step x code, run-level).  gamma=0 / no relation graph / no positions /
 query concatenation instead of attention are the component ablations.
+Round 64: every tensor is created on the input's device / dtype, so the encoder also runs on GPU (SAMT);
+CPU results are bit-identical to the previous version.
 """
 import math, torch, torch.nn as nn
 
 
 def scatter_softmax(score, group, n_groups):
-    mx = torch.full((n_groups,), -1e9).scatter_reduce(0, group, score, reduce="amax", include_self=True)
+    mx = torch.full((n_groups,), -1e9, dtype=score.dtype, device=score.device).scatter_reduce(0, group, score, reduce="amax", include_self=True)
     ex = torch.exp(score - mx[group])
-    den = torch.zeros(n_groups).index_add_(0, group, ex).clamp(min=1e-9)
+    den = torch.zeros(n_groups, dtype=ex.dtype, device=ex.device).index_add_(0, group, ex).clamp(min=1e-9)
     return ex / den[group]
 
 
@@ -42,7 +44,7 @@ class RelEncoder(nn.Module):
             if len(rg_src):
                 msg = W(r[rg_src] * self.pair(rg_pair))
                 agg = torch.zeros_like(r).index_add_(0, rg_dst, msg)
-                cnt = torch.zeros(r.shape[0]).index_add_(0, rg_dst, torch.ones(len(rg_dst))).clamp(min=1)
+                cnt = torch.zeros(r.shape[0], dtype=r.dtype, device=r.device).index_add_(0, rg_dst, torch.ones(len(rg_dst), dtype=r.dtype, device=r.device)).clamp(min=1)
                 r = ln(r + nn.functional.gelu(agg / cnt[:, None]))
         return r
 
@@ -65,8 +67,8 @@ class EntLayer(nn.Module):
         if self.query_attn:
             a = scatter_softmax(self.w(torch.tanh(self.Wh(hv) + self.Wq(q_edge[inc_e]))).squeeze(1), inc_e, n_edges)
         else:
-            cnt = torch.zeros(n_edges).index_add_(0, inc_e, torch.ones(len(inc_e))).clamp(min=1); a = 1.0 / cnt[inc_e]
-        m = torch.zeros(n_edges, d).index_add_(0, inc_e, a[:, None] * self.Wm(hv))
+            cnt = torch.zeros(n_edges, dtype=h.dtype, device=h.device).index_add_(0, inc_e, torch.ones(len(inc_e), dtype=h.dtype, device=h.device)).clamp(min=1); a = 1.0 / cnt[inc_e]
+        m = torch.zeros(n_edges, d, dtype=h.dtype, device=h.device).index_add_(0, inc_e, a[:, None] * self.Wm(hv))
         if self.use_instr: m = m + self.gamma * self.Wp(edge_instr)
         if self.use_rel: m = m * torch.sigmoid(self.phi(edge_rel_vec))
         msg = self.Wo(m[inc_e] * (self.pos(inc_s) if self.use_pos else 1.0))
@@ -74,7 +76,7 @@ class EntLayer(nn.Module):
             key = (self.Wk(m)[inc_e] * self.Wqq(torch.cat([h, q_node], 1))[inc_v]).sum(1) / math.sqrt(d)
             b = scatter_softmax(key, inc_v, h.shape[0])
         else:
-            cnt = torch.zeros(h.shape[0]).index_add_(0, inc_v, torch.ones(len(inc_v))).clamp(min=1); b = 1.0 / cnt[inc_v]
+            cnt = torch.zeros(h.shape[0], dtype=h.dtype, device=h.device).index_add_(0, inc_v, torch.ones(len(inc_v), dtype=h.dtype, device=h.device)).clamp(min=1); b = 1.0 / cnt[inc_v]
         agg = torch.zeros_like(h).index_add_(0, inc_v, b[:, None] * msg)
         self.last_m = m                     # hyperedge representations, read by HGFMv02.encode
         return self.ln(h + nn.functional.gelu(self.W0(h) + agg))
@@ -108,5 +110,5 @@ class HGFMv02(nn.Module):
         self._h = h
         step_logits = self.step_head(torch.cat([h, q_node], 1))
         R = B["q"].shape[0]
-        pooled = torch.zeros(R, h.shape[1]).index_add_(0, B["node_run"], h) / B["n_nodes"][:, None]
+        pooled = torch.zeros(R, h.shape[1], dtype=h.dtype, device=h.device).index_add_(0, B["node_run"], h) / B["n_nodes"][:, None]
         return step_logits, self.run_head(torch.cat([pooled, h[B["last"]], B["q"]], 1))
