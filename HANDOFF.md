@@ -13,6 +13,7 @@
 > 1. `add_repo` 以 push 权限添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`(需要时再加 `graph-based-mas-fault-attribution-papers`),然后 clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走 git 代理,不需要 token。
 > 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-27T02:12:07Z,即我方第 62 轮续的评论)。之后每次被唤醒都先跑一次。
 > 3. **MAA 数据(沙箱若已重置)**:`cd MedHyperTrace-v2 && pip install -r requirements.txt --break-system-packages`,然后运行 `bash scripts/prepare_maa.sh /home/claude/data_maa_v2 QD 8000`。脚本会自动下载、转换、对齐人工标签;**嵌入直接从仓库缓存 `MedHyperTrace-v2/data/maa_emb_minilm/` 恢复**(sha256 校验,约 10 秒,省去 CPU 上约 50 分钟;也可单独运行 `bash scripts/restore_maa_emb.sh <emb_dir>`);再导出图 token、构建 SFT。脚本能跳过已有的步骤;图缓存 `graphs_*.pkl` 在首次加载时自动重建。第一阶段结果已在 `results/phase1_maa/`,不必重跑。
+> 3b. **公开 MAS 数据(需要时)**:从私有 HF 数据集 `UUUooUUU/mht-session-data` 下载 `public_mas/mas_traj/`(86 MB)到 `/home/claude/public_mas/`,`raw/` 1.5 GB 按需;HF token 在 Project doc `UUUooUUU-huggingface-access-token`,写入 600 文件,不上命令行。
 > 4. **API 密钥**:从 Project doc `claude/api端点` 读取,写到 `/home/claude/.mht_api.env`。绝不进 git。调用前先试跑估算成本,再问用户。
 > 5. 阅读顺序:**§0.72(第 62 轮续,先读)** → §0.71 → §0.70(第 61 轮)→ §0.69(第 60 轮)→ §0.68(第 59 轮)→ §0.67(第 58 轮)→ §0.66(第 57 轮)→ §0.65(第 56 轮)→ §0.64(第 55 轮:已定事项与新待办)→ §0.63(第 54 轮)→ §0.62(第 53 轮末交接)→ §0.61(第 53 轮:收藏夹 15 个数据集、五折配对比较)→ §0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.62.md` 第 37–62 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
 > 6. **每轮必做**:讨论记录 `RUN_v0.<N>.md` 用 `git mv` 改版本号并追加本轮;更新本文 §0;commit 并 push;sleep 不超过约 60 秒。
@@ -100,7 +101,7 @@
 - 脚本:`scripts/linux2_midtrain_eval.py`(Linux #2)、`scripts/midtrain_robust_check.py`(沙箱,读 CSV)。逐实例分数 `tapt_pilot_v1_scores.csv.gz`。
 - **issue:** 评论 6432028012(`docs/interfaces/issue_comment_r62b.md`)通知结果,请对方启动分叉试点(约 $0.5 以内,超出先问用户),并提醒 fmt_v1_2、mdagents 开头筛选、phase_canonical v1 仍在等。
 - Linux #2 4 卡现在空闲。
-- **第 3 个会话结束时的交接状态(2026-10-27 04:20 UTC):** 工作区干净(最后提交 cc797d2),issue 无新评论,**没有在跑的任务,也没有待触发的定时任务**。新会话沙箱是新的:`/home/claude/public_mas/mas_traj/`(公开数据转换结果)不在了,只有在需要重建中训练语料时才重跑转换器(`data_tools/public_to_mas_traj/README.md`);试点语料已在 HF `UUUooUUU/mht-midtrain-pilot`,Linux #2 上的 `mht_work/midtrain/` 完整保留(合并模型、8 个 SFT checkpoint 与评测 json)。
+- **第 3 个会话结束时的交接状态(2026-10-27 04:20 UTC):** 工作区干净(最后提交 cc797d2),issue 无新评论,**没有在跑的任务,也没有待触发的定时任务**。新会话沙箱是新的:`/home/claude/public_mas/` 不在了,**已备份到私有 HF 数据集 `UUUooUUU/mht-session-data`**(`public_mas/mas_traj/` 转换好的 7 个数据集 26,108 条运行 + `mas_traj.md5`;`public_mas/raw/` 原始下载 1.5 GB;统计与下载日志;恢复命令见该仓库 README,用 HF 写 / 读 token 下载到 `/home/claude`),需要时下载即可,不必重跑转换器;试点语料已在 HF `UUUooUUU/mht-midtrain-pilot`,Linux #2 上的 `mht_work/midtrain/` 完整保留(合并模型、8 个 SFT checkpoint 与评测 json)。
 - **新会话第一步:** 跑 issue_inbox(等对方:分叉试点、fmt_v1_2、mdagents 开头筛选、phase_canonical v1);然后等用户对上面两个候选的决定。
 
 ### 0.71 第 62 轮:中训练试点 v1 运行中(2026-10-26 19:15 UTC)

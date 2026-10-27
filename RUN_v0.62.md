@@ -929,3 +929,7 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - 未做:基座模型在留出集上的 LM loss;第 61 轮承诺的"数据来源可识别度"(纯文本 TAPT 无标签,留到结构感知版本)。
 - 新脚本:`scripts/linux2_midtrain_eval.py`(Linux #2,配对 bootstrap)、`scripts/midtrain_robust_check.py`(沙箱从 CSV 复算,逐 run AUROC 与服务器一致到 0;稳健指标)。逐实例分数 `results/midtrain_pilot/tapt_pilot_v1_scores.csv.gz`。
 - **issue:** 评论 6432028012(`docs/interfaces/issue_comment_r62b.md`):通知试点结果;按约定请对方启动分叉试点(约 $0.5 以内,超出先问用户);提醒 fmt_v1_2、mdagents 开头筛选、phase_canonical v1 仍在等。
+
+### 第 62 轮(续 3,2026-10-27 ~04:30 UTC)· 用户:要新开会话,准备交接;把所需数据(含转换好的公开数据)上传到 HF,新建数据集仓库
+- 新建**私有** HF 数据集 `UUUooUUU/mht-session-data`:`public_mas/mas_traj/`(7 个数据集 26,108 条运行,mas-traj/1 第 61–62 轮版本)+ `mas_traj.md5`、`public_mas/raw/`(原始下载 1.5 GB)、第 53–55 轮的统计与下载日志、README(布局、恢复命令、许可:AgentRx gated,TRAIL 只评测且不得在 gated / 私有仓库外转发)。未上传:who-when-pro 原始 3.3 GB 压缩包(其 JSON 子集在 `raw/wwp_json/`)、ATBench(未使用,含合成的 API key 字符串)、已被取代的 r57 转换备份。其余数据本来就有处:中训练语料在 `UUUooUUU/mht-midtrain-pilot`,MAA 数据由 `prepare_maa.sh` 重建,锚点在 medical-aegis 仓库,AEGIS 旧数据在本仓库,Linux #2 的 `mht_work/` 完整保留。
+- HANDOFF 快速恢复加了第 3b 步(需要时从该数据集下载)。
