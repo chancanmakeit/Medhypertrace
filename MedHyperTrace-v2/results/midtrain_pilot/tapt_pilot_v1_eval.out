@@ -1,0 +1,29 @@
+QD       graph models--Qwen--Qwen3-8B       0.773 0.797 0.777  mean 0.782 ± 0.013
+QD       graph Qwen3-8B-tapt_pilot_v1       0.767 0.791  mean 0.779 ± 0.018
+   same-seed s0 TAPT vs base: 0.767 vs 0.773 diff -0.006 [-0.041, +0.024]
+   same-seed s1 TAPT vs base: 0.791 vs 0.797 diff -0.006 [-0.038, +0.031]
+   ensemble TAPT2 vs base3: 0.791 vs 0.805 diff -0.014 [-0.041, +0.013]
+   ensemble TAPT2 vs base2: 0.791 vs 0.803 diff -0.012 [-0.040, +0.017]
+QD       text  models--Qwen--Qwen3-8B       0.780 0.782 0.778  mean 0.780 ± 0.002
+QD       text  Qwen3-8B-tapt_pilot_v1       0.790 0.792  mean 0.791 ± 0.001
+   same-seed s0 TAPT vs base: 0.790 vs 0.780 diff +0.010 [-0.021, +0.044]
+   same-seed s1 TAPT vs base: 0.792 vs 0.782 diff +0.010 [-0.020, +0.038]
+   ensemble TAPT2 vs base3: 0.797 vs 0.787 diff +0.010 [-0.016, +0.037]
+   ensemble TAPT2 vs base2: 0.797 vs 0.779 diff +0.019 [-0.007, +0.049]
+QD       graph-text models--Qwen--Qwen3-8B       per seed -0.007 +0.015 -0.002 mean +0.002±0.012; ens(all) 0.805 vs 0.787 diff +0.018 [-0.007, +0.043]; ens(s0,1) +0.024
+QD       graph-text Qwen3-8B-tapt_pilot_v1       per seed -0.023 -0.000 mean -0.012±0.016; ens(all) 0.791 vs 0.797 diff -0.007 [-0.031, +0.020]; ens(s0,1) -0.007
+LQD_mac  graph models--Qwen--Qwen3-8B       0.878 0.841 0.759  mean 0.826 ± 0.061
+LQD_mac  graph Qwen3-8B-tapt_pilot_v1       0.712 0.844  mean 0.778 ± 0.093
+   same-seed s0 TAPT vs base: 0.712 vs 0.878 diff -0.166 [-0.269, -0.001]
+   same-seed s1 TAPT vs base: 0.844 vs 0.841 diff +0.003 [-0.049, +0.079]
+   ensemble TAPT2 vs base3: 0.795 vs 0.808 diff -0.013 [-0.150, +0.096]
+   ensemble TAPT2 vs base2: 0.795 vs 0.854 diff -0.059 [-0.172, +0.052]
+LQD_mac  text  models--Qwen--Qwen3-8B       0.830 0.824 0.771  mean 0.809 ± 0.032
+LQD_mac  text  Qwen3-8B-tapt_pilot_v1       0.704 0.724  mean 0.714 ± 0.014
+   same-seed s0 TAPT vs base: 0.704 vs 0.830 diff -0.126 [-0.219, +0.086]
+   same-seed s1 TAPT vs base: 0.724 vs 0.824 diff -0.100 [-0.196, +0.058]
+   ensemble TAPT2 vs base3: 0.743 vs 0.800 diff -0.057 [-0.157, +0.064]
+   ensemble TAPT2 vs base2: 0.743 vs 0.836 diff -0.093 [-0.181, +0.065]
+LQD_mac  graph-text models--Qwen--Qwen3-8B       per seed +0.048 +0.017 -0.012 mean +0.018±0.030; ens(all) 0.808 vs 0.800 diff +0.008 [-0.022, +0.039]; ens(s0,1) +0.018
+LQD_mac  graph-text Qwen3-8B-tapt_pilot_v1       per seed +0.008 +0.119 mean +0.064±0.078; ens(all) 0.795 vs 0.743 diff +0.052 [-0.074, +0.155]; ens(s0,1) +0.052
+rows 4660
