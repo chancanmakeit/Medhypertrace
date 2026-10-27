@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-27 02:15 UTC(第 62 轮续;第 3 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-27 04:20 UTC(第 62 轮末;第 3 个会话结束,交接给第 4 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -100,6 +100,8 @@
 - 脚本:`scripts/linux2_midtrain_eval.py`(Linux #2)、`scripts/midtrain_robust_check.py`(沙箱,读 CSV)。逐实例分数 `tapt_pilot_v1_scores.csv.gz`。
 - **issue:** 评论 6432028012(`docs/interfaces/issue_comment_r62b.md`)通知结果,请对方启动分叉试点(约 $0.5 以内,超出先问用户),并提醒 fmt_v1_2、mdagents 开头筛选、phase_canonical v1 仍在等。
 - Linux #2 4 卡现在空闲。
+- **第 3 个会话结束时的交接状态(2026-10-27 04:20 UTC):** 工作区干净(最后提交 cc797d2),issue 无新评论,**没有在跑的任务,也没有待触发的定时任务**。新会话沙箱是新的:`/home/claude/public_mas/mas_traj/`(公开数据转换结果)不在了,只有在需要重建中训练语料时才重跑转换器(`data_tools/public_to_mas_traj/README.md`);试点语料已在 HF `UUUooUUU/mht-midtrain-pilot`,Linux #2 上的 `mht_work/midtrain/` 完整保留(合并模型、8 个 SFT checkpoint 与评测 json)。
+- **新会话第一步:** 跑 issue_inbox(等对方:分叉试点、fmt_v1_2、mdagents 开头筛选、phase_canonical v1);然后等用户对上面两个候选的决定。
 
 ### 0.71 第 62 轮:中训练试点 v1 运行中(2026-10-26 19:15 UTC)
 - **用户决定:** 开始中训练试点;采用 phase_canonical;分叉试点排在中训练试点之后;fmt_v1_2 与 mdagents 开头筛选验证批准(已在 issue 6424293259 请对方执行)。
