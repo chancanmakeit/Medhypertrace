@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-27 04:20 UTC(第 62 轮末;第 3 个会话结束,交接给第 4 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-27 05:00 UTC(第 63 轮;第 4 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -11,11 +11,11 @@
 
 > **🚀 新会话快速恢复(第 38 轮写,v2 工作用):**
 > 1. `add_repo` 以 push 权限添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`(需要时再加 `graph-based-mas-fault-attribution-papers`),然后 clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走 git 代理,不需要 token。
-> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-27T02:12:07Z,即我方第 62 轮续的评论)。之后每次被唤醒都先跑一次。
+> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-27T02:12:07Z,即我方第 62 轮续的评论;第 63 轮复查无新评论;脚本已加 `--paginate`)。之后每次被唤醒都先跑一次。
 > 3. **MAA 数据(沙箱若已重置)**:`cd MedHyperTrace-v2 && pip install -r requirements.txt --break-system-packages`,然后运行 `bash scripts/prepare_maa.sh /home/claude/data_maa_v2 QD 8000`。脚本会自动下载、转换、对齐人工标签;**嵌入直接从仓库缓存 `MedHyperTrace-v2/data/maa_emb_minilm/` 恢复**(sha256 校验,约 10 秒,省去 CPU 上约 50 分钟;也可单独运行 `bash scripts/restore_maa_emb.sh <emb_dir>`);再导出图 token、构建 SFT。脚本能跳过已有的步骤;图缓存 `graphs_*.pkl` 在首次加载时自动重建。第一阶段结果已在 `results/phase1_maa/`,不必重跑。
-> 3b. **公开 MAS 数据(需要时)**:从私有 HF 数据集 `UUUooUUU/mht-session-data` 下载 `public_mas/mas_traj/`(86 MB)到 `/home/claude/public_mas/`,`raw/` 1.5 GB 按需;HF token 在 Project doc `UUUooUUU-huggingface-access-token`,写入 600 文件,不上命令行。
+> 3b. **公开 MAS 数据(需要时)**:从私有 HF 数据集 `UUUooUUU/mht-session-data` 下载 `public_mas/mas_traj/`(86 MB)到 `/home/claude/public_mas/`,`raw/` 1.5 GB 按需;**`mas_traj.md5` 在该仓库根目录**,复制到 `/home/claude/public_mas/` 后在该目录 `md5sum -c mas_traj.md5`;HF token 在 Project doc `UUUooUUU-huggingface-access-token`,写入 600 文件,不上命令行。
 > 4. **API 密钥**:从 Project doc `claude/api端点` 读取,写到 `/home/claude/.mht_api.env`。绝不进 git。调用前先试跑估算成本,再问用户。
-> 5. 阅读顺序:**§0.72(第 62 轮续,先读)** → §0.71 → §0.70(第 61 轮)→ §0.69(第 60 轮)→ §0.68(第 59 轮)→ §0.67(第 58 轮)→ §0.66(第 57 轮)→ §0.65(第 56 轮)→ §0.64(第 55 轮:已定事项与新待办)→ §0.63(第 54 轮)→ §0.62(第 53 轮末交接)→ §0.61(第 53 轮:收藏夹 15 个数据集、五折配对比较)→ §0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.62.md` 第 37–62 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
+> 5. 阅读顺序:**§0.73(第 63 轮,先读)** → **§0.72(第 62 轮续)** → §0.71 → §0.70(第 61 轮)→ §0.69(第 60 轮)→ §0.68(第 59 轮)→ §0.67(第 58 轮)→ §0.66(第 57 轮)→ §0.65(第 56 轮)→ §0.64(第 55 轮:已定事项与新待办)→ §0.63(第 54 轮)→ §0.62(第 53 轮末交接)→ §0.61(第 53 轮:收藏夹 15 个数据集、五折配对比较)→ §0.60(第 50 轮:中训练主版本排除所有 AEGIS 注入运行)→ §0.59(含第 48 轮进度)→ §0.58 → §0.57 → §0.56 → §0.55 → §0.54 → §0.53 → §0.52 → §0.51 → §0.50 → §0.49 → `RUN_v0.62.md` 第 37–62 轮 → `MedHyperTrace-v2/docs/design/HGFM_design_v0.2.md` → `MedHyperTrace-v2/hgfm/llm/README.md`。
 > 6. **每轮必做**:讨论记录 `RUN_v0.<N>.md` 用 `git mv` 改版本号并追加本轮;更新本文 §0;commit 并 push;sleep 不超过约 60 秒。
 
 ---
@@ -90,6 +90,12 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.73 第 63 轮:第 4 个会话已恢复(2026-10-27 05:00 UTC)
+- 两仓库已 clone(Medhypertrace、medical-aegis);issue #1 无新评论(79 条,最后为我方 02:12:07Z)。`issue_inbox.sh` 修为分页读取(超过 100 条评论时原脚本会漏看)。
+- Linux #2:4 卡空闲;`mht_work/midtrain/` 完好(合并模型、TAPT ckpt、8 个 SFT ckpt、8 个评测 json、汇总与 CSV)。
+- `/home/claude/public_mas/mas_traj/` 已从 HF 恢复,md5 全过,26,108 条运行 / 169,299 步 / phase_canonical 无缺失。HF token 在 `/home/claude/.mht_secrets/`(600)。
+- **没有在跑的任务;等用户在 §0.72 的两个候选中决定**(结构感知中训练 / LQD 六折 TAPT 对基座);同时等对方的分叉试点、fmt_v1_2、mdagents 开头筛选、phase_canonical v1。
 
 ### 0.72 第 62 轮续:中训练试点 v1 结果——纯文本 TAPT 没有可测提升;已请对方启动分叉试点(2026-10-27 02:15 UTC)
 - **结果**(`MedHyperTrace-v2/results/midtrain_pilot/README.md`;只用 MedAgentAudit 分类体系):

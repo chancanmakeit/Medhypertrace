@@ -933,3 +933,11 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 ### 第 62 轮(续 3,2026-10-27 ~04:30 UTC)· 用户:要新开会话,准备交接;把所需数据(含转换好的公开数据)上传到 HF,新建数据集仓库
 - 新建**私有** HF 数据集 `UUUooUUU/mht-session-data`:`public_mas/mas_traj/`(7 个数据集 26,108 条运行,mas-traj/1 第 61–62 轮版本)+ `mas_traj.md5`、`public_mas/raw/`(原始下载 1.5 GB)、第 53–55 轮的统计与下载日志、README(布局、恢复命令、许可:AgentRx gated,TRAIL 只评测且不得在 gated / 私有仓库外转发)。未上传:who-when-pro 原始 3.3 GB 压缩包(其 JSON 子集在 `raw/wwp_json/`)、ATBench(未使用,含合成的 API key 字符串)、已被取代的 r57 转换备份。其余数据本来就有处:中训练语料在 `UUUooUUU/mht-midtrain-pilot`,MAA 数据由 `prepare_maa.sh` 重建,锚点在 medical-aegis 仓库,AEGIS 旧数据在本仓库,Linux #2 的 `mht_work/` 完整保留。
 - HANDOFF 快速恢复加了第 3b 步(需要时从该数据集下载)。
+
+## 第 63 轮 · 2026-10-27 ~04:50–05:05 UTC · 新会话(第 4 个)续接:按 HANDOFF 快速恢复
+- 两仓库重新 add_repo(push)并 clone:Medhypertrace `e94310d`、medical-aegis `e39b1da`。
+- **issue #1 无新评论**(共 79 条,最后一条仍是我方 6432028012,02:12:07Z);Medhypertrace 无 open issue。仍在等对方:分叉试点、fmt_v1_2 验证、mdagents 开头筛选验证、phase_canonical v1。
+- **修 `scripts/issue_inbox.sh`**:原来只取第 1 页(`per_page=100`),评论超过 100 条后会漏看新评论;加 `--paginate`。用回溯时间点测试过(能打印 02:12 的我方评论)。
+- **Linux #2**:4 卡空闲(各 14 MiB,无计算进程);`mht_work/midtrain/` 完好——合并模型 `Qwen3-8B-tapt_pilot_v1`(4 个分片)、TAPT checkpoint-506、8 个 SFT checkpoint、8 个 `eval_swift[_s1]_Qwen3-8B-tapt_pilot_v1_{graph,text}.json`、评测汇总与逐实例 CSV;SFT 队列 status 末行 `queue empty`。
+- **公开 MAS 数据**:从私有 HF `UUUooUUU/mht-session-data` 下载 `public_mas/mas_traj/` 到 `/home/claude/public_mas/mas_traj/`(86 MB)。注意 `mas_traj.md5` 在该仓库**根目录**(不在 `public_mas/` 下),已复制到 `/home/claude/public_mas/`,在该目录运行 `md5sum -c mas_traj.md5`:7 个文件全部 OK。内容复核:26,108 条运行、169,299 步、缺 `phase_canonical` 0,与第 61–62 轮记录一致。HF 读 / 写 token 在 `/home/claude/.mht_secrets/`(700 / 600),未上命令行。
+- **待用户决定**(同 §0.72):① 结构感知中训练(给图 token 自己的训练信号);② TAPT 与基座在 LQD 六折上各跑一遍(约 20 个任务、约 10 小时 GPU,无 API 费)。
