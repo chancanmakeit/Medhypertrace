@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-27 06:05 UTC(第 64 轮;第 4 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-27 08:05 UTC(第 64 轮续;第 4 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -11,7 +11,7 @@
 
 > **🚀 新会话快速恢复(第 38 轮写,v2 工作用):**
 > 1. `add_repo` 以 push 权限添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`(需要时再加 `graph-based-mas-fault-attribution-papers`),然后 clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走 git 代理,不需要 token。
-> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到 2026-10-27T05:59:16Z,即我方第 64 轮评论 6434952854;脚本已加 `--paginate`)。之后每次被唤醒都先跑一次。
+> 2. **先看 issue**:`cd /home/claude/medhypertrace && bash MedHyperTrace-v2/scripts/issue_inbox.sh`(只打印 `docs/interfaces/issue_last_seen.txt` 之后的新评论;最后读到我方第 64 轮续的评论(见 `docs/interfaces/issue_last_seen.txt`);脚本已加 `--paginate`)。之后每次被唤醒都先跑一次。
 > 3. **MAA 数据(沙箱若已重置)**:`cd MedHyperTrace-v2 && pip install -r requirements.txt --break-system-packages`,然后运行 `bash scripts/prepare_maa.sh /home/claude/data_maa_v2 QD 8000`。脚本会自动下载、转换、对齐人工标签;**嵌入直接从仓库缓存 `MedHyperTrace-v2/data/maa_emb_minilm/` 恢复**(sha256 校验,约 10 秒,省去 CPU 上约 50 分钟;也可单独运行 `bash scripts/restore_maa_emb.sh <emb_dir>`);再导出图 token、构建 SFT。脚本能跳过已有的步骤;图缓存 `graphs_*.pkl` 在首次加载时自动重建。第一阶段结果已在 `results/phase1_maa/`,不必重跑。
 > 3b. **公开 MAS 数据(需要时)**:从私有 HF 数据集 `UUUooUUU/mht-session-data` 下载 `public_mas/mas_traj/`(86 MB)到 `/home/claude/public_mas/`,`raw/` 1.5 GB 按需;**`mas_traj.md5` 在该仓库根目录**,复制到 `/home/claude/public_mas/` 后在该目录 `md5sum -c mas_traj.md5`;HF token 在 Project doc `UUUooUUU-huggingface-access-token`,写入 600 文件,不上命令行。
 > 4. **API 密钥**:从 Project doc `claude/api端点` 读取,写到 `/home/claude/.mht_api.env`。绝不进 git。调用前先试跑估算成本,再问用户。
@@ -90,6 +90,10 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.74b 第 64 轮续(08:05 UTC)
+- **Linux #2 连接器断开,需用户重新授权**;SAMT 链在服务器后台继续(读 `mht_work/midtrain/samt_v1/status`)。连上后:读探针 → 汇报 → 结果入 `results/samt_v1/`。
+- issue:对方第 45 轮已完成三项付费运行(实际 $0.557);分叉试点翻转集中在第 1 轮 / 首位发言者。我方回复建议扩大前处理位置混杂与"字母错"选择条件(见 RUN_v0.64)。**待用户决定:** 是否扩大分叉(llm_debate 每点约 $0.003,mdagents 约 $0.0012)。provenance 已改写 `phase_canonical/1`。
 
 ### 0.74 第 64 轮:结构感知中训练 SAMT v1 运行中(2026-10-27 06:05 UTC)
 - **用户决定:** 做结构感知中训练。设计 `MedHyperTrace-v2/docs/design/SAMT_design_v1.md`:对齐阶段(冻结 Qwen3-8B,端到端训练 HGFM v0.2 编码器 + projector;答案在图 token 里不在文本里);O1 内容匹配 / O2 读集 / O3 读者 / O4 选项答案;语料口径同 TAPT(无 MAA、排除 groupchat);编码器没见过 MAA,一份 MAA 图 token 服务所有折。代码 `hgfm/midtrain/samt_*.py`,详细验证见 RUN_v0.64 第 64 轮。

@@ -953,3 +953,8 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - issue 无新评论。
 - **issue 新评论**(对方 v10 第 16 轮 / issue 第 44 轮,05:08Z,本轮开始后到达):A–E 修复已核对;`phase_canonical` 升 v1(含我方 magentic_one instruction → plan),导出器默认写入;分叉试点按第 43 轮设计 + 我方第 61 轮要求实现(D(t) 用 sources 的传递闭包;无 `system_fingerprint`,改记 `model`;最后一步候选点单列),估算 $0.31;fmt_v1_2 $0.06、开头筛选 $0.09;合计约 $0.46,等用户确认;建议 LQD_mac 主指标只算正负例都 ≥ 2 的码。
 - **我方:** 核对 v1 表单独标注与已存 169,299 步 0 处不同 → 删除转换器里的本地覆盖(数据不用重转)。回复评论 6434952854(05:59:16Z,`docs/interfaces/issue_comment_r64.md`):按我方记录用户第 62 轮已批准这三项(分叉试点上限约 $0.5),新估算都在范围内,若对方需要用户再确认以用户为准;D(t) 请报告大小分布与推断来源占比;最后一步候选点建议不进主分析,可作单步采样翻转率基线;同意 LQD_mac 主指标改为"正负例都 ≥ 2 的码";通知 SAMT 已开跑。
+
+### 第 64 轮(续,2026-10-27 ~08:00 UTC)· 用户:进度如何
+- **Linux #2 Jupyter 连接器断开**(需要用户在 claude.ai 连接器设置里重新授权),本会话读不到 SAMT 进度;任务在服务器后台(setsid nohup),不受影响。按计划 SAMT 约 07:35 完成、探针约 07:55。08:00 UTC 的定时检查同样需要连接器。
+- **issue 新评论**(对方第 45 轮,06:01Z):用户在对方会话确认后三项付费运行已完成,实际 $0.557(估 $0.46,+21%,两项验证有 10–50% 注入步骤用到重试上限)。分叉试点:去掉 aggregator 后 llm_debate 翻转 5/39、mdagents 7/40;aggregator 单步基线 0/39;对照复跑 0/28 不一致;翻转全在 llm_debate 第 1 轮 agent(第 2 轮 0/19)和 mdagents 专家;发言顺序效应例子 medxpertqa_text_2287;锚点 sources 全是运行时记录(无推断),对照臂 29 次未命中都在 D(t) 内。fmt_v1_2:PI 更好认 → llm_debate 保持 fmt_v1。mdagents 开头筛选通过门槛(0.59 / 0.58),format_matched=false 7/50 → 保留 match_opener。建议 provenance 写 `phase_canonical/1`。
+- **我方:** 转换器 provenance 改写表的 `version`(`phase_canonical/1`),已转换数据不重转。回复评论 6436721040(`docs/interfaces/issue_comment_r64b.md`):扩大分叉前处理两个混杂——(a) 位置:正例集中在第 1 轮 / 首位发言者,会学到"猜第一步"捷径 → 评测必须同时报位置平凡基线,翻转率按(轮次, 发言顺序)分层;(b) 候选点只取"字母错"的步骤,选择条件文本可见 → 加一层按位置匹配的"字母对 / 无字母"对照候选点(对→错方向翻转率);同意去掉 D(t) 为空的点;format_matched=false 我方训练与门槛评估时排除或单列。是否扩大由用户定。

@@ -203,8 +203,9 @@ def _phase_canonical_module():
         for (fw, ph), c in PHASE_CANONICAL_OVERRIDES.items():
             t.setdefault("frameworks", {}).setdefault(fw, {})[ph] = c
         _PC["mod"], _PC["table"] = mod, t
-        _PC["version"] = os.path.basename(mod.DEFAULT) + (" + MHT overrides " + ", ".join(f"{a}.{b}->{c}" for (a, b), c in
-                                                          PHASE_CANONICAL_OVERRIDES.items()) if PHASE_CANONICAL_OVERRIDES else "")
+        # table's own version field ("phase_canonical/1"), stable across file renames (issue round 45)
+        _PC["version"] = str(t.get("version") or os.path.basename(mod.DEFAULT)) + (" + MHT overrides " + ", ".join(
+            f"{a}.{b}->{c}" for (a, b), c in PHASE_CANONICAL_OVERRIDES.items()) if PHASE_CANONICAL_OVERRIDES else "")
     return _PC["mod"], _PC["table"]
 
 
