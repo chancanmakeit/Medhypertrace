@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-10-27 08:05 UTC(第 64 轮续;第 4 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-10-27 08:15 UTC(第 64 轮续 2;第 4 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -90,6 +90,10 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.74c 第 64 轮续 2(08:15 UTC):SAMT 完成,探针结构门槛通过;SFT 运行中
+- 连接器已重新授权。SAMT 07:32 完成;探针(`results/samt_v1/README.md`):O2 / O3 真 token 0.98 / 0.99 对打乱 0.51 / 0.22(CI 远离 0),冻结 LLM 能读出图 token 里的交互结构;O1 内容只 +0.09,医学锚点上无增益;O4 +0.11。
+- 在途:SFT samt_v1(07:43 起,约 09:55 完)→ encOnly(约 11:55)→ `linux2_samt_ablate.sh` 置零 / 打乱评测 + `linux2_samt_eval.py`(约 12:30 UTC;输出 `mht_work/midtrain/samt_v1/samt_v1_eval.out`)。之后:把 eval.out / json / scores.csv 读回 `results/samt_v1/`,写 SFT 结论并贴 issue。
 
 ### 0.74b 第 64 轮续(08:05 UTC)
 - **Linux #2 连接器断开,需用户重新授权**;SAMT 链在服务器后台继续(读 `mht_work/midtrain/samt_v1/status`)。连上后:读探针 → 汇报 → 结果入 `results/samt_v1/`。
