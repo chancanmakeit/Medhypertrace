@@ -9,7 +9,11 @@
 # seed ensemble = mean of z-scored instance scores.
 # Writes midtrain/samt_v1/samt_v1_eval.json and samt_v1_scores.csv.
 import json, csv, os, numpy as np
-from sklearn.metrics import roc_auc_score
+from scipy.stats import rankdata
+def roc_auc_score(y, s):
+    """Mann-Whitney AUROC with average ranks for ties (= sklearn.metrics.roc_auc_score for binary y), ~100x faster."""
+    y = np.asarray(y); r = rankdata(np.asarray(s, dtype=float)); n1 = int(y.sum()); n0 = len(y) - n1
+    return float((r[y == 1].sum() - n1 * (n1 + 1) / 2) / (n1 * n0))
 W = os.environ.get("MHT_WORK", "/data1/ekyang/cgh/CODE/mht_work"); L = f"{W}/maa/llm"; OUT = f"{W}/midtrain/samt_v1"
 BASE = "models--Qwen--Qwen3-8B"
 def tag(s, T): return f"swift_{T}" if s == 0 else f"swift_s{s}_{T}"
