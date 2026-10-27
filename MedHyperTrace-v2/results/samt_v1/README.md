@@ -43,4 +43,55 @@ mast_data 0.95/0.32 (37); O3 aftraj 1.00/0.10 (42), medagents_mc 0.92/0.42 (12),
 5. Source identifiability (round 61): the text-only level differs a lot by source (O2 shuffle 0.17–0.70), but with real
    tokens every source is at 0.92–1.00, so the structural readout does not depend on which dataset the run came from.
 
-Whether readable structure helps MAA attribution is the SFT question (running; results → `samt_v1_eval.*`).
+Whether readable structure helps MAA attribution is the SFT question (next section).
+
+## SFT on MedAgentAudit (2026-10-27 07:43–12:06 UTC) — no measurable gain; one unresolved cross-MAS hint
+**Taxonomy: MedAgentAudit only.** Same MS-Swift SFT recipe and the same `sft_graph` prompts as the base runs; only the
+graph vectors (SAMT encoder, one file for all folds) and the projector start differ. samt = SAMT-aligned projector,
+lr 1e-4; encOnly = SAMT tokens with a random projector, lr 1e-3 (the original recipe); base_text / base_graph = round-60
+seed study (3 seeds; text is unchanged by SAMT because the LLM is frozen). samt_zero / samt_shuf = samt checkpoints
+evaluated with zeroed / cross-run shuffled tokens. Full output `samt_v1_eval.out` (paired bootstrap 1000; seed ensemble
+= mean z-score). Per-instance scores and the JSON stay on Linux #2 (`mht_work/midtrain/samt_v1/samt_v1_scores.csv`,
+`samt_v1_eval.json`). LQD_mac primary metric = codes with >= 2 positives and >= 2 negatives (5 codes, n = 51; agreed
+with medical-aegis in issue round 44/64); all-codes metric alongside. On QD both metrics are identical.
+
+| split | metric | base_text | base_graph | samt | encOnly | samt_zero | samt_shuf |
+|---|---|---|---|---|---|---|---|
+| QD (n=399) | main | 0.780 ± 0.002 | 0.782 ± 0.013 | 0.793 / 0.793 | 0.806 / 0.803 | 0.746 / 0.719 | 0.790 / 0.773 |
+| LQD_mac | robust (n=51) | 0.793 ± 0.005 | 0.821 ± 0.009 | 0.863 / 0.826 | 0.771 / 0.798 | 0.738 / 0.780 | 0.796 / 0.826 |
+| LQD_mac | all codes (n=67) | 0.809 ± 0.032 | 0.826 ± 0.061 | 0.866 / 0.816 | 0.717 / 0.832 | 0.812 / 0.712 | 0.783 / 0.780 |
+
+Paired differences, seed ensembles [95% CI]:
+| comparison | QD | LQD_mac robust | LQD_mac all codes |
+|---|---|---|---|
+| samt − base_text (main question) | +0.017 [−0.011, +0.043] | +0.046 [−0.040, +0.149] | +0.033 [−0.038, +0.131] |
+| samt − base_graph | −0.001 [−0.032, +0.028] | +0.036 [−0.048, +0.143] | +0.026 [−0.050, +0.125] |
+| samt − encOnly (alignment init) | −0.003 [−0.033, +0.027] | +0.046 [−0.033, +0.139] | +0.033 [−0.029, +0.132] |
+| encOnly − base_text (encoder swap) | +0.020 [+0.000, +0.040] | +0.000 [−0.089, +0.083] | +0.000 [−0.094, +0.071] |
+| samt − samt_zero | **+0.063 [+0.020, +0.104]** | +0.095 [−0.093, +0.242] | +0.068 [−0.061, +0.207] |
+| samt − samt_shuf (run-specific use) | +0.011 [−0.009, +0.031] | +0.034 [−0.035, +0.175] | +0.060 [−0.026, +0.164] |
+
+Per code on QD (exploratory, not pre-registered; n = 39–40 per code, AUROC SE ≈ 0.07): samt − base_text ranges from
+−0.036 (1.1.1) to +0.074 (3.2.1), with no group of codes standing out beyond that noise level.
+
+### Reading
+1. **QD: no measurable gain.** samt − base_text +0.017 (upper bound +0.043), the same size as the base graph − text gap of
+   round 60. The alignment initialisation adds nothing (samt − encOnly −0.003).
+2. **The SFT model still does not use run-specific token content on QD.** Zeroing the tokens costs −0.063 (CI excludes 0),
+   but zeroed tokens are out of distribution (in the probe, zero was below shuffle too); with shuffled, in-distribution
+   tokens the cost is only +0.011 (n.s.) — the same picture as the C6 diagnosis (round 54: QD −0.005 to −0.024). The
+   probe showed that the frozen LLM CAN read structure from these tokens; attribution SFT on MAA labels does not learn
+   to rely on it.
+3. **LQD_mac (cross-MAS): direction consistent with a transfer gain, not resolvable.** On the robust metric both SAMT seeds
+   (0.863, 0.826) are above all three base-text seeds (0.787–0.796, SD 0.005) and above encOnly, and real > shuffled in
+   seed 0 (+0.066 [+0.010, +0.203]). But n = 51 instances: every ensemble CI includes 0. Only the pooled 6-fold LQD can
+   say whether this is real.
+4. **Practical:** a single label-free SAMT encoder (never trained on MAA) gives graph VECTORS at least as good for the
+   LLM as the per-fold supervised encoders (encOnly − base_graph +0.002 on QD). Caveat: the prompts' candidate steps
+   are still the ones ranked by each fold's supervised encoder (`step_prob`, unchanged sft_graph prompts), so the
+   per-fold encoder is still used for candidate selection; only its graph-vector role is shown to be replaceable.
+5. **Why readability does not turn into attribution signal (hypotheses, not tested):** most MAA defect codes are content
+   judgments about one step (the per-code picture shows no structural group); and the SFT prompt already states the
+   structure in text (event lines name how many and which phases a step read), so the tokens add little beyond the text.
+   Structure should matter more for the responsibility layer (which step caused a wrong answer), e.g. medical-aegis's
+   branch data, than for MAA's defect layer.
