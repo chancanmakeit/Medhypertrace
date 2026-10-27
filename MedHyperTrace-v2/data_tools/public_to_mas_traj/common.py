@@ -187,8 +187,10 @@ def make_step(order, kind, agent_id, agent_role, output, *, agent_label=None, ph
 
 
 PARTNER_PHASE_CANONICAL = "/home/claude/medical-aegis/scripts/phase_canonical.py"
-# agreed in issue round 62 (user adopted phase_canonical); applied here until medical-aegis bumps its table
-PHASE_CANONICAL_OVERRIDES = {("magentic_one", "instruction"): "plan"}
+# Round 64: medical-aegis phase_canonical v1 (their default since issue round 44) already maps magentic_one
+# instruction -> plan; the v1 table alone reproduces all 169,299 stored labels of the round 61-62 conversion, so no
+# local override is needed any more (kept as an empty hook).
+PHASE_CANONICAL_OVERRIDES = {}
 _PC = {}
 
 
