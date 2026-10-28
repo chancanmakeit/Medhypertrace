@@ -91,6 +91,10 @@
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
+### 0.85 第 73 轮:E4 运行中(BEFT + 冻结探针)
+- 预注册 `MedHyperTrace-v2/docs/design/E4_prereg_v1.md`。代码 `hgfm/e4/`(e4_features、e4_eval、e4_probe、e4_beft、e4_beft_eval)。Linux #2:`mht_work/e4/`,状态看 `status`,驱动 `scripts/linux2_run_e4.sh`(可重跑续接)。TracerTraj 的 WW 格式数据在 `mht_work/e4/tt_ww/`。
+- 结束后:读 `stageA/e4a_{linear,mlp}.json`、`stageA.log`、`stageB.out`;写 `results/e4/README.md`(原始 + 控制后,与最长步基线比较,和论文同口径的 WW 步骤级准确率);汇报;发 issue #2。
+
 ### 0.84 第 72 轮:训练加速实测
 - liger-kernel 0.7.0 已装(mht-swift)。`linux2_run_tapt.sh` 支持 `LIGER=true`、`PACK=1`(默认都关,保持旧配方)。A6000 拓扑全是 SYS,无 NVLink;LoRA 训练用 DDP;梯度检查点必须开。数字见 `MedHyperTrace-v2/results/bench_train/README.md`。E4 仍待用户确认。
 

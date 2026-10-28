@@ -136,6 +136,8 @@ def main():
     dist.barrier(); del lm, beft; torch.cuda.empty_cache()
     # final scoring with the best state (every rank scores a shard; rank 0 merges)
     E = load_trajs(a.oat, {"who_and_when": "who_and_when", "traceelephant_gc": "traceelephant_gc", "tt_test": os.path.join(a.data_dir, "test")})
+    if a.max_train:   # smoke test: score only a few trajectories per dataset
+        keep = set(); [keep.update(sorted(k for k in E if k[0] == ds)[:6]) for ds in {k[0] for k in E}]; E = {k: v for k, v in E.items() if k in keep}
     st = torch.load(os.path.join(a.out, "best_state.pt"), weights_only=False); out = {}
     elen = {k: len(tok(v["text"])["input_ids"]) for k, v in E.items()}
     for yarn in (False, True):

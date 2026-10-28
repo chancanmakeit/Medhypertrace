@@ -1039,3 +1039,10 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - 实测(`results/bench_train/README.md`):A6000 计算能力是 8.6(不是 8.0),拓扑全是 SYS(PCIe 跨 NUMA,没有 NVLink)→ LoRA 用纯 DDP 是对的;liger-kernel 0.8.x 要求 transformers ≥ 5,装的是 0.7.0;Liger 微基准每步快 14–20%,显存省 24–36%,16k 只有开 Liger 才放得下,数值等价;**关掉梯度检查点在 4k 就 OOM**(LoRA r64 all-linear);batch 1 没有 padding,1k 与 4k 每 token 成本只差约 9%;swift pt 端到端:Liger 约 +3%,packing 约 1.3 倍(范围 1.0–2.0),但每步 token 数变成约 3 倍,不再是原来的配方。
 - `linux2_run_tapt.sh`:新增 `LIGER`(默认 false)、`PACK`(默认关);flash-attn 2.8.3.post2 已在 PyPI,未升级(2.7.4 可用,收益不明)。
 - E4 训练用:DDP + flash-attn 2 + Liger(RMSNorm / RoPE / SwiGLU)+ 梯度检查点;不用 FLCE(打分头不算词表 logits)、不用 packing(轨迹本身长)。
+
+## 第 73 轮 · 2026-10-28 ~18:05–18:35 UTC · 用户:E4 微调可用 BEFT 或 BitFit,我来定;加大 batch?(不用);设定时检查,自动跑完后续训练
+- **BEFT 核实:** PEFT 0.20 起内置 `BeftConfig`(环境里是 0.17.1);论文 arXiv 2509.15974 / ACL 2026:只训 v_proj 偏置 b_v,低数据(约 1k 样本)时不差于 LoRA,最大测到 OPT-6.7B,任务是 GLUE / SuperGLUE / SQuAD,**没有长上下文、没有步骤级预测**。**选 BEFT(b_v)**,不选 BitFit:Qwen3 本身没有任何偏置,BitFit 只能退化成"注入全部偏置";BEFT 是有依据的子集。偏置用 forward hook 手动注入(fp32,零初始化,不升级 peft)。注意:BEFT 每步的计算量与 LoRA 相同,只省优化器状态。
+- **预注册 E4 v1**(`docs/design/E4_prereg_v1.md`,提交 6a21f9d,写于任何结果之前):A 阶段冻结代理 + 打分头(base / tapt / S / R,线性 + MLP,3 个种子);B 阶段 BEFT(base vs tapt);判定 = 合并 WW + TEgc 上**控制步长后**的 rank-AUROC 差 CI 下界 > 0。
+- 数据:TracerTraj → Who&When 格式(`data_tools/tracertraj_to_ww.py`):训练 2,889 / 验证 319(按题目分组)/ 测试 768(剔除了 22 条与训练集重题的)。
+- 关于加大 batch:GPU 利用率 91–100%,功耗 280–295 / 300 W,已是算力瓶颈;之前实测每 token 成本 1k vs 4k 只差约 9% → 加大 batch 最多快 5–10%,而且变长序列要 padding;用户确认不改。
+- 运行中(Linux #2):A 阶段特征提取 4 个代理,4 张卡并行(18:14 起,约 1.4 s / 条,共约 4.3k 条);驱动 `scripts/linux2_run_e4.sh`(状态在 `mht_work/e4/status`):等特征 → A 阶段打分头(GPU 0,后台)→ B 阶段冒烟(8 条)→ BEFT base(GPU 0、1)与 tapt(GPU 2、3)并行 → B 阶段评测 → ALL DONE。已设定时检查。
