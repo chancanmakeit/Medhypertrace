@@ -11,6 +11,8 @@
 #              text variant = base seed study (round 60): the LLM is frozen in SAMT, so it is unchanged.
 # Every stage is skipped when its output exists, so re-running the script resumes. Status: $D/status.
 # Usage: setsid nohup bash linux2_run_samt.sh > $D/driver.log 2>&1 &     (MAX_STEPS=N: SAMT smoke only, stages 1-3)
+# ATTN: attention kernel (default sdpa, as in SAMT v1; flash_attn is installed since round 68 but untested with the
+# graph-encoder plugin).
 set -u
 ENV=/data/ekyang/anaconda3/envs/mht-swift
 export PATH=$ENV/bin:$PATH HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false USE_HF=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
@@ -47,7 +49,7 @@ if ! ls -d $OUT/checkpoint-* >/dev/null 2>&1 || [ "$MAX_STEPS" -gt 0 ]; then
     --model $LM --model_type graph_enc_lm --template graph_enc --torch_dtype bfloat16 --tuner_type graph_align \
     --learning_rate $LR --lr_scheduler_type cosine --warmup_ratio 0.05 --weight_decay 0 --max_grad_norm 1.0 \
     --per_device_train_batch_size $BS --gradient_accumulation_steps $ACC --num_train_epochs $EPOCHS \
-    --max_length 3072 --attn_impl sdpa --gradient_checkpointing true --ddp_find_unused_parameters true \
+    --max_length 3072 --attn_impl ${ATTN:-sdpa} --gradient_checkpointing true --ddp_find_unused_parameters true \
     --dataset $D/data/train.jsonl --split_dataset_ratio 0 --strict true --dataloader_num_workers 4 \
     --save_strategy epoch --save_only_model true --logging_steps 5 --seed 0 --data_seed 0 \
     --output_dir $OUT --add_version false --report_to $REPORT --run_name samt_v1 $extra > $D/samt.log 2>&1 || die "samt"

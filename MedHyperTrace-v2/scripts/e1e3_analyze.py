@@ -108,7 +108,8 @@ def main():
     for name in ("random", "first_step", "last_step", "position_prior"):
         S[name] = {k: baselines(T[k], prior[k[0]])[name] for k in sets["pooled"]}
     pooled_oat = {}
-    for proxy in ("base", "tapt"):
+    for proxy in ("base", "tapt", "S", "R"):   # S / R = E1b (pre-registration addendum), only if run
+        if not os.path.isdir(os.path.join(a.root, f"oat_{proxy}", "outputs", "results", "ood")): continue
         S[f"oat_{proxy}"] = {}
         for ds in ("who_and_when", "traceelephant_gc"):
             m, nseeds, pooled = oat_seed_metrics(a.root, proxy, ds, T); S[f"oat_{proxy}"].update(m)
@@ -138,6 +139,7 @@ def main():
     pairs = [("oat_tapt", "oat_base")] + [("oat_base", t) for t in triv] + [("oat_tapt", t) for t in triv]
     if "lr_S_minus_R" in S:
         pairs += [("lr_S_minus_R", t) for t in triv] + [("lr_S_minus_R", "nll_base"), ("lr_S_minus_R", "oat_base")]
+    pairs += [("oat_S", "oat_base"), ("oat_R", "oat_base"), ("oat_S", "oat_R"), ("oat_tapt", "oat_S"), ("oat_tapt", "oat_R")]
     for x, y in pairs:
         if x in S and y in S: R["compare"][f"{x} - {y}"] = cmp(x, y)
     # ---- decisions, verbatim from the pre-registration
@@ -146,6 +148,9 @@ def main():
         p_ok = e1["pooled"]["rauc"].get("ci95", [-1])[0] > 0 and e1["pooled"]["acc1"].get("diff", -1) >= 0
         part = [sn for sn in ("WW", "TEgc") if e1[sn]["rauc"].get("ci95", [-1])[0] > 0 and e1[sn]["acc1"].get("diff", -1) >= 0]
         R["decisions"]["E1"] = "HOLDS" if p_ok else ("PARTIAL (" + ", ".join(part) + ")" if part else "DOES NOT HOLD")
+    if "oat_S" in S and "oat_R" in S:   # E1b rule (addendum): at least one of S - base, R - base with pooled rank-AUROC CI lower > 0
+        ok = [p for p in ("S", "R") if R["compare"][f"oat_{p} - oat_base"]["pooled"]["rauc"].get("ci95", [-1])[0] > 0]
+        R["decisions"]["E1b"] = ("REPLICATES (" + ", ".join(ok) + ")") if ok else "DOES NOT REPLICATE at 1/4 corpus size"
     if "lr_S_minus_R" in S:
         best = max(triv, key=lambda t: R["scorers"][t]["pooled"]["rauc"])
         c1 = R["compare"][f"lr_S_minus_R - {best}"]["pooled"]["rauc"]; c2 = R["compare"]["lr_S_minus_R - nll_base"]["pooled"]["rauc"]

@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # Mid-training (TAPT) pilot on Linux #2 (round 62): LoRA continued pre-training of Qwen3-8B on the trajectory corpus
 # built by hgfm/midtrain/build_corpus.py (text-only jsonl {"text"}, chunks <= 4096 tokens at step boundaries;
-# batch 1 per GPU, so no packing / padding is needed -- packing would need flash-attn, not installed), then merge the LoRA into the base weights so the
+# batch 1 per GPU, so no packing / padding is needed), then merge the LoRA into the base weights so the
 # SFT driver (linux2_run_sft_swift.sh, LM=<merged dir>) can train its own graph/text LoRA on top.
 # Usage: CORPUS=<train.jsonl> OUT=<run dir> GPUS=0,1,2,3 bash linux2_run_tapt.sh   (setsid nohup; log in $OUT/tapt.log)
 #        MAX_STEPS=10 for a throughput / memory smoke test (no merge).
+#        ATTN: attention kernel, default flash_attn (flash-attn 2.7.4.post1 installed round 68; LoRA fwd+bwd 1.7x faster at
+#        4k tokens, 2.4x at 8k, scripts/bench_flash_attn.py). Runs before round 68 (tapt_pilot_v1, e2_S, e2_R) used ATTN=sdpa.
 set -u
 ENV=/data/ekyang/anaconda3/envs/mht-swift
 export PATH=$ENV/bin:$PATH HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false USE_HF=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
@@ -19,7 +21,7 @@ CUDA_VISIBLE_DEVICES=$GPUS NPROC_PER_NODE=$NP swift pt \
   --model $LM --model_type qwen3 --template qwen3 --torch_dtype bfloat16 --tuner_type lora --lora_rank 64 --lora_alpha 128 --lora_dropout 0.05 \
   --target_modules all-linear --learning_rate 1e-4 --lr_scheduler_type cosine --warmup_ratio 0.03 --weight_decay 0.01 \
   --per_device_train_batch_size 1 --gradient_accumulation_steps $ACC --num_train_epochs 1 \
-  --max_length 4096 --attn_impl sdpa --gradient_checkpointing true --dataset $CORPUS --split_dataset_ratio 0.005 \
+  --max_length 4096 --attn_impl ${ATTN:-flash_attn} --gradient_checkpointing true --dataset $CORPUS --split_dataset_ratio 0.005 \
   --dataloader_num_workers 4 --dataset_num_proc 8 --save_strategy epoch --save_only_model true --logging_steps 5 \
   --seed 0 --data_seed 0 --output_dir $OUT/ckpt --add_version false --report_to $REPORT --run_name $NAME $extra \
   >> $OUT/tapt.log 2>&1 || { echo "[$(date -u +%F' '%T)] FAIL tapt" >> $OUT/status; exit 1; }
