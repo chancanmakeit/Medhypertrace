@@ -1,0 +1,26 @@
+{
+ "Hand-Crafted": {
+  "n": 58,
+  "step_random_all": 0.04156002068761312,
+  "step_random_model": 0.04592664991749107,
+  "step_first_all": 0.0,
+  "step_first_model": 0.017241379310344827,
+  "step_longest_all": 0.1896551724137931,
+  "step_longest_model": 0.1896551724137931,
+  "agent_most_frequent": 0.3103448275862069,
+  "agent_of_longest_model_step": 0.5862068965517241,
+  "agent_random_expected": 0.422126436781609
+ },
+ "Algorithm-Generated": {
+  "n": 126,
+  "step_random_all": 0.11996094734189953,
+  "step_random_model": 0.16593915343915336,
+  "step_first_all": 0.15873015873015872,
+  "step_first_model": 0.15873015873015872,
+  "step_longest_all": 0.18253968253968253,
+  "step_longest_model": 0.2619047619047619,
+  "agent_most_frequent": 0.5396825396825397,
+  "agent_of_longest_model_step": 0.5396825396825397,
+  "agent_random_expected": 0.39417989417989474
+ }
+}

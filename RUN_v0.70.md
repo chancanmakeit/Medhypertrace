@@ -1020,3 +1020,11 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 ## 第 69 轮 · 2026-10-28 ~14:30 UTC · 用户:把目前进度和意见都发到 issue #2,让其他智能体讨论
 - issue #2 评论(`docs/interfaces/issue2_comment_r69.md`):进度总表(TAPT / SAMT / E1 / E2 / E1b / 混杂检查);意见:公开责任层评测存在步长混杂,统一报告步长 / 位置基线和控制后的数字;中训练没帮上忙的假设(语言建模目标里没有反事实信号);主张用 medical-aegis 分叉对做中训练语料,评测改用分叉点;向 medical-aegis(翻转步与步长的相关性、≥60 次翻转的成本、批量生成分叉对)、GPT(分叉对中训练是否满足约束、目标函数)、Muse(步长基线文献、反事实对预训练先例)提问。为避免通知到真实 GitHub 用户,没有用 @。
 - 我方下一步(等用户确认):预注册 v2(分叉点 + 步长控制);按回复估算 API 成本;在此之前不新开中训练任务。
+
+## 第 70 轮 · 2026-10-28 ~14:40 UTC · 用户:为何 AEGIS(ICLR 2026)、AgenTracer(ICLR 2026)、GraphTracer(AAMAS 2026)都训出了能做 MAS 故障归因的模型(即使是后训练)?(论文在 private-documents/papers)
+- 三篇全文已读(稀疏克隆 private-documents 的 papers/)。共同点:都是**有归因标签的后训练**。AgenTracer:约 2.2k 条,标签来自反事实回放 + 程序化注错,用 DeepSeek-R1 生成;Qwen3-8B 用 GRPO 训练,奖励分步骤级(高斯核)和智能体级。GraphTracer:约 2.1k 条,在信息依赖图上做注错 + 反事实,GRPO。AEGIS:9.5k 条注错轨迹,SFT / GRPO / DCL 三种训练,只做智能体 + 错误模式,不做步骤定位。我方的 TAPT / SAMT / E1 / E2 都没有用归因标签,两者不矛盾。
+- **我方实算的 Who&When 平凡基线**(`scripts/ww_trivial_baselines.py` → `results/e1e3/ww_trivial_baselines.json`,三篇都没有报告这类基线):
+  - Hand-Crafted(n = 58):步骤级"最长步"18.97%,随机 4.2%;AgenTracer 20.68 / 20.68(差 1 条轨迹),Claude-4-Sonnet 17.24 / 18.97,Qwen3-8B 1.72 / 3.45(低于随机);智能体级"最长模型步的智能体"58.6%,AgenTracer 69.1 / 63.8。
+  - Algorithm-Generated(n = 126):"最长模型步"26.2%,第一步 15.9%;AgenTracer 42.86 / 37.30(比最长步高约 11–17 个点);智能体级"出现最多的智能体"54.0%,AgenTracer 69.6 / 63.7,Qwen3-8B 58.7 / 60.3。
+- 其他观察:AgenTracer 的训练任务含 GAIA、框架含 AutoGen,与 WW(Magentic-One / AG2,在 GAIA 上)有任务和框架族的重叠(轨迹本身不重叠);GraphTracer 摘要和贡献里的数字(比 Gemini-2.5-Pro 高 18.18%、比 DeepSeek-R1 高 12.21%、4.8–14.2%)与 AgenTracer 摘要一字不差,表 1 中 AgenTracer 一行也照搬,WW 写成 127 条(实际 184),需谨慎引用;AEGIS 在 WW 上的智能体级 µF1 为 14B SFT 51.14 vs 基座 49.88,SFT 的 OOD 表现在第 2 个 epoch 达峰后下降。
+- 我方结论:后训练有效的部分,来自显式的反事实 / 注错标签;它与"中训练是否有额外价值"是两个问题,三篇都没有检验后者。我方建议的 E4:基座 → 后训练 vs TAPT → 后训练(同样的标签数据,如 AEGIS 9.5k / TracerTraj),在 WW / TEgc 上按步骤级 + 平凡基线 + 步长控制评测。待用户确认。

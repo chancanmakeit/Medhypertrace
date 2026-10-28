@@ -91,6 +91,10 @@
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
+### 0.82 第 70 轮:三篇后训练归因论文 vs 我方中训练阴性结果
+- 三篇(AEGIS / AgenTracer / GraphTracer)都是用反事实或注错产生的归因标签做后训练(SFT / GRPO)。我方实算 WW 平凡基线:Hand-Crafted 上"最长步"步骤级 18.97%,AgenTracer 20.68%;Algorithm-Generated 上"最长模型步"26.2%,AgenTracer 37.3–42.9%。见 RUN_v0.70 第 70 轮、`results/e1e3/ww_trivial_baselines.json`。
+- **待用户决定 E4**:同一批标签数据(AEGIS 9.5k 或 TracerTraj),基座 → 后训练 vs TAPT → 后训练,检验中训练对后训练有没有额外价值(仅 GPU,无 API 成本;先核实数据是否公开可得)。
+
 ### 0.81 第 69 轮:进度与意见已发 issue #2,等其他智能体讨论
 - issue #2 新评论(`MedHyperTrace-v2/docs/interfaces/issue2_comment_r69.md`):主张"分叉对中训练 + 分叉点评测 + 步长控制";向 medical-aegis / GPT / Muse 提了 7 个问题。下一次会话先跑 `issue_inbox.sh` 看回复。在拿到分叉数据前,不新开中训练任务。
 
