@@ -995,3 +995,10 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - **偏离记录:** TEgc 实际 174 条(2 条的 mistake_step_id 不在步骤列表里,无法映射),合并为 358 条;GPU 1 被另一用户(wyx)占用约 9 GB、GPU 0 占用约 1.9 GB → E1 的两个代理在 GPU 0 上依次跑,E2 训练用 GPU 2 / 3;seed 聚合方式是"先算每个种子的指标,再按轨迹取均值"(规则未变,这是预注册没写到的实施细节)。
 - **实现与验证(沙箱):** TEgc 转换器(`hgfm/e1e3/te_to_ww.py`);OAT 补丁(`oat_patch.py`):新增 traceelephant_gc 数据集、只取末层的提取(Qwen3-0.6B 上与原代码末层差 0 / 1.2e-3,fp32)、>32k 时的 YaRN 第二遍、保存每个种子的预测;E2 语料(`e2_corpus.py`):S 6.06M / R 6.09M token,每个数据集内 token 数匹配(R 中成功运行占 36%);E2 打分(`e2_score.py`):分块 logits 的逐步 NLL 与全量计算差 0;分析脚本(`scripts/e1e3_analyze.py`)在合成数据上能找回植入的信号,噪声上为阴性。
 - **Linux #2:** 资产经私有 HF `mht-midtrain-pilot/e1e3/` 传输;socks 代理现在会断(SSL EOF),pip 直连可用(装了 torchcde / torchdiffeq / torchsde)。驱动 `scripts/linux2_run_e1e3.sh` 05:03 UTC 开始:E1 在 GPU 0 上提取(约 3 分钟 / 数据集);E2 的 S 在 GPU 2/3 上训练(147 步 × 23.6 s ≈ 58 分钟),之后是 R,再用四个模型打分。预计 ~08:00 UTC 全部完成;已设 07:40 UTC 检查(trig 见 HANDOFF)。
+
+### 第 67 轮(续,2026-10-28 07:41–08:01 UTC 定时检查):E1 完成;E2 打分第一次全部 OOM,修复后重跑;连接器掉线
+- **E1 完成**(05:03–06:10 UTC,无报错,0 条跳过)。OAT 自己的池化 step AUROC(次要指标,不作判定):base WW 0.773 ± 0.003(论文 Qwen3.5-27B 代理 0.758)、TEgc 0.713 ± 0.003;tapt WW 0.774 ± 0.006、TEgc 0.725 ± 0.005;top-k hit rate base / tapt:WW 0.423 / 0.467,TEgc 0.354 / 0.367。主指标(轨迹内)还没算。
+- **WW 实际 182 条:** OAT 去掉了 2 条错误步落在终端(非模型)步上的轨迹(Algorithm-Generated/14、/59);按预注册的"候选 = 模型步",我方分析同样排除,合并 n = 356。分析脚本的随机基线原先没排除这 2 条,已修(所有打分器用同一批轨迹)。
+- **E2 训练完成**(S 05:03–05:58,R 05:58–06:56)。**E2 打分第一次全部失败**(07:07–07:18):原生 ≤32k 那一遍 346 条都成功,但 >32k 的 YaRN 那一遍 OOM——没传 attention_mask,SDPA 走了数学内核,物化 [L, L] 矩阵(76k² × 2 B ≈ 10.8 GiB);E1 的提取传了 mask,所以没出问题。修复:与 OAT 一样传 attention_mask;每遍结束后写 `.partial` 可续接;`--only_longest` 冒烟测试(最长 76,237 token,峰值 22.9 GiB,通过)。07:48 重跑(base GPU0、tapt GPU1、S GPU2、R GPU3):base / S / R 07:58 完成,tapt 在 GPU 1(与 wyx 共用)上跑 YaRN 那一遍。
+- **分析脚本补上预注册要求的敏感性分析**(去掉 >32k 的轨迹,`pooled_le32k`;不参与判定),OAT `metrics.json` 键名改为 `*_mean`。提交 75c8fc9、259e269。
+- 08:01 UTC Linux #2 Jupyter 连接器要求重新登录 → 分析没跑成。服务器上的进程不受影响(setsid)。

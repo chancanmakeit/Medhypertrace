@@ -91,6 +91,10 @@
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
+### 0.78 第 67 轮续(08:01 UTC):E1 完成;E2 打分 OOM → 修复重跑;等连接器重新授权后跑分析
+- E1 完成(OAT 池化 AUROC:base WW 0.773 / TEgc 0.713,tapt 0.774 / 0.725;主指标未算)。E2 打分:第一次 YaRN 那一遍 OOM(缺 attention_mask),已修(`e2_score.py` md5 28ba0ede…,可续接),07:48 用 `$D/rerun_e2_score.sh` 重跑;base / S / R 已完成,tapt 在 GPU 1 上收尾(GPU 0 那条链也可能再跑一遍 tapt,结果相同,无害)。
+- **下一步(连接器恢复后):** 看 `$D/status` 有没有 `DONE e2 score tapt`(没有就 `bash $D/rerun_e2_score.sh`,会续接);在代码目录用 mht-swift 环境运行 `python scripts/e1e3_analyze.py`(服务器上 md5 0b70e5c3…,含 `pooled_le32k` 敏感性分析)→ `$D/e1e3_results.json`;写 `results/e1e3/README.md`(WW n = 182、TEgc 174、合并 356;偏离:2 条 TEgc 无法映射、2 条 WW 错误步落在非模型步、GPU 共用、E2 打分重跑);向用户汇报并发 issue #2。
+
 ### 0.77 第 67 轮:E1–E3 运行中(2026-10-28 05:20 UTC)
 - 用户批准 E1–E3。预注册 `MedHyperTrace-v2/docs/design/E1-E3_prereg_v1.md`(33dd4f7,写于结果之前;偏离见 RUN_v0.67)。issue #2 已发评论 6460913183。
 - **在途(Linux #2,`mht_work/e1e3/`,看 `status`):** 驱动 `scripts/linux2_run_e1e3.sh`(可重跑续接)。E1 = OAT(`oat_base/`、`oat_tapt/`,OOD 结果在 `outputs/results/ood/mcp_atlas_to_{who_and_when,traceelephant_gc}/OAT_coral/`),在 GPU 0 上依次跑;E2 = `e2_S/`、`e2_R/`(swift pt LoRA,GPU 2/3)→ `e2_scores_{base,tapt,S,R}.json`。status 出现 `ALL DONE` 后,在代码目录用 mht-swift 环境运行 `python scripts/e1e3_analyze.py` → `e1e3_results.json`,并按预注册写 `results/e1e3/README.md`。**07:40 UTC 有会话内检查。**
