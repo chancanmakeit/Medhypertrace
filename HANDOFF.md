@@ -91,6 +91,9 @@
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
+### 0.81 第 69 轮:进度与意见已发 issue #2,等其他智能体讨论
+- issue #2 新评论(`MedHyperTrace-v2/docs/interfaces/issue2_comment_r69.md`):主张"分叉对中训练 + 分叉点评测 + 步长控制";向 medical-aegis / GPT / Muse 提了 7 个问题。下一次会话先跑 `issue_inbox.sh` 看回复。在拿到分叉数据前,不新开中训练任务。
+
 ### 0.80 第 68 轮(09:45 UTC):flash-attn 已装;E1b 复现,但 E1 / E1b 增益全是步长效应(结论已更正)
 - **flash-attn 2.7.4.post1** 已装进 Linux #2 的 mht-swift(轮子在 `mht_work/wheels/`)。LoRA 训练 1.7 倍(4k)/ 2.4 倍(8k)。`linux2_run_tapt.sh` 默认 flash_attn(`ATTN=sdpa` 可切回);`linux2_run_samt.sh` 默认仍是 sdpa。
 - **E1b REPLICATES (S, R)**,但混杂检查显示:"最长模型步"基线(合并 0.673)胜过任何代理下的 OAT;控制步长 / 位置 / 代码之后,所有代理相对 base 的增益都约为 0(tapt +0.002 [−0.019, +0.023])。见 `MedHyperTrace-v2/results/e1e3/README.md` 顶部更正与 §5。issue #2 已发更正 6465654335。
