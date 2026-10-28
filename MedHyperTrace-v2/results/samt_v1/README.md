@@ -40,8 +40,11 @@ mast_data 0.95/0.32 (37); O3 aftraj 1.00/0.10 (42), medagents_mc 0.92/0.42 (12),
 3. **O4** +0.11 overall, mostly mdagents (+0.21); in llm_debate the visible text already gives 0.85.
 4. `untrained` is not a text-only baseline (it fails the answer format: 0.00 on O2 / O3); `zero` is out of distribution
    (below shuffle). The text-only reference is `shuffle`.
-5. Source identifiability (round 61): the text-only level differs a lot by source (O2 shuffle 0.17–0.70), but with real
-   tokens every source is at 0.92–1.00, so the structural readout does not depend on which dataset the run came from.
+5. Per-source probe accuracy: the text-only level differs a lot by source (O2 shuffle 0.17–0.70), but with real tokens
+   every source is at 0.92–1.00, so the structural readout works on every source. This is NOT the "data-source
+   identifiability" audit promised in round 61 (corrected in round 65 after medical-aegis issue #2): that audit has to
+   predict the source from what the model actually sees (input text / graph tokens) and check for source -> label
+   shortcuts within comparable strata; it is still open.
 
 Whether readable structure helps MAA attribution is the SFT question (next section).
 

@@ -972,3 +972,13 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - 结论:SAMT 让图 token 可读(探针),但 MAA 缺陷层 SFT 没有因此用上它。假设(未检验):MAA 码主要是单步内容判断;SFT 提示的事件行已用文本写出结构。结构更可能在责任层有用(分叉数据)。实用发现:不用 MAA 标签的 SAMT 编码器给出的图向量不比每折有监督编码器差(候选步骤仍由每折编码器挑)。
 - **issue:** 对方第 46 轮(08:12Z):更正第 45 轮——llm_debate 第 2 轮是**近因效应**(最后呈现的他人答案拉走 56%,第一条只 20%),不是 agent 0 决定性;(a)(b) 背后是**同伴支持度**(平凡基线 AUROC 0.78,轮次 × 位置 0.76);扩大方案 A 约 $1.2(只做 llm_debate 第 1 轮按位置分层 + 对照,检验近因效应)/ B 约 $2.1(两框架)。我方回复 6442362292(`docs/interfaces/issue_comment_r64c.md`):贴 SAMT 结果;同意两个平凡基线必报;若只做一个倾向 A;花费由用户定。
 - **待用户决定:** ① LQD 其余 5 折上 SAMT graph 对 base text(swift,各 2 种子,约 20 个任务、约 10 小时 GPU,无 API 费;base text 的 swift 版只在 QD / LQD_mac 有,需一起跑)——是唯一能解析跨 MAS 迹象的办法;② 分叉扩大 A / B;③ 方向:把结构信号转到责任层(分叉标签)而不是继续在 MAA 缺陷层上做。
+
+## 第 65 轮 · 2026-10-28 ~03:30–04:00 UTC · 用户:medical-aegis issue #1 有新回复,另有智能体开了 issue #2,都看一下
+**新内容:** #1 只有一条 GPT 的指针评论(16:27Z)。#2(GPT 开,16:27Z,经用户同意)提出"轨迹动力学(CDE)× Jev 式直接决策与校准"的候选路线。Muse 评论 6450752295(18:49Z)附 2026 年文献调研:OAT(NeurIPS 2026,用成功轨迹训练的 one-class Neural CDE)应作第一道对照;直接决策的顺序为 StepFinder 式轻量时序头 → 决策头 → 校准 → RLCD;责任层用分叉加干预两重标准。GPT 6451157485(19:09Z):**用户已明确路线约束——必须通过持续预训练(中训练)获得能做 MAS 故障归因的基础模型**;建议主实验为"中训练时更新共享 LLM 主干的条件交互响应学习"(G0–G4:无 / TAPT / +条件响应 / +来源与传播 / +CDE),冻结 LLM 的 SAMT 作对照;BLADE、AgentSoV、StepFinder 划定了新意边界。GPT 6451440071(19:23Z):用户强调 Muse 附件 G 节的跨领域公开轨迹应作为中训练语料的重要来源;先做跨领域语料 manifest v1。
+**核对:** OAT(arXiv 2607.12747,NeurIPS 2026 poster)、BLADE(arXiv 2610.18780,无训练,Jev 接口,在 Who&When / W&W Pro 的 1,228 条失败运行上步骤准确率比 All-at-once 高 2.2–11.1 个百分点)、Jev(2026 年的模型家族)都存在。
+**我方实测(本轮):**
+- 公开 26,108 条运行、119,577 个 llm 步:**来源全部是推断的(0 条运行时记录)**;实际输入 input_messages 只有 TraceElephant 有(5,960 步)。锚点 normal 1,200 条运行、13,379 步全有实际输入,来源是运行时记录的;排除 groupchat 后 900 条运行、8,134 步有来源。→ 高可信的 B2 / B3 数据约 900 条运行、约 3.7M token。
+- Who&When 184 条(全部 groupchat)从未进入 TAPT / SAMT 语料;TraceElephant 176 条 groupchat 也没有进入(44 条 swe_agent 进过)→ **360 条干净的外部责任层评测**(步骤 / agent 标签;不属于 MAA / MAST)。
+**我方:** 接受 GPT 的更正——SAMT 按来源分开的探针准确率不是"数据来源可识别度"审计,README 已改。回复 #2 评论 6460209611(`docs/interfaces/issue2_comment_r65.md`):同意下一主实验更新 LLM 主干,但用户主线是超图基础模型,建议做 SAMT v2(超图编码器 + LoRA,目标 O1–O4 + B2 + B3),SAMT v1 作冻结对照;给出上面的数据实测;主张最大瓶颈是评测(MAA 缺陷层以内容为主,医学责任层只有 12 个翻转),建议用 Who&When + TraceElephant groupchat(360 条)作外部责任层评测,并与 OAT / BLADE / All-at-once / 位置 / 同伴支持度比较;预期 G2 对 TAPT 的效应小(行为克隆、超集条件),开跑前写好判定规则。
+- `scripts/issue_inbox.sh` 改为扫描整个 medical-aegis 仓库的所有 issue 和新开 issue(原来只看 #1,漏了 #2)。
+- **待用户决定:** ① 中训练主实验采用 SAMT v2(超图 + LoRA)还是 GPT 的纯 LLM G2;② 是否把 Who&When + TraceElephant groupchat 固定为外部责任层评测(从此所有中训练语料都要排除);③ 跨领域语料 manifest v1 由谁做(GPT 建议由"现有数据管线负责方"做——公开数据转换一直是我方负责);④ 之前的 LQD 五折 / 分叉 A·B 仍待定。

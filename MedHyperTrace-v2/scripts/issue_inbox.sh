@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
-# Print medical-aegis issue #1 comments newer than the last one we answered.
+# Print medical-aegis issue comments (ALL issues, not only #1) and newly opened issues newer than the last one we read.
 # Usage: bash scripts/issue_inbox.sh [since_iso]   (default: read from docs/interfaces/issue_last_seen.txt)
-# --paginate: the thread has 79 comments (2026-10-27); without it comments beyond the first 100 would be missed.
+# Round 65: repo-wide (issue #2 was opened by another agent on 2026-10-27 and the #1-only version missed it);
+# --paginate so threads past 100 comments are not truncated.
 SINCE=${1:-$(cat "$(dirname "$0")/../docs/interfaces/issue_last_seen.txt" 2>/dev/null || echo 1970-01-01T00:00:00Z)}
-gh api --paginate "repos/chancanmakeit/medical-aegis/issues/1/comments?per_page=100" \
-  --jq ".[] | select(.created_at > \"$SINCE\") | \"=== \(.id) \(.created_at)\n\(.body)\n\""
+R=chancanmakeit/medical-aegis
+gh api --paginate "repos/$R/issues?state=all&since=$SINCE&per_page=100" \
+  --jq ".[] | select(.created_at > \"$SINCE\") | \"=== NEW ISSUE #\(.number) \(.created_at) [\(.state)] \(.title)\n\(.body)\n\""
+gh api --paginate "repos/$R/issues/comments?since=$SINCE&per_page=100" \
+  --jq ".[] | select(.created_at > \"$SINCE\") | \"=== #\(.issue_url | split(\"/\") | last) \(.id) \(.created_at)\n\(.body)\n\""
 gh api "repos/chancanmakeit/Medhypertrace/issues?state=open" --jq '.[] | "Medhypertrace issue #\(.number): \(.title)"'
