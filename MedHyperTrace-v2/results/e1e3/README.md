@@ -1,4 +1,11 @@
-# E1–E3 results (round 67, 2026-10-28)
+# E1–E3 results (round 67, 2026-10-28; corrected and extended in round 68)
+
+> **Correction (round 68, read first).** A trivial baseline the pre-registration did not include — **"the longest model
+> step"** — reaches pooled rank-AUROC 0.673 and beats OAT with every proxy. After removing step length, position and code
+> content (§5), the E1 gain tapt − base drops from +0.028 [+0.008, +0.047] to **+0.002 [−0.019, +0.023]**, and the same
+> holds for the two E1b proxies. E1 still "holds" by the letter of the pre-registered rule, but the gain is almost
+> entirely explained by mid-trained proxies making OAT's scores track step length more. It is **not** evidence that
+> mid-training improves attribution. Missing the length baseline was a design error in the pre-registration.
 
 Pre-registration: `docs/design/E1-E3_prereg_v1.md` (commit 33dd4f7, written before any result). Analysis:
 `scripts/e1e3_analyze.py` (run on Linux #2 at 08:07 UTC, md5 0b70e5c3…), full printout `e1e3_analyze.out`; per-trajectory
@@ -12,6 +19,7 @@ is merged with MAST or MedAgentAudit numbers.
 | | rule | result |
 |---|---|---|
 | **E1** (TAPT checkpoint as OAT proxy) | pooled tapt − base rank-AUROC CI lower > 0 and Acc@1 diff ≥ 0 | **HOLDS**: rank-AUROC +0.027 [+0.009, +0.047], Acc@1 +0.038; it also holds separately on WW and on TEgc |
+| **E1b** (addendum, S / R checkpoints as OAT proxies) | at least one of S − base, R − base with pooled rank-AUROC CI lower > 0 | **REPLICATES (S, R)**: S +0.021 [+0.003, +0.036], R +0.034 [+0.016, +0.052]; see §5 for why this is not an attribution gain |
 | **E2** (likelihood ratio S − R) | pooled rank-AUROC beats the best trivial baseline and NLL_base, both CI lower > 0 | **DOES NOT HOLD**: −0.120 [−0.160, −0.081] vs first step, −0.147 [−0.182, −0.112] vs NLL_base; below chance (0.456) |
 
 ## 1. Scorers (candidates = model steps; WW n = 182, TEgc n = 174, pooled n = 356)
@@ -68,10 +76,47 @@ within-trajectory metrics.
    Reversed ΔNLL (R − S) is weak: 0.530 / 0.559.
    Possible reading (untested): mistake steps contain the generic agent text the TAPT corpus is full of (plans, code,
    tool-call boilerplate, restated tasks), which TAPT learns best; that would also explain why TAPT hidden states help
-   OAT. Possible confounds not yet checked: step length (mean NLL of short steps is noisy), content type.
+   OAT. Step length and content type: checked in §5 — most of this signal is step length.
 3. Why E2 failed as specified: success-only vs mixed corpora matched within dataset differ only in outcome composition
    (R has 36% success runs), so S and R are near-identical LMs; their difference is small and dominated by noise /
    the domain-adaptation direction, not by "failure-likeness".
+
+## 5. Round 68: step-length confound and E1b (post hoc diagnostics + pre-registered addendum)
+Scripts `scripts/e1e3_confounds.py` (output `e1e3_confounds.json`) and `scripts/e1e3_analyze.py` with the E1b addendum
+(output `e1e3_analyze_v2.out`). Covariates per candidate step: token length (OAT serialisation, Qwen3 tokenizer), relative
+position, has_code. "Residual" = the scorer after an OLS on [log length, relative position, has_code] with trajectory
+fixed effects, fitted **without labels**; OAT scores here are seed means (raw values differ by ≤ 0.003 from §1).
+
+**Step length alone is the strongest trivial baseline.** "Longest model step" rank-AUROC: WW 0.691, TEgc 0.655, pooled
+0.673 (shortest: 0.309 / 0.345). Mistake steps are long (plans, code, long answers).
+
+| pooled (n = 356), rank-AUROC difference [95% CI] | raw | after length / position / code |
+|---|---|---|
+| OAT base − longest step | −0.079 [−0.119, −0.039] | – |
+| OAT tapt − longest step | −0.051 [−0.096, −0.010] | – |
+| NLL_base − NLL_tapt − longest step | +0.010 [−0.025, +0.040] | – |
+| **OAT tapt − OAT base (E1)** | +0.028 [+0.008, +0.047] | **+0.002 [−0.019, +0.023]** |
+| OAT S − OAT base (E1b) | +0.020 [+0.000, +0.038] | −0.002 [−0.020, +0.017] |
+| OAT R − OAT base (E1b) | +0.037 [+0.019, +0.056] | +0.000 [−0.021, +0.020] |
+| OAT base − chance | +0.095 [+0.062, +0.126] | +0.043 [+0.010, +0.079] |
+| OAT tapt − chance | +0.123 [+0.089, +0.155] | +0.044 [+0.007, +0.079] |
+| NLL_base − NLL_tapt − chance | +0.183 [+0.152, +0.210] | +0.087 [+0.057, +0.118] |
+
+Per dataset after the control: OAT base / tapt / S / R = WW 0.500 / 0.501 / 0.494 / 0.492, TEgc 0.587 / 0.590 / 0.590 /
+0.597 — OAT has no length-independent signal on Who&When, some on TraceElephant groupchat.
+
+**E1b (pre-registered addendum, written before its results).** Pooled rank-AUROC: base 0.595, S 0.616, R 0.629, tapt 0.622.
+Every mid-trained proxy raises it (S − base +0.021, R − base +0.034, CI lower > 0 → "replicates"). There is no dose effect
+(R, ~6M tokens, ≥ tapt, ~24.5M), and success-only S is slightly below all-outcome R (−0.013 [−0.021, −0.006]). Together
+with the table above: any continued pretraining on agent trajectories shifts OAT's step representation towards step
+length, and that is the whole of the "gain".
+
+**Remaining leads (all post hoc):** NLL_base − NLL_tapt keeps +0.087 above chance after the control (0.58 / 0.60). OAT keeps
+~+0.04 above chance, all of it on TEgc.
+
+**flash-attn (round 68).** flash-attn 2.7.4.post1 installed in mht-swift (torch 2.6 / cu12 / cp310). On Qwen3-8B vs SDPA:
+hidden-state cosine 0.99998; LoRA forward+backward 1.7x faster at 4k tokens, 2.4x at 8k (`scripts/bench_flash_attn.py`).
+E1b deliberately kept SDPA so the four proxies are comparable.
 
 ## Deviations from the pre-registration
 - **n:** TEgc 174 of 176 (2 runs whose `mistake_step_id` is not among the steps, not mappable). WW 182 of 184: in
@@ -91,13 +136,13 @@ within-trajectory metrics.
 E1: 05:03–06:10 UTC on 1 GPU (both proxies). E2: S training 55 min and R 58 min on 2 GPUs each; scoring ~13 min × 4 GPUs
 (plus ~15 min × 4 for the failed first run). All on Linux #2 (48 GB GPUs).
 
-## What this means
-- Mid-training on MAS trajectories gives a **small but robust** improvement in a structure-free, label-free attribution
-  readout (OAT), on two held-out architectures never seen in the TAPT corpus. This is the first positive transfer result for
-  the mid-training line on the responsibility layer.
-- It is small in absolute terms: OAT with the TAPT proxy is still at Acc@1 0.175 and rank-AUROC 0.622, and on WW it does
-  not beat the first-step baseline within trajectories. The value is that the effect has the right direction and is
-  above seed noise.
-- The likelihood-ratio idea as specified fails. The unexpected TAPT − base signal (§4.2) is the most interesting lead,
-  but it is post hoc; it has to be pre-registered and tested on fresh failures (e.g. medical-aegis branch points, or a
-  new held-out split) before it counts.
+## What this means (rewritten in round 68)
+- Within trajectories, the attribution signal in OAT and in raw NLL on these two held-out sets is mostly **step length**
+  (and on WW, position). A one-line "longest step" rule beats OAT with any proxy. Any future responsibility-layer
+  evaluation must report length / position baselines and length-controlled numbers; this is now a standing requirement.
+- **E1's gain is not an attribution gain.** Mid-training (TAPT, S or R) makes OAT more length-sensitive; after the control the
+  difference is +0.002. The pre-registered verdict "E1 holds" stands as recorded but must be read with this correction.
+- E2 (likelihood ratio) fails, raw and controlled.
+- What is left: OAT ~0.59 on TEgc after the control (independent of the proxy) and the post hoc NLL_base − NLL_tapt residual
+  (0.58 / 0.60). Neither is evidence for mid-training yet; both would need a pre-registered test on fresh data with the
+  length controls built in.

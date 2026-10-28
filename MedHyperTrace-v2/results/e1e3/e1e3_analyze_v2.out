@@ -1,0 +1,31 @@
+scorer                                     WW                    TEgc                  pooled            pooled_le32k
+random                 a1 0.128 h3 0.383 r 0.500  a1 0.064 h3 0.193 r 0.500  a1 0.097 h3 0.290 r 0.500  a1 0.099 h3 0.298 r 0.500
+first_step             a1 0.115 h3 0.445 r 0.590  a1 0.069 h3 0.149 r 0.561  a1 0.093 h3 0.301 r 0.576  a1 0.093 h3 0.305 r 0.566
+last_step              a1 0.071 h3 0.269 r 0.410  a1 0.029 h3 0.207 r 0.439  a1 0.051 h3 0.239 r 0.424  a1 0.052 h3 0.247 r 0.434
+position_prior         a1 0.192 h3 0.440 r 0.584  a1 0.069 h3 0.149 r 0.525  a1 0.132 h3 0.298 r 0.556  a1 0.131 h3 0.302 r 0.549
+oat_base               a1 0.130 h3 0.423 r 0.540  a1 0.145 h3 0.354 r 0.653  a1 0.137 h3 0.389 r 0.595  a1 0.142 h3 0.398 r 0.592
+oat_tapt               a1 0.158 h3 0.467 r 0.573  a1 0.192 h3 0.367 r 0.674  a1 0.175 h3 0.418 r 0.622  a1 0.181 h3 0.427 r 0.620
+oat_S                  a1 0.173 h3 0.433 r 0.561  a1 0.180 h3 0.334 r 0.674  a1 0.176 h3 0.385 r 0.616  a1 0.183 h3 0.396 r 0.612
+oat_R                  a1 0.182 h3 0.454 r 0.576  a1 0.185 h3 0.351 r 0.685  a1 0.184 h3 0.403 r 0.629  a1 0.190 h3 0.414 r 0.625
+nll_base               a1 0.148 h3 0.473 r 0.598  a1 0.075 h3 0.167 r 0.607  a1 0.112 h3 0.323 r 0.603  a1 0.110 h3 0.326 r 0.595
+nll_tapt_minus_base    a1 0.022 h3 0.203 r 0.317  a1 0.029 h3 0.075 r 0.317  a1 0.025 h3 0.140 r 0.317  a1 0.026 h3 0.145 r 0.322
+lr_S_minus_R           a1 0.044 h3 0.357 r 0.470  a1 0.063 h3 0.132 r 0.441  a1 0.053 h3 0.247 r 0.456  a1 0.055 h3 0.253 r 0.453
+oat_tapt - oat_base                pooled: acc1 +0.038 [+0.009,+0.068]  hit3 +0.029 [-0.005,+0.062]  rauc +0.027 [+0.009,+0.047]
+oat_base - first_step              pooled: acc1 +0.044 [-0.002,+0.087]  hit3 +0.089 [+0.026,+0.155]  rauc +0.019 [-0.028,+0.063]
+oat_base - last_step               pooled: acc1 +0.087 [+0.043,+0.126]  hit3 +0.151 [+0.090,+0.206]  rauc +0.171 [+0.130,+0.214]
+oat_base - position_prior          pooled: acc1 +0.005 [-0.044,+0.055]  hit3 +0.092 [+0.028,+0.156]  rauc +0.039 [-0.011,+0.095]
+oat_tapt - first_step              pooled: acc1 +0.082 [+0.038,+0.131]  hit3 +0.117 [+0.056,+0.176]  rauc +0.046 [-0.001,+0.097]
+oat_tapt - last_step               pooled: acc1 +0.124 [+0.081,+0.165]  hit3 +0.179 [+0.119,+0.240]  rauc +0.198 [+0.157,+0.242]
+oat_tapt - position_prior          pooled: acc1 +0.043 [-0.010,+0.090]  hit3 +0.120 [+0.063,+0.175]  rauc +0.067 [+0.023,+0.116]
+lr_S_minus_R - first_step          pooled: acc1 -0.039 [-0.067,-0.011]  hit3 -0.053 [-0.107,-0.003]  rauc -0.120 [-0.160,-0.081]
+lr_S_minus_R - last_step           pooled: acc1 +0.003 [-0.034,+0.037]  hit3 +0.008 [-0.051,+0.067]  rauc +0.032 [-0.010,+0.076]
+lr_S_minus_R - position_prior      pooled: acc1 -0.079 [-0.115,-0.042]  hit3 -0.051 [-0.104,+0.000]  rauc -0.100 [-0.144,-0.058]
+lr_S_minus_R - nll_base            pooled: acc1 -0.059 [-0.093,-0.028]  hit3 -0.076 [-0.126,-0.028]  rauc -0.147 [-0.182,-0.112]
+lr_S_minus_R - oat_base            pooled: acc1 -0.084 [-0.125,-0.045]  hit3 -0.142 [-0.210,-0.081]  rauc -0.139 [-0.190,-0.091]
+oat_S - oat_base                   pooled: acc1 +0.039 [+0.009,+0.071]  hit3 -0.004 [-0.035,+0.028]  rauc +0.021 [+0.003,+0.036]
+oat_R - oat_base                   pooled: acc1 +0.047 [+0.016,+0.076]  hit3 +0.014 [-0.015,+0.046]  rauc +0.034 [+0.016,+0.052]
+oat_S - oat_R                      pooled: acc1 -0.007 [-0.021,+0.006]  hit3 -0.019 [-0.034,-0.003]  rauc -0.013 [-0.021,-0.006]
+oat_tapt - oat_S                   pooled: acc1 -0.002 [-0.024,+0.021]  hit3 +0.033 [+0.008,+0.060]  rauc +0.006 [-0.007,+0.020]
+oat_tapt - oat_R                   pooled: acc1 -0.009 [-0.031,+0.013]  hit3 +0.015 [-0.010,+0.039]  rauc -0.007 [-0.022,+0.006]
+OAT pooled (OAT's own metric): {"base/who_and_when": {"n_seeds": 5, "auroc_mean": 0.7725181545418968, "auroc_std": 0.002664699040046223, "auprc_mean": 0.12613667220189867, "topk_detection_hit_rate_mean": 0.4230769230769231, "topk_detection_f1_mean": 0.21153846153846154, "n": 910}, "base/traceelephant_gc": {"n_seeds": 5, "auroc_mean": 0.7130042335649812, "auroc_std": 0.003431087425156688, "auprc_mean": 0.10699169075677062, "topk_detection_hit_rate_mean": 0.35402298850574715, "topk_detection_f1_mean": 0.17701149425287357, "n": 870}, "tapt/who_and_when": {"n_seeds": 5, "auroc_mean": 0.7736770013480019, "auroc_std": 0.00568421984511609, "auprc_mean": 0.1218862775006176, "topk_detection_hit_rate_mean": 0.467032967032967, "topk_detection_f1_mean": 0.2335164835164835, "n": 910}, "tapt/traceelephant_gc": {"n_seeds": 5, "auroc_mean": 0.7247529961355292, "auroc_std": 0.004756964896507074, "auprc_mean": 0.10845451285819967, "topk_detection_hit_rate_mean": 0.3666666666666667, "topk_detection_f1_mean": 0.18333333333333335, "n": 870}, "S/who_and_when": {"n_seeds": 5, "auroc_mean": 0.7802238180135298, "auroc_std": 0.0031493954392848287, "auprc_mean": 0.12531408525255402, "topk_detection_hit_rate_mean": 0.43296703296703304, "topk_detection_f1_mean": 0.21648351648351652, "n": 910}, "S/traceelephant_gc": {"n_seeds": 5, "auroc_mean": 0.7306633227838515, "auroc_std": 0.00464106505868069, "auprc_mean": 0.10546481729878185, "topk_detection_hit_rate_mean": 0.33448275862068966, "topk_detection_f1_mean": 0.16724137931034483, "n": 870}, "R/who_and_when": {"n_seeds": 5, "auroc_mean": 0.7807714049658652, "auroc_std": 0.002487956318865347, "auprc_mean": 0.12552036591126986, "topk_detection_hit_rate_mean": 0.45384615384615384, "topk_detection_f1_mean": 0.22692307692307692, "n": 910}, "R/traceelephant_gc": {"n_seeds": 5, "auroc_mean": 0.7355607063470421, "auroc_std": 0.004672090977850648, "auprc_mean": 0.1083064340211021, "topk_detection_hit_rate_mean": 0.3505747126436781, "topk_detection_f1_mean": 0.17528735632183906, "n": 870}}
+DECISIONS: {"E1": "HOLDS", "E1b": "REPLICATES (S, R)", "E2": {"best_trivial": "first_step", "vs_best_trivial": {"n": 356, "diff": -0.1201751200061688, "ci95": [-0.15988877104898436, -0.08108833600849207]}, "vs_nll_base": {"n": 356, "diff": -0.14670530785261737, "ci95": [-0.18248156336127322, -0.11215928818287385]}, "verdict": "DOES NOT HOLD"}}

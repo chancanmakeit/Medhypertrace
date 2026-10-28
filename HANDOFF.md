@@ -91,6 +91,12 @@
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
+### 0.80 第 68 轮(09:45 UTC):flash-attn 已装;E1b 复现,但 E1 / E1b 增益全是步长效应(结论已更正)
+- **flash-attn 2.7.4.post1** 已装进 Linux #2 的 mht-swift(轮子在 `mht_work/wheels/`)。LoRA 训练 1.7 倍(4k)/ 2.4 倍(8k)。`linux2_run_tapt.sh` 默认 flash_attn(`ATTN=sdpa` 可切回);`linux2_run_samt.sh` 默认仍是 sdpa。
+- **E1b REPLICATES (S, R)**,但混杂检查显示:"最长模型步"基线(合并 0.673)胜过任何代理下的 OAT;控制步长 / 位置 / 代码之后,所有代理相对 base 的增益都约为 0(tapt +0.002 [−0.019, +0.023])。见 `MedHyperTrace-v2/results/e1e3/README.md` 顶部更正与 §5。issue #2 已发更正 6465654335。
+- **常设规则(新):** 责任层评测必须报告步长 / 位置基线和控制步长后的数字(`scripts/e1e3_confounds.py` 是参考实现)。
+- **等用户决定:** 中训练路线在责任层上目前没有站得住的正面证据。可选方向:(a) 把剩下的两条线索(TEgc 上 OAT 控制后约 0.59;NLL_base − NLL_tapt 控制后 0.58 / 0.60)带着步长控制写成预注册,在新数据上检验(medical-aegis 分叉点有反事实标签,不受步长影响,最合适);(b) 回到之前悬而未决的选项(LQD 5 折 SAMT vs 文本、分叉扩展 A / B、SAMT v2 vs G2、通过 medical-aegis 扩充自然运行,后者付费)。
+
 ### 0.79 第 67 轮续 2(08:15 UTC):E1–E3 完成——E1 成立(小),E2 不成立,事后线索 base − tapt
 - 结果见 `MedHyperTrace-v2/results/e1e3/README.md`。E1 成立:合并 rank-AUROC +0.027 [+0.009, +0.047],WW 和 TEgc 各自成立,种子间稳健;但绝对水平低,WW 上不胜第一步基线。E2(似然比)不成立(0.456)。事后:NLL_base − NLL_tapt 0.683(未预注册)。issue #2 已发 6464027068。
 - **等用户决定:** (a) 把 base − tapt 线索写成预注册 v2,在新数据上检验(medical-aegis 分叉点 / 新留出集),并先查步长与内容类型混杂;(b) 用 E2 的 S / R 检查点(6M token)做 OAT 代理,看 E1 增益是否随中训练 token 量变化(各约 35 分钟 GPU,无 API 成本);(c) 之前悬而未决的:LQD 5 折 SAMT vs 文本、分叉扩展 A / B、SAMT v2 vs G2、manifest v1 归属、通过 medical-aegis 扩充自然运行(付费)。

@@ -1009,3 +1009,10 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - **E2 不成立**:ΔNLL = NLL_S − NLL_R 的 rank-AUROC 0.456(低于随机),比"第一个模型步" −0.120 [−0.160, −0.081],比 NLL_base −0.147。
 - **事后发现(未预注册)**:NLL_base − NLL_tapt 的 rank-AUROC 为 0.683(WW、TEgc 都是),去掉第一个模型步后 0.667 / 0.687(剩余最早步 0.627 / 0.565)。是线索,不是结论;步长 / 内容混杂未查,需要预注册后到新数据上检验。脚本 `scripts/e1e3_exploratory.py`。
 - issue #2 评论 6464027068(`docs/interfaces/issue2_comment_r67b.md`)。
+
+## 第 68 轮 · 2026-10-28 ~08:51–09:45 UTC · 用户:检查有没有 flash-attn,能加速就装(GitHub releases);装完按计划继续
+- **flash-attn:** mht-swift 环境原来没有。装了 `flash_attn-2.7.4.post1+cu12torch2.6cxx11abiFALSE-cp310`(torch 2.6.0+cu124、py3.10、cxx11abi False)。直连 GitHub 超时,走 socks 代理续传下完(187,815,087 B,zip 校验通过),`pip install --no-deps`,其他包不动。Qwen3-8B 实测(`scripts/bench_flash_attn.py`,GPU 0):隐状态余弦 0.99998 / 相对误差 0.7%(bf16 级);前向 1.24 倍(4k)/ 1.51 倍(8k);LoRA 前向+反向 1.71 倍(4k)/ 2.39 倍(8k);显存不变。`linux2_run_tapt.sh` 默认改为 `--attn_impl ${ATTN:-flash_attn}`;`linux2_run_samt.sh` 用 `${ATTN:-sdpa}`(插件在 flash-attn 下未测)。ms-swift 参数:`--attn_impl flash_attn`,可选 `--padding_free true`。
+- **E1b(补充预注册 d73e483,写在结果之前):** 用 E2 的 S / R 检查点作 OAT 代理(SDPA,与 E1 可比),GPU 2 / 3,08:54–09:25 UTC。判定 **REPLICATES (S, R)**:S − base +0.021 [+0.003, +0.036],R − base +0.034 [+0.016, +0.052];S − R −0.013 [−0.021, −0.006];无剂量效应(R 的约 6M token ≥ tapt 的约 24.5M)。
+- **混杂检查(事后,`scripts/e1e3_confounds.py`):** "最长模型步"基线 rank-AUROC WW 0.691 / TEgc 0.655 / 合并 0.673,比 OAT base 高 0.079 [0.039, 0.119],比 OAT tapt 高 0.051 [0.010, 0.096]。对 log 步长、相对位置、是否含代码做带轨迹固定效应的 OLS(不用标签)后:E1 tapt − base +0.028 → **+0.002 [−0.019, +0.023]**,S / R − base 都约 0;OAT 在 WW 上 0.49–0.50,TEgc 0.59–0.60;NLL_base − NLL_tapt 0.683 → 0.58 / 0.60(比随机高 +0.087 [0.057, 0.118])。**结论更正:E1 的增益是"中训练让 OAT 分数更跟着步长走",不是归因能力的提升。** 预注册漏掉步长基线是我的设计错误。README 顶部加了更正框和 §5,"What this means" 重写。
+- issue #2 更正评论 6465654335(`docs/interfaces/issue2_comment_r68.md`)。
+- **新的常设规则:** 责任层评测一律报告步长 / 位置基线和控制步长后的数字。
