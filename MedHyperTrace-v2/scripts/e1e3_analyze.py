@@ -108,7 +108,7 @@ def main():
         S[f"oat_{proxy}"] = {}
         for ds in ("who_and_when", "traceelephant_gc"):
             m, nseeds, pooled = oat_seed_metrics(a.root, proxy, ds, T); S[f"oat_{proxy}"].update(m)
-            pooled_oat[f"{proxy}/{ds}"] = {"n_seeds": nseeds, **{k: pooled.get(k) for k in ("auroc", "auprc", "topk_detection_hit_rate", "topk_detection_f1")}}
+            pooled_oat[f"{proxy}/{ds}"] = {"n_seeds": nseeds, **{k: pooled.get(k) for k in ("auroc_mean", "auroc_std", "auprc_mean", "topk_detection_hit_rate_mean", "topk_detection_f1_mean", "n")}}
     E2 = {}
     for n in ("base", "tapt", "S", "R"):
         f = os.path.join(a.root, f"e2_scores_{n}.json")
