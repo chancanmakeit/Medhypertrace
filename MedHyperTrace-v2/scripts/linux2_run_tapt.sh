@@ -10,7 +10,7 @@ ENV=/data/ekyang/anaconda3/envs/mht-swift
 export PATH=$ENV/bin:$PATH HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false USE_HF=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 unset all_proxy ALL_PROXY http_proxy https_proxy
 LM=${LM:-/data1/ekyang/cgh/cache/huggingface_hub/hub/models--Qwen--Qwen3-8B}
-CORPUS=${CORPUS:?}; OUT=${OUT:?}; GPUS=${GPUS:-0,1,2,3}; MAX_STEPS=${MAX_STEPS:-0}
+CORPUS=${CORPUS:?}; OUT=${OUT:?}; GPUS=${GPUS:-0,1,2,3}; MAX_STEPS=${MAX_STEPS:-0}; NAME=${NAME:-tapt_pilot_v1}   # NAME: round 67 (E2), default unchanged
 NP=$(echo $GPUS | tr ',' '\n' | wc -l); ACC=${ACC:-$((32 / NP))}
 if [ -n "${WANDB_API_KEY:-}" ] || grep -qs api.wandb.ai ~/.netrc; then REPORT=wandb; else REPORT=tensorboard; fi
 mkdir -p $OUT; extra=""; [ "$MAX_STEPS" -gt 0 ] && extra="--max_steps $MAX_STEPS --save_strategy no"
@@ -21,10 +21,10 @@ CUDA_VISIBLE_DEVICES=$GPUS NPROC_PER_NODE=$NP swift pt \
   --per_device_train_batch_size 1 --gradient_accumulation_steps $ACC --num_train_epochs 1 \
   --max_length 4096 --attn_impl sdpa --gradient_checkpointing true --dataset $CORPUS --split_dataset_ratio 0.005 \
   --dataloader_num_workers 4 --dataset_num_proc 8 --save_strategy epoch --save_only_model true --logging_steps 5 \
-  --seed 0 --data_seed 0 --output_dir $OUT/ckpt --add_version false --report_to $REPORT --run_name tapt_pilot_v1 $extra \
+  --seed 0 --data_seed 0 --output_dir $OUT/ckpt --add_version false --report_to $REPORT --run_name $NAME $extra \
   >> $OUT/tapt.log 2>&1 || { echo "[$(date -u +%F' '%T)] FAIL tapt" >> $OUT/status; exit 1; }
 [ "$MAX_STEPS" -gt 0 ] && { echo "[$(date -u +%F' '%T)] SMOKE DONE" >> $OUT/status; exit 0; }
 CK=$(ls -d $OUT/ckpt/checkpoint-* | sort -V | tail -1)
-CUDA_VISIBLE_DEVICES=${GPUS%%,*} swift export --adapters $CK --merge_lora true --output_dir $OUT/Qwen3-8B-tapt_pilot_v1 >> $OUT/tapt.log 2>&1 \
+CUDA_VISIBLE_DEVICES=${GPUS%%,*} swift export --adapters $CK --merge_lora true --output_dir $OUT/Qwen3-8B-$NAME >> $OUT/tapt.log 2>&1 \
   || { echo "[$(date -u +%F' '%T)] FAIL merge" >> $OUT/status; exit 1; }
-echo "[$(date -u +%F' '%T)] DONE merged=$OUT/Qwen3-8B-tapt_pilot_v1" >> $OUT/status
+echo "[$(date -u +%F' '%T)] DONE merged=$OUT/Qwen3-8B-$NAME" >> $OUT/status
