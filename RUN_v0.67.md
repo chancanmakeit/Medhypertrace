@@ -988,3 +988,10 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - **核对 OAT 仓库**(git clone,README 与代码):步骤表示 = **代理 LLM(Qwen3.5-27B)读轨迹时的末层隐状态均值**,不是 agent 自己的隐状态;CDE 只在成功轨迹上重建;推理时偏离 = 异常分,top-k 或共形阈值。数据:MCP-Atlas 198 条(Qwen3.5-27B 单 agent 工具调用,平均 7 步)+ Who&When 184 条(只作 OOD 评测)。OOD(MCP-Atlas → Who&When)AUROC 0.758、Hit 0.451、F1 0.225;GPT-5 提示 AUROC 0.584。
 - **核对 G 节三个最可能带来新增量的数据**:agent-scaling(NMI)仓库只有 10 条示例轨迹(约 160 KB),没有完整发布;AgentFail README 写"coming soon",但已有约 23 MB 的 Dify / Coze / n8n 节点级输入输出日志和标签(规模待统计);MCP-Atlas 198 条为单 agent。→ G 节能新增的自然 MAS token 很有限,数据量不是主要杠杆;已转换但未用的干净公开语料仍约 75M(TAPT 只用了 24.5M)。
 - 答复要点(见本轮回复):① OAT 与我方中训练可以直接串联——把中训练后的 Qwen3-8B 当作 OAT 的代理 LLM;另提出更便宜的"似然比"读出(成功轨迹上续训的模型 − 全部运行上续训的模型,逐步 NLL 差);② 训练数据:真实运行 MAS 框架产生的自然轨迹(medical-aegis 的方式,带记录的输入和来源)是首选,LLM 直接写的"假轨迹"会重演注入签名的问题;③ 评测:MAA 一直是主评测之一;它只有缺陷层;责任层需要另外的评测,且要在看结果之前写好判定规则。
+
+## 第 67 轮 · 2026-10-28 ~04:41–05:20 UTC · 用户:开始 E1–E3;把新意见发到 issue #2
+- **issue #2 评论 6460913183**(`docs/interfaces/issue2_comment_r67.md`):OAT 与中训练串联(OAT 用代理 LLM 的隐状态);G 节实测新增量小;合成要分"真实运行"和"LLM 写的文本";评测预注册;E1–E3 开跑。
+- **预注册** `docs/design/E1-E3_prereg_v1.md`(提交 33dd4f7,写于任何结果产生之前):留出集 WW 184 + TEgc;主指标为轨迹内的 Acc@1 / Hit@3 / rank-AUROC;平凡基线;E1 / E2 的判定规则。
+- **偏离记录:** TEgc 实际 174 条(2 条的 mistake_step_id 不在步骤列表里,无法映射),合并为 358 条;GPU 1 被另一用户(wyx)占用约 9 GB、GPU 0 占用约 1.9 GB → E1 的两个代理在 GPU 0 上依次跑,E2 训练用 GPU 2 / 3;seed 聚合方式是"先算每个种子的指标,再按轨迹取均值"(规则未变,这是预注册没写到的实施细节)。
+- **实现与验证(沙箱):** TEgc 转换器(`hgfm/e1e3/te_to_ww.py`);OAT 补丁(`oat_patch.py`):新增 traceelephant_gc 数据集、只取末层的提取(Qwen3-0.6B 上与原代码末层差 0 / 1.2e-3,fp32)、>32k 时的 YaRN 第二遍、保存每个种子的预测;E2 语料(`e2_corpus.py`):S 6.06M / R 6.09M token,每个数据集内 token 数匹配(R 中成功运行占 36%);E2 打分(`e2_score.py`):分块 logits 的逐步 NLL 与全量计算差 0;分析脚本(`scripts/e1e3_analyze.py`)在合成数据上能找回植入的信号,噪声上为阴性。
+- **Linux #2:** 资产经私有 HF `mht-midtrain-pilot/e1e3/` 传输;socks 代理现在会断(SSL EOF),pip 直连可用(装了 torchcde / torchdiffeq / torchsde)。驱动 `scripts/linux2_run_e1e3.sh` 05:03 UTC 开始:E1 在 GPU 0 上提取(约 3 分钟 / 数据集);E2 的 S 在 GPU 2/3 上训练(147 步 × 23.6 s ≈ 58 分钟),之后是 R,再用四个模型打分。预计 ~08:00 UTC 全部完成;已设 07:40 UTC 检查(trig 见 HANDOFF)。
