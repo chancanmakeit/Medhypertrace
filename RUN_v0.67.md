@@ -1002,3 +1002,10 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - **E2 训练完成**(S 05:03–05:58,R 05:58–06:56)。**E2 打分第一次全部失败**(07:07–07:18):原生 ≤32k 那一遍 346 条都成功,但 >32k 的 YaRN 那一遍 OOM——没传 attention_mask,SDPA 走了数学内核,物化 [L, L] 矩阵(76k² × 2 B ≈ 10.8 GiB);E1 的提取传了 mask,所以没出问题。修复:与 OAT 一样传 attention_mask;每遍结束后写 `.partial` 可续接;`--only_longest` 冒烟测试(最长 76,237 token,峰值 22.9 GiB,通过)。07:48 重跑(base GPU0、tapt GPU1、S GPU2、R GPU3):base / S / R 07:58 完成,tapt 在 GPU 1(与 wyx 共用)上跑 YaRN 那一遍。
 - **分析脚本补上预注册要求的敏感性分析**(去掉 >32k 的轨迹,`pooled_le32k`;不参与判定),OAT `metrics.json` 键名改为 `*_mean`。提交 75c8fc9、259e269。
 - 08:01 UTC Linux #2 Jupyter 连接器要求重新登录 → 分析没跑成。服务器上的进程不受影响(setsid)。
+
+### 第 67 轮(续 2,2026-10-28 08:05–08:15 UTC)· 用户:已重新授权,进度如何
+- E2 打分重跑全部完成(08:01:42 RERUN DONE)。预注册分析 08:07 UTC 跑完 → `MedHyperTrace-v2/results/e1e3/README.md`、`e1e3_analyze.out`。
+- **E1 成立**:合并 n = 356,tapt − base rank-AUROC +0.027 [+0.009, +0.047],Acc@1 +0.038 [+0.009, +0.068];WW(+0.033 [+0.002, +0.068])和 TEgc(+0.021 [+0.004, +0.038])各自成立;去掉 >32k 的轨迹后不变;TAPT 的每个种子都高于基座的每个种子。幅度小:TAPT 代理的 OAT 也只有 Acc@1 0.175 / rank-AUROC 0.622;WW 上轨迹内不比"第一个模型步"好(0.573 vs 0.590),优势在 TEgc(0.674 vs 0.561)。
+- **E2 不成立**:ΔNLL = NLL_S − NLL_R 的 rank-AUROC 0.456(低于随机),比"第一个模型步" −0.120 [−0.160, −0.081],比 NLL_base −0.147。
+- **事后发现(未预注册)**:NLL_base − NLL_tapt 的 rank-AUROC 为 0.683(WW、TEgc 都是),去掉第一个模型步后 0.667 / 0.687(剩余最早步 0.627 / 0.565)。是线索,不是结论;步长 / 内容混杂未查,需要预注册后到新数据上检验。脚本 `scripts/e1e3_exploratory.py`。
+- issue #2 评论 6464027068(`docs/interfaces/issue2_comment_r67b.md`)。

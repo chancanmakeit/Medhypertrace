@@ -91,6 +91,10 @@
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
+### 0.79 第 67 轮续 2(08:15 UTC):E1–E3 完成——E1 成立(小),E2 不成立,事后线索 base − tapt
+- 结果见 `MedHyperTrace-v2/results/e1e3/README.md`。E1 成立:合并 rank-AUROC +0.027 [+0.009, +0.047],WW 和 TEgc 各自成立,种子间稳健;但绝对水平低,WW 上不胜第一步基线。E2(似然比)不成立(0.456)。事后:NLL_base − NLL_tapt 0.683(未预注册)。issue #2 已发 6464027068。
+- **等用户决定:** (a) 把 base − tapt 线索写成预注册 v2,在新数据上检验(medical-aegis 分叉点 / 新留出集),并先查步长与内容类型混杂;(b) 用 E2 的 S / R 检查点(6M token)做 OAT 代理,看 E1 增益是否随中训练 token 量变化(各约 35 分钟 GPU,无 API 成本);(c) 之前悬而未决的:LQD 5 折 SAMT vs 文本、分叉扩展 A / B、SAMT v2 vs G2、manifest v1 归属、通过 medical-aegis 扩充自然运行(付费)。
+
 ### 0.78 第 67 轮续(08:01 UTC):E1 完成;E2 打分 OOM → 修复重跑;等连接器重新授权后跑分析
 - E1 完成(OAT 池化 AUROC:base WW 0.773 / TEgc 0.713,tapt 0.774 / 0.725;主指标未算)。E2 打分:第一次 YaRN 那一遍 OOM(缺 attention_mask),已修(`e2_score.py` md5 28ba0ede…,可续接),07:48 用 `$D/rerun_e2_score.sh` 重跑;base / S / R 已完成,tapt 在 GPU 1 上收尾(GPU 0 那条链也可能再跑一遍 tapt,结果相同,无害)。
 - **下一步(连接器恢复后):** 看 `$D/status` 有没有 `DONE e2 score tapt`(没有就 `bash $D/rerun_e2_score.sh`,会续接);在代码目录用 mht-swift 环境运行 `python scripts/e1e3_analyze.py`(服务器上 md5 0b70e5c3…,含 `pooled_le32k` 敏感性分析)→ `$D/e1e3_results.json`;写 `results/e1e3/README.md`(WW n = 182、TEgc 174、合并 356;偏离:2 条 TEgc 无法映射、2 条 WW 错误步落在非模型步、GPU 共用、E2 打分重跑);向用户汇报并发 issue #2。
