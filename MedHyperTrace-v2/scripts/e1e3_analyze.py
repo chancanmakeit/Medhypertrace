@@ -36,6 +36,8 @@ def metrics_for(scores, cand, mistake):
 def baselines(traj, prior):
     """traj: {cand, mistake, n_steps}. Returns {name: metric dict}. Random = expected values."""
     c, m = traj["cand"], traj["mistake"]; n = len(c); res = {}
+    if m not in c:   # mistake on a non-model step: not evaluable for any scorer (OAT drops these too)
+        return {k: None for k in ("random", "first_step", "last_step", "position_prior")}
     res["random"] = {"acc1": 1 / n, "hit3": min(3, n) / n, **({"rauc": 0.5} if n > 1 else {})}
     res["first_step"] = metrics_for({x: -i for i, x in enumerate(c)}, c, m)
     res["last_step"] = metrics_for({x: i for i, x in enumerate(c)}, c, m)
@@ -66,7 +68,7 @@ def load_trajs(root):
     for r in json.load(open(f))["rows"]:
         cand = [si for si, im in zip(r["step_indices"], r["step_is_model"]) if si >= 0 and im]
         T[(r["dataset"], r["id"])] = {"cand": cand, "mistake": r["mistake_step"], "n_steps": len(r["step_indices"]) - 1,
-                                      "nll": dict(zip(r["step_indices"], r["step_nll"]))}
+                                      "nll": dict(zip(r["step_indices"], r["step_nll"])), "yarn": bool(r.get("yarn"))}
     return T
 
 
@@ -93,6 +95,8 @@ def main():
     T = load_trajs(a.root)
     sets = {"WW": [k for k in T if k[0] == "who_and_when"], "TEgc": [k for k in T if k[0] == "traceelephant_gc"]}
     sets["pooled"] = sets["WW"] + sets["TEgc"]
+    # pre-registered sensitivity: without the trajectories > 32,768 tokens (YaRN pass); not used by the decision rules
+    sets["pooled_le32k"] = [k for k in sets["pooled"] if not T[k]["yarn"]]
     # position prior: relative-position histogram of the OTHER dataset's mistake steps (10 bins, add-one)
     def hist(keys):
         h = np.ones(10)
