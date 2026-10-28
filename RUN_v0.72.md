@@ -1034,3 +1034,8 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - 审计(`data_tools/tracertraj_audit.py` → `results/tracertraj_audit/`):sha256 全部一致;3,208 训练 + 790 测试;agentic 部分 1-indexed、所有步骤都叫 "assistant"(没有智能体标签)、87% 为注错标签;coding / math 部分 0-indexed;与 WW / TEgc 没有重叠;math 测试有 21 / 63 道题在训练集里也出现;在 TracerTraj 上"最长步"捷径无效(agentic 5.7%、coding 1.6%)。
 - 意义:可以作为 E4 的后训练标签数据,训练时学不到步长捷径;在 WW / TEgc 上评测时继续报告步长基线和控制后的数字。
 - E4 方案(待用户确认):有监督步骤打分头(在步骤表示上做步骤分类,LoRA),基座 vs TAPT 初始化,训练数据 = TracerTraj 训练集(去掉与测试题重复的样本);评测 WW / TEgc(主)+ TracerTraj 测试;先预注册再跑。
+
+## 第 72 轮 · 2026-10-28 ~17:35–17:55 UTC · 用户:给出 4 卡 A6000 加速建议(FA2、Liger、packing / padding-free、关 GC、LoRA 用 DDP)
+- 实测(`results/bench_train/README.md`):A6000 计算能力是 8.6(不是 8.0),拓扑全是 SYS(PCIe 跨 NUMA,没有 NVLink)→ LoRA 用纯 DDP 是对的;liger-kernel 0.8.x 要求 transformers ≥ 5,装的是 0.7.0;Liger 微基准每步快 14–20%,显存省 24–36%,16k 只有开 Liger 才放得下,数值等价;**关掉梯度检查点在 4k 就 OOM**(LoRA r64 all-linear);batch 1 没有 padding,1k 与 4k 每 token 成本只差约 9%;swift pt 端到端:Liger 约 +3%,packing 约 1.3 倍(范围 1.0–2.0),但每步 token 数变成约 3 倍,不再是原来的配方。
+- `linux2_run_tapt.sh`:新增 `LIGER`(默认 false)、`PACK`(默认关);flash-attn 2.8.3.post2 已在 PyPI,未升级(2.7.4 可用,收益不明)。
+- E4 训练用:DDP + flash-attn 2 + Liger(RMSNorm / RoPE / SwiGLU)+ 梯度检查点;不用 FLCE(打分头不算词表 logits)、不用 packing(轨迹本身长)。

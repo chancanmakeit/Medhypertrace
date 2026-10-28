@@ -91,6 +91,9 @@
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
+### 0.84 第 72 轮:训练加速实测
+- liger-kernel 0.7.0 已装(mht-swift)。`linux2_run_tapt.sh` 支持 `LIGER=true`、`PACK=1`(默认都关,保持旧配方)。A6000 拓扑全是 SYS,无 NVLink;LoRA 训练用 DDP;梯度检查点必须开。数字见 `MedHyperTrace-v2/results/bench_train/README.md`。E4 仍待用户确认。
+
 ### 0.83 第 71 轮:TracerTraj 公开版已获取并审计
 - `mht_work/tracertraj/agentracer-data-v1.0.0/`(Linux #2):3,208 训练 / 790 测试,Who&When 格式。agentic 部分 1-indexed、无智能体名;math 测试有三分之一与训练重题;与 WW / TEgc 无重叠。见 `MedHyperTrace-v2/results/tracertraj_audit/README.md`。
 - **待用户确认 E4**(方案见 RUN_v0.71 第 71 轮)。
