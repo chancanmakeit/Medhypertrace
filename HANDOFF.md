@@ -91,6 +91,10 @@
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
+### 0.86 第 74 轮:E4 完成——中训练对有监督归因也没有价值
+- 结果 `MedHyperTrace-v2/results/e4/README.md`。三种设置(A 线性 / A MLP / B BEFT)在控制步长后 tapt − base 都不成立(MLP 显著为负)。有监督 TracerTraj 标签可以迁移(BEFT 控制后 0.63–0.64),但原始值仍不胜最长步基线。服务器上的完整输出在 `mht_work/e4/`。
+- **需要用户重新定方向**:中训练路线(TAPT / S / R / SAMT)在 MAA 缺陷层、公开责任层、无监督读出、有监督后训练上都没有站得住的正面证据。
+
 ### 0.85 第 73 轮:E4 运行中(BEFT + 冻结探针)
 - 预注册 `MedHyperTrace-v2/docs/design/E4_prereg_v1.md`。代码 `hgfm/e4/`(e4_features、e4_eval、e4_probe、e4_beft、e4_beft_eval)。Linux #2:`mht_work/e4/`,状态看 `status`,驱动 `scripts/linux2_run_e4.sh`(可重跑续接)。TracerTraj 的 WW 格式数据在 `mht_work/e4/tt_ww/`。
 - 结束后:读 `stageA/e4a_{linear,mlp}.json`、`stageA.log`、`stageB.out`;写 `results/e4/README.md`(原始 + 控制后,与最长步基线比较,和论文同口径的 WW 步骤级准确率);汇报;发 issue #2。
