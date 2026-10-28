@@ -1028,3 +1028,9 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - Algorithm-Generated(n = 126):"最长模型步"26.2%,第一步 15.9%;AgenTracer 42.86 / 37.30(比最长步高约 11–17 个点);智能体级"出现最多的智能体"54.0%,AgenTracer 69.6 / 63.7,Qwen3-8B 58.7 / 60.3。
 - 其他观察:AgenTracer 的训练任务含 GAIA、框架含 AutoGen,与 WW(Magentic-One / AG2,在 GAIA 上)有任务和框架族的重叠(轨迹本身不重叠);GraphTracer 摘要和贡献里的数字(比 Gemini-2.5-Pro 高 18.18%、比 DeepSeek-R1 高 12.21%、4.8–14.2%)与 AgenTracer 摘要一字不差,表 1 中 AgenTracer 一行也照搬,WW 写成 127 条(实际 184),需谨慎引用;AEGIS 在 WW 上的智能体级 µF1 为 14B SFT 51.14 vs 基座 49.88,SFT 的 OOD 表现在第 2 个 epoch 达峰后下降。
 - 我方结论:后训练有效的部分,来自显式的反事实 / 注错标签;它与"中训练是否有额外价值"是两个问题,三篇都没有检验后者。我方建议的 E4:基座 → 后训练 vs TAPT → 后训练(同样的标签数据,如 AEGIS 9.5k / TracerTraj),在 WW / TEgc 上按步骤级 + 平凡基线 + 步长控制评测。待用户确认。
+
+## 第 71 轮 · 2026-10-28 ~14:51–15:25 UTC · 用户:TracerTraj 可能在 github.com/bingreeky/AgenTracer
+- 仓库(公开,git 只读)只带一个 `data/tracertraj-code-test.parquet`;README 指向 release `data-v1.0.0`。沙箱访问不到 release 资源(403 / 白名单),改由 Linux #2 经 socks 代理下载 `agentracer-data-v1.0.0.zip`(23,997,287 B,md5 f1384beb…),解压到 `mht_work/tracertraj/`。release 版是扩充版,与论文的 2.5K 不完全相同;作者表示不发布 AgenTracer-8B 权重。
+- 审计(`data_tools/tracertraj_audit.py` → `results/tracertraj_audit/`):sha256 全部一致;3,208 训练 + 790 测试;agentic 部分 1-indexed、所有步骤都叫 "assistant"(没有智能体标签)、87% 为注错标签;coding / math 部分 0-indexed;与 WW / TEgc 没有重叠;math 测试有 21 / 63 道题在训练集里也出现;在 TracerTraj 上"最长步"捷径无效(agentic 5.7%、coding 1.6%)。
+- 意义:可以作为 E4 的后训练标签数据,训练时学不到步长捷径;在 WW / TEgc 上评测时继续报告步长基线和控制后的数字。
+- E4 方案(待用户确认):有监督步骤打分头(在步骤表示上做步骤分类,LoRA),基座 vs TAPT 初始化,训练数据 = TracerTraj 训练集(去掉与测试题重复的样本);评测 WW / TEgc(主)+ TracerTraj 测试;先预注册再跑。

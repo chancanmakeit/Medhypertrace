@@ -1,0 +1,161 @@
+{
+ "sha256": {
+  "agentic/train.jsonl": true,
+  "agentic/test.jsonl": true,
+  "coding/train.jsonl": true,
+  "coding/test.jsonl": true,
+  "math/train.jsonl": true,
+  "math/test.jsonl": true
+ },
+ "splits": {
+  "agentic/train": {
+   "rows": 1500,
+   "agent_matches_step_name": 1500,
+   "error_source=Injection Error": 1306,
+   "error_source=Diagnosis Error": 194,
+   "history_len_median": 7,
+   "history_len_max": 42
+  },
+  "agentic/test": {
+   "rows": 600,
+   "agent_matches_step_name": 600,
+   "error_source=Injection Error": 516,
+   "error_source=Diagnosis Error": 84,
+   "question_also_in_train": 1,
+   "history_len_median": 7,
+   "history_len_max": 39
+  },
+  "coding/train": {
+   "rows": 1141,
+   "agent_matches_step_name": 1141,
+   "history_len_median": 14,
+   "history_len_max": 304
+  },
+  "coding/test": {
+   "rows": 127,
+   "agent_matches_step_name": 127,
+   "history_len_median": 13,
+   "history_len_max": 151
+  },
+  "math/train": {
+   "rows": 567,
+   "agent_matches_step_name": 567,
+   "history_len_median": 7,
+   "history_len_max": 11
+  },
+  "math/test": {
+   "rows": 63,
+   "agent_matches_step_name": 63,
+   "question_also_in_train": 21,
+   "history_len_median": 7,
+   "history_len_max": 11
+  }
+ },
+ "overlap_e3": {
+  "agentic/train": {
+   "question_match_rows": 0,
+   "step_text_match_rows": 0,
+   "e3_trajectories_hit": [],
+   "e3_trajectories_hit_n": 0
+  },
+  "agentic/test": {
+   "question_match_rows": 0,
+   "step_text_match_rows": 0,
+   "e3_trajectories_hit": [],
+   "e3_trajectories_hit_n": 0
+  },
+  "coding/train": {
+   "question_match_rows": 0,
+   "step_text_match_rows": 0,
+   "e3_trajectories_hit": [],
+   "e3_trajectories_hit_n": 0
+  },
+  "coding/test": {
+   "question_match_rows": 0,
+   "step_text_match_rows": 0,
+   "e3_trajectories_hit": [],
+   "e3_trajectories_hit_n": 0
+  },
+  "math/train": {
+   "question_match_rows": 0,
+   "step_text_match_rows": 0,
+   "e3_trajectories_hit": [],
+   "e3_trajectories_hit_n": 0
+  },
+  "math/test": {
+   "question_match_rows": 0,
+   "step_text_match_rows": 0,
+   "e3_trajectories_hit": [],
+   "e3_trajectories_hit_n": 0
+  }
+ },
+ "baselines": {
+  "agentic/train": {
+   "n": 1500,
+   "step_random": 0.14055490743633672,
+   "step_first": 0.029333333333333333,
+   "step_last": 0.166,
+   "step_longest": 0.06466666666666666,
+   "agent_most_frequent": 1.0,
+   "agent_of_longest_step": 1.0
+  },
+  "agentic/test": {
+   "n": 600,
+   "step_random": 0.14154964663888803,
+   "step_first": 0.015,
+   "step_last": 0.19666666666666666,
+   "step_longest": 0.056666666666666664,
+   "agent_most_frequent": 1.0,
+   "agent_of_longest_step": 1.0
+  },
+  "coding/train": {
+   "n": 1141,
+   "step_random": 0.0700283188577805,
+   "step_first": 0.009640666082383873,
+   "step_last": 0.03680981595092025,
+   "step_longest": 0.024539877300613498,
+   "agent_most_frequent": 0.5915863277826467,
+   "agent_of_longest_step": 0.11042944785276074
+  },
+  "coding/test": {
+   "n": 127,
+   "step_random": 0.07161165820741135,
+   "step_first": 0.007874015748031496,
+   "step_last": 0.03937007874015748,
+   "step_longest": 0.015748031496062992,
+   "agent_most_frequent": 0.5590551181102362,
+   "agent_of_longest_step": 0.11023622047244094
+  },
+  "math/train": {
+   "n": 567,
+   "step_random": 0.2019763011826497,
+   "step_first": 0.0,
+   "step_last": 0.09171075837742504,
+   "step_longest": 0.3880070546737213,
+   "agent_most_frequent": 0.4603174603174603,
+   "agent_of_longest_step": 0.6419753086419753
+  },
+  "math/test": {
+   "n": 63,
+   "step_random": 0.20248402391259543,
+   "step_first": 0.0,
+   "step_last": 0.07936507936507936,
+   "step_longest": 0.2222222222222222,
+   "agent_most_frequent": 0.36507936507936506,
+   "agent_of_longest_step": 0.47619047619047616
+  }
+ },
+ "index_offset": {
+  "agentic/train": 1,
+  "agentic/test": 1,
+  "coding/train": 0,
+  "coding/test": 0,
+  "math/train": 0,
+  "math/test": 0
+ },
+ "source": {
+  "url": "https://github.com/bingreeky/AgenTracer/releases/download/data-v1.0.0/agentracer-data-v1.0.0.zip",
+  "zip_md5": "f1384beba8ddc552cc9078e78fbbb935",
+  "server_path": "/data1/ekyang/cgh/CODE/mht_work/tracertraj/agentracer-data-v1.0.0"
+ }
+}

@@ -91,6 +91,10 @@
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
+### 0.83 第 71 轮:TracerTraj 公开版已获取并审计
+- `mht_work/tracertraj/agentracer-data-v1.0.0/`(Linux #2):3,208 训练 / 790 测试,Who&When 格式。agentic 部分 1-indexed、无智能体名;math 测试有三分之一与训练重题;与 WW / TEgc 无重叠。见 `MedHyperTrace-v2/results/tracertraj_audit/README.md`。
+- **待用户确认 E4**(方案见 RUN_v0.71 第 71 轮)。
+
 ### 0.82 第 70 轮:三篇后训练归因论文 vs 我方中训练阴性结果
 - 三篇(AEGIS / AgenTracer / GraphTracer)都是用反事实或注错产生的归因标签做后训练(SFT / GRPO)。我方实算 WW 平凡基线:Hand-Crafted 上"最长步"步骤级 18.97%,AgenTracer 20.68%;Algorithm-Generated 上"最长模型步"26.2%,AgenTracer 37.3–42.9%。见 RUN_v0.70 第 70 轮、`results/e1e3/ww_trivial_baselines.json`。
 - **待用户决定 E4**:同一批标签数据(AEGIS 9.5k 或 TracerTraj),基座 → 后训练 vs TAPT → 后训练,检验中训练对后训练有没有额外价值(仅 GPU,无 API 成本;先核实数据是否公开可得)。
