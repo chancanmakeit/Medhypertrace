@@ -13,8 +13,11 @@ paper's TracerTraj-2.5K. Script `data_tools/tracertraj_audit.py`, output `audit.
 
 - sha256 of all six files match MANIFEST.json. Agentic `error_source`: Injection Error 1,306 / 516, Diagnosis Error
   (counterfactual) 194 / 84 — the labels are mostly by construction (fault injection).
-- **No overlap with our held-out E3 sets**: 0 rows share a normalised question, and 0 share any step text of >= 200
-  characters, with Who&When (184) or TraceElephant groupchat (174).
+- ~~No overlap with our held-out E3 sets~~ **Corrected in round 75:** 0 rows share an *exact* normalised question or a
+  step text of >= 200 characters, but near-duplicate questions are common: 110 of the 358 E3 trajectories (WW 47, TEgc
+  59) have a TracerTraj train-file question with word-set Jaccard >= 0.3 (106 >= 0.5, 51 >= 0.7, 6 >= 0.9) -- the same
+  GAIA tasks with a format instruction prepended ("Please answer in a concise format ..."). The trajectories and labels
+  differ (other MAS, injected faults), the tasks do not. E4 re-scored without these 110: `results/e4/README.md`.
 - The manifest reports 0 *exact* train/test overlap, but 21 of 63 math test questions also appear in math train.
 - Trivial step-level baselines (exact index): the length shortcut that works on Who&When does **not** work here
   (longest step: agentic test 5.7%, coding test 1.6%, math test 22.2% vs random 14.2% / 7.2% / 20.2%; last step agentic

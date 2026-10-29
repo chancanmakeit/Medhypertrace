@@ -56,3 +56,27 @@ TEgc — BEFT base 0.184 / 0.610, tapt 0.178 / 0.575, longest step 0.115 / 0.655
 - Stage B: one seed per initialisation (pre-registered); best checkpoint by validation rank-AUROC (base 0.893, tapt
   0.907, both at the end of epoch 2). Runtime 20:31–23:40 UTC on 2 + 2 GPUs.
 - Stage-A seed means: metrics per seed, then mean per trajectory (as E1).
+
+## Round 75 additions (exploratory; `analysis/e4_overlap_matched.py`, output `mht_work/e4/overlap_matched.json`)
+**Task overlap.** 110 of 358 held-out trajectories share a near-duplicate question with the TracerTraj training file
+(Jaccard >= 0.3; see the corrected audit). Re-scored on the 248 clean ones: BEFT controlled rank-AUROC base 0.640, tapt
+0.648 (vs chance +0.14 [+0.10, +0.18]); tapt − base controlled +0.008 [−0.026, +0.042]; linear −0.001, MLP −0.037
+[−0.067, −0.007]. On the 110 overlapping ones BEFT is *lower* (0.604 / 0.617): the overlap did not inflate the transfer.
+
+**Matched pairs** (rule fixed before computing; mistake step vs same-trajectory candidates with length ratio <= r,
+|relative position difference| <= w, same has_code; trajectories with >= 1 pair):
+
+| (r, w) | n traj | E1 OAT tapt − base | A linear | A MLP | B BEFT |
+|---|---|---|---|---|---|
+| (1.5, 0.25) | 214 | **+0.059 [+0.017, +0.107]** | +0.014 [−0.040, +0.067] | +0.019 | −0.012 |
+| (1.25, 0.25) | 177 | +0.049 [−0.005, +0.100] | −0.013 | +0.008 | +0.004 |
+| (1.5, 0.15) | 147 | +0.005 [−0.045, +0.051] | +0.009 | +0.020 | −0.054 |
+| (1.25, 0.15) | 125 | −0.008 [−0.073, +0.055] | +0.002 | +0.025 | −0.002 |
+| (2.0, 0.5) | 289 | **+0.058 [+0.019, +0.095]** | −0.011 | −0.011 | −0.004 |
+| (1.5, 1.0) | 271 | **+0.047 [+0.004, +0.089]** | −0.010 | −0.021 | −0.025 |
+
+The longest-step rule scores 0.46–0.51 under matching, so the length matching works. **Correction to round 68:** the
+E1 OAT gain is *not* fully explained by step length -- it survives length matching (+0.05 when position is loosely or
+not matched) but vanishes under tight position matching (w = 0.15, fewer trajectories). E1 is therefore *undetermined*
+(length-independent, possibly position-related), not negative. The supervised E4 comparisons are null under every
+variant, so the E4 conclusion is unchanged.
