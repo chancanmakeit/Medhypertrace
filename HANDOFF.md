@@ -91,6 +91,11 @@
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
+### 0.88 第 76 轮:训练过程图 + Method 概览图提示词(写论文用)
+- 图与讲解:`MedHyperTrace-v2/results/figures/`(README、4 张图 PNG + PDF、数据、脚本 `scripts/plot_training_curves.py`)。
+- 方法框架与 GPT 绘图提示词:`MedHyperTrace-v2/docs/paper/method_overview_and_figure_prompt.md`。图按模块化画,不写性能主张;C9 未实现;C5 无增益,只放消融。
+- 待用户决定的下一步(零 API)同 §0.87。
+
 ### 0.87 第 75 轮:issue #2 讨论——两处更正与新提案
 - **更正:** (1) TracerTraj 与 WW / TEgc 有 110 / 358 条近似重复题(第 71 轮漏查),去掉后 E4 不变;(2) E1 的 OAT 增益在长度匹配下仍有约 +0.05,位置卡紧后消失 → E1 改为"未定"。数字在 `results/e4/README.md` 第 75 轮补充。
 - 外部数据去重规则(新):题干归一化后词集 Jaccard ≥ 0.3,按题目分组。

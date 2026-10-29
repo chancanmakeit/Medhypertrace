@@ -1059,3 +1059,16 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   3. **分叉试点的步长:** 79 点 / 12 翻转,原长度 AUROC 0.34(翻转点更短),字母改变 0.82。
 - issue #2 评论(`docs/interfaces/issue2_comment_r75.md`):同意 GPT 对零臂的更正;同意 Muse 的操作定义;停止规则用由检验力定的"无效界"(CI 上界 < +0.04);标签效率曲线、负对照中训练前移;新见解——所有读出器都是因果前缀表示,看不到下游证据;提出零 API 的"替换步检测"作为中训练目标(长度匹配、可检验超图价值)。
 - 脚本:`analysis/e4_overlap_matched.py`、`analysis/branch_length_audit.py`。
+
+## 第 76 轮 · 2026-10-29 · 用户:① 给出中训练 / 微调实验的训练过程图(loss 等)并讲解;② 准备写文章,给出方法大框架讲解与提示词,用于让 GPT 画 Method 概览图
+- **训练过程图**(只用已有日志,零训练、零 API):`MedHyperTrace-v2/results/figures/`,讲解见同目录 `README.md`,脚本 `scripts/plot_training_curves.py`,数据 `training_curves_data.json`(从 Linux #2 原样拷贝,md5 核对)。
+  - 图 1 文本中训练(TAPT 0.97→0.47,留出 0.477;E2-S 1.21→0.55;E2-R 1.20→0.59)。
+  - 图 2 SAMT(答案 loss 2.41→0.06,准确率 0.73→0.98,梯度范数约 100 步后稳定)。
+  - 图 3 BEFT(TracerTraj 验证 rank-AUROC base 0.819→0.893,tapt 0.825→0.907,仍在上升)。
+  - 图 4 探针(同分布验证上中训练特征高 0.005–0.01)。
+  - 统一读法:优化都成功了,但外部集上控制步长后中训练无增益(E1 未定,E4 不成立)。"同分布验证提升 ≠ 外部迁移"本身是评测协议的一个论据。
+- **Method 框架讲解 + GPT 绘图提示词:** `MedHyperTrace-v2/docs/paper/method_overview_and_figure_prompt.md`。
+  - 框架:模块 A 日志 → B UTH → C HGFM(C1–C4)→ D projector / 图 token → E 两阶段中训练(TAPT、SAMT;替换步检测作为 Stage II′ 候选)→ F 缺陷层 / 责任层微调、C7(C9 未实现)→ G 评测协议。
+  - 提示词有 A(完整版,C9 画虚线框)和 B(保守版)两个版本。
+  - 建议:图按模块化画,不写任何性能主张。目前有正面证据的只有 SAMT 的结构可读性。
+- 待用户决定的下一步不变(见第 75 轮)。
