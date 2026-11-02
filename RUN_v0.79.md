@@ -1108,3 +1108,18 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - 预计全部约 03:00 UTC(11-03)。
   - 第一次启动时 full 与 shuf 的 torchrun 端口冲突(都用 29500)→ 驱动加 MASTER_PORT 后重启;第一次的 status 存为 `status.first_launch_port_clash`。
 - **manifest + 审计表**交给后台子 agent(Linux #2 用 kernel 126283c5,只用 CPU;输出 `results/stage0_manifest/`)。
+
+### 第 79 轮(续,2026-11-02 ~17:30 UTC):manifest + 审计表完成(后台子 agent)——评测题与中训练语料大面积重叠
+- 产物 `MedHyperTrace-v2/results/stage0_manifest/`(README、overlap.json、eval_clean_keys.json、audit.json、manifest_eval_compact.json、maa_edges.json);脚本 `data_tools/build_manifest.py`(Linux #2 上同 md5;全量 manifest 留在服务器 `mht_work/stage0_manifest/out/`)。
+- **核心发现(直接重叠,Jaccard ≥ 0.3,E4 可评测的 356 条):**
+  - 与 tapt 语料重题 **270**(WW 123 / 182、TEgc 147 / 174);R 205、S 118、full 0(已过滤)、TT_train 90。
+  - tapt 的重叠来自 AFTraj 255、ARIA 182(同一批 GAIA / AssistantBench 题,0.5 / 0.7 阈值下几乎不变:267 / 266)。
+  - 主会话独立复算:360 道评测题中 257 道与 AFTraj(非 groupchat、全部进了 TAPT)的问题 ≥ 0.3,抽查都是同一道 GAIA 题被 smolagents 跑过(J = 1.00)。
+- **干净子集**(与 tapt / S / R / full / TT_train 都不重题):85 条(WW 58、TEgc 27);只看 R 时 151 条,只看 S 时 238 条。→ 阶段 0 的敏感性分析检验力很低(n = 85 时 CI 半宽约为全集的 2 倍)。
+- **意义:** 此前所有 tapt / S / R 代理在 WW / TEgc 上的比较(E1、E1b、E2、E4)都是在"中训练见过同一任务(别的框架、无归因标签)"的条件下做的。这不是标签泄漏,但"任务熟悉度"是一个未控制的变量。阶段 0 分析将按 tapt 重叠 / 不重叠分组报告。
+- **其他:**
+  - 预注册的"连通分量分组"在 0.3 时不可用(模板题把 14,262 项串成一个大组)→ 改用直接重叠,与第 75 轮及 full 的过滤规则一致,记为偏离。
+  - TracerTraj **测试集**与训练集在任务层面大多重复(621 / 768 ≥ 0.3)→ E4 的分布内约 0.92 不是"留出任务"的数字(已写进 `results/tracertraj_audit/README.md`)。
+  - 该 README 第 75 轮写的"WW 47、TEgc 59"其实是 ≥ 0.5 的拆分,≥ 0.3 是 49 + 61(已更正)。
+  - 服务器上的 TAPT 训练文件只有文本,run 通过 chunk 表头回溯(16,271 个 chunk 全部解析)。
+  - 审计表的平凡基线与 `results/e4/README.md` 逐项一致(合并最长步 0.183 / 0.673 等)。

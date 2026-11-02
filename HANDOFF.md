@@ -70,6 +70,7 @@
   2. 按预注册算 Q1 / Q2 / Q3(原始、控制后、匹配配对,以及敏感性子集 `results/stage0_manifest/eval_clean_keys.json`);
   3. 写 `results/stage0/README.md`;发 issue #3;更新本文。
 - **manifest:** 由后台子 agent 产出 `results/stage0_manifest/`(若会话中断:检查该目录是否齐全,不齐就按预注册 Q4 重做,脚本 `data_tools/build_manifest.py`)。
+- **manifest 已完成(17:30 UTC,`results/stage0_manifest/`):** 356 条评测轨迹中 270 条与 tapt 语料重题(R 205、S 118、full 0、TT_train 90);干净子集 `eval_clean_keys.json` 的 `clean_direct` 85 条(用直接重叠,不用连通分量——0.3 时一个分量 14k 项)。分析时把 tapt 重叠 / 不重叠分开报告。TracerTraj 测试集 621 / 768 与训练重题。
 - **更正:** 可用干净语料是 34.42M(不是 75M);TAPT / S / R 语料可能含 WW / TEgc 题目近似重复(full 已去除)。issue #3 评论 6582634345。
 
 ### 0.90 第 78 轮:中训练动机再审视;新开 medical-aegis issue #3

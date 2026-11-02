@@ -1,0 +1,9 @@
+[   10.8s] items Counter({'public': 26108, 'TT': 3976, 'anchor': 1200, 'WW': 184, 'TEgc': 174})
+[   11.4s] corpus tapt: 16271 rows, 12880 runs, 0 unmapped, {'rows_by_header': 16271}
+[   11.6s] corpus S: 4704 rows, 4118 runs, 0 unmapped, {'header_check_ok': 4704}
+[   11.7s] corpus R: 4950 rows, 4376 runs, 0 unmapped, {'header_check_ok': 4950}
+[   12.6s] corpus full: 27578 rows, 23339 runs, 0 unmapped, {'header_check_ok': 27578}
+[   13.6s] nodes: 21529 text nodes (47 empty) + 600 MAA; items 32242
+[  181.8s] text edges >= 0.3: 408036
+[  183.5s] feats meta 4332, evaluable 4329
+[  184.8s] groups 5493 (271 with evaluation items); done
