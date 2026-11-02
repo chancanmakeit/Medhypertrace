@@ -1081,3 +1081,10 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - **Linux #2:** 连接器已恢复;kernel `ffd58261-…` 仍在,已重新定义 `r()` / `rep()`。GPU 1–3 空闲,GPU 0 有他人进程约 1.9 GB;`mht_work/` 完好(e4 status 末行 ALL DONE);mht-swift 环境 ms-swift 4.6.0 / flash-attn 2.7.4.post1 / peft 0.17.1;服务器 HF 读 token 600。**/data1 已用 92%(剩 1.3 TB)**,新中训练检查点要留意空间。
 - 密钥:HF 读 / 写 token 写入 `/home/claude/.mht_secrets/`(600),API 端点写入 `/home/claude/.mht_api.env`(600),都在仓库外,未上命令行。
 - 没有在跑的任务。**等用户在四个零 API 下一步中决定**(E4 标签效率曲线 / 负对照中训练 / 按题目分组 manifest + 基准审计表 / 预注册 v2)。
+
+## 第 78 轮 · 2026-11-02 ~16:00–16:10 UTC · 用户:先确认引入中训练的动机(① 域差异;② 成功轨迹有规律,可灌入先验);是否请 medical-aegis 跑不同框架凑 0.1B–1B 语料;看法发到 medical-aegis 新 issue #3
+- **新核查(零 API,`MedHyperTrace-v2/analysis/success_regularity_check.py` → `.out`):** 锚点 normal(llama,100 题 × K=3 × 4 框架,1,200 条)。同题内 TF-IDF 余弦距离(规则计算前固定)。Δ_C(对对比对错更近)+0.032 [+0.024, +0.042](85 题);两条错误运行选同一错项 Δ_W +0.043 [+0.027, +0.062](49 题);选不同错项 −0.009 [−0.027, +0.009](16 题);去掉最后一步几乎不变;四框架方向一致(medagents_mc 两项都约 0)。→ "成功轨迹的规律"在这批数据上基本是"结论一致";"失败各不相同"基本是"错误选项不止一个"。**坑:** 该导出的 `answer` 字段是金标准,系统答案要用 `verification.regex_extracted`(第一次跑时用错,已修)。
+- **我方看法(issue #3 正文 `docs/interfaces/issue3_r78.md`):** 动机 1 成立(TAPT LM loss 0.97→0.47),但弥合 LM 域差异没有带来归因提升,正确的检验是标签效率曲线;医学域差异尚未被检验。动机 2 已有弱阴性(E2 0.456;S 作 OAT 代理不胜 R),但 E2 中 S / R 重叠大,检验偏弱;边际成功先验 = 单类似然,受表面统计量(步长)主导,而且成功先验是轨迹级的、归因是步骤级的;建议改为条件版本:同题成败对比 / 分叉。语料量:75M 干净语料只用了 24.5M,无剂量效应;先做 24.5M→75M 零 API 剂量检验。付费估算(按第 66 轮单价每千条 $2–3、每条约 4.1k token):0.1B ≈ 2.4 万条 ≈ $50–75,1B ≈ $500–750;题库和多样性可能比钱更紧。建议分阶段:0(我方零 API)→ 1(medical-aegis 约 $5–15、10–20M token,难度筛题、K ≥ 4、≥ 6 族、带 sources)→ 2(有正斜率才扩到 0.1B+)。
+- **issue #3** 已建(16:05:23Z,https://github.com/chancanmakeit/medical-aegis/issues/3),向 medical-aegis / GPT / Muse 提问,未 @ 任何人。
+- HANDOFF 拆分:旧历史移到 `HANDOFF_archive.md`,主文档变小,以便每轮同步 Project doc。
+- **待用户决定:** 阶段 0 的四项(标签效率、负对照、剂量检验、manifest)是否开始;阶段 1 的付费生成等 medical-aegis 报价后再定。
