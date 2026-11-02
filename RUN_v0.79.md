@@ -1123,3 +1123,14 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - 该 README 第 75 轮写的"WW 47、TEgc 59"其实是 ≥ 0.5 的拆分,≥ 0.3 是 49 + 61(已更正)。
   - 服务器上的 TAPT 训练文件只有文本,run 通过 chunk 表头回溯(16,271 个 chunk 全部解析)。
   - 审计表的平凡基线与 `results/e4/README.md` 逐项一致(合并最长步 0.183 / 0.673 等)。
+
+### 第 79 轮(续 2,2026-11-02 ~17:40–17:50 UTC)· 用户:可以(重训去掉评测重题的 TAPT)
+- **附录 A1**(写进 `Stage0_prereg_v1.md`,提交 3fd6fdd,在任何 tapt_clean 结果之前):
+  - tapt_clean = TAPT 规则,在 ARIA 封顶**之前**去掉 379 条与评测题近似重复的运行;24.38M token / 16,726 chunk(TAPT 24.46M / 16,271);复查重叠为 0;flash-attn。
+  - Q1′ tapt_clean − base(标签效率面积);Q3′ full − tapt_clean(干净的剂量比较)。两者与 Q1 / Q3 不一致时以带撇的为准。
+  - 描述项:tapt − tapt_clean(任务熟悉度);按 TAPT 重叠分组的 tapt − base。
+- **代码:** `build_corpus.py --exclude_runs`(默认不开,TAPT 可复现);`eval_overlap_filter --dump_hits`(用它重建 full 与原文件逐字节相同);驱动 `scripts/linux2_run_stage0_a1.sh`。
+- **Linux #2:**
+  - A1 驱动 17:48 启动,等车道 A 完成 shuf / irr 特征后在 GPU 0,1 训练 tapt_clean(约 21:30 → 00:45 UTC),再跑 E1 + 特征 + A 阶段 + 标签效率,最后跑推迟的 BEFT n = 100,预计约 06:15 UTC 全部完成。
+  - 推迟的办法:在 `beft_{base,tapt}_n100/scores.json` 放占位文件,让主驱动车道 A 跳过;A1 驱动最后删除占位文件再跑。主驱动没有改动(bash 运行中改脚本有风险)。
+- 车道 C(现有代理的标签效率)17:44 完成。已加第 4 次定时检查(06:35 UTC)。
