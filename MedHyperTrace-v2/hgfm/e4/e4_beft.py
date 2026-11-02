@@ -83,6 +83,8 @@ def main():
     ap.add_argument("--epochs", type=int, default=2); ap.add_argument("--accum", type=int, default=16); ap.add_argument("--lr", type=float, default=1e-3)
     ap.add_argument("--max_train_tokens", type=int, default=16384); ap.add_argument("--liger", type=int, default=1); ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--max_train", type=int, default=0, help="smoke test: use only this many training trajectories")
+    ap.add_argument("--train_ids", default=None, help="Stage 0: json list of tt_train ids to train on (label-efficiency subset)")
+    ap.add_argument("--evals_per_epoch", type=int, default=2, help="validations per epoch (E4 v1: 2)")
     a = ap.parse_args()
     dist.init_process_group("nccl"); rk, ws = dist.get_rank(), dist.get_world_size(); dev = torch.device("cuda", int(os.environ["LOCAL_RANK"]))
     torch.cuda.set_device(dev); torch.manual_seed(a.seed); os.makedirs(a.out, exist_ok=True)
@@ -92,6 +94,7 @@ def main():
     lens = {k: len(tok(v["text"])["input_ids"]) for k, v in T.items()}
     train = sorted(k for k in T if k[0] == "tt_train" and lens[k] <= a.max_train_tokens and T[k]["label"] in T[k]["cand"])
     val = sorted(k for k in T if k[0] == "tt_val" and lens[k] <= 32768 and T[k]["label"] in T[k]["cand"])
+    if a.train_ids: allow = set(json.load(open(a.train_ids))); train = [k for k in train if k[1] in allow]
     if a.max_train: train = train[: a.max_train]; val = val[: max(8, a.max_train // 4)]
     lm = build(a.model, False, a.liger, True).to(dev); beft = Beft(lm).to(dev)
     for p_ in beft.parameters(): dist.broadcast(p_.data, 0)   # identical head init on every rank
@@ -111,7 +114,7 @@ def main():
         v = torch.tensor([sum(s), len(s)], dtype=torch.float64, device=dev); dist.all_reduce(v); lm.train(); return float(v[0] / v[1])
 
     rng = np.random.default_rng(a.seed); best, step, t0 = -1.0, 0, time.time()
-    per_rank = len(train) // ws; half = max(1, per_rank // 2)
+    per_rank = len(train) // ws; half = max(1, per_rank // a.evals_per_epoch)
     for ep in range(a.epochs):
         order = [train[i] for i in rng.permutation(len(train))][: per_rank * ws]; mine = order[rk::ws]; lm.train()
         for i, k in enumerate(mine):

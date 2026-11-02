@@ -48,9 +48,11 @@ def val_rauc(sc, rows):
     return float(np.mean(v))
 
 
-def train(rows, kind, seed, dev, log):
+def train(rows, kind, seed, dev, log, allow=None):
+    """allow: optional set of tt_train ids (Stage 0 label-efficiency subsets); None = all (E4 v1 behaviour)."""
     torch.manual_seed(seed); rng = np.random.default_rng(seed)
-    tr = [k for k in rows if k[0] == "tt_train" and rows[k]["label"] in rows[k]["cand"]]; va = [k for k in rows if k[0] == "tt_val"]
+    tr = [k for k in rows if k[0] == "tt_train" and rows[k]["label"] in rows[k]["cand"] and (allow is None or k[1] in allow)]
+    va = [k for k in rows if k[0] == "tt_val"]
     H = next(iter(rows.values()))["x"].shape[1]; head = make_head(kind, H).to(dev)
     opt = torch.optim.AdamW(head.parameters(), lr=1e-3, weight_decay=1e-2); best, best_state, bad = -1, None, 0
     for ep in range(30):
@@ -72,7 +74,10 @@ def train(rows, kind, seed, dev, log):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--feats", nargs="+"); ap.add_argument("--out")
     ap.add_argument("--heads", nargs="*", default=["linear", "mlp"]); ap.add_argument("--seeds", type=int, default=3)
-    a = ap.parse_args(); os.makedirs(a.out, exist_ok=True); dev = "cuda" if torch.cuda.is_available() else "cpu"
+    ap.add_argument("--subsets", default=None, help="Stage 0 label efficiency: subsets.json from hgfm.stage0.le_subsets")
+    ap.add_argument("--sizes", nargs="*", default=None, help="subset sizes to run (default: all in the file)")
+    a = ap.parse_args()
+    if a.subsets: return main_le(a); os.makedirs(a.out, exist_ok=True); dev = "cuda" if torch.cuda.is_available() else "cpu"
     F = {}; meta = {}; skipped = {}
     for spec in a.feats:
         name, path = spec.split("="); F[name], skipped[name] = load(path)
@@ -99,6 +104,34 @@ def main():
             for kind2 in ("raw", "resid"):
                 q = res["paired"].get(f"{p[0]} - {p[1]} / pooled / {kind2} / rauc", {})
                 print("DECISION-INPUT", p, kind2, q, flush=True)
+
+
+def main_le(a):
+    """Stage 0 Q1: for every proxy, head type, size n and draw d, train on subset (d, n) with head seed d. Saves scores
+    {"<kind>_<proxy>_n<n>": {"dataset|id": [per-draw score lists]}} + meta; the pre-registered statistics (incl. the
+    label-efficiency area) are computed by hgfm.stage0.le_analyze."""
+    os.makedirs(a.out, exist_ok=True); dev = "cuda" if torch.cuda.is_available() else "cpu"
+    SUB = json.load(open(a.subsets)); draws = sorted(SUB["draws"], key=int); sizes = a.sizes or sorted(SUB["draws"][draws[0]], key=int)
+    F = {}
+    for spec in a.feats:
+        name, path = spec.split("="); F[name], _ = load(path)
+    base = F.get("base") or next(iter(F.values()))
+    common = set.intersection(*[{k for k in rows if k[0] in EVAL} for rows in F.values()])
+    meta = {f"{k[0]}|{k[1]}": {kk: base[k][kk] for kk in ("cand", "label", "ntok", "code", "n_steps")} for k in common}
+    json.dump(meta, open(os.path.join(a.out, "meta.json"), "w"))
+    for name, rows in F.items():
+        for kind in a.heads:
+            fn = os.path.join(a.out, f"le_{kind}_{name}.json")
+            if os.path.exists(fn): print("skip", fn, flush=True); continue
+            scores, log = {}, []
+            for n in sizes:
+                st = f"{kind}_{name}_n{n}"; scores[st] = {f"{k[0]}|{k[1]}": [] for k in common}
+                for d in draws:
+                    allow = set(SUB["draws"][d][str(n)]); head, best = train(rows, kind, int(d), dev, log, allow)
+                    print(kind, name, "n", n, "draw", d, "n_train", sum(1 for k in rows if k[0] == "tt_train" and k[1] in allow), "best val rauc", round(best, 4), flush=True)
+                    sc = score(head, rows, sorted(common), dev)
+                    for k in common: scores[st][f"{k[0]}|{k[1]}"].append(sc[k])
+            json.dump({"scores": scores, "train_log": log}, open(fn, "w"))
 
 
 if __name__ == "__main__":
