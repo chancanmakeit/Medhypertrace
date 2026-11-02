@@ -21,6 +21,7 @@ def read(p):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--public_dir"); ap.add_argument("--anchor", nargs="*", default=[])
     ap.add_argument("--corpus"); ap.add_argument("--out"); ap.add_argument("--report"); ap.add_argument("--thr", type=float, default=0.3)
+    ap.add_argument("--dump_hits", default=None, help="write the dropped runs as a json list of [dataset, run_id]")
     a = ap.parse_args()
     q = {}; evalq = []
     for p in sorted(glob.glob(os.path.join(a.public_dir, "*.jsonl.gz"))):
@@ -53,6 +54,7 @@ def main():
            "chunks_dropped": dict(rep), "runs_with_jaccard_ge_0.5": sum(1 for v in best.values() if v >= 0.5),
            "runs_with_jaccard_ge_0.7": sum(1 for v in best.values() if v >= 0.7)}
     json.dump(out, open(a.report, "w"), indent=1); print(json.dumps(out))
+    if a.dump_hits: json.dump(sorted([list(k) for k in hits]), open(a.dump_hits, "w"))
 
 
 if __name__ == "__main__":

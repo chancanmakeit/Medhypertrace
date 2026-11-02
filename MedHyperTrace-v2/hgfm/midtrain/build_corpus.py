@@ -44,12 +44,15 @@ def main():
     ap.add_argument("--max_tokens", type=int, default=4096); ap.add_argument("--env_chars", type=int, default=2000)
     ap.add_argument("--maa_exclusion", default=os.path.join(os.path.dirname(__file__), "..", "..", "docs", "interfaces", "maa_exclusion_v1.json"))
     ap.add_argument("--tokenizer", default="Qwen/Qwen3-8B")
+    ap.add_argument("--exclude_runs", default=None, help="Stage 0 (round 79): json list of [dataset, run_id] removed BEFORE the caps "
+                    "(eval-question near-duplicates from hgfm.stage0.eval_overlap_filter --dump_hits); default none = pilot behaviour")
     a = ap.parse_args()
     from transformers import AutoTokenizer
     tok = AutoTokenizer.from_pretrained(a.tokenizer)
     ntok = lambda s: len(tok(s, add_special_tokens=False)["input_ids"])
     caps = {k: float(v) * 1e6 for k, v in (x.split("=") for x in a.cap)}
     excl = json.load(open(a.maa_exclusion)); maa = {e["norm_stem"]: e for e in excl["entries"]}
+    xr = {tuple(x) for x in json.load(open(a.exclude_runs))} if a.exclude_runs else set()
 
     runs = []   # (dataset, rec)
     for p in sorted(glob.glob(os.path.join(a.public_dir, "*.jsonl.gz"))):
@@ -70,6 +73,8 @@ def main():
         e = maa.get(norm_stem(r["task"].get("query") or ""))
         if e and (not e["images"] or set(e["images"]) & set(r["task"].get("images") or [])):
             st[ds]["excluded_maa"] += 1; continue
+        if (ds, r["run_id"]) in xr:
+            st[ds]["excluded_eval_overlap"] += 1; continue
         kept[ds].append(r)
     rng = random.Random(0)
     n_out = 0

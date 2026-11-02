@@ -78,3 +78,21 @@
 
 ## 无论结果如何都会报告
 所有判定按本文规则执行;偏离写进结果 README。
+
+## 附录 A1(第 79 轮,2026-11-02 ~17:55 UTC;用户 09:41 PT 批准;写于任何 tapt-clean 结果之前)
+**起因:** manifest(`results/stage0_manifest/`)显示,356 条评测轨迹中有 270 条的题目出现在 TAPT 语料里。主要是 AFTraj 中 smolagents 跑过的同一批 GAIA 题。干净子集只有 85 条,检验力不够。
+
+**新代理 tapt_clean:**
+- 规则与 TAPT 完全相同(`build_corpus.py`,ARIA 封顶 10M,排除 MAA、排除 groupchat 族),只是**在封顶之前**先去掉与 WW / TEgc 评测题近似重复的 379 条运行(`--exclude_runs`,名单来自 `eval_overlap_filter --dump_hits`,与 full 的过滤相同)。
+- 规模:24.38M token、16,726 chunk;复查评测重叠为 0。
+- 与 TAPT 的差别:去掉的运行;ARIA 封顶抽样因此换成另一批运行。
+- 训练用 flash-attn 2(与 full 一致;TAPT 当时是 SDPA),其余配方相同。
+- 读出与 Q1–Q3 相同:E1 OAT、E4 A 阶段全量、标签效率。
+
+**比较与判定(规则与正文相同:CI 下界 > 0 成立,上界 < +0.04 无效,其余未定):**
+- **Q1′ 标签效率:** tapt_clean − base 的标签效率面积(控制后,全部 356 条)。这是没有任务重叠的版本,与 Q1 并列报告。若两者结论不一致,以 Q1′ 为准来解读"中训练是否提高标签效率"。
+- **Q3′ 剂量:** full − tapt_clean(两者都去掉了重叠、都用 flash-attn;这是干净的剂量比较),主指标同 Q3。若与 Q3 不一致,以 Q3′ 为准。
+- **描述(不判定):**
+  - tapt − tapt_clean:语料里有没有评测题的影响,即"任务熟悉度",看 E1 匹配配对、E4 A 阶段全量、标签效率;
+  - 另按"与 TAPT 重叠 / 不重叠"把评测轨迹分成两组,报告 tapt − base。
+- **顺序:** 车道 A 跑完 shuf / irr 的特征之后,在 GPU 0,1 上训练 tapt_clean,随后跑 E1 + 特征 + A 阶段;BEFT n = 100 推到它之后(BEFT 只描述)。
