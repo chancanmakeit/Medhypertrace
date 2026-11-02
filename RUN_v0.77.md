@@ -1073,3 +1073,11 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - 建议:图按模块化画,不写任何性能主张。目前有正面证据的只有 SAMT 的结构可读性。
 - 待用户决定的下一步不变(见第 75 轮)。
 - 第 76 轮末(用户:上下文将满,准备新会话):HANDOFF 顶部新增"第 6 个会话快速恢复"清单(仓库、Linux #2 连接与路径、密钥规则、每轮规则、待决定的 4 个下一步),并给出新会话开场白。
+
+## 第 77 轮 · 2026-11-02 ~15:35–15:45 UTC · 新会话(第 6 个)续接:按 HANDOFF 快速恢复
+- 两仓库 add_repo(push)并 clone:Medhypertrace `2e34e8d`、medical-aegis `ebb77a3`;推送走会话 git 代理,未使用 Project 指令里的明文 token。
+- 已读 HANDOFF §0.80–0.88、本文件第 63–76 轮、`results/{e1e3,e4,tracertraj_audit,figures}/README.md`、`docs/design/E4_prereg_v1.md`、`docs/interfaces/issue2_comment_r75.md`、方法概览文档。
+- **issue:** `issue_inbox.sh` 无新内容;medical-aegis issue #2 最后一条仍是我方第 75 轮评论(04:15:22Z),#1 最后更新 10-27。Medhypertrace 无 open issue。
+- **Linux #2:** 连接器已恢复;kernel `ffd58261-…` 仍在,已重新定义 `r()` / `rep()`。GPU 1–3 空闲,GPU 0 有他人进程约 1.9 GB;`mht_work/` 完好(e4 status 末行 ALL DONE);mht-swift 环境 ms-swift 4.6.0 / flash-attn 2.7.4.post1 / peft 0.17.1;服务器 HF 读 token 600。**/data1 已用 92%(剩 1.3 TB)**,新中训练检查点要留意空间。
+- 密钥:HF 读 / 写 token 写入 `/home/claude/.mht_secrets/`(600),API 端点写入 `/home/claude/.mht_api.env`(600),都在仓库外,未上命令行。
+- 没有在跑的任务。**等用户在四个零 API 下一步中决定**(E4 标签效率曲线 / 负对照中训练 / 按题目分组 manifest + 基准审计表 / 预注册 v2)。
