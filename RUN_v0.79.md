@@ -1088,3 +1088,23 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - **issue #3** 已建(16:05:23Z,https://github.com/chancanmakeit/medical-aegis/issues/3),向 medical-aegis / GPT / Muse 提问,未 @ 任何人。
 - HANDOFF 拆分:旧历史移到 `HANDOFF_archive.md`,主文档变小,以便每轮同步 Project doc。
 - **待用户决定:** 阶段 0 的四项(标签效率、负对照、剂量检验、manifest)是否开始;阶段 1 的付费生成等 medical-aegis 报价后再定。
+
+## 第 79 轮 · 2026-11-02 ~16:15–16:45 UTC · 用户:阶段 0 可以开始;GPU 0–3 都能用(GPU 0 他人只占不到 2 GB)
+- **预注册** `MedHyperTrace-v2/docs/design/Stage0_prereg_v1.md`(提交 30a4862,写于任何阶段 0 结果之前;修订"BEFT 累积 4"在 9df9dc0,也在任何 BEFT 运行之前)。Q1 标签效率(主统计量:tapt − base 的控制后 rank-AUROC 在 n = 100 / 300 / 1000 上的平均"面积";判定:CI 下界 > 0 成立,上界 < +0.04 无效);Q2 负对照(R vs shuf vs irr,E1 匹配配对 (1.5, 0.25) + 控制后,四条按顺序的判读规则);Q3 剂量(full − tapt,主指标同 Q1);Q4 manifest + 审计表。
+- **语料:**
+  - shuf = E2-R 每个 chunk 内打乱步骤顺序、重编号(6,082,709 vs R 6,085,312 token;4,950 chunk;154 步;87 个单步 chunk 不变);
+  - irr = WikiText-103 窗口,逐 chunk 与 R 等长(6,085,312 token,重新分词后逐条差 0;沙箱重建的 R 与服务器 R 的长度 md5 一致 1f947dca…);
+  - full = build_corpus 同 TAPT 规则、ARIA 不封顶 36.08M → 去掉与 WW / TEgc 近似重复的运行(ARIA 245、AFTraj 126、MAST-Data 8;359 条 Jaccard ≥ 0.7)后 **34.42M**(1.41 倍 TAPT,27,578 chunk)。
+  - 代码 `hgfm/stage0/{nc_corpus,eval_overlap_filter,le_subsets}.py`;语料经私有 HF `mht-midtrain-pilot/stage0/` 传到 Linux #2(md5 全过)。
+- **更正(issue #3 评论 6582634345):** 可用干净语料不是约 75M(第 53 轮按字符 / 4 对原始数据的粗估),而是 34.4M;另报告"中训练语料混有评测题近似重复"——TAPT / S / R 构建时没有这条规则。
+- **代码:** `e4_probe --subsets`(标签效率模式,每个 (代理, 头, n) 存 `le_<head>_<proxy>.json`;统计量另由分析脚本算);`e4_beft --train_ids --evals_per_epoch`;子集 `stage0/subsets.json`(2,889 条合格、2,799 个题目组,5 次抽取、嵌套,大小精确);冒烟通过(base n = 100,val 0.769)。
+- **Linux #2 运行中(`mht_work/stage0/`,看 `status`;驱动 `scripts/linux2_run_stage0.sh`,可重跑续接):**
+  - NC-shuf 训练(GPU 0,1,16:23 起,单独启动,约 17:20 完成);
+  - full 训练(GPU 2,3,flash-attn,858 步 × 约 22 s,约 22:00 UTC 完成);
+  - 车道 A:shuf 完 → irr 训练 → shuf / irr 的 E1 OAT + E4 特征 → BEFT n = 100(base, tapt);
+  - 车道 B:full 完 → full 的 E1 + 特征 → BEFT n = 300;
+  - 车道 C:现有代理 base / tapt / S / R 的 A 阶段标签效率(GPU 1,在跑);
+  - 车道 D:三个新特征都出来后,跑 A 阶段全量 + 标签效率。
+  - 预计全部约 03:00 UTC(11-03)。
+  - 第一次启动时 full 与 shuf 的 torchrun 端口冲突(都用 29500)→ 驱动加 MASTER_PORT 后重启;第一次的 status 存为 `status.first_launch_port_clash`。
+- **manifest + 审计表**交给后台子 agent(Linux #2 用 kernel 126283c5,只用 CPU;输出 `results/stage0_manifest/`)。
