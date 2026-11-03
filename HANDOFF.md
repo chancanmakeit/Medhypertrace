@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-11-03 08:12 UTC(第 82 轮续;阶段 0 全部结束) · **原始版本:** 2026-10-08
+**最后更新:** 2026-11-03 08:15 UTC(第 82 轮末;准备开第 7 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -11,14 +11,15 @@
 
 > **📦 第 78 轮起:旧历史(§0.2–0.32、§0.34–0.79、§〇–十:MAFA 评测、旧 AEGIS 数据、v1 代码结构、方法论决定等)已移到 `HANDOFF_archive.md`,内容未删改;需要旧细节时去那里查。**
 
-> **🚀 第 6 个会话快速恢复(第 76 轮末写,以此为准;下面第 38 轮的旧清单仍适用于 MAA / 公开数据恢复细节):**
+> **🚀 第 7 个会话快速恢复(第 82 轮末写,以此为准;第 6 个会话的清单同样适用;下面第 38 轮的旧清单仍适用于 MAA / 公开数据恢复细节):**
+> 0. 第 7 个会话从**第 83 轮**开始;讨论记录现为 `RUN_v0.82.md`(下一轮 `git mv` 到 `RUN_v0.83.md`)。issue last_seen = 2026-11-03T07:39:22Z(四个 issue 的最新评论都是我方 07:39 的回复)。阶段 0 全部结束,Linux #2 无在跑任务,无定时检查。论文 PDF / Muse 的调研文档在 private-documents(需要时稀疏克隆 `papers/agent轨迹数据合成/`)。
 > 1. `add_repo`(push)添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`,clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走会话 git 代理,**不用 Project 指令里的明文 GitHub token**(已建议用户吊销)。commit 结尾加会话给的署名行。
 > 2. 读 §0.94 → §0.93 → §0.92 → §0.91 → §0.90 → §0.89 → §0.88 → §0.87 → §0.86 → §0.80–0.85 → `RUN_v0.82.md` 第 63–82 轮。核心结果文件:`MedHyperTrace-v2/results/e1e3/README.md`、`results/e4/README.md`、`results/tracertraj_audit/README.md`、`results/figures/README.md`、`results/samt_v1/README.md`、`results/midtrain_pilot/README.md`;设计:`docs/design/{HGFM_design_v0.2,SAMT_design_v1,E1-E3_prereg_v1,E4_prereg_v1}.md`;论文:`docs/paper/method_overview_and_figure_prompt.md`。
 > 3. issue:`bash MedHyperTrace-v2/scripts/issue_inbox.sh`(medical-aegis 全部 issue;我方最近:第 75 轮 issue #2 评论 `docs/interfaces/issue2_comment_r75.md`;第 78 轮新开 **issue #3**(中训练动机 + 是否请 medical-aegis 生成语料,正文 `docs/interfaces/issue3_r78.md`);第 80 轮新开 **issue #4**(ADP 对 mas-traj schema 的借鉴,正文 `docs/interfaces/issue4_r80.md`))。与其他智能体只通过 issue 交流,不 @ 任何人。
 > 4. **Linux #2(4×A6000,无 NVLink)**:经 claude.ai 连接器 `Claude-connect-inqi_top` 的 `jupyter-mcp-2_linux2_*` 工具访问(**会话结束时该连接器掉线,需用户在连接器设置里重新授权**)。上次 kernel `ffd58261-5022-427d-86d3-035e82bd2358`(可能已不在,先 `list_kernels`;新 kernel 要重新定义 helper:`r()` 跑 shell、`rep()` 原地替换字符串)。路径:代码 `C=/data1/ekyang/cgh/CODE/Medhypertrace/MedHyperTrace-v2`(服务器上的仓库副本,改动后需同步)、工作区 `W=/data1/ekyang/cgh/CODE/mht_work`(`e1e3/`、`e4/`、`midtrain/`、`tracertraj/agentracer-data-v1.0.0`、`wheels/`)。环境:MS-Swift 4.6、flash-attn 2.7.4.post1、liger-kernel 0.7.0、peft 0.17.1;长单元格容易 520 / 超时,单元格要短、长任务用 nohup 后台 + 状态文件。沙箱访问不了服务器文件,数据传输靠 kernel 打印(zlib + base64 + md5 核对)。
 > 5. 密钥:HF token 从 Project doc `UUUooUUU-huggingface-access-token` 读,写 600 文件,不上命令行;API 端点从 Project doc `claude/api端点` 读,写 `/home/claude/.mht_api.env`,绝不进 git;**任何付费 API 调用前先试跑估算成本,问用户**。
 > 6. 规则:每轮 `git mv RUN_v0.<N>.md` 到新轮次并追加;更新本文 §0;commit + push;同步 Project doc `claude/HANDOFF_MedHyperTrace.md`;sleep ≤ 约 60 秒;MAST 与 MedAgentAudit 数据 / 结果分开;责任层评测必须报告长度 / 位置基线和长度控制结果;外部数据按"题干归一化 + Jaccard ≥ 0.3,按题目分组"去重;主线 = 文本属性超图上的超图基础模型,**基础模型必须经中训练 / 续训预训练获得**;用户要直接、同行式的批评和实证核对,用中文交流。
-> 7. **阶段 0 已完成(§0.93),纯语言建模中训练配方停掉;等用户定下一步中训练目标。** 阶段 0 内容回顾: ① 标签效率曲线(TracerTraj 100 / 300 / 1000 / 全量);② 负对照中训练(shuf / irr,与 R 同 token 量);③ 剂量 24.5M → 34.4M(full);④ 按题目分组的 manifest + 基准审计表。预注册 v2(替换步检测)等阶段 0 结果后再议。阶段 1(medical-aegis 付费生成)等 issue #3 报价 + 阶段 0 结果。用户已开始写论文(Method 图提示词已给)。
+> 7. **阶段 0 已完成(§0.93、§0.94),纯语言建模中训练配方停掉;等用户定下一步中训练目标**(候选:GPT 的关系类混合目标 / 零训练 loss 诊断 → 格式 2×2 / 三种步骤表示比较 / 阶段 1 付费生成按约 $8.78 每千条重估;loss 诊断免费可并行)。 阶段 0 内容回顾: ① 标签效率曲线(TracerTraj 100 / 300 / 1000 / 全量);② 负对照中训练(shuf / irr,与 R 同 token 量);③ 剂量 24.5M → 34.4M(full);④ 按题目分组的 manifest + 基准审计表。预注册 v2(替换步检测)等阶段 0 结果后再议。阶段 1(medical-aegis 付费生成)等 issue #3 报价 + 阶段 0 结果。用户已开始写论文(Method 图提示词已给)。
 
 > **🚀 旧版快速恢复(第 38 轮写,恢复 MAA / 公开数据时参考):**
 > 1. `add_repo` 以 push 权限添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`(需要时再加 `graph-based-mas-fault-attribution-papers`),然后 clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走 git 代理,不需要 token。
