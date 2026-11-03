@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-11-02 17:50 UTC(第 79 轮,阶段 0 + 附录 A1 运行中) · **原始版本:** 2026-10-08
+**最后更新:** 2026-11-03 03:40 UTC(第 79 轮,阶段 0 主体完成,附录 A1 运行中) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -72,6 +72,7 @@
 - **manifest:** 由后台子 agent 产出 `results/stage0_manifest/`(若会话中断:检查该目录是否齐全,不齐就按预注册 Q4 重做,脚本 `data_tools/build_manifest.py`)。
 - **manifest 已完成(17:30 UTC,`results/stage0_manifest/`):** 356 条评测轨迹中 270 条与 tapt 语料重题(R 205、S 118、full 0、TT_train 90);干净子集 `eval_clean_keys.json` 的 `clean_direct` 85 条(用直接重叠,不用连通分量——0.3 时一个分量 14k 项)。分析时把 tapt 重叠 / 不重叠分开报告。TracerTraj 测试集 621 / 768 与训练重题。
 - **附录 A1(用户批准,17:48 UTC 启动):** tapt_clean(TAPT 规则去掉 379 条评测重题运行,24.38M)。驱动 `scripts/linux2_run_stage0_a1.sh`(status 行带 "A1" 前缀;末行 "A1 ALL DONE",约 06:15 UTC)。产物 `stage0/tapt_clean/`、`e1e3/oat_tapt_clean/`、`stage0/feats_tapt_clean.pt`、`stage0/stageA_clean/`、`stage0/le/le_*_tapt_clean.json`;BEFT n100 也由它最后跑(主驱动车道 A 靠占位文件跳过;占位文件含 "placeholder" 字样,分析时若还在就说明 A1 没跑完)。判定见预注册附录 A1(Q1′ / Q3′ 与 Q1 / Q3 不一致时以 Q1′ / Q3′ 为准)。
+- **03:20 UTC(检查 3):** 主驱动 ALL DONE。e4_probe 回归 bug(非标签效率模式 dev 未定义)已修(md5 c780bb7f),shuf / irr / full 的全量 A 阶段 03:23 在 GPU 0 重跑(status 会出现 "DONE stageA new (rerun after e4_probe fix)")。中间结果(RUN_v0.79 续 5):Q1 无效(tapt − base 面积 +0.014 [−0.006, +0.034]),Q2 未定(R − irr +0.031 [−0.002, +0.065]),Q3 无效。**Q1′ / Q3′ 待 A1**(tapt_clean 的标签效率),以它们为准。分析命令:`cd $C && python scripts/stage0_analyze.py --w $W --clean $W/stage0/hf/stage0/an/eval_clean_keys.json --out $W/stage0/analysis_final.json`。全部完成后写 `results/stage0/README.md`、发 issue #3。
 - **更正:** 可用干净语料是 34.42M(不是 75M);TAPT / S / R 语料可能含 WW / TEgc 题目近似重复(full 已去除)。issue #3 评论 6582634345。
 
 ### 0.90 第 78 轮:中训练动机再审视;新开 medical-aegis issue #3
