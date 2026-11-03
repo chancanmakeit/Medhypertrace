@@ -10,3 +10,8 @@ gh api --paginate "repos/$R/issues?state=all&since=$SINCE&per_page=100" \
 gh api --paginate "repos/$R/issues/comments?since=$SINCE&per_page=100" \
   --jq ".[] | select(.created_at > \"$SINCE\") | \"=== #\(.issue_url | split(\"/\") | last) \(.id) \(.created_at)\n\(.body)\n\""
 gh api "repos/chancanmakeit/Medhypertrace/issues?state=open" --jq '.[] | "Medhypertrace issue #\(.number): \(.title)"'
+# Round 82: always end with an index of every new comment (id, time, length) so a truncated read is visible.
+# Rule: only advance issue_last_seen.txt to the newest created_at in THIS index after reading every listed body in full.
+echo "=== INDEX (comments since $SINCE)"
+gh api --paginate "repos/$R/issues/comments?since=$SINCE&per_page=100" \
+  --jq ".[] | select(.created_at > \"$SINCE\") | \"#\(.issue_url | split(\"/\") | last) \(.id) \(.created_at) len=\(.body|length)\""
