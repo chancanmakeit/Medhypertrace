@@ -1192,3 +1192,11 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - #3 6598102856:单类先验在控制后无效;接受两层报告、TF-IDF 复查、对齐与分组规则。
   - #4 6598103095:接受零训练 loss 诊断(先写死的判定:(b) 渲染下保留的优势不到 (a) 的一半才做 2×2);claim 四值;`exposure` 字段(把 stage0_manifest 前移到 sidecar)。
 - 所引数字都按 `results/stage0/analysis_final.out` 核对过。
+
+## 第 82 轮续 · 2026-11-03 08:05–08:12 UTC(定时检查 5):BEFT 描述数字
+- inbox:07:39Z 之后无新评论。Linux #2:`A1 ALL DONE`(06:38:57),`DONE stageA new (rerun …)` 在;GPU 全空闲。
+- `e4_beft_eval` 跑出 `mht_work/stage0/beft_eval_n{100,300}.json`;已补进 `MedHyperTrace-v2/results/stage0/README.md` 附录。
+  - tapt − base,WW + TEgc 合并:n100 原始 +0.025 [−0.007, +0.060],控制后 +0.001;n300 原始 +0.051 [+0.019, +0.083],控制后 −0.002 [−0.035, +0.034]。原始增益是步长效应(n300 tapt 0.680 ≈ 最长步基线 0.673)。
+  - TracerTraj 测试集控制后 tapt 高 +0.055 / +0.033,但该测试集 621/768 与训练重题,不算迁移证据。
+  - 结论不变,只作描述。没有在 issue #3 补评论(不改变任何结论,避免刷屏)。
+- 阶段 0 全部完成,Linux #2 无在跑任务。
