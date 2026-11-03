@@ -117,3 +117,42 @@ Reading: same pattern as stage A and E4 — the raw tapt advantage on the transf
 opposite directions. On the in-distribution TracerTraj test split tapt is higher (+0.055 / +0.033 controlled), but 621 /
 768 of those test trajectories have near-duplicate questions in TracerTraj train (manifest), so this is not evidence of
 transfer. Nothing here changes the Stage 0 conclusion.
+
+## Addendum (round 83, 2026-11-03): question-clustered bootstrap — sensitivity analysis
+
+The pre-registration fixed a paired bootstrap over trajectories. Who&When HC / AG and TraceElephant groupchat share
+questions, so trajectories are not independent. `scripts/stage0_cluster_ci.py` re-runs `stage0_analyze.py` unchanged
+except that questions (clusters) are resampled with replacement; point estimates are identical, only intervals change.
+Cluster maps (built on Linux #2 from the OAT loader's question text, word-set Jaccard as in round 75, connected
+components among the 356 evaluable trajectories only): `jac0.7` 170 clusters (≈ exact question text, 171; primary),
+`jac0.3` 158 clusters, and `manifest0.3` = the stage-0 manifest groups (97 clusters, chained through corpus items, one
+group holds 123 evaluation trajectories; most conservative). Outputs: `results/stage0/cluster_ci/an_*.out`; full JSON
+and the cluster map on Linux #2 `mht_work/stage0/cluster_ci/`.
+
+**Clustering hardly widens the intervals** (about 2.1 trajectories per question; low intra-question correlation of the
+paired differences). Every pre-registered conclusion stands:
+
+| comparison | trajectory (prereg) | jac0.7 (170) | jac0.3 (158) | manifest0.3 (97) |
+|---|---|---|---|---|
+| Q1′ linear tapt_clean − base (LE area, resid) | +0.016 [−0.003, +0.035] NULL | [−0.003, +0.036] NULL | [−0.004, +0.035] NULL | [+0.001, +0.035] small > 0, < bound |
+| Q1 linear tapt − base | +0.014 [−0.005, +0.034] NULL | [−0.004, +0.034] NULL | [−0.006, +0.035] NULL | [−0.001, +0.040] NULL (edge) |
+| Q3 full − tapt (LE) | −0.000 [−0.009, +0.007] NULL | NULL | NULL | NULL |
+| Q3′ full − tapt_clean | NULL | NULL | UNDETERMINED (E1 upper +0.041) | UNDETERMINED (E1 upper +0.046) |
+| E1 R − shuf (matched) | −0.007 [−0.030, +0.017] | [−0.032, +0.018] | [−0.032, +0.019] | [−0.041, +0.019] |
+| E1 R − irr (matched) | +0.031, lower −0.0011 | lower +0.0003 | lower +0.0004 | lower −0.0007 |
+| stage A MLP, every proxy − base (resid) | all ≤ 0, most CI < 0 | same | same | CIs touch 0 for tapt / R |
+
+- Q2's rule output moves from "4 undetermined" (trajectory) to "3 MAS content, not order" under jac0.7 / jac0.3 only
+  because the R − irr lower bound sits within ±0.001 of zero in all four schemes — smaller than the bootstrap's own
+  Monte Carlo noise (±0.002 between runs). We read Q2 as **undetermined** under every scheme and do not report the
+  flip as a finding.
+- Q3′ becomes undetermined under the 0.3 schemes because its NULL verdict needs the E1 bound as well; the LE part stays
+  under the bound (upper ≤ +0.006).
+- Under the most conservative grouping, linear Q1′ has its lower bound just above zero while its upper bound stays
+  below the +0.04 null bound: a small positive effect smaller than the pre-registered minimum useful gain. Practical
+  reading unchanged.
+- Separate bug check (GPT, issue #1): `stage0_analyze.py`, `analysis/e4_overlap_matched.py` and
+  `analysis/success_regularity_check.py` resample with `rng.integers` (with replacement, repeats kept). Two older
+  anchor scripts — `analysis/anchor_fmt_val/lexical_norm.py:41` and `analysis/anchor_gate7/sham_same_slot.py:26` —
+  turn the drawn questions into a `set` and so drop repeats; their intervals (rounds 43–59) are too narrow, point
+  estimates unaffected. Not recomputed.
