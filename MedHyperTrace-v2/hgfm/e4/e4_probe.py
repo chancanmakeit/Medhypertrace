@@ -77,7 +77,8 @@ def main():
     ap.add_argument("--subsets", default=None, help="Stage 0 label efficiency: subsets.json from hgfm.stage0.le_subsets")
     ap.add_argument("--sizes", nargs="*", default=None, help="subset sizes to run (default: all in the file)")
     a = ap.parse_args()
-    if a.subsets: return main_le(a); os.makedirs(a.out, exist_ok=True); dev = "cuda" if torch.cuda.is_available() else "cpu"
+    if a.subsets: return main_le(a)
+    os.makedirs(a.out, exist_ok=True); dev = "cuda" if torch.cuda.is_available() else "cpu"   # round 79 fix: was on the if-line
     F = {}; meta = {}; skipped = {}
     for spec in a.feats:
         name, path = spec.split("="); F[name], skipped[name] = load(path)
