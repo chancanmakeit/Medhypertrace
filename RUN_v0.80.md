@@ -1151,3 +1151,9 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - **Q3(full − tapt):** 标签效率面积 −0.000 [−0.008, +0.008],E1 匹配配对 −0.010 [−0.041, +0.022] → **无效**。Q3′(full − tapt_clean)等 A1;E1 部分 +0.004 [−0.028, +0.034]。
   - **重叠的影响(描述):** tapt − base 的 E1 匹配配对增益在"与 TAPT 重题"的 270 条上 +0.077 [+0.026, +0.129],在不重题的 86 条上 +0.002 [−0.085, +0.082](只剩 52 条有配对,CI 很宽)。但 tapt_clean − base 仍有 +0.045 [+0.003, +0.089],tapt − tapt_clean 只有 +0.013 [−0.014, +0.041] → 任务重叠不是 E1 匹配配对增益的主要来源。
   - 待定:Q1′(tapt_clean 的标签效率)、Q3′;shuf / irr / full / tapt_clean 的全量 A 阶段(描述);BEFT n100(A1 最后跑)。预计约 07:30 UTC 全部完成;第 4 次检查(06:35)出完整报告并发 issue #3。
+
+## 第 80 轮 · 2026-11-03 ~05:40–05:45 UTC · 用户:读 Agent Data Protocol(ADP,ICLR 2026),把想法提到 medical-aegis issue #4
+- 论文从 private-documents(稀疏克隆 `papers/agent轨迹数据合成/`)读取全文,包括附录 C(混合权重)、E.1(同样本数对照)。
+- **核对:** mas-traj/1 已覆盖 ADP 的轨迹层,并多出 agent 身份、phase、读集 `sources`(含是否推断)、框架族、标签与步骤分层;缺的是动作类型(代码 / 工具 / 消息)和思考与动作分离。**新发现:** 中训练语料的序列化(`build_corpus.py`:`Task (…)` + `[s<k>] role | phase`)与 OAT / E4 读出(`[STEP t] [ROLE: r] [AGENT: a]`)不同,MAA SFT / SAMT 又是另外的格式 → 中训练格式 ≠ 评测格式(未检验的假设)。ADP 正文和附录没有训练 / 评测去重的讨论;它的 E.1 对照是把单数据集上采样到同样本数,唯一内容量仍不同。
+- **issue #4**(05:44:10Z,`docs/interfaces/issue4_r80.md`):不建议改用 ADP 作主格式(会丢多智能体结构)。借鉴四点:① 规范渲染器 + 零 API 的格式一致性检验(用 TAPT 格式重新提 base / tapt_clean 的 E4 特征,约 4.5 GPU 小时);② typed 标签子 schema(层 / 粒度 / 分类体系 / origin / 未判定 / 分叉链接 / 统一 0 起始索引);③ `task_group_id` + `split` 必填,导出时自动查重;④ 数据卡指标化。ADP 的 1.3M 单智能体数据若用,只作"无交互结构"的负对照。分工:medical-aegis 起草 mas-traj/1.1;我方做渲染器 / 标签适配 / manifest 回填;请 GPT / Muse 补文献。均待用户确认。
+- 阶段 0:A1 的 stageA_clean / LE / BEFT base_n100 已完成,BEFT tapt_n100 在跑;"stageA new" 重跑 03:56 完成。第 4 次检查(06:35 UTC)出完整报告。
