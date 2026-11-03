@@ -1217,3 +1217,14 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - `scripts/stage0_analyze.py`、`analysis/e4_overlap_matched.py`、`analysis/success_regularity_check.py` 用的是 `rng.integers` 有放回抽样,没有 set bug。
   - 但有两个旧脚本有同样的 set bug:`analysis/anchor_fmt_val/lexical_norm.py:41`、`analysis/anchor_gate7/sham_same_slot.py:26`(第 43–59 轮锚点分析,结论在 issue 评论 r43 / r46 / r47 / r59 中引用过)。区间偏窄,点估计不受影响。
   - **更重要:** 阶段 0 按预注册用"按轨迹配对 bootstrap",没有按题目聚类。实查 manifest:356 条可评测轨迹在 Jaccard 0.3 连通分组下只落在 97 个题组(大小分布 1×23、2×35、3×25、4×7、5×3、6/7/9 各 1、**123 一个巨型分量**)。所以阶段 0 的 CI 偏窄;Q1 / Q1′ / Q3 的"无效"判定依赖 CI 上界 < +0.04,聚类后可能变为"未定"。0.3 连通分组有链式合并问题(123 条的分量),聚类单位需要另定(例如更高阈值或直接重叠)。未重算,等用户决定。
+
+## 第 83 轮续 · 2026-11-03 17:35 UTC · 用户:medical-aegis 的 issue 有新动静
+- **inbox(09:25:55Z 之后 4 条,全部读完,last_seen → 14:32:17Z),全是 medical-aegis 会话:**
+  - #4 6605421826:更正 `sources[].how` 是变换语义(verbatim / excerpt / structured_field / summary / control),`inferred` 才是采集方式(protocol / text_match;缺失 = runtime)→ 1.1 建议显式 `collection ∈ {runtime, protocol, text_match, unknown}`。锚点可确定性派生 `actions[]`(无代码、无真实工具调用;决策在 `structured`);公开数据代码只能标 `code_unverified`;锚点 backbone(llama-4-maverick)无思考输出;公开数据 `reasoning_exported` 全 False。格式诊断:同意 GPT 的估计对象,不同意比值门槛;认为更大的变量是责任层标签(分叉)。
+  - #1 6605424424 / 6606051071:分叉身份四步已完成(medical-aegis `b309d72`):源头 `branch` 块、264 条 sidecar(264 唯一身份、118 组 rep0、28 条 rep1)、导出器对无身份分叉文件和重复 run_id 默认失败、6 项测试。**导出器新增 `run_mode: "branch"`**,身份在 `labels.branch`。branch_pilot 的 bootstrap set bug 已修,区间变宽(llm_debate 0.467 [0.394, 0.542],mdagents 0.496 [0.430, 0.563]),结论不变。
+  - #1 6606528394:方案 A(用户批准,实际 $1.528;llm_debate 第 1 轮,180 点,426 条记录)。**预注册近因预测不成立**(位置 2 − 0:−0.13 [−0.35, +0.08],功效约 0.6)。**服务商温度 0 不确定**(rep1 vs rep0 重新生成文本 264/264 全不同;model 实为 gemma-4-31B-it-turbo;对照对对照最终答案不一致约 7%;53 个翻转点里 13 个对照不一致 → 单次对照的翻转约四分之一是噪声)。收回"同伴支持度驱动翻转"(确认翻转 10 对 10)。最强效应:运行答对且 t 是唯一说对的人时,重采样后 12/15 翻错(同伴 ≥1 对时 0/30)。建议协议 v2(自适应确认:翻转点补一次 control,两次 control 一致且都异于 branch 才标 confirmed),成本约 control 臂 +30%。
+- **我方影响核查(离线):**
+  - 读 mas-traj 的入口(`build_manifest.py`、`midtrain/build_corpus.py`、`samt_tasks.py`、`e2_corpus.py`)都是 `run_mode == "normal"` 白名单,新增 `"branch"` 自动排除;`hgfm/uth.py` 只是渲染器,不读 run_mode。无需改代码。
+  - 我方唯一用过分叉数据的 `analysis/branch_length_audit.py`(第 75 轮;79 点 / 12 翻转,原长度 AUROC 0.34,字母改变 0.82):翻转用的是单次 control,但试点 12 个翻转都被 rep1 确认(12/12),在协议 v2 下都算 confirmed;未翻转点本来就当 undetermined 解读。结论不需更正。"字母改变"0.82 与对方"t 的字母是否改变决定翻转"一致。
+  - 对方向决策的含义:分叉责任层标签的实测成本约 $0.0085 / 点(方案 A),但确认翻转产出率低(主点 29/90 原始翻转,确认更少);协议 v2 每点约 +30%。
+- Linux #2 连接器本会话已掉线(用到时需用户重新授权)。未回复 issue。

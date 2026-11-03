@@ -12,7 +12,7 @@
 > **📦 第 78 轮起:旧历史(§0.2–0.32、§0.34–0.79、§〇–十:MAFA 评测、旧 AEGIS 数据、v1 代码结构、方法论决定等)已移到 `HANDOFF_archive.md`,内容未删改;需要旧细节时去那里查。**
 
 > **🚀 第 7 个会话快速恢复(第 82 轮末写,以此为准;第 6 个会话的清单同样适用;下面第 38 轮的旧清单仍适用于 MAA / 公开数据恢复细节):**
-> 0. 第 7 个会话已于第 83 轮恢复;讨论记录现为 `RUN_v0.83.md`(下一轮 `git mv` 到 `RUN_v0.84.md`)。issue last_seen = 2026-11-03T09:25:55Z(8 条新评论已读,**尚未回复**,见 §0.95)。阶段 0 全部结束,Linux #2 无在跑任务,无定时检查。论文 PDF / Muse 的调研文档在 private-documents(需要时稀疏克隆 `papers/agent轨迹数据合成/`)。
+> 0. 第 7 个会话已于第 83 轮恢复;讨论记录现为 `RUN_v0.83.md`(下一轮 `git mv` 到 `RUN_v0.84.md`)。issue last_seen = 2026-11-03T14:32:17Z(12 条新评论已读,**尚未回复**,见 §0.95)。阶段 0 全部结束,Linux #2 无在跑任务,无定时检查。论文 PDF / Muse 的调研文档在 private-documents(需要时稀疏克隆 `papers/agent轨迹数据合成/`)。
 > 1. `add_repo`(push)添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`,clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走会话 git 代理,**不用 Project 指令里的明文 GitHub token**(已建议用户吊销)。commit 结尾加会话给的署名行。
 > 2. 读 §0.94 → §0.93 → §0.92 → §0.91 → §0.90 → §0.89 → §0.88 → §0.87 → §0.86 → §0.80–0.85 → `RUN_v0.82.md` 第 63–82 轮。核心结果文件:`MedHyperTrace-v2/results/e1e3/README.md`、`results/e4/README.md`、`results/tracertraj_audit/README.md`、`results/figures/README.md`、`results/samt_v1/README.md`、`results/midtrain_pilot/README.md`;设计:`docs/design/{HGFM_design_v0.2,SAMT_design_v1,E1-E3_prereg_v1,E4_prereg_v1}.md`;论文:`docs/paper/method_overview_and_figure_prompt.md`。
 > 3. issue:`bash MedHyperTrace-v2/scripts/issue_inbox.sh`(medical-aegis 全部 issue;我方最近:第 75 轮 issue #2 评论 `docs/interfaces/issue2_comment_r75.md`;第 78 轮新开 **issue #3**(中训练动机 + 是否请 medical-aegis 生成语料,正文 `docs/interfaces/issue3_r78.md`);第 80 轮新开 **issue #4**(ADP 对 mas-traj schema 的借鉴,正文 `docs/interfaces/issue4_r80.md`))。与其他智能体只通过 issue 交流,不 @ 任何人。
@@ -60,6 +60,7 @@
 - 环境正常(见 RUN_v0.83 第 83 轮)。kernel `ffd58261-…` 仍在,helper 已重定义;Linux #2 无在跑任务。
 - issue:Muse #1–#4(08:27Z)、GPT #1–#4(09:25Z)已读,**未回复**。分歧:三路步骤表示比较是否为新中训练配方的硬前置门(Muse 是 / GPT 否);零训练 loss 诊断判定式(Muse 比值减 (c) / GPT 同目标内容条件 NLL 绝对差 Δ_f、D = Δ_a − Δ_b,不作硬门)。GPT #3 给了最小三臂方案(base / LM-CPT / interaction-CPT)。
 - **bootstrap 自查:** 阶段 0 主分析无 set bug,但用的是轨迹级 bootstrap;356 条可评测轨迹只在 97 个题组(Jaccard 0.3 连通,含一个 123 条的巨型分量)→ 阶段 0 CI 偏窄,"无效"判定可能变"未定"。旧脚本 `analysis/anchor_fmt_val/lexical_norm.py`、`analysis/anchor_gate7/sham_same_slot.py` 有 set bug(区间偏窄)。都未重算。
+- **续(17:35 UTC):** medical-aegis 4 条新评论(见 RUN_v0.83 第 83 轮续):分叉身份四步完成(`b309d72`),导出器新增 `run_mode: "branch"`(我方入口均为 normal 白名单,无需改);方案 A 花 $1.528,近因预测不成立;**服务商温度 0 不确定**,单次对照翻转约 1/4 是噪声 → 提议协议 v2(自适应确认)。我方 `branch_length_audit.py` 的 12 个翻转都已被 rep1 确认,不需更正。Linux #2 连接器已掉线。
 - **待用户决定:** (1) 是否按题目聚类重算阶段 0 区间(免费、CPU,需先定聚类单位);(2) 下一步中训练方向;(3) 是否回复 issue。
 
 ### 0.94 第 82 轮:issue #1–#4 补读并回复(2026-11-03 07:40 UTC)
