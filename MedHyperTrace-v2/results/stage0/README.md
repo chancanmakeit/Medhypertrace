@@ -91,3 +91,29 @@ ones (only 52 have matched pairs).
 - BEFT n = 100 was deferred to after tapt_clean (appendix A1); BEFT n = 100 / 300 are descriptive single-draw runs and are
   reported separately when complete (`mht_work/stage0/beft_*`).
 - Bootstrap CIs move by ±0.002 between runs (shared RNG stream); numbers here are from `analysis_final.out`.
+
+## Addendum (check 5, 2026-11-03 08:10 UTC): BEFT at n = 100 / 300 — descriptive only
+
+v_proj-bias-only fine-tuning (E4 stage B recipe, accum 4 per amendment 9df9dc0) on the first draw of the question-grouped
+nested subsets; one run each, **no decision is drawn from these** (pre-registration: single draw, descriptive).
+`python -m hgfm.e4.e4_beft_eval --feats e4/feats_base.pt --runs base=stage0/beft_base_n<n> tapt=stage0/beft_tapt_n<n>`
+→ `mht_work/stage0/beft_eval_n{100,300}.json`. Rank-AUROC (step-level acc@1 in brackets); "resid" = controlled for
+log step tokens / relative position / has_code with trajectory fixed effects.
+
+| n | init | WW raw | TEgc raw | pooled raw | pooled resid | TT_test resid |
+|---|---|---|---|---|---|---|
+| 100 | base | 0.558 (0.209) | 0.674 (0.178) | 0.615 (0.194) | 0.606 (0.166) | 0.721 (0.409) |
+| 100 | tapt | 0.671 (0.220) | 0.607 (0.126) | 0.640 (0.174) | 0.607 (0.157) | 0.776 (0.467) |
+| 300 | base | 0.595 (0.170) | 0.664 (0.195) | 0.629 (0.183) | 0.636 (0.177) | 0.817 (0.504) |
+| 300 | tapt | 0.697 (0.231) | 0.662 (0.184) | 0.680 (0.208) | 0.634 (0.166) | 0.850 (0.544) |
+| — | longest step | 0.691 (0.247) | 0.655 (0.115) | 0.673 (0.183) | 0.472 (0.087) | 0.484 (0.091) |
+
+tapt − base, pooled WW + TEgc (n = 356, paired trajectory bootstrap):
+- n = 100: raw +0.025 [−0.007, +0.060]; controlled +0.001 [−0.030, +0.035].
+- n = 300: raw +0.051 [+0.019, +0.083]; controlled −0.002 [−0.035, +0.034].
+
+Reading: same pattern as stage A and E4 — the raw tapt advantage on the transfer benchmarks is a step-length effect
+(raw tapt at n = 300 is 0.680 vs the longest-step baseline 0.673; controlled difference ≈ 0), and WW and TEgc move in
+opposite directions. On the in-distribution TracerTraj test split tapt is higher (+0.055 / +0.033 controlled), but 621 /
+768 of those test trajectories have near-duplicate questions in TracerTraj train (manifest), so this is not evidence of
+transfer. Nothing here changes the Stage 0 conclusion.
