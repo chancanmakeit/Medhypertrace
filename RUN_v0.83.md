@@ -1200,3 +1200,20 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - TracerTraj 测试集控制后 tapt 高 +0.055 / +0.033,但该测试集 621/768 与训练重题,不算迁移证据。
   - 结论不变,只作描述。没有在 issue #3 补评论(不改变任何结论,避免刷屏)。
 - 阶段 0 全部完成,Linux #2 无在跑任务。
+
+## 第 83 轮 · 2026-11-03 09:40–09:50 UTC · 第 7 个会话恢复;读 issue 8 条新评论;自查 bootstrap
+- **恢复:** 两仓库已 clone(Medhypertrace cd9b175、medical-aegis ebb77a3)。Linux #2 连接正常,kernel `ffd58261-…` 仍在(helper r() / rep() 已重新定义);GPU 1–3 空闲,GPU 0 他人占约 1.9 GB;/data1 用了 93%(剩 1.3 TB);stage0 status 末行 `A1 ALL DONE`。密钥写入 `/home/claude/.mht_secrets/hf_token`、`/home/claude/.mht_api.env`(600)。
+- **inbox(07:39:22Z 之后 8 条,全部读完,last_seen → 09:25:55Z):**
+  - Muse #1 6598889358:核实 `t` = `llm_steps()` 0 起点下标;建议把"arm / pair / protocol_id 不进模型输入或图特征"写进 sidecar 规范;control rep1 也要回填。
+  - Muse #2 6598889822:负对照是"收敛的零结果";容差网格同号计数外再报中位值与极差;**主张三路步骤表示比较是新中训练配方的门(先做,不并行)**。
+  - Muse #3 6598890478:同意停纯 LM 配方;全标签 MLP 负差单列;顺序:三路比较 → 新配方。
+  - Muse #4 6598890971:read-set 必须多对多(不能沿用 ATIF 单链引用);零训练 loss 诊断判定式减去 (c) 基线。
+  - GPT #1 6599933976:分叉试点全量 16 文件 / 264 记录 / 118 候选,现有身份只 40 个唯一;**`branch_pilot.py:267–268` bootstrap 把有放回抽样变成 set,丢失重复次数**;control rep1 是选择性复测,分歧率要分层。
+  - GPT #2 6599939257:shuf 只是 chunk 内步骤块打乱,不能"排除结构";OLS 归零是条件结果;**三路比较只是接口诊断,不是新目标的逻辑前置门**;RTD 可作辅助中训练目标。
+  - GPT #3 6599948902:Q1′ 是"未达最小有用收益"不是"零";tapt − tapt_clean 不能当重叠机制反证。**最小方案:base / LM-CPT / interaction-CPT(条件响应 + 证据对应 + 少量 LM 回放)三臂,同清洁语料、同主干、完整轨迹读出接口**;预算列主干 token / 有效目标 token / GPU 小时。
+  - GPT #4 6599954124:反对用比值(含减 (c))作硬门;改为同一目标内容的条件 NLL 绝对差 Δ_f 与 D = Δ_a − Δ_b(按题目聚类);LM loss 与归因迁移是两个估计对象,不做 2×2 应记为预算决定。
+- **Muse 与 GPT 分歧点:** 三路表示比较是否为新中训练配方的硬前置门(Muse 是,GPT 否);零训练 loss 诊断的判定式(Muse 比值减基线,GPT 绝对差、不作硬门)。待用户定。
+- **自查(GPT #1 的 bootstrap 问题,外推到我方):**
+  - `scripts/stage0_analyze.py`、`analysis/e4_overlap_matched.py`、`analysis/success_regularity_check.py` 用的是 `rng.integers` 有放回抽样,没有 set bug。
+  - 但有两个旧脚本有同样的 set bug:`analysis/anchor_fmt_val/lexical_norm.py:41`、`analysis/anchor_gate7/sham_same_slot.py:26`(第 43–59 轮锚点分析,结论在 issue 评论 r43 / r46 / r47 / r59 中引用过)。区间偏窄,点估计不受影响。
+  - **更重要:** 阶段 0 按预注册用"按轨迹配对 bootstrap",没有按题目聚类。实查 manifest:356 条可评测轨迹在 Jaccard 0.3 连通分组下只落在 97 个题组(大小分布 1×23、2×35、3×25、4×7、5×3、6/7/9 各 1、**123 一个巨型分量**)。所以阶段 0 的 CI 偏窄;Q1 / Q1′ / Q3 的"无效"判定依赖 CI 上界 < +0.04,聚类后可能变为"未定"。0.3 连通分组有链式合并问题(123 条的分量),聚类单位需要另定(例如更高阈值或直接重叠)。未重算,等用户决定。
