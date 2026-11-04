@@ -21,4 +21,10 @@ if [ ! -s $O/iface.json ]; then
   ( cd $V2 && CUDA_VISIBLE_DEVICES=$GPU python -m hgfm.icpt.iface_probe --prefix $W/e4/feats_base.pt --query $O/featsq_base.pt \
       --out $O/iface.json > $O/iface.log 2>&1 ) && st "DONE iface $(grep SELECTED $O/iface.log)" || { st "FAIL iface"; exit 1; }
 fi
+if [ ! -s $O/loss_diag.json ]; then   # §6.1 (amendment A3): zero-training loss diagnostic, base vs tapt_clean
+  ( cd $V2 && CUDA_VISIBLE_DEVICES=$GPU python -m hgfm.icpt.loss_diag run --runs $W/icpt/hf/icpt/loss_runs.jsonl.gz \
+      --models base=$BASE tapt_clean=$W/stage0/tapt_clean/Qwen3-8B-tapt_clean --out $O/loss_diag.jsonl > $O/loss_diag.log 2>&1 \
+    && python -m hgfm.icpt.loss_diag analyse --inp $O/loss_diag.jsonl --out $O/loss_diag.json > $O/loss_diag.out 2>&1 ) \
+    && st "DONE loss_diag" || { st "FAIL loss_diag"; exit 1; }
+fi
 st "DIAG ALL DONE"
