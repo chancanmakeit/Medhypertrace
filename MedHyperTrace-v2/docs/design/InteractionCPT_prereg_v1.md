@@ -120,3 +120,8 @@
 ## 8. 产物
 - 代码:`hgfm/icpt/`(语料构建、渲染、医学评测);驱动 `scripts/linux2_run_icpt.sh`。
 - 结果:`results/icpt/README.md`。
+
+## 修订记录
+- **A1(第 86 轮,2026-11-04,在任何特征提取与评测之前):** §4.1 的阳性改为对两臂对称的合并参照规则——stage 2 且 `statistics.p_value_pooled` < 0.05。
+  - 原因:第一批标签的 `judgment` 用 control 众数参照(有偏,置换 FDR 约 0.14),扩充批用合并参照,两批口径不一。
+  - 合并参照下共 303 个阳性(原 `judgment` 为 379 个)。`judgment` 口径作敏感性分析报告。
