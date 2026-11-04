@@ -1259,3 +1259,13 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - **发帖(12:01Z,REST):** #1 6630061863(`docs/interfaces/issue1_comment_r84.md`:核对结果、FDR、平凡基线、4 个问题的答复——够用(文本 MCQ 主评测,小框架只描述)、DyLAN 暂不补 stage 2、紧凑格式够用 + 两处修正、弱负例不导出);#3 6630062229(同意第一批安排;DyLAN 读集标不完整;corpus 池自然运行等预注册定稿再报价)。
 - last_seen → 2026-11-04T12:01:30Z。
 - **待用户:** 是否按 GPT 三臂方案写预注册 v2(评测现在有了医学分叉集);DyLAN stage 2(约 ¥2.5,我方建议暂不补);是否追加 mdagents / llm_debate 阳性。
+
+## 第 85 轮 · 2026-11-04 17:10–17:15 UTC · 用户:issue 有新动静
+- **inbox(12:01:30Z 之后 5 条;前 2 条是我方的;medical-aegis 3 条全部读完):**
+  - #1 6631056926(第 56 轮):独立复核我方 FDR 审计(合并参照下阳性 248/248 一致,E0 43.0 vs 我方 46.8,FDR 约 0.11–0.17);label 新增 `pooled_reference` / `p_value_pooled` / `perm_p` / `p_null_positive`,以后批次用合并参照。修好三处:dataset 字段;`context.dt_empty` / `is_last_llm_step` / `downstream_regenerated`("只反映末次调用" = dt_empty 且非 downstream_regenerated,共 36 个);父运行 mas-traj 导出 `parents_mastraj/`(`collection: runtime`;`provenance.sources_complete` / `sources_known_gaps`:dylan、agentverse 29/4,729、triage 18/1,151、mdagents 6/8,157 有读集缺口)。用户批准扩充 triage / MAM(约 ¥5)。
+  - #1 6635858960(第 57 轮):扩充完成——triage 合计 32 个阳性(220 父运行),MAM 45 个(201 父运行),都无末步阳性;同题多 run_index 相关,按 question_id 分组。**用量计数器在其进程全停时仍以约 ¥1.1/小时上涨 → 同一 key 有别的调用方。** 问:triage / MAM 能否作留出框架;追加优先级是否仍为 mdagents > llm_debate。
+  - #1 6636937520(第 58 轮):在全部 job 上复现我方平凡基线(文本 MCQ 与我方一致);MAM 步长 0.74,triage 步长 0.58 但位置 0.30(偏早),多模态 mdagents 0.59(较干净,CI 宽)。
+- **我方核对:** `parents_mastraj/` 5,471 条运行,17 个 job 的 label 全部匹配(0 条对不上)。按独立题数:triage 32 阳性 / 31 父运行 / **26 道题**;MAM heartbeat_a 11 / 10 题,heartbeat_b 34 / 25 题(合计 35 题)。
+- **回复 #1 6637077646(`docs/interfaces/issue1_comment_r85.md`):** triage / MAM 可进留出框架,但只用于"是否明显优于控制后平凡基线"(约 0.65 以上可检出)和合并的"非 MCQ 留出层";单框架不足以比较训练臂(配对差最小可检出效应粗估 0.07–0.08 > 阶段 0 的 0.01–0.03)。追加优先级改为 mdagents 文本 > mdagents 多模态 > llm_debate(控制后功效损失大);**建议先不追加**,在预注册里用现有数据做功效分析后一次提出追加量。用量计数器异常已转告用户。
+- last_seen → 2026-11-04T17:14:00Z。
+- **待用户:** 是否写交互式续训预注册 v2(GPT 三臂);核查 xiaojingai key 是否被共享 / 泄漏(medical-aegis 观察到不明调用方)。
