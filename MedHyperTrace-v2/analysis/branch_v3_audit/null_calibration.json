@@ -1,0 +1,133 @@
+{
+ "agentverse": {
+  "points": 2087,
+  "stage2": 674,
+  "reported_positive": 99,
+  "obs_ctrl_mode": 99.0,
+  "obs_pooled_mode": 81.0,
+  "null_ctrl_mode": 16.0,
+  "null_pooled_mode": 10.0
+ },
+ "dylan": {
+  "points": 566,
+  "stage2": 0,
+  "reported_positive": 0
+ },
+ "llm_debate": {
+  "points": 2100,
+  "stage2": 443,
+  "reported_positive": 61,
+  "obs_ctrl_mode": 61.0,
+  "obs_pooled_mode": 42.0,
+  "null_ctrl_mode": 7.8,
+  "null_pooled_mode": 4.3
+ },
+ "mac_groupchat": {
+  "points": 387,
+  "stage2": 42,
+  "reported_positive": 8,
+  "obs_ctrl_mode": 8.0,
+  "obs_pooled_mode": 6.0,
+  "null_ctrl_mode": 1.0,
+  "null_pooled_mode": 0.5
+ },
+ "mam_heartbeat_a": {
+  "points": 376,
+  "stage2": 58,
+  "reported_positive": 3,
+  "obs_ctrl_mode": 3.0,
+  "obs_pooled_mode": 3.0,
+  "null_ctrl_mode": 1.0,
+  "null_pooled_mode": 0.6
+ },
+ "mam_heartbeat_b": {
+  "points": 377,
+  "stage2": 69,
+  "reported_positive": 9,
+  "obs_ctrl_mode": 9.0,
+  "obs_pooled_mode": 8.0,
+  "null_ctrl_mode": 1.3,
+  "null_pooled_mode": 0.7
+ },
+ "mam_sounddr": {
+  "points": 402,
+  "stage2": 1,
+  "reported_positive": 0,
+  "obs_ctrl_mode": 0.0,
+  "obs_pooled_mode": 0.0,
+  "null_ctrl_mode": 0.0,
+  "null_pooled_mode": 0.0
+ },
+ "mdagents": {
+  "points": 2975,
+  "stage2": 552,
+  "reported_positive": 97,
+  "obs_ctrl_mode": 97.0,
+  "obs_pooled_mode": 77.0,
+  "null_ctrl_mode": 12.7,
+  "null_pooled_mode": 7.0
+ },
+ "medagents_mc": {
+  "points": 741,
+  "stage2": 114,
+  "reported_positive": 16,
+  "obs_ctrl_mode": 16.0,
+  "obs_pooled_mode": 9.0,
+  "null_ctrl_mode": 2.9,
+  "null_pooled_mode": 1.6
+ },
+ "mm_kvasir_vqa_x1": {
+  "points": 154,
+  "stage2": 17,
+  "reported_positive": 4,
+  "obs_ctrl_mode": 4.0,
+  "obs_pooled_mode": 2.0,
+  "null_ctrl_mode": 0.4,
+  "null_pooled_mode": 0.2
+ },
+ "mm_medxpertqa_mm": {
+  "points": 350,
+  "stage2": 47,
+  "reported_positive": 13,
+  "obs_ctrl_mode": 13.0,
+  "obs_pooled_mode": 9.0,
+  "null_ctrl_mode": 1.3,
+  "null_pooled_mode": 0.8
+ },
+ "mm_pathvqa": {
+  "points": 350,
+  "stage2": 16,
+  "reported_positive": 3,
+  "obs_ctrl_mode": 3.0,
+  "obs_pooled_mode": 3.0,
+  "null_ctrl_mode": 0.3,
+  "null_pooled_mode": 0.2
+ },
+ "mm_slake": {
+  "points": 147,
+  "stage2": 15,
+  "reported_positive": 1,
+  "obs_ctrl_mode": 1.0,
+  "obs_pooled_mode": 1.0,
+  "null_ctrl_mode": 0.4,
+  "null_pooled_mode": 0.3
+ },
+ "triage_agent": {
+  "points": 424,
+  "stage2": 77,
+  "reported_positive": 10,
+  "obs_ctrl_mode": 10.0,
+  "obs_pooled_mode": 7.0,
+  "null_ctrl_mode": 1.7,
+  "null_pooled_mode": 0.9
+ },
+ "TOTAL": {
+  "points": 11436.0,
+  "stage2": 2125.0,
+  "reported_positive": 324.0,
+  "obs_ctrl_mode": 324.0,
+  "obs_pooled_mode": 248.0,
+  "null_ctrl_mode": 46.8,
+  "null_pooled_mode": 27.1
+ }
+}

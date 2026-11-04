@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-11-03 18:10 UTC(第 83 轮续 2;第 7 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-11-04 12:05 UTC(第 84 轮;第 7 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -12,7 +12,7 @@
 > **📦 第 78 轮起:旧历史(§0.2–0.32、§0.34–0.79、§〇–十:MAFA 评测、旧 AEGIS 数据、v1 代码结构、方法论决定等)已移到 `HANDOFF_archive.md`,内容未删改;需要旧细节时去那里查。**
 
 > **🚀 第 7 个会话快速恢复(第 82 轮末写,以此为准;第 6 个会话的清单同样适用;下面第 38 轮的旧清单仍适用于 MAA / 公开数据恢复细节):**
-> 0. 第 7 个会话已于第 83 轮恢复;讨论记录现为 `RUN_v0.83.md`(下一轮 `git mv` 到 `RUN_v0.84.md`)。issue last_seen = 2026-11-03T18:04:30Z(我方 18:05Z 在 #1–#4 各发一条,见 §0.96;**发评论用 `gh api repos/chancanmakeit/medical-aegis/issues/N/comments -F body=@file`,`gh issue comment` 走 GraphQL 会 403**)。阶段 0 全部结束,Linux #2 无在跑任务,无定时检查。论文 PDF / Muse 的调研文档在 private-documents(需要时稀疏克隆 `papers/agent轨迹数据合成/`)。
+> 0. 第 7 个会话已于第 83 轮恢复;讨论记录现为 `RUN_v0.84.md`(下一轮 `git mv` 到 `RUN_v0.85.md`)。issue last_seen = 2026-11-04T12:01:30Z(我方 12:01Z 在 #1、#3 各发一条,见 §0.97;**发评论用 `gh api repos/chancanmakeit/medical-aegis/issues/N/comments -F body=@file`,`gh issue comment` 走 GraphQL 会 403**)。阶段 0 全部结束,Linux #2 无在跑任务,无定时检查。论文 PDF / Muse 的调研文档在 private-documents(需要时稀疏克隆 `papers/agent轨迹数据合成/`)。
 > 1. `add_repo`(push)添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`,clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走会话 git 代理,**不用 Project 指令里的明文 GitHub token**(已建议用户吊销)。commit 结尾加会话给的署名行。
 > 2. 读 §0.94 → §0.93 → §0.92 → §0.91 → §0.90 → §0.89 → §0.88 → §0.87 → §0.86 → §0.80–0.85 → `RUN_v0.82.md` 第 63–82 轮。核心结果文件:`MedHyperTrace-v2/results/e1e3/README.md`、`results/e4/README.md`、`results/tracertraj_audit/README.md`、`results/figures/README.md`、`results/samt_v1/README.md`、`results/midtrain_pilot/README.md`;设计:`docs/design/{HGFM_design_v0.2,SAMT_design_v1,E1-E3_prereg_v1,E4_prereg_v1}.md`;论文:`docs/paper/method_overview_and_figure_prompt.md`。
 > 3. issue:`bash MedHyperTrace-v2/scripts/issue_inbox.sh`(medical-aegis 全部 issue;我方最近:第 75 轮 issue #2 评论 `docs/interfaces/issue2_comment_r75.md`;第 78 轮新开 **issue #3**(中训练动机 + 是否请 medical-aegis 生成语料,正文 `docs/interfaces/issue3_r78.md`);第 80 轮新开 **issue #4**(ADP 对 mas-traj schema 的借鉴,正文 `docs/interfaces/issue4_r80.md`))。与其他智能体只通过 issue 交流,不 @ 任何人。
@@ -55,6 +55,13 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.97 第 84 轮:medical-aegis 协议 v3 评测集已完成;我方审计(2026-11-04 12:05 UTC)
+- **评测集(medical-aegis `data_runs/eval_v3_2026-11-04/`,HEAD 0bf6609,用户在对方项目里批准,约 ¥30):** gemini-2.5-flash-lite;eval 题池 `datasets/data/pools_v1/eval.json`(MedXpertQA-Text 800)+ 多模态 4×200,**永不进我方语料**;协议 v3(2+2 → 6+6,Fisher);11,436 点 / 324 阳性(43 个 D(t) 为空)。父运行 `parents/`,标签 `<job>/labels_v3.jsonl.gz`。
+- **审计(`MedHyperTrace-v2/analysis/branch_v3_audit/README.md`):** 置换法 FDR ≈ 0.14(参照取 control 众数有偏;合并众数 0.11)。**步长捷径:** 父运行内步长 AUROC AgentVerse 0.76、llm_debate 0.81、MedAgents 0.72、MAC 0.97,只有 mdagents 0.54;阳性偏早。→ 在这个集上必须报步长 / 位置基线和控制后数字;mdagents 最干净。更正第 83 轮"分叉标签不受步长影响"。
+- 锚点 backbone 实为 `google/gemma-4-31B-it-turbo`(请求名 llama-4-maverick)。DyLAN 10-21 后的数据是空轨迹(我方未持有)。DyLAN 读集不完整(221/350 有隐性依赖)。
+- **issue(12:01Z):** #1 6630061863(审计 + 4 个问题的答复);#3 6630062229。
+- **待用户:** ① 是否按 GPT 三臂方案写预注册 v2(评测 = 公开数据带步长控制 + 医学分叉集);② DyLAN stage 2(约 ¥2.5,我方建议暂不补);③ 是否追加 mdagents / llm_debate 阳性。
 
 ### 0.96 第 83 轮续 2:协议 v2 获批;请 medical-aegis 报价;阶段 0 聚类重算;问多框架轨迹(2026-11-03 18:10 UTC)
 - **用户决定:** 协议 v2 通过;请 medical-aegis 报价医学分叉责任层评测集;阶段 0 聚类重算由我决定(已做);在 issue 里问 medical-aegis 是否运行已集成的多个框架产出轨迹。

@@ -1243,3 +1243,19 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - #4 6611681144:收回比值硬门,改用 GPT 的估计对象;read-set 多对多;`collection` 显式化、`code_unverified`;claim 终点;exposure 字段。
 - last_seen → 2026-11-03T18:04:30Z(发帖前 inbox 无新评论)。
 - **待用户确认:** 是否按 GPT 三臂方案写预注册 v2(会用 Linux #2 跑两次续训);等 medical-aegis 报价(评测集、多框架运行)。
+
+## 第 84 轮 · 2026-11-04 11:55–12:05 UTC · 用户:issue 有新动静
+- **inbox(18:04:30Z 之后 9 条,前 4 条是我方 18:05Z 的;medical-aegis 5 条全部读完):**
+  - #1 6612193880(第 51 轮):评测集意见与报价。锚点 100 题已进我方 TAPT 语料,评测集必须用新题;锚点 "llama-4-maverick" 实际返回 `google/gemma-4-31B-it-turbo`;用户指定新一批用 gemini-2.5-flash-lite(xiaojingai)。
+  - #3 6612194217(第 52 轮):多框架意见——第一批 6 个 MCQ 框架(llm_debate、mdagents、medagents_mc、MAC、DyLAN、AgentVerse),triage 第二批,mam / consensus / cmas 不进;预算 分叉 55% / 自然 35% / 注入 10%;两个 backbone。
+  - #1 6612871277(第 53 轮):gemini 试跑——6 框架都跑通;温度 0 同样不确定;题池 `pools_v1`(eval 400 → 后扩 800 / corpus 1,849);**DyLAN 自 10-21 起每条都是空轨迹**(已修)。
+  - #1 6615225277(第 54 轮):用户决定加其他框架 + 多模态(MedXpertQA-MM、PathVQA、SLAKE、Kvasir-VQA-x1)+ eval 池 800;xiaojingai 实价约 Google 列表价 1/20;v2 在高噪声框架不够(confirmed 概率 ≈ d/2)→ **协议 v3**(2+2,不全同则扩到 6+6,Fisher 单侧 p<0.05);DyLAN 改私有 RNG 后可回放;DyLAN 221/350 条有 `sources` 漏掉的隐性依赖。
+  - #1 6629822563(第 55 轮):**协议 v3 评测集完成**(用户批准,约 ¥30):11,436 点、324 个阳性(43 个 D(t) 为空);AgentVerse 99、mdagents 97、llm_debate 61、MedAgents 16、triage 10、MAC 8、MAM 12、多模态 21;DyLAN stage 2 暂停。问我方 4 个问题。
+- **我方离线审计(`MedHyperTrace-v2/analysis/branch_v3_audit/`):**
+  - **假阳性:** v3 的参照取 control 众数(偏向阳性)。置换法(零假设下 12 个答案在两臂间可交换,2,000 次,含 stage-1 筛查)得期望阳性 E0 = 46.8 / 324 → **FDR ≈ 0.14**(各框架 0.13–0.18;偏保守的上界)。改用合并众数参照:248 个阳性 / E0 27.1(0.11)。stage 2 上单次检验零假设触发率约 2.2%。(第一版脚本里的"swapped"列设计错误:两臂分布不同时正反两个方向都判阳性,不是偏差检验,已删除。)
+  - **平凡基线(重要):** 父运行内"阳性 vs 其他点"的 AUROC——步长:AgentVerse 0.761、llm_debate 0.814、MedAgents 0.724、MAC 0.972、**mdagents 0.538**;阳性偏早(位置 AUROC 约 0.3)。**更正我方第 83 轮"分叉标签不受步长影响"的说法:产生过程不依赖步长,但标签与步长 / 位置相关。** 评测必须报步长 / 位置基线和控制后数字;mdagents 是最干净的子集。
+  - DyLAN:我方只有 8-13 AEGIS-custom-dataset 的 DyLAN,不受影响。锚点 backbone 名已在两个脚本说明里注明(`success_regularity_check.py`、`pilot_20261020.py`)。
+  - 数据问题:多模态 / MAM 父运行的 `dataset` 字段写错;"D(t) 为空"无显式字段(末步近似与对方计数不一致:AgentVerse 1 vs 5)。
+- **发帖(12:01Z,REST):** #1 6630061863(`docs/interfaces/issue1_comment_r84.md`:核对结果、FDR、平凡基线、4 个问题的答复——够用(文本 MCQ 主评测,小框架只描述)、DyLAN 暂不补 stage 2、紧凑格式够用 + 两处修正、弱负例不导出);#3 6630062229(同意第一批安排;DyLAN 读集标不完整;corpus 池自然运行等预注册定稿再报价)。
+- last_seen → 2026-11-04T12:01:30Z。
+- **待用户:** 是否按 GPT 三臂方案写预注册 v2(评测现在有了医学分叉集);DyLAN stage 2(约 ¥2.5,我方建议暂不补);是否追加 mdagents / llm_debate 阳性。

@@ -1,5 +1,5 @@
 """Round 78: zero-API check of the 'successful runs are alike' intuition (motivation 2 for mid-training).
-Data: medical-aegis anchor normal runs (llama-4-maverick, 100 MedXpertQA questions x K=3, 4 frameworks).
+Data: medical-aegis anchor normal runs (requested as llama-4-maverick; the aihubmix endpoint actually returned google/gemma-4-31B-it-turbo, medical-aegis #1 round 51; 100 MedXpertQA questions x K=3, 4 frameworks).
 Rule (fixed before computing): within-question comparisons only; TF-IDF (sublinear, word 1-2gram) cosine distance,
 vectoriser fit per framework on all runs; text = concatenated step responses.
   2C1W questions: delta_C = mean d(C,W) - d(C,C)

@@ -1,7 +1,7 @@
 """Round 28: shortcut and pairing analysis on the medical-aegis pilot (2026-10-20).
 
 Input: mas-traj/1 export (pilot_export.jsonl, 420 runs; medagents_mc + triage_agent x
-mercury-2.5-preview / llama-4-maverick; normal K=4 x 20 questions; PI / RC injections).
+mercury-2.5-preview / llama-4-maverick (the latter actually served as google/gemma-4-31B-it-turbo, medical-aegis #1 round 51); normal K=4 x 20 questions; PI / RC injections).
 Reads labels ONLY to define targets; features come from steps / task.
 
 A. content shortcut:  does a single step's output text reveal that it was injected?
