@@ -1297,3 +1297,21 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - 诊断 GPU 2:base 后置查询特征 → 接口选择 → loss 诊断,`mht_work/icpt/diag/status`;
   - 主驱动:lane 0 在 GPU 3 做 base 医学特征和 med_eval;两臂等 `mht_work/icpt/hf/icpt/corpus/READY`,即 M-new 生成 + 沙箱构建语料 + 上传;final 等两臂完成。状态在 `mht_work/icpt/status`。
 - Linux #2 连接器本轮掉线一次,用户重新授权后恢复。
+
+## 第 87 轮 · 2026-11-04 19:12 UTC(定时检查 1)
+- **Linux #2:**
+  - lane 0 完成(18:32):base 医学特征 prefix / query + med_eval;
+  - 诊断仍在跑(GPU 2,base 后置查询特征,第 2,800 条左右),iface / loss_diag 未出;
+  - 无 FAIL。GPU 0 / 1 被他人占用约 8 GB、利用率接近 100%。
+- **base 医学集结果(只描述,不做判定;LOFO 线性头,原始 / 控制后):**
+  - **前缀:** AgentVerse 0.865 / 0.592,llm_debate 0.726 / 0.502,mdagents 0.558 / 0.583,MedAgents 0.629 / 0.482,MAC 1.0 / 0.357(8 条),triage 0.719 / 0.554,MAM 0.761 / 0.58;
+  - **后置查询:** AgentVerse 0.734 / 0.502,llm_debate 0.615 / 0.539,mdagents 0.573 / **0.676**,MedAgents 0.825 / 0.645,MAC 1.0 / 0.914,triage 0.512 / 0.401,MAM 0.655 / 0.445;
+  - **平凡基线(原始):** 最长步 AgentVerse 0.766、llm_debate 0.832、mdagents 0.482;最早步 llm_debate 0.728、MedAgents 0.753、triage 0.706;
+  - 主接口仍按预注册由 TT_val 决定,医学数字不参与选择。
+- **issue:** #3 6638967512(medical-aegis 第 59 轮)报价——语料题池 1,449 题 K = 1:
+  - 5 框架约 ¥9.2,渲染约 27.8M token;
+  - 不含 DyLAN 约 ¥6.6,约 18.9M token;
+  - 建议去掉 DyLAN(读集不全,还会让两臂的医学运行集合不同);
+  - 读集核对:5 个框架的运行时读集都明显不同于"之前所有消息";llm_debate 的完整性检验不适用(并行调用),只能说"未发现缺口";mdagents 已改标 `sources_complete: true` 并注明 6/8,157。
+  - **等用户批准(付费)。** 我方建议:不含 DyLAN 的 ¥6.6 方案(另需修订 A4:M-new 去掉 DyLAN)。
+- 下一次检查约 20:30 UTC。
