@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-11-04 17:15 UTC(第 85 轮;第 7 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-11-04 18:05 UTC(第 86 轮;第 7 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -12,7 +12,7 @@
 > **📦 第 78 轮起:旧历史(§0.2–0.32、§0.34–0.79、§〇–十:MAFA 评测、旧 AEGIS 数据、v1 代码结构、方法论决定等)已移到 `HANDOFF_archive.md`,内容未删改;需要旧细节时去那里查。**
 
 > **🚀 第 7 个会话快速恢复(第 82 轮末写,以此为准;第 6 个会话的清单同样适用;下面第 38 轮的旧清单仍适用于 MAA / 公开数据恢复细节):**
-> 0. 第 7 个会话已于第 83 轮恢复;讨论记录现为 `RUN_v0.85.md`(下一轮 `git mv` 到 `RUN_v0.86.md`)。issue last_seen = 2026-11-04T17:14:00Z(我方 17:14Z 在 #1 发一条,见 §0.98;**发评论用 `gh api repos/chancanmakeit/medical-aegis/issues/N/comments -F body=@file`,`gh issue comment` 走 GraphQL 会 403**)。阶段 0 全部结束,Linux #2 无在跑任务,无定时检查。论文 PDF / Muse 的调研文档在 private-documents(需要时稀疏克隆 `papers/agent轨迹数据合成/`)。
+> 0. 第 7 个会话已于第 83 轮恢复;讨论记录现为 `RUN_v0.86.md`(下一轮 `git mv` 到 `RUN_v0.87.md`)。issue last_seen = 2026-11-04T17:14:00Z(我方 17:32Z 在 #3 请报价,见 §0.99;**发评论用 `gh api repos/chancanmakeit/medical-aegis/issues/N/comments -F body=@file`,`gh issue comment` 走 GraphQL 会 403**)。**交互式续训实验在跑(§0.99)**,有定时检查。论文 PDF / Muse 的调研文档在 private-documents(需要时稀疏克隆 `papers/agent轨迹数据合成/`)。
 > 1. `add_repo`(push)添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`,clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走会话 git 代理,**不用 Project 指令里的明文 GitHub token**(已建议用户吊销)。commit 结尾加会话给的署名行。
 > 2. 读 §0.94 → §0.93 → §0.92 → §0.91 → §0.90 → §0.89 → §0.88 → §0.87 → §0.86 → §0.80–0.85 → `RUN_v0.82.md` 第 63–82 轮。核心结果文件:`MedHyperTrace-v2/results/e1e3/README.md`、`results/e4/README.md`、`results/tracertraj_audit/README.md`、`results/figures/README.md`、`results/samt_v1/README.md`、`results/midtrain_pilot/README.md`;设计:`docs/design/{HGFM_design_v0.2,SAMT_design_v1,E1-E3_prereg_v1,E4_prereg_v1}.md`;论文:`docs/paper/method_overview_and_figure_prompt.md`。
 > 3. issue:`bash MedHyperTrace-v2/scripts/issue_inbox.sh`(medical-aegis 全部 issue;我方最近:第 75 轮 issue #2 评论 `docs/interfaces/issue2_comment_r75.md`;第 78 轮新开 **issue #3**(中训练动机 + 是否请 medical-aegis 生成语料,正文 `docs/interfaces/issue3_r78.md`);第 80 轮新开 **issue #4**(ADP 对 mas-traj schema 的借鉴,正文 `docs/interfaces/issue4_r80.md`))。与其他智能体只通过 issue 交流,不 @ 任何人。
@@ -55,6 +55,17 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 0.99 第 86 轮:交互式续训实验——预注册、代码、Linux #2 已启动(2026-11-04 18:05 UTC)
+- **预注册** `MedHyperTrace-v2/docs/design/InteractionCPT_prereg_v1.md`(5b5420b + 修订 A1–A3)。读结果前先读它。
+- **代码** `hgfm/icpt/`:feat_query、iface_probe、med_to_ww、med_eval、build_icpt、loss_diag。驱动 `scripts/linux2_run_icpt_diag.sh`、`scripts/linux2_run_icpt.sh`。
+- **传输:** 沙箱 → HF `UUUooUUU/mht-midtrain-pilot` 的 `icpt/`(写 token)→ 服务器 `cd mht_work/icpt && /data/ekyang/anaconda3/envs/mht-swift/bin/python dl.py 'icpt/*'`,得到 `mht_work/icpt/hf/icpt/`,核对 md5.txt,再解压 code.tgz 到 `$C`。
+- **Linux #2 状态:**
+  - `mht_work/icpt/diag/status`(GPU 2):featsq_base → iface.json(SELECTED 主接口)→ loss_diag.json;
+  - `mht_work/icpt/status`(主驱动):lane 0(GPU 3)base 医学特征 + med_eval → 两臂等 `hf/icpt/corpus/READY` → final。
+  - 两个驱动都可重跑续接,启动方式见脚本头。
+- **语料待办:** medical-aegis 报价(#3 6637475561)→ 用户批准 → 对方生成 M-new → 沙箱下载其 mas-traj,与 `/home/claude/anchor_runs/anchor_normal.mastraj.jsonl`(由 medical-aegis 导出器从锚点 raw 导出)一起,用 `python -m hgfm.icpt.build_icpt --runtime <M-new> <anchor> --public_dir <public mas_traj> --eval_parents <eval_v3>/parents_mastraj --out_dir corpus --budget_m 40` 构建 → 上传到 `icpt/corpus/`(含 READY 文件)→ 服务器 dl.py 'icpt/corpus/*'。
+- **注意:** kernel 里启动后台任务要 `</dev/null >log 2>&1 &`,别在同一单元格长时间 sleep(会超时)。
 
 ### 0.98 第 85 轮:评测集修复与扩充;triage / MAM 定位(2026-11-04 17:15 UTC)
 - medical-aegis 复核了我方 FDR 审计(一致);label 增加置换 p 值等字段,以后用合并参照;dataset 字段已修;`context.dt_empty` 等三个字段;**父运行 mas-traj 导出 `data_runs/eval_v3_2026-11-04/parents_mastraj/`**(5,471 条,label 全部匹配;`provenance.sources_complete`:dylan、agentverse、triage、mdagents(罕见)有读集缺口)。

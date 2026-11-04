@@ -1269,3 +1269,31 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - **回复 #1 6637077646(`docs/interfaces/issue1_comment_r85.md`):** triage / MAM 可进留出框架,但只用于"是否明显优于控制后平凡基线"(约 0.65 以上可检出)和合并的"非 MCQ 留出层";单框架不足以比较训练臂(配对差最小可检出效应粗估 0.07–0.08 > 阶段 0 的 0.01–0.03)。追加优先级改为 mdagents 文本 > mdagents 多模态 > llm_debate(控制后功效损失大);**建议先不追加**,在预注册里用现有数据做功效分析后一次提出追加量。用量计数器异常已转告用户。
 - last_seen → 2026-11-04T17:14:00Z。
 - **待用户:** 是否写交互式续训预注册 v2(GPT 三臂);核查 xiaojingai key 是否被共享 / 泄漏(medical-aegis 观察到不明调用方)。
+
+## 第 86 轮 · 2026-11-04 17:26–18:05 UTC · 用户:按推荐来;长时运行要设定时查看、必要时自动续跑
+- **决定:** 按 GPT 三臂方案写预注册并执行。
+- **预注册** `MedHyperTrace-v2/docs/design/InteractionCPT_prereg_v1.md`(5b5420b,写于任何结果之前;项目内称"预注册 v2"):
+  - 主假设 H1:interaction-CPT − LM-CPT,评测为医学分叉集上留一框架读出的控制后父运行内 AUROC,按 question_id 聚类,无效界 +0.04,匹配网格 ≥ 4/6 同号;
+  - 次要:H2 / H3,以及公开 WW + TEgc 标签效率;
+  - 接口按 base 在 TT_val 上的控制后 AUROC 选定(前缀 / 全轨迹后置查询 / 双向聚合器);
+  - 留出框架:AgentVerse、triage、MAM 不进任何语料;
+  - 功效:粗估最小可检出效应 0.035–0.05。
+- **修订(都在任何结果之前):**
+  - A1:阳性统一用合并参照(`p_value_pooled` < 0.05),303 个(原 judgment 379);
+  - A2:交互样本按框架级读集缺口率 < 1% 定资格(mdagents 可用,DyLAN 只作 LM 文本);题目隔离只比较题干(带选项全文会误伤:锚点 38 题 → 题干 18 题,其中有的确为改写);
+  - A3:loss 诊断的留出样本改用 eval_v3 中 4 个见过框架的父运行,因为锚点运行在 tapt_clean 的训练语料里。
+- **关键事实:** 公开 mas-traj 7 个数据集**没有一条运行时读集**(全是 protocol / text_match 推断),交互目标在上面会退化。运行时读集只有锚点 1,200 条和需要新生成的语料题池运行。→ issue #3 6637475561 请 medical-aegis 报价:语料题池 1,449 题 × 5 框架(llm_debate、mdagents、medagents_mc、MAC、DyLAN),gemini,K = 1(付费,需用户批准)。
+- **代码(`hgfm/icpt/`,沙箱内冒烟测试过):**
+  - `feat_query`:后置查询特征;
+  - `iface_probe`:接口诊断;
+  - `med_to_ww`:医学父运行转 WW 格式 + 标签表;
+  - `med_eval`:留一框架读出、原始 / 控制后 / 匹配网格、平凡基线、按题聚类比较与判定;合成特征上验证过(无信号 0.5,有信号 HOLDS);
+  - `build_icpt`:两臂语料,同一批运行、处理 token 配平(试跑比值 1.009)、公开 chunk 逐条相同;
+  - `loss_diag`:零训练 loss 诊断(GPT 的估计对象)。
+  - 驱动:`scripts/linux2_run_icpt_diag.sh`、`scripts/linux2_run_icpt.sh`;`linux2_run_tapt.sh` 加 `MODE=sft`。
+  - 代码和数据经 HF `UUUooUUU/mht-midtrain-pilot` 的 `icpt/` 中转;服务器侧用 mht-swift 的 python 跑 `mht_work/icpt/dl.py`(kernel 环境的 SOCKS 代理缺依赖)。
+- 可评测父运行(合并参照、剔除末次调用阳性后):237 条 / 207 道题。
+- **Linux #2(17:57 UTC 启动):**
+  - 诊断 GPU 2:base 后置查询特征 → 接口选择 → loss 诊断,`mht_work/icpt/diag/status`;
+  - 主驱动:lane 0 在 GPU 3 做 base 医学特征和 med_eval;两臂等 `mht_work/icpt/hf/icpt/corpus/READY`,即 M-new 生成 + 沙箱构建语料 + 上传;final 等两臂完成。状态在 `mht_work/icpt/status`。
+- Linux #2 连接器本轮掉线一次,用户重新授权后恢复。
