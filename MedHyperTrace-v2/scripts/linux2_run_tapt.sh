@@ -9,6 +9,8 @@
 #        4k tokens, 2.4x at 8k, scripts/bench_flash_attn.py). Runs before round 68 (tapt_pilot_v1, e2_S, e2_R) used ATTN=sdpa.
 #        LIGER=true: Liger kernel 0.7.0 (RMSNorm / RoPE / SwiGLU / fused linear cross-entropy; round 72, LoRA step +16%,
 #        memory -24..-36%, same loss / gradients, scripts/bench_train_speed.py). Default false (all earlier runs).
+#        MODE=sft (round 86, interaction-CPT arm): `swift sft` on a {"messages"} jsonl, loss on the assistant turn only;
+#        every other argument identical. Default pt (every earlier run).
 set -u
 ENV=/data/ekyang/anaconda3/envs/mht-swift
 export PATH=$ENV/bin:$PATH HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false USE_HF=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
@@ -19,7 +21,7 @@ NP=$(echo $GPUS | tr ',' '\n' | wc -l); ACC=${ACC:-$((32 / NP))}
 if [ -n "${WANDB_API_KEY:-}" ] || grep -qs api.wandb.ai ~/.netrc; then REPORT=wandb; else REPORT=tensorboard; fi
 mkdir -p $OUT; extra=""; [ "$MAX_STEPS" -gt 0 ] && extra="--max_steps $MAX_STEPS --save_strategy no"
 echo "[$(date -u +%F' '%T)] START tapt gpus=$GPUS np=$NP accum=$ACC max_steps=$MAX_STEPS" >> $OUT/status
-CUDA_VISIBLE_DEVICES=$GPUS NPROC_PER_NODE=$NP swift pt \
+CUDA_VISIBLE_DEVICES=$GPUS NPROC_PER_NODE=$NP swift ${MODE:-pt} \
   --model $LM --model_type qwen3 --template qwen3 --torch_dtype bfloat16 --tuner_type lora --lora_rank 64 --lora_alpha 128 --lora_dropout 0.05 \
   --target_modules all-linear --learning_rate 1e-4 --lr_scheduler_type cosine --warmup_ratio 0.03 --weight_decay 0.01 \
   --per_device_train_batch_size 1 --gradient_accumulation_steps $ACC --num_train_epochs 1 \
