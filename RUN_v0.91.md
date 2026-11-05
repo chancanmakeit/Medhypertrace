@@ -1385,3 +1385,30 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - 服务器上的任务用 nohup / setsid 运行,不依赖这个连接。交互臂按计划应在约 08:20 UTC 训练结束并开始抽特征,但**这一点未核实**。
 - **issue:** 无新评论(last_seen 02:23:23Z)。
 - 13:20 UTC 再试仍为 530。14:01 UTC 再重试一次;仍不通就请用户在服务器上恢复隧道(或重启 Jupyter)。
+
+## 第 91 轮 · 2026-11-05 13:47 UTC(用户:Linux #2 应已连上;lm 臂改用 GPU 2–3 跑;照常定时检查)
+- **连接:** 13:40–13:47 UTC 试了 5 次,仍是 Cloudflare 530。
+  - jupyter-mcp 和 jupyter-mcp-2 都一样;portal 列表正常;RefreshMcpTools 后没有新工具。
+  - 已约 14:08 UTC 自动重试,最多再试 3 次,间隔约 30 分钟。
+- **lm 臂重跑方案(用户决定):** 在 GPU 2,3 上跑,等交互臂训练和抽特征完成后再开始。
+  - 语料、配方、种子都不变;2 卡 DDP、累积 16 与原计划相同。
+  - 仅有三处不同:用的卡、运行时间晚于交互臂、每 100 步存检查点。这些都不改训练配方,写入报告的偏离说明。
+- **代码(3720c2a,code.tgz md5 4c0de726…,已传 HF):**
+  - `linux2_run_tapt.sh` 新增 `SAVE_STEPS`:
+    - 每 N 步存完整检查点(含优化器),保留最近 2 个;
+    - 已有检查点时自动 resume;
+    - merge 前确认最后一个检查点就是最终步。
+    - 不设 SAVE_STEPS 时行为不变。用伪 swift 测过三种情况。
+  - `linux2_run_icpt.sh`:
+    - `ICPT_LIB=1 source` 时只定义函数;
+    - final 的探针 GPU 改为参数 `FG`(默认 0,与原来一致)。
+  - 新驱动 `linux2_run_icpt_lm2.sh`:
+    1. 等 "DONE arm icpt";若交互臂 FAIL 就停。
+    2. 只做一次:把 status 里第 88 轮 lm 的 FAIL / KILLED / PAUSED 行移到 `status.r88`(final 见到任何 FAIL 都会停),把旧的 `lm/` 改名为 `lm_killed_r88/`。
+    3. 用 `arm lm` 在 GPU 2,3 上训练,SAVE_STEPS=100。
+    4. 跑 final,FG=2。
+    - 可重跑续接。
+- **待办(连上后):**
+  - 同步代码并启动 lm2 驱动;
+  - 在 GPU 1 上重跑 loss_diag(只作描述);
+  - 核实交互臂的训练与特征。
