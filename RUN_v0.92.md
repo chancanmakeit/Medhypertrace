@@ -1416,3 +1416,19 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - 授权需要用户在 claude.ai 的连接器设置里完成,我无法自行处理,所以 lm2 驱动仍未启动。
   - 不再自动重试;等用户授权后告诉我,再按上面的步骤启动。
   - issue 无新评论。
+
+## 第 92 轮 · 2026-11-05 14:45 UTC(用户已重新授权连接器,继续)
+- **Linux #2 已连上**(uptime 120 天,服务器没有重启),但 Jupyter 重启过,旧 kernel ffd58261 已不存在。
+  - 现在用已有的 ms-swift kernel `0ee2176b-5b1d-4fd8-9674-9d9b18fee69f`,helper 命名为 `mht_r(cmd, t)`,避免与别人的变量冲突。
+  - 后台启动要用 `subprocess.Popen(..., start_new_session=True)`;在 `mht_r` 里写 `&` 会让单元格超时。
+- **交互臂在掉线期间自行完成:** 08:18:28 DONE train icpt(merged `icpt/icpt/Qwen3-8B-icpt_icpt`);10:29–10:45 四个特征文件全部完成;10:45:36 DONE arm icpt。
+- **lm2 驱动(14:38:14 启动,代码 md5 4c0de726 已核对):**
+  - status 已轮换,旧行在 `status.r88`;旧 lm 目录改名为 `lm_killed_r88`;START train lm(GPU 2,3)。
+  - 第 1 步 loss 1.156,27 s/it,预计约 6 h,训练约 20:40 UTC 结束。
+  - 之后 merge、抽特征(约 2.5 h),final 在 GPU 2 上跑。
+  - save_steps = 100;过滤后 25,307 条、791 步,与原计划相同。
+- **loss_diag 在 GPU 1 上重跑**(14:39 START diag gpu=1):240 个运行、1,436 个目标步,先 base 后 tapt_clean。
+  - GPU 1 上还有他人(wyx)约 11 GB 的进程,当前空间够用。
+- **GPU 0:** 他人(wyx)约 6–8 GB。
+- **issue:** 无新评论。
+- 下一次检查约 17:30 UTC。
