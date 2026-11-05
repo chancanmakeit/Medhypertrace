@@ -11,6 +11,8 @@
 #        memory -24..-36%, same loss / gradients, scripts/bench_train_speed.py). Default false (all earlier runs).
 #        MODE=sft (round 86, interaction-CPT arm): `swift sft` on a {"messages"} jsonl, loss on the assistant turn only;
 #        every other argument identical. Default pt (every earlier run).
+#        SAVE_STEPS=N (round 91): save a full checkpoint (model + optimizer) every N steps (keep the last 2) and, when
+#        $OUT/ckpt already holds a checkpoint, resume from it. Training recipe unchanged; unset = old behaviour.
 set -u
 ENV=/data/ekyang/anaconda3/envs/mht-swift
 export PATH=$ENV/bin:$PATH HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false USE_HF=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
@@ -20,17 +22,29 @@ CORPUS=${CORPUS:?}; OUT=${OUT:?}; GPUS=${GPUS:-0,1,2,3}; MAX_STEPS=${MAX_STEPS:-
 NP=$(echo $GPUS | tr ',' '\n' | wc -l); ACC=${ACC:-$((32 / NP))}
 if [ -n "${WANDB_API_KEY:-}" ] || grep -qs api.wandb.ai ~/.netrc; then REPORT=wandb; else REPORT=tensorboard; fi
 mkdir -p $OUT; extra=""; [ "$MAX_STEPS" -gt 0 ] && extra="--max_steps $MAX_STEPS --save_strategy no"
+SAVE="--save_strategy epoch --save_only_model true"
+if [ -n "${SAVE_STEPS:-}" ]; then
+  SAVE="--save_strategy steps --save_steps $SAVE_STEPS --save_total_limit 2 --save_only_model false"
+  LAST=$(ls -d $OUT/ckpt/checkpoint-* 2>/dev/null | sort -V | tail -1)
+  [ -n "$LAST" ] && { SAVE="$SAVE --resume_from_checkpoint $LAST"; echo "[$(date -u +%F' '%T)] RESUME from $LAST" >> $OUT/status; }
+fi
 echo "[$(date -u +%F' '%T)] START tapt gpus=$GPUS np=$NP accum=$ACC max_steps=$MAX_STEPS" >> $OUT/status
 CUDA_VISIBLE_DEVICES=$GPUS NPROC_PER_NODE=$NP swift ${MODE:-pt} \
   --model $LM --model_type qwen3 --template qwen3 --torch_dtype bfloat16 --tuner_type lora --lora_rank 64 --lora_alpha 128 --lora_dropout 0.05 \
   --target_modules all-linear --learning_rate 1e-4 --lr_scheduler_type cosine --warmup_ratio 0.03 --weight_decay 0.01 \
   --per_device_train_batch_size 1 --gradient_accumulation_steps $ACC --num_train_epochs 1 \
   --max_length 4096 --attn_impl ${ATTN:-flash_attn} --use_liger_kernel ${LIGER:-false} ${PACK:+--packing true} --gradient_checkpointing true --dataset $CORPUS --split_dataset_ratio 0.005 \
-  --dataloader_num_workers 4 --dataset_num_proc 8 --save_strategy epoch --save_only_model true --logging_steps 5 \
+  --dataloader_num_workers 4 --dataset_num_proc 8 $SAVE --logging_steps 5 \
   --seed 0 --data_seed 0 --output_dir $OUT/ckpt --add_version false --report_to $REPORT --run_name $NAME $extra \
   >> $OUT/tapt.log 2>&1 || { echo "[$(date -u +%F' '%T)] FAIL tapt" >> $OUT/status; exit 1; }
 [ "$MAX_STEPS" -gt 0 ] && { echo "[$(date -u +%F' '%T)] SMOKE DONE" >> $OUT/status; exit 0; }
 CK=$(ls -d $OUT/ckpt/checkpoint-* | sort -V | tail -1)
+if [ -n "${SAVE_STEPS:-}" ]; then   # the merged model must come from the final step, not an intermediate checkpoint
+  python - "$CK" <<'PY' || { echo "[$(date -u +%F' '%T)] FAIL last checkpoint is not the final step ($CK)" >> $OUT/status; exit 1; }
+import json, sys
+s = json.load(open(sys.argv[1] + "/trainer_state.json")); sys.exit(0 if s["global_step"] >= s["max_steps"] else 1)
+PY
+fi
 CUDA_VISIBLE_DEVICES=${GPUS%%,*} swift export --adapters $CK --merge_lora true --output_dir $OUT/Qwen3-8B-$NAME >> $OUT/tapt.log 2>&1 \
   || { echo "[$(date -u +%F' '%T)] FAIL merge" >> $OUT/status; exit 1; }
 echo "[$(date -u +%F' '%T)] DONE merged=$OUT/Qwen3-8B-$NAME" >> $OUT/status

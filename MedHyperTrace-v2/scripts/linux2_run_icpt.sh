@@ -6,7 +6,7 @@
 # then, once $IC/hf/icpt/corpus/READY exists (corpus built in the sandbox from M-new + M-anchor + public, via HF):
 # lane L (GPUs 0,1): train LM-CPT (swift pt)  -> features (prefix + query; public + medical)
 # lane I (GPUs 2,3): train interaction-CPT (swift sft, MODE=sft) -> same features
-# final (GPU 0): stage-A full-label + label efficiency on public (both interfaces, base / lm / icpt); med_eval for the arms
+# final (GPU ${FG:-0}): stage-A full-label + label efficiency on public (both interfaces, base / lm / icpt); med_eval for the arms
 #                and the pre-registered comparisons.
 set -u
 ENV=/data/ekyang/anaconda3/envs/mht-swift; export PATH=$ENV/bin:$PATH HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
@@ -53,9 +53,9 @@ final() {
   until [ -s $IC/diag/featsq_base.pt ]; do sleep 300; done   # base query features on public come from the interface diagnostic
   for I in prefix query; do
     if [ $I = prefix ]; then B=$W/e4/feats_base.pt; p=feats; else B=$IC/diag/featsq_base.pt; p=featsq; fi
-    [ -s $IC/stageA_$I/e4a_linear.json ] || ( cd $V2 && CUDA_VISIBLE_DEVICES=0 python -m hgfm.e4.e4_probe --feats base=$B lm=$IC/${p}_lm.pt icpt=$IC/${p}_icpt.pt \
+    [ -s $IC/stageA_$I/e4a_linear.json ] || ( cd $V2 && CUDA_VISIBLE_DEVICES=${FG:-0} python -m hgfm.e4.e4_probe --feats base=$B lm=$IC/${p}_lm.pt icpt=$IC/${p}_icpt.pt \
         --out $IC/stageA_$I > $IC/stageA_$I.log 2>&1 ) && st "DONE stageA $I" || st "FAIL stageA $I"
-    [ -s $IC/le_$I/le_linear_icpt.json ] || ( cd $V2 && CUDA_VISIBLE_DEVICES=0 python -m hgfm.e4.e4_probe --feats base=$B lm=$IC/${p}_lm.pt icpt=$IC/${p}_icpt.pt \
+    [ -s $IC/le_$I/le_linear_icpt.json ] || ( cd $V2 && CUDA_VISIBLE_DEVICES=${FG:-0} python -m hgfm.e4.e4_probe --feats base=$B lm=$IC/${p}_lm.pt icpt=$IC/${p}_icpt.pt \
         --subsets $W/stage0/subsets.json --out $IC/le_$I > $IC/le_$I.log 2>&1 ) && st "DONE le $I" || st "FAIL le $I"
     medscore lm_$I $IC/${p}med_lm.pt $IC/med_${I}_lm.json; medscore icpt_$I $IC/${p}med_icpt.pt $IC/med_${I}_icpt.json
     ( cd $V2 && python -m hgfm.icpt.med_eval compare --arms base=$IC/med_${I}_base.json lm=$IC/med_${I}_lm.json icpt=$IC/med_${I}_icpt.json \
@@ -63,6 +63,7 @@ final() {
   done
   st "ALL DONE"
 }
+[ "${ICPT_LIB:-0}" = 1 ] && return 0   # round 91: `ICPT_LIB=1 source` gives the functions only (scripts/linux2_run_icpt_lm2.sh)
 st "START icpt driver"
 lane0 &
 ( until [ -s $COR/READY ]; do sleep 300; done; st "corpus ready"
