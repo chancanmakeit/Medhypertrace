@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-11-05 17:45 UTC(第 93 轮;第 7 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-11-05 20:51 UTC(第 94 轮;第 7 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -12,7 +12,7 @@
 > **📦 第 78 轮起:旧历史(§0.2–0.32、§0.34–0.79、§〇–十:MAFA 评测、旧 AEGIS 数据、v1 代码结构、方法论决定等)已移到 `HANDOFF_archive.md`,内容未删改;需要旧细节时去那里查。**
 
 > **🚀 第 7 个会话快速恢复(第 82 轮末写,以此为准;第 6 个会话的清单同样适用;下面第 38 轮的旧清单仍适用于 MAA / 公开数据恢复细节):**
-> 0. 第 7 个会话已于第 83 轮恢复;讨论记录现为 `RUN_v0.93.md`(下一轮 `git mv` 到 `RUN_v0.94.md`)。issue last_seen = 2026-11-05T02:23:23Z(语料已交付、两臂 02:22Z 已启动,见 §1.00;**发评论用 `gh api repos/chancanmakeit/medical-aegis/issues/N/comments -F body=@file`,`gh issue comment` 走 GraphQL 会 403**)。**交互式续训实验在跑(§0.99)**,有定时检查。论文 PDF / Muse 的调研文档在 private-documents(需要时稀疏克隆 `papers/agent轨迹数据合成/`)。
+> 0. 第 7 个会话已于第 83 轮恢复;讨论记录现为 `RUN_v0.94.md`(下一轮 `git mv` 到 `RUN_v0.95.md`)。issue last_seen = 2026-11-05T02:23:23Z(语料已交付、两臂 02:22Z 已启动,见 §1.00;**发评论用 `gh api repos/chancanmakeit/medical-aegis/issues/N/comments -F body=@file`,`gh issue comment` 走 GraphQL 会 403**)。**交互式续训实验在跑(§0.99)**,有定时检查。论文 PDF / Muse 的调研文档在 private-documents(需要时稀疏克隆 `papers/agent轨迹数据合成/`)。
 > 1. `add_repo`(push)添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`,clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走会话 git 代理,**不用 Project 指令里的明文 GitHub token**(已建议用户吊销)。commit 结尾加会话给的署名行。
 > 2. 读 §0.94 → §0.93 → §0.92 → §0.91 → §0.90 → §0.89 → §0.88 → §0.87 → §0.86 → §0.80–0.85 → `RUN_v0.82.md` 第 63–82 轮。核心结果文件:`MedHyperTrace-v2/results/e1e3/README.md`、`results/e4/README.md`、`results/tracertraj_audit/README.md`、`results/figures/README.md`、`results/samt_v1/README.md`、`results/midtrain_pilot/README.md`;设计:`docs/design/{HGFM_design_v0.2,SAMT_design_v1,E1-E3_prereg_v1,E4_prereg_v1}.md`;论文:`docs/paper/method_overview_and_figure_prompt.md`。
 > 3. issue:`bash MedHyperTrace-v2/scripts/issue_inbox.sh`(medical-aegis 全部 issue;我方最近:第 75 轮 issue #2 评论 `docs/interfaces/issue2_comment_r75.md`;第 78 轮新开 **issue #3**(中训练动机 + 是否请 medical-aegis 生成语料,正文 `docs/interfaces/issue3_r78.md`);第 80 轮新开 **issue #4**(ADP 对 mas-traj schema 的借鉴,正文 `docs/interfaces/issue4_r80.md`))。与其他智能体只通过 issue 交流,不 @ 任何人。
@@ -68,6 +68,7 @@
 - **第 92 轮(14:45 UTC):** 交互臂已全部完成(训练 08:18、特征 10:45);lm2 驱动 14:38 启动,lm 臂在 GPU 2,3 上训练,约 20:40 UTC 结束,之后抽特征、跑 final;loss_diag 在 GPU 1 上重跑。
 - **Jupyter 重启过,旧 kernel 已不在。** 现用 ms-swift kernel `0ee2176b-5b1d-4fd8-9674-9d9b18fee69f`,helper 为 `mht_r(cmd, t)`(subprocess,bash -lc)。后台任务用 `subprocess.Popen(..., start_new_session=True)` 启动。
 - **第 93 轮(17:45 UTC):** lm 臂 390 / 791 步(约 20:25 UTC 训练结束)。loss_diag 已完成(数字和 recv 列的问题见 RUN_v0.93):tapt_clean 在 OAT 格式下目标变好(+0.19),在自己的格式下没有变好(−0.08,含 0);recv 列被格式边界尖峰主导,不可比,稳健版本等用户决定。
+- **第 94 轮(20:51 UTC):连接器又要求重新登录,lm 臂的 merge / 抽特征 / final 状态未核实;等用户授权后再查(检查 6 的步骤见 RUN_v0.94)。**
 - issue #3 6647953304 已回复。下一次定时检查见最新的 RUN。
 
 ### 0.99 第 86 轮:交互式续训实验——预注册、代码、Linux #2 已启动(2026-11-04 18:05 UTC)
