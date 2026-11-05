@@ -1375,3 +1375,13 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - 主接口 (c) 在 base 上,控制后高于线性头的框架有 AgentVerse、llm_debate、MedAgents;triage 更差。不做判定。
 - **issue:** 没有新评论(last_seen 02:23:23Z)。
 - 下一次检查约 08:40 UTC(交互臂训练结束后)。
+
+## 第 90 轮 · 2026-11-05 08:45 UTC(定时检查 4,无人值守)
+- **Linux #2 连不上:**
+  - `jupyter-mcp-2` 的 execute_python 和 list_kernels 都返回 HTTP 502;
+  - get_server_info 返回 Cloudflare 530("上游只能经私网访问");
+  - portal 本身正常(jupyter-mcp、jupyter-mcp-2 都显示 enabled)。
+  - 判断:服务器侧的 Cloudflare 隧道或 Jupyter 服务掉了,不是连接器授权的问题。
+- 服务器上的任务用 nohup / setsid 运行,不依赖这个连接。交互臂按计划应在约 08:20 UTC 训练结束并开始抽特征,但**这一点未核实**。
+- **issue:** 无新评论(last_seen 02:23:23Z)。
+- 约 40 分钟后重试;若仍不通,需要用户在服务器上恢复隧道(或重启 Jupyter)。
