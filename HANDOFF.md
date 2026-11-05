@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-11-05 02:30 UTC(第 88 轮;第 7 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-11-05 03:05 UTC(第 88 轮;第 7 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -62,6 +62,7 @@
 - **两臂启动(02:22:33Z):** lm 在 GPU 0,1,icpt 在 GPU 2,3;日志 `mht_work/icpt/{lm,icpt}/tapt.log`,状态 `mht_work/icpt/status`。完成后 driver 自动抽特征 → final(e4_probe 默认头已含 agg;medscore lm / icpt;compare)。
 - **接口诊断:** 选中 (c) 前缀 + 聚合器(tt_val 0.887);WW 上 c 最差(0.526),报告时要写。loss_diag 修好 import,训练后重跑:`cd $C && GPU=<g> bash scripts/linux2_run_icpt_diag.sh`(跳过已完成步骤)。
 - base 医学 med_eval 带 agg 头重跑中(CPU);final 读 `med_{prefix,query}_base.json`。**确认它在 final 之前完成。**
+- **03:02 UTC 用户要求终止 lm 臂(GPU 0,1;步 55,没有检查点)。不要自动重启,等用户指示。** 交互臂继续跑;final 在等 lm 臂。
 - issue #3 6647953304 已回复。下一次定时检查见 RUN_v0.88。
 
 ### 0.99 第 86 轮:交互式续训实验——预注册、代码、Linux #2 已启动(2026-11-04 18:05 UTC)
