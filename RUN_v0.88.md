@@ -1315,3 +1315,39 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - 读集核对:5 个框架的运行时读集都明显不同于"之前所有消息";llm_debate 的完整性检验不适用(并行调用),只能说"未发现缺口";mdagents 已改标 `sources_complete: true` 并注明 6/8,157。
   - **等用户批准(付费)。** 我方建议:不含 DyLAN 的 ¥6.6 方案(另需修订 A4:M-new 去掉 DyLAN)。
 - 下一次检查约 20:30 UTC。
+
+## 第 88 轮 · 2026-11-05 02:25 UTC(用户:issue 新动静 + 两个训练臂能否启动)
+- **issue #3 6640829402(medical-aegis):** 交付语料 `data_runs/corpus_v1_2026-11-04/mastraj/`(5ee6c44)。
+  - 4 个框架 × 1,449 题,K = 1,不含 DyLAN(用户批准)。
+  - duckcoding 端点,gemini-2.5-flash-lite,温度 0.7;约 18.4M 渲染 token(o200k)。
+  - 他们提了补足到 40M 的三个选项;MedAgents 占一半以上的 token。
+- **诊断(GPU 2):**
+  - **iface:** SELECTED **c_prefix_aggregator**。
+    - tt_val 控制后:a 0.866、b 0.822、c 0.887;
+    - WW / TEgc 控制后:a 0.560 / 0.601、b 0.606 / 0.613、c 0.526 / 0.598。
+    - c 在 TT_val 上最好,但在 WW 上最差。选择规则是预注册的,照执行;这个张力必须写进报告。
+  - **loss_diag:** FAIL,`ModuleNotFoundError data_tools.public_to_mas_traj`。已删除该 import;训练结束后重跑(本来就是描述性的)。
+- **代码:**
+  - `med_eval` 加 agg 头(LOFO;lr 3e-4;默认头 linear / mlp / agg);
+  - `e4_probe` 加 agg 头(`fwd()` 统一前向,默认 `--heads linear mlp agg`,满足 A4 §4.2);
+  - 小合成集冒烟:agg val rauc 1.0。
+  - code.tgz md5 09a63705…,已同步到服务器。
+  - base 医学 med_eval 带 agg 重跑中(旧 json 在 `mht_work/icpt/old/`)。
+- **语料构建:** `build_icpt --budget_m 40`,输入 M-new 4 个文件 + anchor + 公开 mas_traj。
+  - **LM 臂:** 医学 19.43M + P 20.57M = 40.00M,25,437 个 chunk。
+  - **icpt 臂:** 条件响应 14.50M + 证据 4.91M(2.96 : 1)+ 回放 20.93M = 40.33M。
+    - 样本数:条件 11,546、证据 5,330、回放 17,783;
+    - 有效目标 token:条件 3.23M、证据 0.016M。
+  - 比值 1.008;交互样本覆盖医学部分(19.40M vs 19.43M,无 WARNING)。
+  - 回放的 17,783 条与 LM 臂的公开 chunk 逐字相同(已核对)。
+  - **每个医学框架:** 1,749 个运行进入,保留 1,424。
+    - 评测题重叠 319 题,MAA 6;
+    - mdagents 有 246 个运行 `sources_complete=false`,按 A2 使用;
+    - medagents_mc 有 4,257 个条件样本因上下文被截断;
+    - llm_debate 有 448 个步没有证据干扰项。
+  - **不对称(预注册要求报告):** 有效目标 token LM 约 40M,icpt 约 24M。
+  - 传输:HF `icpt/corpus/`(md5.txt)→ 服务器 md5 全部 OK → 在服务器本地写非空 READY(driver 用 `-s` 判断,空文件不触发)。
+- **Linux #2:** 02:22:33 UTC corpus ready,START train lm(GPU 0,1)和 START train icpt(GPU 2,3)。GPU 0 仍被他人占用约 8 GB。
+  - swift 预处理后:lm 25,310 / 25,437,icpt 34,486 / 34,659。差额待查(可能是超长样本被丢弃或验证集切分),写入报告。
+- **issue:** #3 6647953304,内容:语料收到;两臂构成;按 1 epoch、自然分布训练,不补 K = 2、不加权;排除统计;端点差异作为已知差异;两臂已启动。last_seen = 02:23:23Z。
+- **框架加权:** 预注册没有规定,保持自然分布(事后改设计会破坏预注册)。

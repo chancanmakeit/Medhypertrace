@@ -27,15 +27,24 @@ def load(path):
 
 
 def make_head(kind, H):
+    if kind == "agg":   # round 88: interaction-CPT pre-registration §3 interface (c), same module as hgfm.icpt.iface_probe
+        from hgfm.icpt.iface_probe import Agg
+        return Agg(H)
     if kind == "linear": return torch.nn.Sequential(torch.nn.LayerNorm(H), torch.nn.Linear(H, 1))
     return torch.nn.Sequential(torch.nn.LayerNorm(H), torch.nn.Linear(H, 256), torch.nn.GELU(), torch.nn.Linear(256, 1))
+
+
+def fwd(head, r, dev):
+    """Scores of the candidate steps. The aggregator head reads every step of the trajectory, the others only candidates."""
+    if type(head).__name__ == "Agg": return head(r["x"].to(dev))[r["cand"]]
+    return head(r["x"][r["cand"]].to(dev)).squeeze(-1)
 
 
 def score(head, rows, keys, dev):
     head.eval(); out = {}
     with torch.no_grad():
         for k in keys:
-            r = rows[k]; out[k] = head(r["x"][r["cand"]].to(dev)).squeeze(-1).float().cpu().tolist()
+            r = rows[k]; out[k] = fwd(head, r, dev).float().cpu().tolist()
     return out
 
 
@@ -54,13 +63,13 @@ def train(rows, kind, seed, dev, log, allow=None):
     tr = [k for k in rows if k[0] == "tt_train" and rows[k]["label"] in rows[k]["cand"] and (allow is None or k[1] in allow)]
     va = [k for k in rows if k[0] == "tt_val"]
     H = next(iter(rows.values()))["x"].shape[1]; head = make_head(kind, H).to(dev)
-    opt = torch.optim.AdamW(head.parameters(), lr=1e-3, weight_decay=1e-2); best, best_state, bad = -1, None, 0
+    opt = torch.optim.AdamW(head.parameters(), lr=3e-4 if kind == "agg" else 1e-3, weight_decay=1e-2); best, best_state, bad = -1, None, 0
     for ep in range(30):
         head.train(); perm = rng.permutation(len(tr))
         for b in range(0, len(perm), 32):
             loss = 0
             for i in perm[b:b + 32]:
-                r = rows[tr[i]]; lg = head(r["x"][r["cand"]].to(dev)).squeeze(-1)
+                r = rows[tr[i]]; lg = fwd(head, r, dev)
                 loss = loss + torch.nn.functional.cross_entropy(lg.view(1, -1), torch.tensor([r["cand"].index(r["label"])], device=dev))
             opt.zero_grad(); (loss / len(perm[b:b + 32])).backward(); opt.step()
         v = val_rauc(score(head, rows, va, dev), rows); log.append({"seed": seed, "epoch": ep, "val_rauc": v})
@@ -73,7 +82,7 @@ def train(rows, kind, seed, dev, log, allow=None):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--feats", nargs="+"); ap.add_argument("--out")
-    ap.add_argument("--heads", nargs="*", default=["linear", "mlp"]); ap.add_argument("--seeds", type=int, default=3)
+    ap.add_argument("--heads", nargs="*", default=["linear", "mlp", "agg"]); ap.add_argument("--seeds", type=int, default=3)   # agg added round 88 (ICPT interface (c))
     ap.add_argument("--subsets", default=None, help="Stage 0 label efficiency: subsets.json from hgfm.stage0.le_subsets")
     ap.add_argument("--sizes", nargs="*", default=None, help="subset sizes to run (default: all in the file)")
     a = ap.parse_args()
