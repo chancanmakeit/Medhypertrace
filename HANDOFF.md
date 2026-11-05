@@ -65,7 +65,7 @@
 - **final 已因 lm 的 FAIL 自行退出(03:02)。** lm 臂重跑完后要手动单独跑 final:先处理 status 里 lm 的 FAIL 行。
 - 03:02 UTC 用户要求终止 lm 臂(GPU 0,1;步 55,没有检查点)。
 - **第 91 轮用户决定:lm 臂改在 GPU 2,3 上跑(等交互臂完成之后)。** 驱动 `scripts/linux2_run_icpt_lm2.sh`(每 100 步存检查点,可续接;做完接 final,FG=2)。启动:`cd $C && setsid nohup bash scripts/linux2_run_icpt_lm2.sh > $W/icpt/driver_lm2.log 2>&1 < /dev/null &`。代码在 HF `icpt/code.tgz`,md5 4c0de726…。
-- **第 90–91 轮:Linux #2 隧道掉线(Cloudflare 530 / 502),13:47 UTC 仍不通;交互臂状态未核实;lm2 驱动尚未启动。**
+- **第 90–91 轮:Linux #2 先是隧道掉线(530 / 502);14:14 UTC 连接器 Claude-connect-inqi_top 要求用户重新登录。交互臂状态未核实;lm2 驱动尚未启动(步骤见 RUN_v0.91 定时检查的说明)。**
 - issue #3 6647953304 已回复。下一次定时检查见最新的 RUN。
 
 ### 0.99 第 86 轮:交互式续训实验——预注册、代码、Linux #2 已启动(2026-11-04 18:05 UTC)
