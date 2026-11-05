@@ -39,7 +39,6 @@ def sample(paths, per_fw, seed):
 
 def contexts(r, t):
     steps = r["steps"]; s = steps[t]; q = (r["task"].get("query") or "").strip()
-    from data_tools.public_to_mas_traj.common import add_phase_canonical
     ph = lambda x: x.get("phase_canonical") or x.get("phase")
     a_prev = "".join(f"[{x['step_id']}] {who(x)} | {ph(x)}\n{(x.get('output') or '').strip()}\n\n" for x in steps[:t])
     a = (f"Task ({r['task'].get('dataset')}, framework {r['framework']}):\n{q}\n\n" + a_prev, f"[{s['step_id']}] {who(s)} | {ph(s)}\n")
@@ -60,10 +59,8 @@ def cmd_run(a):
     from transformers import AutoModelForCausalLM, AutoTokenizer
     runs = sample(a.runs, a.per_fw, a.seed); models = dict(x.split("=", 1) for x in a.models)
     tok = AutoTokenizer.from_pretrained(next(iter(models.values()))); rng = random.Random(a.seed)
-    from data_tools.public_to_mas_traj.common import add_phase_canonical
-    items = []
+    items = []   # phase label = the run's own `phase` (no phase_canonical mapping: medical frameworks only, same in all formats)
     for r in runs:
-        r = add_phase_canonical(r)
         ts = [i for i, s in enumerate(r["steps"]) if s["kind"] == "llm" and (s.get("output") or "").strip() and s.get("sources") is not None]
         for t in sorted(rng.sample(ts, min(a.steps, len(ts)))):
             tgt = tok(r["steps"][t]["output"].strip(), add_special_tokens=False)["input_ids"][: a.max_target]

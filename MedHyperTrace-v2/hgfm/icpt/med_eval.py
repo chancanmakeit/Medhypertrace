@@ -8,6 +8,9 @@ Units (frameworks): mdagents (text + multimodal), llm_debate, medagents_mc, mac_
 Points = labelled LLM steps of a parent. Positive = labels.jsonl `positive` (pooled reference, amendment A1);
 `--rule judgment` uses the original judgment (sensitivity). Positives that only reflect the last call are dropped.
 A parent is evaluable with >= 1 positive and >= 1 other point.
+Heads: linear (LayerNorm + Linear), mlp (256 hidden), agg = the interface diagnostic's selected interface (c)
+(hgfm.icpt.iface_probe.Agg: 2-layer Transformer over ALL steps of the parent, scores read at the labelled points;
+lr 3e-4, otherwise the same recipe). agg is meaningful on prefix features (round 87: SELECTED c_prefix_aggregator).
 Read-out: for every unit f, a head is trained on the evaluable parents of the other units (listwise softmax, loss = mean
 over positives of -log p; other points are the softmax competitors), early stopping on a 10% question-grouped hold-out of
 the training parents (mean AUROC, patience 5, <= 30 epochs), AdamW lr 1e-3, wd 1e-2, 32 parents per step; seeds 0-2.
@@ -47,13 +50,16 @@ def build(feats_path, ww, rule):
             pts.append((i + 1, k / max(len(llm_idx) - 1, 1), p))   # feature row = history index + 1
         if not any(p for *_, p in pts) or all(p for *_, p in pts): continue
         rows = [a for a, _, _ in pts]
-        P[m["run_id"]] = {"x": r["feats"][rows].float(), "y": np.array([p for *_, p in pts]), "rel": np.array([b for _, b, _ in pts]),
+        P[m["run_id"]] = {"x": r["feats"][rows].float(), "xf": r["feats"].float(), "rows": torch.tensor(rows), "y": np.array([p for *_, p in pts]), "rel": np.array([b for _, b, _ in pts]),
                           "ntok": np.array([max(r["step_ntok"][a], 1) for a in rows], float), "unit": UNIT[m["framework"]],
                           "q": m["question_id"]}
     return P
 
 
 def head_of(kind, H):
+    if kind == "agg":
+        from hgfm.icpt.iface_probe import Agg
+        return Agg(H)
     if kind == "linear": return torch.nn.Sequential(torch.nn.LayerNorm(H), torch.nn.Linear(H, 1))
     return torch.nn.Sequential(torch.nn.LayerNorm(H), torch.nn.Linear(H, 256), torch.nn.GELU(), torch.nn.Linear(256, 1))
 
@@ -63,22 +69,26 @@ def auroc(s, y):
     return float(((p[:, None] > n[None]).sum() + 0.5 * (p[:, None] == n[None]).sum()) / (len(p) * len(n)))
 
 
+def score(h, d, kind):
+    return h(d["xf"])[d["rows"]] if kind == "agg" else h(d["x"]).squeeze(-1)
+
+
 def fit(P, keys, kind, seed):
     torch.manual_seed(seed); rng = np.random.default_rng(seed)
     qs = sorted({P[k]["q"] for k in keys}); hold_q = set(np.random.default_rng(12345).permutation(qs)[: max(1, len(qs) // 10)])
     tr = [k for k in keys if P[k]["q"] not in hold_q]; es = [k for k in keys if P[k]["q"] in hold_q]
-    H = P[keys[0]]["x"].shape[1]; h = head_of(kind, H); opt = torch.optim.AdamW(h.parameters(), lr=1e-3, weight_decay=1e-2)
+    H = P[keys[0]]["x"].shape[1]; h = head_of(kind, H); opt = torch.optim.AdamW(h.parameters(), lr=3e-4 if kind == "agg" else 1e-3, weight_decay=1e-2)
     best, state, bad = -1, None, 0
     for ep in range(30):
         h.train(); perm = rng.permutation(len(tr))
         for b in range(0, len(perm), 32):
             opt.zero_grad(); loss = 0.0
             for i in perm[b:b + 32]:
-                d = P[tr[i]]; lp = torch.log_softmax(h(d["x"]).squeeze(-1), 0)
+                d = P[tr[i]]; lp = torch.log_softmax(score(h, d, kind), 0)
                 loss = loss - lp[torch.from_numpy(d["y"])].mean()
             (loss / len(perm[b:b + 32])).backward(); opt.step()
         h.eval()
-        with torch.no_grad(): v = np.mean([auroc(h(P[k]["x"]).squeeze(-1).numpy(), P[k]["y"]) for k in es])
+        with torch.no_grad(): v = np.mean([auroc(score(h, P[k], kind).numpy(), P[k]["y"]) for k in es])
         if v > best: best, state, bad = v, {k: t.detach().clone() for k, t in h.state_dict().items()}, 0
         else:
             bad += 1
@@ -123,7 +133,7 @@ def cmd_score(a):
                 tr = [k for k in P if P[k]["unit"] != u]; h = fit(P, tr, kind, sd)
                 with torch.no_grad():
                     for k in P:
-                        if P[k]["unit"] == u: S[k] = h(P[k]["x"]).squeeze(-1).numpy().astype(float)
+                        if P[k]["unit"] == u: S[k] = score(h, P[k], kind).numpy().astype(float)
             per_seed.append(metrics(S, P)); print(kind, "seed", sd, "done", flush=True)
         res["heads"][kind] = {k: {m: (float(np.mean([ps[k][m] for ps in per_seed if ps[k][m] is not None]))
                                       if any(ps[k][m] is not None for ps in per_seed) else None) for m in per_seed[0][k]} for k in P}
@@ -176,8 +186,8 @@ def cmd_compare(a):
 def main():
     ap = argparse.ArgumentParser(); sp = ap.add_subparsers(dest="cmd", required=True)
     s = sp.add_parser("score"); s.add_argument("--feats"); s.add_argument("--ww"); s.add_argument("--out")
-    s.add_argument("--heads", nargs="+", default=["linear", "mlp"]); s.add_argument("--rule", default="pooled", choices=["pooled", "judgment"])
-    c = sp.add_parser("compare"); c.add_argument("--arms", nargs="+"); c.add_argument("--out"); c.add_argument("--heads", nargs="+", default=["linear", "mlp"])
+    s.add_argument("--heads", nargs="+", default=["linear", "mlp", "agg"]); s.add_argument("--rule", default="pooled", choices=["pooled", "judgment"])
+    c = sp.add_parser("compare"); c.add_argument("--arms", nargs="+"); c.add_argument("--out"); c.add_argument("--heads", nargs="+", default=["linear", "mlp", "agg"])
     a = ap.parse_args(); cmd_score(a) if a.cmd == "score" else cmd_compare(a)
 
 
