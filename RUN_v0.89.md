@@ -1360,3 +1360,18 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - status 里有 "FAIL train lm" 和 KILLED 行。final 会一直等 lm 臂完成,所以 H1 / H2 的读出要等 lm 臂重跑完才能出。
   - **重启 lm 臂需用户指示。** 届时只单独跑 lm 臂(train → 特征),不重跑交互臂;建议加按步保存检查点。
   - 定时检查 3 已改为不自动重启 lm 臂。
+
+## 第 89 轮 · 2026-11-05 04:30 UTC(定时检查 3,无人值守)
+- **交互臂(GPU 2,3):** 370 / 1,075 步,loss 0.438,token_acc 0.878,19.7 s/it,剩余约 3 h 51 m(预计约 08:20 UTC 训练结束,之后抽特征)。没有 FAIL。
+- **lm 臂:** 按用户要求保持终止,没有重启。GPU 0 只剩他人进程(约 7 GB),GPU 1 空闲。
+- **final 已自行退出**("final: FAIL seen, stop",03:02:34),因为看到了 FAIL train lm。
+  - 以后 lm 臂重跑完成后,要手动单独跑 final:先把 status 里 lm 的 FAIL / KILLED 行改名或注释掉,否则会再次停下。
+  - 交互臂的训练和抽特征不受影响(独立子 shell)。
+- **base 医学 med_eval 带 agg 头已完成**(10:22 / 10:26 CST)。linear 头与第 87 轮数字逐位一致(可复现)。
+  - 以下各框架父运行均值为"原始 / 控制后",只作描述;mac / medagents 都只有 6 条。
+  - **前缀接口 agg:** AgentVerse 0.828 / 0.627,llm_debate 0.718 / 0.568,mdagents 0.569 / 0.566,MedAgents 0.648 / 0.519,MAC 1.0 / 0.365,triage 0.602 / 0.411,MAM 0.530 / 0.616。
+  - **后置查询接口 agg:** AgentVerse 0.791 / 0.569,llm_debate 0.705 / 0.593,mdagents 0.595 / 0.637,MedAgents 0.762 / 0.591,MAC 0.981 / 0.941,triage 0.494 / 0.367,MAM 0.648 / 0.508。
+  - **最长步基线(原始 / 控制后):** AgentVerse 0.766 / 0.368,llm_debate 0.832 / 0.401,mdagents 0.482 / 0.517。
+  - 主接口 (c) 在 base 上,控制后高于线性头的框架有 AgentVerse、llm_debate、MedAgents;triage 更差。不做判定。
+- **issue:** 没有新评论(last_seen 02:23:23Z)。
+- 下一次检查约 08:40 UTC(交互臂训练结束后)。
