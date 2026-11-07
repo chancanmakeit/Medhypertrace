@@ -1599,3 +1599,6 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - **线 2:** G0 结束后驱动在 22:33 自动重启,GPU 0,1 正在训练 P-TT。
 - **Linux #2 的 GPU 2,3** 按用户要求没有使用。
 - issue 没有新评论。
+- **22:50 UTC:** Linux #1 驱动第一次失败,原因是 ms-swift 环境里缺 sklearn。按 Linux #2 的版本补装 scikit-learn 1.7.2、scipy 1.15.3、pandas 2.3.3、networkx 3.4.2(清华源),hgfm 各模块都能 import 后,22:52 重启驱动,两路抽特征已开始。
+  - 分词器的 "incorrect regex" 警告来自 swift 合并导出的分词器文件:Linux #2 抽 lm / icpt 臂特征时也出现过,两台机器的 tokenizers 都是 0.22.2、transformers 都是 4.57.6,不影响可比性。
+  - 待做:跨机特征一致性的小检查(余弦)。
