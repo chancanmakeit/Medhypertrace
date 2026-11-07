@@ -58,3 +58,22 @@ The medical corpus runs (medical-aegis corpus_v1, 4 frameworks × 1,449 question
 ## 4. Products
 - Code: `hgfm/outcome/` (corpus_to_ww, value_gate; ocpt rendering in build_icpt).
 - Results: `results/outcome/README.md`.
+
+## Amendments
+- **A1 (round 97, 2026-11-07 16:15 UTC; written before any G0 features were extracted and before gate G's results):** add **gate G0 (model × layer)** ahead of gate G. G0 runs on Linux #2 GPUs 0,1 ahead of line 2 (approved by the user).
+  - **Motivation (user's question, round 97):** all mid-training so far was done on `Qwen/Qwen3-8B`, the post-trained, aligned hybrid thinking model, not `Qwen3-8B-Base`. Features were always taken from the last layer only. Both confounds were never tested. If either matters, outcome-aware CPT on the old configuration would repeat the same pitfall.
+  - **Configurations:** model ∈ {Qwen3-8B (post-trained, current), Qwen3-8B-Base} × layer ∈ {9, 18, 27, 36}.
+    - Layer l < 36 = output of decoder layer l (residual stream, before the final norm).
+    - 36 = last hidden state after the final norm (the current setting).
+    - Step representation is unchanged (mean of the step's tokens in the OAT serialisation); no training of the language model.
+  - **Read-outs (frozen, existing recipes unchanged):**
+    1. **Medical:** `med_eval score` (LOFO, linear / agg heads), 237 parents, controlled AUROC.
+    2. **Public:** `e4_probe` stage A full labels (TT train → WW + TEgc, linear / agg heads), controlled rank-AUROC, 356 trajectories.
+  - **Reference:** (post-trained, L36), re-extracted in the same pass as a reproducibility check against the existing feats_base / featsmed_base.
+  - **Rule (primary = agg head):**
+    - Each configuration is compared with the reference by per-parent / per-trajectory paired differences, question-clustered bootstrap (medical: question_id; public: jac0.7).
+    - **Switch:** a configuration is "better" if its medical controlled difference has CI lower > 0 and point ≥ +0.02, and its public controlled difference is not significantly negative (CI upper ≥ 0). Among the "better" ones, take the largest medical point estimate.
+      - Gate G and the training of §2 then use that configuration. If the winner is Base, the ocpt and lm control arms are both retrained from Base (on Linux #1 or Linux #2, decided with the user).
+    - **No switch:** no configuration qualifies. The configuration stays as is, and this confound is recorded as ruled out at the frozen-feature level.
+    - Linear head results are reported only.
+  - Base CPT can only test "is it Base that matters" if it is done as a matched pair (Base-lm vs Base-ocpt, and Base-lm vs Qwen3-8B-lm). That will be a separate amendment after G0.
