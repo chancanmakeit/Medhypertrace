@@ -56,6 +56,34 @@
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
 
+### 1.03 第 97 轮:G0(后训练版 vs Base × 层)运行中;闸门 G 判 UNINFORMATIVE;Linux #1 准备 Base 实验(2026-11-07 16:55 UTC)
+- **用户要求:**
+  - 先做冻结检查 G0,看 Base 和中间层是否更好(修正案 A1,4ec524a);
+  - 下载 Qwen3-8B-Base;Base 上的续训实验放在 Linux #1(代码放 `/data1/cgh/code/`,HF 缓存放 `/data1/cgh/cache/huggingface`,conda 环境 `ms-swift`;四张卡每卡剩约 26 GB,小 batch / ZeRO-3 / 张量并行)。
+- **闸门 G(参考配置):**
+  - probe 留出末步 AUROC 最小值 0.592 < 0.60 → **UNINFORMATIVE**;
+  - drop 控制后 0.500 [0.458, 0.541];
+  - 不启动 ocpt 臂。结果写在 `MedHyperTrace-v2/results/outcome/README.md`。
+- **G0(Linux #2,`scripts/linux2_run_g0.sh`):**
+  - 状态文件 `mht_work/outcome/g0/status`,最终结果写入 `g0/g0.out`(含 DECISION 行);
+  - GPU 0 跑后训练版,GPU 1 跑 Base(检测到 `mht_work/dl_base.log` 出现 `^done` 后才开始);
+  - 结束后自动重启线 2 驱动(线 2 目前暂停)。
+- **Base 模型下载(`scripts/pdl.py`,走 ModelScope 直连,用 `qwen3_8b_base_meta.json` 校验 sha256):**
+  - Linux #1 → `/data1/cgh/cache/huggingface/models/Qwen3-8B-Base`,log `/data1/cgh/code/mht/pdl_base.log`;
+  - Linux #2 → `/data1/ekyang/cgh/models/Qwen3-8B-Base`,log `mht_work/dl_base.log`。
+- **网络要点:**
+  - 两台机器都能直连 ModelScope 和清华 PyPI;
+  - Linux #2 的 HTTP 代理 23333 总带宽只有约 1.4 MB/s;
+  - Linux #1 的 SOCKS 11111 很慢,而且 SSL 会断。
+- **Linux #1 连接器:** `jupyter-mcp_*`,kernel `17b8b4c1-4eb4-45ce-8509-1bdf4b8088a8`,其中已定义 `mht_r`。
+- **Linux #1 装环境:** `/data1/cgh/code/mht/install_env.sh`(清华源;版本与 Linux #2 的 mht-swift 一致,flash-attn 用 cp312 wheel);log 里出现 `ENV OK` / `INSTALL_FINISHED` 算完成。
+- **待办:**
+  1. 读 G0 结果,按 A1 规则判定;
+  2. 若 Base 胜出,写新修正案(配对:Base-lm vs Base-ocpt,以及 Base-lm vs Qwen3-8B-lm),在 Linux #1 四卡上跑 ZeRO-3,并和用户商定;
+  3. 闸门 G 在胜出配置上重跑;
+  4. 线 2 自动恢复后监控;
+  5. issue #1 等报价。
+
 ### 1.02 第 96 轮:线 2 和线 3 启动(2026-11-07 15:40 UTC)
 - **用户决定:** 做线 2(用反事实标签做后训练)和线 3(继续中训练,但先说明凭什么这次会不一样)。训练用 GPU 0,1(即使有他人占用)。
 - **预注册:** `docs/design/PostTrain_prereg_v1.md`(线 2;主假设 HP1 = P-MED − F-LOFO,医学集控制后);`docs/design/OutcomeCPT_prereg_v1.md`(线 3;先跑零训练闸门 G,GO 之后才训练 ocpt 臂,对照 lm 臂)。

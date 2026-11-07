@@ -1515,3 +1515,33 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - GPU 2,3 上有他人进程(1.7 GB,100% 利用),没有使用。
 - **issue:** #1 6709060723,请求报价"语料题池答错运行的 v3 分叉标签"(每框架 300 / 500 / 全部三档,只报价,不生成)。last_seen 15:32:44Z。
 - **下一次检查:** 16:55 UTC(读闸门结果;GO 的话问用户线 3 用哪些 GPU)。
+
+## 第 97 轮 · 2026-11-07 16:55 UTC(用户:"Base 先冻结检查"、"下载 Qwen3-8B-Base,Base 实验放 Linux #1"、"Linux #1 用 conda ms-swift 环境,四卡小 batch / 张量并行")
+- **用户提出的三种可能解释:**
+  1. MiniLM 不够强:它只用在 v1 / HGNN / SAMT。阶段 0 / E4 / ICPT 用的都是 Qwen3-8B 末层特征,所以这条解释不适用于近期的阴性结果。
+  2. 用的是后训练版而不是 Base:从没测过 → 写修正案 A1 = 闸门 G0。
+  3. 医学数据太少:见回复,作为后续。
+- **修正案 A1(4ec524a,写在任何 G0 特征和闸门 G 结果之前):** 闸门 G0 = {Qwen3-8B 后训练版, Qwen3-8B-Base} × 层 {9, 18, 27, 36},冻结读出(医学 LOFO agg;公开 stageA agg)。
+  - 换配置条件:医学控制后差值 CI 下界 > 0、点估计 ≥ +0.02,且公开数据不显著为负。
+  - `e4_features --layers` 用前向 hook 取各层输出。
+- **闸门 G 结果(参考配置,16:40 UTC):**
+  - probe 留出末步 AUROC 0.600 / 0.608 / 0.592,按代码取最小值 < 0.60 → **UNINFORMATIVE**(按均值是 0.600,恰好压线)。
+  - drop 控制后 0.500 [0.458, 0.541];即使 probe 有效也只能判 UNCLEAR。
+  - 不自动启动 ocpt 臂。详见 `MedHyperTrace-v2/results/outcome/README.md`。
+- **G0 在 Linux #2 上运行(`scripts/linux2_run_g0.sh`,16:13 UTC 启动):**
+  - GPU 0:后训练版 4 层,公开 + 医学特征,约 2.5 s/轨迹。
+  - GPU 1:Base,等下载完成;之后跑 stageA + med_eval + `hgfm/outcome/g0_compare.py`。
+  - 线 2 驱动已暂停,G0 脚本结束时会自动重启它。
+- **Qwen3-8B-Base 下载:**
+  - 新写 `scripts/pdl.py`:并行分块下载,支持断点续传,做 sha256 校验,带 `--url_tmpl` / `--meta`。
+  - 修过的坑:
+    - py3.10 urllib 不跟随 308 跳转,改写 `redirect_request` 并保留 Range 头;
+    - Linux #2 代理 23333 的**总带宽**上限约 1.4 MB/s。
+  - **关键发现:两台机器都能直连 ModelScope**:Linux #1 约 61 MB/s,Linux #2 约 10 MB/s(16 线程)。改走 `https://www.modelscope.cn/models/{repo}/resolve/master/{path}`,sha256 用 huggingface.co API 的 LFS 值(`qwen3_8b_base_meta.json`)。
+  - 输出位置:Linux #1 `/data1/cgh/cache/huggingface/models/Qwen3-8B-Base`;Linux #2 `/data1/ekyang/cgh/models/Qwen3-8B-Base`。
+- **Linux #1 环境:**
+  - conda `ms-swift` 原本是空的(Python 3.12.15,只有 ipykernel)。
+  - `install_env.sh` 改用清华 PyPI 镜像直连(PyPI 直连只有 55 kB/s,清华源可以直连),版本与 Linux #2 一致;flash-attn 装 cp312 wheel。
+  - 网络:SOCKS 11111 代理到 hf-mirror 约 18 kB/s,而且 SSL 会断,所以不用它。
+  - GPU:lxt 的任务每卡占约 21 GB,剩约 26 GB。
+- **代码:** `scripts/pdl.py`、`hgfm/outcome/g0_compare.py`、`scripts/linux2_run_g0.sh` 已提交。
