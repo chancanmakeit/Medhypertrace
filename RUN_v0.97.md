@@ -1551,3 +1551,17 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - G0 进度(公开集约 4,300 条):后训练版在 GPU 0 上 2,800 条,Base 在 GPU 1 上 2,000 条(16:59 开始)。预计约 19:15 UTC 抽完特征,然后是 stageA、med_eval 和比较。
   - 用户决定 Linux #2 的 GPU 2,3 不给 G0 用。目前上面跑的是用户另一个项目 `many-heads-are-better-than-one` 的 `lewm/train_wm.py`,不是本项目的任务。
   - issue 没有新评论。
+- **用户授权(18:26 UTC):** "若有胜出情况,你写好修正案之后可以直接开训而无需询问我"。
+- **修正案 A2(ce75abb,18:40 UTC,写在任何 G0 读出之前):** 规定 G0 之后怎么做。
+  - Base 胜出 → 在 Linux #1 训练 Base-lm(语料、配方与 lm 臂相同;4 卡 × 累积 8,等效 batch 32 不变;显存不够时允许 ZeRO-3)。H-B1 = Base-lm(l) − Base(l),医学控制后 agg;并在 Base(l) 上重跑闸门 G。
+  - 中间层胜出 → 不新训,在第 l 层重抽 lm 臂特征(H-L1),并重跑闸门 G。
+  - 没有配置胜出 → 不训练。
+- **Linux #1 准备工作:**
+  - 两台机器在同一局域网(10.171.26.1 / .21),HTTP 直传约 117 MB/s。用它把 lm.jsonl(md5 b7e05cda…)、代码、评测数据(oat_src、tt_ww、med_ww、outcome/corpus,evaldata.tar md5 964d3375…)传到 `/data1/cgh/code/mht/{xfer,work,MedHyperTrace-v2}`。传完已关掉 HTTP 服务。
+  - `linux2_run_tapt.sh` 加了 ENV / DS 选项(默认行为不变)。
+  - 冒烟测试:
+    - 直接 DDP 显存不够:在 logits 处 OOM,其他用户每卡占约 22 GB。
+    - ZeRO-3 可行:每卡 20 GiB,约 76 s/步,第 1 步 loss 1.24。791 步约需 16.5 h。
+  - /data1 是负载很重的机械盘,4 个进程用 mmap 随机读权重非常慢;先用 cat 顺序读一遍把权重放进页缓存(约 90 MB/s)。
+  - 驱动 `scripts/linux1_run_base_lm.sh`(LAYER=l):训练 → 合并 → 抽第 l 层特征(Base-lm 公开 + 医学;Base 医学 + 语料)→ 跑 value_gate。
+- **G0 进度(18:50 UTC):** 公开集两个模型都已抽到 4,000 / 约 4,300 条。

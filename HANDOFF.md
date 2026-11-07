@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-11-07 16:55 UTC(第 97 轮;第 7 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-11-07 18:55 UTC(第 97 轮;第 7 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -78,9 +78,15 @@
 - **Linux #1 连接器:** `jupyter-mcp_*`,kernel `17b8b4c1-4eb4-45ce-8509-1bdf4b8088a8`,其中已定义 `mht_r`。
 - **Linux #1 环境已就绪(17:58 UTC 核实 ENV OK):** conda `ms-swift`(Python 3.12),torch 2.6.0+cu124、transformers 4.57.6、swift 4.6.0、peft 0.17.1、deepspeed 0.19.8、flash-attn 2.7.4.post1;安装脚本 `/data1/cgh/code/mht/install_env.sh`(清华源)。两台机器的 Base 都已下载并通过 sha256 校验。
 - **G0 进度:** 预计约 19:15 UTC 抽完特征,然后 stageA、med_eval、g0_compare。**用户要求 Linux #2 的 GPU 2,3 留空**(上面现在跑的是用户另一个项目的 lewm 训练)。
+- **用户授权(18:26 UTC):** G0 有胜出配置时,写好修正案后直接开训,不用再问。**修正案 A2 已写好(ce75abb,早于 G0 读出)**,规定 Base 胜出(case B)、中间层胜出(case L)、没有胜出三种情况怎么做。
+- **Linux #1 已就绪:** 代码 `/data1/cgh/code/mht/MedHyperTrace-v2`;语料 `xfer/lm.jsonl`;评测数据 `work/`(结构与 Linux #2 的 mht_work 相同)。
+  - Base 胜出时的启动命令:`cd /data1/cgh/code/mht && LAYER=<l> setsid nohup bash MedHyperTrace-v2/scripts/linux1_run_base_lm.sh > runs/base_lm_driver.log 2>&1 < /dev/null &`
+  - 用 ZeRO-3,约 76 s/步,约 16.5 h;状态文件 `runs/base_lm/driver_status`。
+  - 两台机器同在 10.171.26.x 局域网:在发送端 `python -m http.server <port> --bind <ip>`,接收端不走代理 curl,约 117 MB/s;传完关掉服务。
+  - /data1 是机械盘,加载模型前先 cat 一遍权重做预热。
 - **待办:**
-  1. 读 G0 结果,按 A1 规则判定;
-  2. 若 Base 胜出,写新修正案(配对:Base-lm vs Base-ocpt,以及 Base-lm vs Qwen3-8B-lm),在 Linux #1 四卡上跑 ZeRO-3,并和用户商定;
+  1. 读 G0 结果,按 A1 规则判定,再按 A2 执行(case B → 在 Linux #1 启动上面的驱动;case L → 在 Linux #2 重抽 lm 臂第 l 层特征);
+  2. Base-lm 训练完成后,把特征传回 Linux #2,对照 G0 的 b_l 特征跑 med_eval / stageA(H-B1 / H-B2);
   3. 闸门 G 在胜出配置上重跑;
   4. 线 2 自动恢复后监控;
   5. issue #1 等报价。
