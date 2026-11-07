@@ -11,10 +11,12 @@
 #        memory -24..-36%, same loss / gradients, scripts/bench_train_speed.py). Default false (all earlier runs).
 #        MODE=sft (round 86, interaction-CPT arm): `swift sft` on a {"messages"} jsonl, loss on the assistant turn only;
 #        every other argument identical. Default pt (every earlier run).
+#        ENV / DS (round 97, Linux #1 Base CPT): ENV = conda env prefix (default the Linux #2 mht-swift env);
+#        DS=zero2|zero3 adds `--deepspeed DS` (memory fallback on shared GPUs; optimiser math unchanged). Unset = old behaviour.
 #        SAVE_STEPS=N (round 91): save a full checkpoint (model + optimizer) every N steps (keep the last 2) and, when
 #        $OUT/ckpt already holds a checkpoint, resume from it. Training recipe unchanged; unset = old behaviour.
 set -u
-ENV=/data/ekyang/anaconda3/envs/mht-swift
+ENV=${ENV:-/data/ekyang/anaconda3/envs/mht-swift}
 export PATH=$ENV/bin:$PATH HF_HUB_OFFLINE=1 TOKENIZERS_PARALLELISM=false USE_HF=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 unset all_proxy ALL_PROXY http_proxy https_proxy
 LM=${LM:-/data1/ekyang/cgh/cache/huggingface_hub/hub/models--Qwen--Qwen3-8B}
@@ -33,7 +35,7 @@ CUDA_VISIBLE_DEVICES=$GPUS NPROC_PER_NODE=$NP swift ${MODE:-pt} \
   --model $LM --model_type qwen3 --template qwen3 --torch_dtype bfloat16 --tuner_type lora --lora_rank 64 --lora_alpha 128 --lora_dropout 0.05 \
   --target_modules all-linear --learning_rate 1e-4 --lr_scheduler_type cosine --warmup_ratio 0.03 --weight_decay 0.01 \
   --per_device_train_batch_size 1 --gradient_accumulation_steps $ACC --num_train_epochs 1 \
-  --max_length 4096 --attn_impl ${ATTN:-flash_attn} --use_liger_kernel ${LIGER:-false} ${PACK:+--packing true} --gradient_checkpointing true --dataset $CORPUS --split_dataset_ratio 0.005 \
+  --max_length 4096 --attn_impl ${ATTN:-flash_attn} --use_liger_kernel ${LIGER:-false} ${PACK:+--packing true} --gradient_checkpointing true ${DS:+--deepspeed $DS} --dataset $CORPUS --split_dataset_ratio 0.005 \
   --dataloader_num_workers 4 --dataset_num_proc 8 $SAVE --logging_steps 5 \
   --seed 0 --data_seed 0 --output_dir $OUT/ckpt --add_version false --report_to $REPORT --run_name $NAME $extra \
   >> $OUT/tapt.log 2>&1 || { echo "[$(date -u +%F' '%T)] FAIL tapt" >> $OUT/status; exit 1; }

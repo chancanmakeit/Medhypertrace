@@ -77,3 +77,19 @@ The medical corpus runs (medical-aegis corpus_v1, 4 frameworks × 1,449 question
     - **No switch:** no configuration qualifies. The configuration stays as is, and this confound is recorded as ruled out at the frozen-feature level.
     - Linear head results are reported only.
   - Base CPT can only test "is it Base that matters" if it is done as a matched pair (Base-lm vs Base-ocpt, and Base-lm vs Qwen3-8B-lm). That will be a separate amendment after G0.
+- **A2 (round 97, 2026-11-07 18:40 UTC; written before any G0 result — G0 features were still being extracted, no read-out had run):** what happens after G0 picks a winner. The user authorised starting training directly once this amendment is written (no further confirmation).
+  - **Case B: the G0 winner is a Base configuration b_l (Qwen3-8B-Base, layer l).**
+    - **Train Base-lm** on Linux #1 (4×A6000, shared; ~26 GB free per GPU):
+      - same corpus `lm.jsonl` (md5 b7e05cda62c34954df648ba03d82509c) and the same recipe as the existing lm arm: `scripts/linux2_run_tapt.sh`, LoRA r64 / α128 all-linear, lr 1e-4 cosine, warmup 3%, 1 epoch, max_length 4096, seed 0, gradient checkpointing, flash-attn;
+      - only change: 4-GPU DDP × accumulation 8 instead of 2 × 16, so the effective batch (32) and the step count are unchanged;
+      - same package versions; DeepSpeed ZeRO-3 only if the plain run does not fit (recorded if used).
+    - **Features:** `e4_features --layers l` on public + medical, same serialisation.
+    - **H-B1 (primary):** Base-lm(l) − Base(l), medical branching set, med_eval LOFO agg, controlled, pooled; question-clustered bootstrap. Interaction-CPT §4.3 rules: HOLDS = CI lower > 0 and ≥ 4/6 grid points with the same sign; NULL = CI upper < +0.04; otherwise UNDETERMINED.
+    - **H-B2 (secondary):** Base-lm(l) − Qwen3-8B-lm(L36) on medical, plus public stage A (WW + TEgc, controlled).
+    - **Gate G** is re-run on Base(l) corpus features with the §1 rules unchanged. The Base-ocpt arm is trained only on GO, as Base-ocpt vs Base-lm.
+  - **Case L: the winner is a post-trained middle layer it_l.**
+    - No new language-model training for the lm comparison. Re-extract the existing merged lm arm at layer l (public + medical).
+    - **H-L1:** lm(l) − base(l), same rules as H-B1.
+    - Gate G is re-run on layer-l corpus features. ocpt only on GO.
+  - **No switch:** nothing is trained. The model / layer confound is recorded as ruled out at the frozen-feature level, and line 2 continues as pre-registered.
+  - **Unchanged:** all evaluation code, data and statistics. A Base run that fails for engineering reasons (OOM, I/O) is re-run without changes to the recipe beyond the memory fallback above.
