@@ -1484,3 +1484,34 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - **需要用户决定的大方向:**
   - 中训练路线(阶段 0 的纯语言建模,加上这次的交互目标)在控制步长和位置后,都没有可靠增益;
   - 而项目主线要求"基础模型必须经中训练获得"。
+
+## 第 96 轮 · 2026-11-07 15:40 UTC(用户:"做 2 线和 3 线")
+- **数据核查:**
+  - 语料运行(corpus_v1,4 框架 × 1,449)有 `labels.is_correct`,每框架约 43% 答对;共 5,796 条,答对 2,492 条。这是免费的结局标签。
+  - 评测集中 263 条可评测父运行**全是答错的运行**。
+- **预注册(6a0482c,在任何结果之前):**
+  - `docs/design/OutcomeCPT_prereg_v1.md`(线 3):
+    - 先用零训练闸门回答"凭什么这次会不一样"。之前所有目标都没让模型见过结局。
+    - **闸门 G:** 在 base 冻结特征上,用语料运行训练结局 probe v,计算掉值分数 drop(t) = v(t_prev) − v(t),在医学分叉集上算控制后 AUROC。
+      - GO:CI 下界 > 0.50、点估计 ≥ 0.53、网格 ≥ 4/6;NO-GO:上界 < 0.53;否则 UNCLEAR。
+      - probe 有效性:末步 AUROC ≥ 0.60。
+    - **GO 之后:** ocpt 臂 = lm 臂语料加上每个 LLM 步后的 `[OUTCOME]` 行(单变量消融),对照现有 lm 臂。
+  - `docs/design/PostTrain_prereg_v1.md`(线 2):
+    - LoRA r16 后训练步打分器。
+    - P-TT:在 TracerTraj 上训练,零样本迁移到医学集,并在公开数据上评测。
+    - P-MED:医学分叉标签,7 折留一框架。
+    - P-MED/TT:以 P-TT 为起点。
+    - **主假设 HP1:** P-MED − F-LOFO(冻结特征 + agg,0.569),控制后,合并。
+    - 桥接(次要):从 lm / icpt 起始的 P-MED。
+    - 付费扩展只报价。
+- **代码(b01d6ab):**
+  - `hgfm/outcome/{corpus_to_ww, value_gate}.py`:合成数据冒烟,植入信号检出 0.81 GO。
+  - `hgfm/posttrain/{lora_score, posttrain_eval}.py`、`scripts/linux2_run_posttrain.sh`:服务器上 med / tt 两种模式各冒烟一次,EXIT 0;评测脚本两个子命令都跑通;可训练参数 43.6M。
+- **Linux #2(GPU 0,1,用户指定):**
+  - 闸门:15:26 开始在 GPU 1 上抽 base 语料特征(5,796 条,约 55 分钟),接着在 CPU 上跑 value_gate。
+  - 线 2 驱动 15:38 启动,等闸门抽特征结束后开始,依次跑:P-TT → 7 折 P-MED → 7 折 P-MED/TT → 评测 → 桥接(lm / icpt 各 7 折)。
+  - E4 的 BEFT 训练 2 个 epoch 约 2.9 h,P-TT 预计 3–4 h。
+  - 服务器路径:`mht_work/outcome/`、`mht_work/posttrain/`。
+  - GPU 2,3 上有他人进程(1.7 GB,100% 利用),没有使用。
+- **issue:** #1 6709060723,请求报价"语料题池答错运行的 v3 分叉标签"(每框架 300 / 500 / 全部三档,只报价,不生成)。last_seen 15:32:44Z。
+- **下一次检查:** 16:55 UTC(读闸门结果;GO 的话问用户线 3 用哪些 GPU)。
