@@ -1545,3 +1545,9 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - 网络:SOCKS 11111 代理到 hf-mirror 约 18 kB/s,而且 SSL 会断,所以不用它。
   - GPU:lxt 的任务每卡占约 21 GB,剩约 26 GB。
 - **代码:** `scripts/pdl.py`、`hgfm/outcome/g0_compare.py`、`scripts/linux2_run_g0.sh` 已提交。
+- **检查(17:58 UTC):**
+  - 两台机器的 Qwen3-8B-Base 都已下载完,sha256 全部通过。
+  - Linux #1 的 ms-swift 环境 **ENV OK**:torch 2.6.0+cu124、transformers 4.57.6、swift 4.6.0、peft 0.17.1、deepspeed 0.19.8、flash-attn 2.7.4.post1,CUDA 可用。
+  - G0 进度(公开集约 4,300 条):后训练版在 GPU 0 上 2,800 条,Base 在 GPU 1 上 2,000 条(16:59 开始)。预计约 19:15 UTC 抽完特征,然后是 stageA、med_eval 和比较。
+  - 用户决定 Linux #2 的 GPU 2,3 不给 G0 用。目前上面跑的是用户另一个项目 `many-heads-are-better-than-one` 的 `lewm/train_wm.py`,不是本项目的任务。
+  - issue 没有新评论。

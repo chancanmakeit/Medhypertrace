@@ -76,7 +76,8 @@
   - Linux #2 的 HTTP 代理 23333 总带宽只有约 1.4 MB/s;
   - Linux #1 的 SOCKS 11111 很慢,而且 SSL 会断。
 - **Linux #1 连接器:** `jupyter-mcp_*`,kernel `17b8b4c1-4eb4-45ce-8509-1bdf4b8088a8`,其中已定义 `mht_r`。
-- **Linux #1 装环境:** `/data1/cgh/code/mht/install_env.sh`(清华源;版本与 Linux #2 的 mht-swift 一致,flash-attn 用 cp312 wheel);log 里出现 `ENV OK` / `INSTALL_FINISHED` 算完成。
+- **Linux #1 环境已就绪(17:58 UTC 核实 ENV OK):** conda `ms-swift`(Python 3.12),torch 2.6.0+cu124、transformers 4.57.6、swift 4.6.0、peft 0.17.1、deepspeed 0.19.8、flash-attn 2.7.4.post1;安装脚本 `/data1/cgh/code/mht/install_env.sh`(清华源)。两台机器的 Base 都已下载并通过 sha256 校验。
+- **G0 进度:** 预计约 19:15 UTC 抽完特征,然后 stageA、med_eval、g0_compare。**用户要求 Linux #2 的 GPU 2,3 留空**(上面现在跑的是用户另一个项目的 lewm 训练)。
 - **待办:**
   1. 读 G0 结果,按 A1 规则判定;
   2. 若 Base 胜出,写新修正案(配对:Base-lm vs Base-ocpt,以及 Base-lm vs Qwen3-8B-lm),在 Linux #1 四卡上跑 ZeRO-3,并和用户商定;
