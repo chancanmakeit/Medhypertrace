@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-11-08 07:05 UTC(第 100 轮;第 7 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-11-08 09:30 UTC(第 100 轮;第 7 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -60,7 +60,7 @@
 - **结果:** `MedHyperTrace-v2/results/posttrain/README.md`;原始输出在 Linux #1 `/data1/cgh/code/mht/work/posttrain/`。
 - **HP1:** P-MED − F-LOFO = −0.064 [−0.115, −0.017](去掉 mdagents 后 −0.078)。P-MED 控制后 0.505、原始 0.696,学到的是捷径。**按预注册停掉这条路线,不扩付费标签**;issue #1 6718517591 已撤回报价请求。
 - **HP2:** P-TT − F-TT 公开集 +0.068 [+0.032, +0.104] → HOLDS;零样本迁移到医学 −0.007。**HP3:** +0.084 HOLDS,但 P-MED/TT 只回到冻结基线水平(+0.021)。
-- **还在跑:** bridge(pmedlm / pmedicpt × 7,Linux #1,约 09:15 UTC)→ eval_bridge.out。只报告,不改变结论。
+- **bridge(08:59 UTC 完成):** pmedlm − pmed +0.054 [+0.021, +0.088] HOLDS;pmedicpt − pmed 未定;pmedicpt − pmedlm −0.028 显著为负。pmedlm 控制后 0.559,仍低于冻结探针 0.569 和 TT 初始化 0.589。**线 2 全部完成,Linux #1 上没有在跑的任务。**
 - **待用户决定:**
   1. H-L1 怎么复现;
   2. 是否预注册在第 18 层回头检查之前的阴性结论;

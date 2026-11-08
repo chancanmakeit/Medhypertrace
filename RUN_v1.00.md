@@ -1674,3 +1674,10 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - 冻结读出上,只有第 18 层的 LM-CPT 有小而成立的增益(+0.017);
   - 后训练在医学集上被捷径吞掉;只有用大量公开标签做后训练,在公开数据上有效。
   - 医学集每个 fold 约 150–200 条标签太少,而且捷径太强。
+- **bridge(08:59 UTC 完成;09:26 检查):**
+  - pmedlm − pmed **+0.054 [+0.021, +0.088] HOLDS**;
+  - pmedicpt − pmed +0.026 → UNDETERMINED;
+  - pmedicpt − pmedlm −0.028 → NULL(显著为负)。
+  - 绝对值(控制后):pmedlm 0.559 < F-LOFO 0.569 < pmedtt 0.589。
+  - 读法:LM-CPT 初始化部分挡住了捷径,和第 18 层 H-L1 方向一致;但仍没有超过冻结探针。写进 `results/posttrain/README.md` bridge 一节。
+  - 线 2 全部完成,Linux #1 上没有本项目任务;不再约定时检查。
