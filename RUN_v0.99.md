@@ -1646,3 +1646,17 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
 - **用户决定(03:06 UTC):** 等 Linux #2 上目前的实验做完,就不再用 Linux #2;我们的实验都在 Linux #1 上做。
   - 执行:Linux #2 只让线 2 驱动跑完,不派新任务;新实验(包括 H-L1 复现、第 18 层回头检查等)都在 Linux #1。写进 HANDOFF §1.06。
   - 线 2 第一个 P-MED fold 跑完后估算总时长;如果太长,提议把剩下的 fold 挪到 Linux #1。
+- **用户(04:32 UTC):"把剩下的 fold 挪到 Linux #1"。** 执行情况:
+  - Linux #2:
+    - P-TT 已在 04:17 完成(best val 0.928,1,363 条打分);
+    - 驱动当时已开始 pmed_mdagents。我只杀掉了顶层驱动进程(SIGKILL 704958),让这个 fold 在 Linux #2 跑完(04:3x,61 条打分),驱动不再往下走;
+    - Linux #2 上已没有本项目进程,status 已注明。
+  - 拷到 Linux #1(局域网,md5 一致):
+    - ptt/{best_state.pt, scores.json, log.jsonl};
+    - pmed_mdagents/;
+    - 评测需要的 icpt/featsmed_base.pt、icpt/med_prefix_base.json、stage0/le/meta.json、stage0/cluster_ci/clusters.json、e4/stageA/e4a_linear_scores.json;
+    - icpt 臂模型(16 GB,15 个文件大小全部一致)。
+  - **PostTrain 修正案 A1(b11811d,写在任何 eval 之前):** 剩下的 fold 在 Linux #1 上用 4 卡 × accum 8,等效 batch 32 不变。已知差异:每 epoch 最多丢 3 条(原来是 1 条),epoch 内的数据顺序不同。另报一个去掉 mdagents fold 的 HP1 敏感性结果。
+  - 冒烟测试(8 条):4 卡每卡约 20 GB,加上他人占用峰值约 41 GB,没有 OOM。
+  - **驱动 `scripts/linux1_run_posttrain.sh`:** 04:40 在 Linux #1 GPU 0–3 启动,跳过 ptt / pmed_mdagents,llm_debate fold 正在训练(n_train 189)。
+  - 状态文件 `/data1/cgh/code/mht/work/posttrain/status`;顺序为 P-MED 余下 6 个 → P-MED/TT 7 个 → eval med / pub → bridge lm / icpt 各 7 个 → eval bridge。
