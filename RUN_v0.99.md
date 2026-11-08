@@ -1637,3 +1637,9 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - 已把 pub_it_L18.pt(513,062,830 B,大小一致)从 Linux #2 拷到 Linux #1;`runs/layer18/stageA.sh` 会在特征写完后自动在 Linux #1 GPU 3 上跑 e4_probe stageA(base=it18、lm=lm18,linear + agg)。打分结果再拷回 Linux #2,用 G0 的公开集比较代码算控制后配对差(次要,只报告)。
   - 线 2:P-TT epoch 1、优化步 100,用时 3.4 h,预计约 05:30 UTC 结束。
   - issue 没有新评论。
+- **检查(02:55 UTC):公开集次要比较(第 18 层)完成。**
+  - agg 控制后 lm − base **+0.020 [+0.0001, +0.041]**,linear +0.012 [−0.008, +0.034];按 jac0.7 题目聚类 bootstrap。
+  - 原始值:linear −0.022 [−0.041, −0.005],agg −0.005。
+  - 方向和医学集的 H-L1 一致,但只是勉强显著,并且只在控制后成立(lm 臂在第 18 层的特征少用了步长 / 位置捷径)。
+  - 写进 `results/outcome/README.md`。打分结果在 Linux #2 `mht_work/outcome/g0/l18/`。
+  - 两台机器上临时开的 HTTP 服务都已关掉。
