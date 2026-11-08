@@ -48,3 +48,22 @@ All share: Qwen3-8B; inputs serialised as OAT (same as E4 / stage 0); step repre
 ## 6. Products
 - Code: `hgfm/posttrain/` (LoRA step scoring, LOFO driver, external-score evaluation).
 - Results: `results/posttrain/README.md`.
+
+## Amendment A1 (round 99, 2026-11-08 04:40 UTC): compute moved to Linux #1. Written before any line-2 evaluation was run or read.
+
+- **Why:** the user asked that, once its current experiments finish, Linux #2 is no longer used and the remaining folds move to Linux #1.
+- **Where each run executes:**
+  - P-TT and the first P-MED fold (`pmed_mdagents`) ran on Linux #2 (2 GPUs × accum 16, as registered). They are copied unchanged to Linux #1.
+  - Everything else runs on Linux #1 via `scripts/linux1_run_posttrain.sh`: the remaining 6 P-MED folds, the 7 P-MED/TT folds, the bridge arms and both evaluations.
+- **What changes on Linux #1:**
+  - 4 GPUs × accum 8, so the effective batch stays 32.
+  - Same code, arguments, seeds and environment versions (torch 2.6.0, transformers 4.57.6, peft 0.17.1).
+  - Same model weights, copied over the LAN; the layer-18 cross-machine check (round 99) found features bit-identical.
+- **Known differences:**
+  - Per-rank sharding drops up to 3 trailing training items per epoch (ws=4), instead of up to 1 (ws=2).
+  - The data order inside an epoch differs (the same permutation is split over 4 ranks).
+  - These are engineering differences of the same order as seed noise. They are recorded, not corrected.
+- **Analysis plan:** unchanged.
+  - Folds trained on different machines are pooled exactly as registered.
+  - As a sensitivity line, HP1 is also reported without the mdagents fold.
+- **What has been seen before writing this:** only the internal validation numbers inside the training logs, which the analysis never uses. No evaluation output (`eval_med`, `eval_pub`) had been produced.
