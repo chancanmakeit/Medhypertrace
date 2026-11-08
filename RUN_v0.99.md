@@ -1660,3 +1660,4 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - 冒烟测试(8 条):4 卡每卡约 20 GB,加上他人占用峰值约 41 GB,没有 OOM。
   - **驱动 `scripts/linux1_run_posttrain.sh`:** 04:40 在 Linux #1 GPU 0–3 启动,跳过 ptt / pmed_mdagents,llm_debate fold 正在训练(n_train 189)。
   - 状态文件 `/data1/cgh/code/mht/work/posttrain/status`;顺序为 P-MED 余下 6 个 → P-MED/TT 7 个 → eval med / pub → bridge lm / icpt 各 7 个 → eval bridge。
+- **检查(05:41 UTC):** 线 2 在 Linux #1 上每个 fold 约 10 分钟。P-MED 7 个 fold 全部完成:6 个在 Linux #1(04:51–05:37),mdagents 来自 Linux #2。P-MED/TT 正在跑。预计约 06:50 UTC 出 eval med / pub(HP1、HP2、HP3),约 09:15 UTC bridge 完成。issue 没有新评论。
