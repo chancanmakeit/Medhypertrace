@@ -1661,3 +1661,16 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - **驱动 `scripts/linux1_run_posttrain.sh`:** 04:40 在 Linux #1 GPU 0–3 启动,跳过 ptt / pmed_mdagents,llm_debate fold 正在训练(n_train 189)。
   - 状态文件 `/data1/cgh/code/mht/work/posttrain/status`;顺序为 P-MED 余下 6 个 → P-MED/TT 7 个 → eval med / pub → bridge lm / icpt 各 7 个 → eval bridge。
 - **检查(05:41 UTC):** 线 2 在 Linux #1 上每个 fold 约 10 分钟。P-MED 7 个 fold 全部完成:6 个在 Linux #1(04:51–05:37),mdagents 来自 Linux #2。P-MED/TT 正在跑。预计约 06:50 UTC 出 eval med / pub(HP1、HP2、HP3),约 09:15 UTC bridge 完成。issue 没有新评论。
+
+## 第 100 轮 · 2026-11-08 07:05 UTC(定时检查;线 2 评测结果)
+- **线 2 主评测(Linux #1,06:42 UTC,`results/posttrain/README.md`):**
+  - **HP1 P-MED − F-LOFO = −0.064 [−0.115, −0.017] → NULL(显著为负)。** P-MED 控制后 0.505(原始 0.696):学到的是步长 / 位置捷径。去掉 mdagents fold 后 −0.078,结论不变。
+  - **HP2 P-TT − F-TT(公开)= +0.068 [+0.032, +0.104],网格 6/6 → HOLDS**;零样本迁移到医学 −0.007。
+  - **HP3 P-MED/TT − P-MED = +0.084 → HOLDS**,但 P-MED/TT 对 F-LOFO 只有 +0.021,不显著。
+  - 按框架:agentverse −0.20 最差;mam 原始 +0.265、控制后约 0;triage +0.157。
+- **按预注册 HP1 NULL → 停掉这条路线。** issue #1 评论 6718517591:撤回 6709060723 的扩充标签报价请求,并建议以后如需扩充,优先选步长 / 位置与阳性解耦的父运行。last_seen = 07:02:23Z。
+- **bridge(pmedlm / pmedicpt)仍按预注册在跑,约 09:15 UTC 完成。**
+- **整体图景(给用户):**
+  - 冻结读出上,只有第 18 层的 LM-CPT 有小而成立的增益(+0.017);
+  - 后训练在医学集上被捷径吞掉;只有用大量公开标签做后训练,在公开数据上有效。
+  - 医学集每个 fold 约 150–200 条标签太少,而且捷径太强。

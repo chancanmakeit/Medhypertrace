@@ -1,6 +1,6 @@
 # MedHyperTrace 会话交接文档
 
-**最后更新:** 2026-11-08 04:45 UTC(第 99 轮;第 7 个会话) · **原始版本:** 2026-10-08
+**最后更新:** 2026-11-08 07:05 UTC(第 100 轮;第 7 个会话) · **原始版本:** 2026-10-08
 **项目:** 医学多智能体系统故障归因 → 本仓库是其中的「故障归因方法」子项目(另一个子项目「人机协同自动化标注」提供人类标注,接口见 `docs/annotation_interface_v1.md`)
 **用户:** Alvin Chan(清华,ML/NLP researcher;偏好直接的 peer-level 技术交流、要诚实批评而非附和、要求实证核对而非臆断)
 
@@ -12,7 +12,7 @@
 > **📦 第 78 轮起:旧历史(§0.2–0.32、§0.34–0.79、§〇–十:MAFA 评测、旧 AEGIS 数据、v1 代码结构、方法论决定等)已移到 `HANDOFF_archive.md`,内容未删改;需要旧细节时去那里查。**
 
 > **🚀 第 7 个会话快速恢复(第 82 轮末写,以此为准;第 6 个会话的清单同样适用;下面第 38 轮的旧清单仍适用于 MAA / 公开数据恢复细节):**
-> 0. 第 7 个会话已于第 83 轮恢复;讨论记录现为 `RUN_v0.99.md`(下一轮 `git mv` 到 `RUN_v1.00.md`)。issue last_seen = 2026-11-08T01:07:13Z(语料已交付、两臂 02:22Z 已启动,见 §1.00;**发评论用 `gh api repos/chancanmakeit/medical-aegis/issues/N/comments -F body=@file`,`gh issue comment` 走 GraphQL 会 403**)。**第 18 层 H-L1 成立(§1.05);等用户决定是否复现、是否回头检查。机器规则(§1.06):Linux #2 不再使用;线 2 余下的 fold 已在 Linux #1 上跑。**论文 PDF / Muse 的调研文档在 private-documents(需要时稀疏克隆 `papers/agent轨迹数据合成/`)。
+> 0. 第 7 个会话已于第 83 轮恢复;讨论记录现为 `RUN_v1.00.md`(下一轮 `git mv` 到 `RUN_v1.01.md`)。issue last_seen = 2026-11-08T07:02:23Z(语料已交付、两臂 02:22Z 已启动,见 §1.00;**发评论用 `gh api repos/chancanmakeit/medical-aegis/issues/N/comments -F body=@file`,`gh issue comment` 走 GraphQL 会 403**)。**第 18 层 H-L1 成立(§1.05);线 2 HP1 NULL、路线停止(§1.07);等用户决定下一步。机器规则(§1.06):Linux #2 不再使用;线 2 余下的 fold 已在 Linux #1 上跑。**论文 PDF / Muse 的调研文档在 private-documents(需要时稀疏克隆 `papers/agent轨迹数据合成/`)。
 > 1. `add_repo`(push)添加 `chancanmakeit/Medhypertrace`、`chancanmakeit/medical-aegis`,clone 到 `/home/claude/medhypertrace`、`/home/claude/medical-aegis`;推送走会话 git 代理,**不用 Project 指令里的明文 GitHub token**(已建议用户吊销)。commit 结尾加会话给的署名行。
 > 2. 读 §0.94 → §0.93 → §0.92 → §0.91 → §0.90 → §0.89 → §0.88 → §0.87 → §0.86 → §0.80–0.85 → `RUN_v0.82.md` 第 63–82 轮。核心结果文件:`MedHyperTrace-v2/results/e1e3/README.md`、`results/e4/README.md`、`results/tracertraj_audit/README.md`、`results/figures/README.md`、`results/samt_v1/README.md`、`results/midtrain_pilot/README.md`;设计:`docs/design/{HGFM_design_v0.2,SAMT_design_v1,E1-E3_prereg_v1,E4_prereg_v1}.md`;论文:`docs/paper/method_overview_and_figure_prompt.md`。
 > 3. issue:`bash MedHyperTrace-v2/scripts/issue_inbox.sh`(medical-aegis 全部 issue;我方最近:第 75 轮 issue #2 评论 `docs/interfaces/issue2_comment_r75.md`;第 78 轮新开 **issue #3**(中训练动机 + 是否请 medical-aegis 生成语料,正文 `docs/interfaces/issue3_r78.md`);第 80 轮新开 **issue #4**(ADP 对 mas-traj schema 的借鉴,正文 `docs/interfaces/issue4_r80.md`))。与其他智能体只通过 issue 交流,不 @ 任何人。
@@ -55,6 +55,16 @@
 - 所有评测、表格、结论都按体系分开;**任何数字不跨体系合并**(不同标签定义;同一轨迹会被算两次;MHT 只懂 MAST)。`evaluate.py` 已按体系输出并断言。
 - 第 11、13、15、16 轮汇报过的 v2 / closest v2 合并数字作废,以 `RUN_v0.17.md` 的分体系表为准。
 - 合成训练数据只有 MAST 码;MAA 上的结果是「迁移到另一套定义」,论文中单独报告。
+
+### 1.07 第 100 轮:线 2 结果——HP1 NULL(显著为负),路线停止;HP2 公开集成立(2026-11-08 07:05 UTC)
+- **结果:** `MedHyperTrace-v2/results/posttrain/README.md`;原始输出在 Linux #1 `/data1/cgh/code/mht/work/posttrain/`。
+- **HP1:** P-MED − F-LOFO = −0.064 [−0.115, −0.017](去掉 mdagents 后 −0.078)。P-MED 控制后 0.505、原始 0.696,学到的是捷径。**按预注册停掉这条路线,不扩付费标签**;issue #1 6718517591 已撤回报价请求。
+- **HP2:** P-TT − F-TT 公开集 +0.068 [+0.032, +0.104] → HOLDS;零样本迁移到医学 −0.007。**HP3:** +0.084 HOLDS,但 P-MED/TT 只回到冻结基线水平(+0.021)。
+- **还在跑:** bridge(pmedlm / pmedicpt × 7,Linux #1,约 09:15 UTC)→ eval_bridge.out。只报告,不改变结论。
+- **待用户决定:**
+  1. H-L1 怎么复现;
+  2. 是否预注册在第 18 层回头检查之前的阴性结论;
+  3. 线 2 已停。是否把 P-TT(公开标签后训练,HP2 成立)作为公开数据上的方法分支写进论文。
 
 ### 1.06 用户决定:机器使用(2026-11-08 03:06 UTC)
 - **用户:** "等 Linux #2 上目前的实验做完之后,就先不用 Linux #2,我们这边的实验都在 Linux #1 上做。"
