@@ -8,18 +8,21 @@ every step k = 0..T-1 in order, the string "\n[QUERY STEP k]" and take the final
 that query. Each query therefore sees the full trajectory (and the earlier query strings, which carry only step
 numbers). Row 0 (question) is zeros, as a placeholder; rows 1..T are the queries. step_ntok / step_has_code keep the
 STEP spans' values so that the length control and trivial baselines are identical to interface (a).
+Round 101 (layer-18 re-check pre-registration): --layer L takes decoder layer L's output (forward hook, as
+hgfm.e4.e4_features --layers) instead of the final-norm state; L = n_layers or no flag = the original behaviour.
 """
 import argparse, os, sys, time
 import numpy as np
 import torch
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
-from hgfm.e4.e4_features import step_token_ranges, has_code, load   # noqa: E402
+from hgfm.e4.e4_features import step_token_ranges, has_code, load, hook_layers, CAP   # noqa: E402
 
 
 @torch.inference_mode()
-def query_feats(m, ids, q_last, H):
+def query_feats(m, ids, q_last, H, layer=None):
     h = m.model(input_ids=ids.cuda(), use_cache=False, return_dict=True).last_hidden_state[0]
+    if layer is not None and layer < m.config.num_hidden_layers: h = CAP[layer][0]
     out = torch.zeros(len(q_last) + 1, H, dtype=torch.float16)
     out[1:] = h[q_last].float().half().cpu()
     return out
@@ -27,7 +30,7 @@ def query_feats(m, ids, q_last, H):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--oat"); ap.add_argument("--model"); ap.add_argument("--out")
-    ap.add_argument("--data", nargs="+"); a = ap.parse_args()
+    ap.add_argument("--data", nargs="+"); ap.add_argument("--layer", type=int, default=None); a = ap.parse_args()
     sys.path.insert(0, a.oat); cwd = os.getcwd(); os.chdir(a.oat)
     import data_pipeline as dp, extract_states as ex
     T = []
@@ -44,6 +47,7 @@ def main():
     skipped = {}
     for yarn in (False, True):
         m, tok = load(a.model, yarn); H = m.config.hidden_size; t0 = time.time(); k = 0
+        if a.layer is not None: hook_layers(m, [a.layer])
         for t in T:
             key = (t["_ds"], t["id"])
             if key in done: continue
@@ -64,7 +68,7 @@ def main():
                 idx = np.nonzero((st <= e) & (en > e))[0]
                 q_last.append(int(idx[-1]) if len(idx) else int(np.nonzero(en <= e + 1)[0][-1]))
             ranges = step_token_ranges(offs, bounds)   # STEP spans of the trajectory itself (for ntok / code)
-            f = query_feats(m, enc["input_ids"], q_last, H); k += 1
+            f = query_feats(m, enc["input_ids"], q_last, H, a.layer); k += 1
             done[key] = {"dataset": t["_ds"], "id": t["id"], "feats": f,
                          "step_ntok": [max(e - s + 1, 0) for s, e in ranges], "step_is_model": [True] + list(t["step_is_model"]),
                          "step_has_code": [has_code(text[b:e + 1]) for b, e in bounds],
@@ -74,7 +78,7 @@ def main():
                 torch.save({"model": a.model, "rows": list(done.values())}, part)
         print(f"yarn={yarn}: {k} trajectories in {time.time() - t0:.0f}s", flush=True)
         del m; torch.cuda.empty_cache(); torch.save({"model": a.model, "rows": list(done.values())}, part)
-    torch.save({"model": a.model, "interface": "full_trajectory_query", "skipped_over_131072": skipped, "rows": list(done.values())}, a.out)
+    torch.save({"model": a.model, "interface": "full_trajectory_query", "layer": a.layer, "skipped_over_131072": skipped, "rows": list(done.values())}, a.out)
     print(f"{len(done)} / {len(T)} rows, skipped {len(skipped)} -> {a.out}")
 
 
