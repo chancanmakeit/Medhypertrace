@@ -1681,3 +1681,23 @@ Linux #2 队列 18:50 UTC `ALL DONE`。逐实例分数(399 例 × 各变体 / �
   - 绝对值(控制后):pmedlm 0.559 < F-LOFO 0.569 < pmedtt 0.589。
   - 读法:LM-CPT 初始化部分挡住了捷径,和第 18 层 H-L1 方向一致;但仍没有超过冻结探针。写进 `results/posttrain/README.md` bridge 一节。
   - 线 2 全部完成,Linux #1 上没有本项目任务;不再约定时检查。
+
+## 第 101 轮 · 2026-11-08 10:25 UTC(用户问 Q0–Q3;H-L1 复现与第 18 层复核)
+- **用户:** "0,本次在 Linux#1 上的实验是采用 qwen3-8b-base 基础模型的么?1,LM-CPT 臂是先做文本中训练再接后训练么?2,交互式 CPT 臂呢?3,有没有尝试过 LM-CPT 之后再接交互式 CPT,再续接后训练?4,H-L1 按你推荐来;5,检查之前的阴性结论;6,P-TT 可以记录,后续也可以考虑作为附录拓展"
+- **回答:**
+  - **Q0:** 不是。所有训练过的臂都从后训练版 Qwen3-8B 出发。Base 只在 G0 里抽过冻结特征,同层和后训练版没有差别(L18 −0.0002),所以 A2 情形 B 没触发,Base 从未训练。
+  - **Q1:** LM-CPT 两种读法都做过:
+    - 冻结读出:H-L1,第 18 层 +0.017,HOLDS;
+    - 接后训练:bridge pmedlm − pmed +0.054,HOLDS,但仍低于冻结探针(0.559 对 0.569)。
+  - **Q2:** ICPT 是并行臂,从后训练版出发,处理 token 预算相同。冻结读出 H1 NULL;接后训练时 pmedicpt − pmed +0.026(不显著),pmedicpt − pmedlm −0.028。
+  - **Q3:** 串行做法没试过。不直接开,原因是剂量混淆(需要 2 倍剂量对照)和先验弱;成本约 2–3 天卡时。触发条件:R2.5 上 icpt − lm 在 L18 显示优势,才写修正案开"串行臂 + 2 倍剂量对照"。
+- **预注册** `docs/design/Layer18_recheck_prereg_v1.md`(e4d8048;C1 澄清 6fad6ea):
+  - **R1a:** 交叉拟合选层,零成本;
+  - **R1b:** 新数据真复现,issue #1 评论 6720288063 已请报价,批准前不生成;
+  - **R2:** 在 L18 复核 12 个比较,做 Holm 校正。
+  - **C1 更正:** base = it;ICPT 的前缀接口是 `e4_features`,`feat_query` 是后置查询接口;E1 OAT 不在 L18 重跑,Q2 / Q3 用 LE 面积替代,Q3 只能判"部分 NULL"。
+- **代码:** `feat_query --layer`、`scripts/linux1_run_layer18_recheck.sh`、`scripts/l18rc_analyze.py`(5d118dd)。
+- **Linux #1:**
+  - 10:15 UTC 启动 `runs/l18rc`:医学多层特征 it / lm / icpt 先跑;7 个模型正经局域网从 Linux #2 拷来,约 115 GB。
+  - 预计约 1.5 小时出 R1a / R2.5,约 7–8 小时出公开集 R2.1–R2.4。
+- **P-TT** 记为附录候选:`docs/paper/appendix_candidates.md` A1。
